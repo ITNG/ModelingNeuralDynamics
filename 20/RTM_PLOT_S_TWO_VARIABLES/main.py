@@ -111,6 +111,9 @@ if __name__ == "__main__":
     ax[1].set_yticks([0, 0.5, 1])
     ax[2].set_yticks([0, 0.5, 1])
 
+    ax[1].set_title(r"$\tau_d=300 ms, \tau_r=10 ms, \tau_{d,q}$=10 ms")
+    ax[2].set_title(r"$\tau_d=300 ms, \tau_r=100 ms, \tau_{d,q}$=100 ms")
+
     pl.tight_layout()
     pl.savefig("fig_20_4.png", dpi=150)
     # pl.show()
