@@ -9,7 +9,7 @@ results/
 
 *.pyc
 *.npz
-*.png
+#*.png
 *.pdf
 *.eps
 *.o
