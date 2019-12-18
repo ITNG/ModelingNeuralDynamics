@@ -57,7 +57,7 @@ def n_inf(v):
 
 def derivative(x0, t):
     '''
-    define Traub Model
+    define HH Model
     '''
     v, m, n, h, = x0
     dv = (i_ext - g_na * h * m ** 3 * \
