@@ -60,11 +60,11 @@ def derivative(x0, t):
     I_L = g_l * (v - v_l)
     I_K = g_k * n ** 4 * (v - v_k)
 
-    vp = -I_Na - I_K - I_L + i_ext
-    hp = phi * (alpha_h(v) * (1-h) - beta_h(v) * h)
-    np = phi * (alpha_n(v) * (1-n) - beta_n(v) * n)
+    dv = -I_Na - I_K - I_L + i_ext
+    dh = phi * (alpha_h(v) * (1-h) - beta_h(v) * h)
+    dn = phi * (alpha_n(v) * (1-n) - beta_n(v) * n)
 
-    return [vp, hp, np]
+    return [dv, dh, dn]
 
 
 v = -63.0
