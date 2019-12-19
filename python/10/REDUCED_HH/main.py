@@ -10,8 +10,8 @@ g_l = 0.3
 v_k = -82.0
 v_na = 45.0
 v_l = -59.0
-i_ext = 7.0
-t_final = 100.0
+i_ext = 10.0
+t_final = 50.0
 dt = 0.01
 
 
@@ -53,49 +53,47 @@ def n_inf(v):
 
 def derivative(x0, t):
 
-    v, m, n, h, = x0
+    v, n = x0
+    
+    m = m_inf(v)
+    h = 0.83 - n
+
     I_na = -g_na * h * m ** 3 * (v - v_na)
     I_k = -g_k * n ** 4 * (v - v_k)
     I_l = -g_l * (v - v_l)
     
     dv = (i_ext + I_na + I_k + I_l) / c
-    dm = alpha_m(v) * (1.0 - m) - beta_m(v) * m
     dn = alpha_n(v) * (1.0 - n) - beta_n(v) * n
-    dh = alpha_h(v) * (1.0 - h) - beta_h(v) * h
 
-    return [dv, dm, dn, dh]
+    return [dv, dn]
 
 
-v = -20.0
+v = -50.0
 m = m_inf(v)
-h = h_inf(v)
-n = n_inf(v)
-x0 = [v, m, n, h]
+n = 0.4
+x0 = [v, n]
 
 if __name__ == "__main__":
 
-    pl.figure(figsize=(7, 3))
-
-    v = np.asarray([-82.0, -54.0])
-    t = np.asarray([0.0, (v[1] - v[0]) / 1.65])
-    pl.plot(t, v, c="b", lw=2)
-
-    for i in range(1, 6):
-        pl.plot(t + t[1] * i, v, c="b", lw=2)
-        pl.plot([(i)*t[1], (i)*t[1]], v, c="b", lw=2, ls="--")
-
-
+    fig, ax = pl.subplots(2, figsize=(7, 5), sharex=True)
 
     t = np.arange(0, t_final, dt)
     sol = odeint(derivative, x0, t)
     v = sol[:, 0]
+    n = sol[:, 1]
 
-    pl.plot(t, v, lw=2, c="k")
-    pl.xlim(min(t), max(t))
-    pl.ylim(-100, 50)
-    pl.xlabel("time [ms]")
-    pl.ylabel("v [mV]")
-    pl.yticks(range(-100, 100, 50))
+    ax[0].plot(t, v, lw=2, c="k")
+    ax[1].plot(t, n, lw=2, c="r", label="n")
+    ax[1].plot(t, 0.83 - n, lw=2, c="g", label="h")
+    ax[1].plot(t, m_inf(v), lw=2, c="b", label="m")
+
+    ax[0].set_xlim(min(t), max(t))
+    ax[0].set_ylim(-100, 50)
+    ax[1].set_ylim(0, 1)
+    ax[1].set_xlabel("time [ms]", fontsize=14)
+    ax[0].set_ylabel("v [mV]", fontsize=14)
+    ax[1].set_ylabel("m, h, n", fontsize=14)
     pl.tight_layout()
-    pl.savefig("fig_7_1.png")
+    pl.tick_params(labelsize=14)
+    pl.savefig("fig_10_2.png")
     # pl.show()
