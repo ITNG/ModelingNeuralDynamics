@@ -1,5 +1,4 @@
 from scipy.integrate import odeint
-from scipy.optimize import bisect
 import numpy as np
 from numpy import exp
 import pylab as pl
@@ -68,16 +67,7 @@ def initial_condition(v):
 
 def tau_peak_function(tau_d, tau_r, tau_d_q):
 
-    
-    # def ds(s, t):
-    #     return exp(-t / tau_d_q) * (1.0 - s) / tau_r - s * tau_d
-    # t = np.arange(0, 2000, dt)
-    # sol = odeint(ds, 0, t)
-    # pl.plot(t, sol)
-    # pl.show()
-    # exit(0)
-    
-    dt = 0.01
+    # dt = 0.01
     dt05 = 0.5 * dt
 
     s = 0
@@ -87,21 +77,22 @@ def tau_peak_function(tau_d, tau_r, tau_d_q):
         t_old = t
         s_inc_old = s_inc
         s_tmp = s + dt05 * s_inc
-        s_inc_tmp = exp(-(t + dt05) / tau_d_q) * (1.0 - s_tmp) / tau_r - s_tmp / tau_d
+        s_inc_tmp = exp(-(t + dt05) / tau_d_q) * \
+            (1.0 - s_tmp) / tau_r - s_tmp / tau_d
         s = s + dt * s_inc_tmp
         t = t + dt
         s_inc = exp(-t / tau_d_q) * (1.0 - s) / tau_r - s / tau_d
-    
+
     return (t_old * (-s_inc) + t * s_inc_old) / (s_inc_old - s_inc)
 
 
 def tau_d_q_function(tau_d, tau_r, tau_hat):
-    
+
     # set an interval for tau_d_q
     tau_d_q_left = 1.0
     while tau_peak_function(tau_d, tau_r, tau_d_q_left) > tau_hat:
         tau_d_q_left *= 0.5
-    
+
     tau_d_q_right = tau_r
     while tau_peak_function(tau_d, tau_r, tau_d_q_right) < tau_hat:
         tau_d_q_right *= 2.0
@@ -117,62 +108,64 @@ def tau_d_q_function(tau_d, tau_r, tau_hat):
     return 0.5 * (tau_d_q_left + tau_d_q_right)
 
 
-c = 1.0
+c = 1
 g_k = 80.0
 g_na = 100.0
 g_l = 0.1
 v_k = -100.0
 v_na = 50.0
 v_l = -67.0
-i_ext = 0.12
+i_ext = 0.2
 t_final = 2000.0
 dt = 0.01
 v = -70.0
+spikeThreshold = -20.0
 
 if __name__ == "__main__":
 
-    tau_d = 300.0
-    tau_r = 10.0
-    tau_peak = 20.0
-    tau_d_q = tau_d_q_function(tau_d, tau_r, tau_peak)
-    print tau_d_q
-    
+    # condition is tau_d >> T, tau_d_q << tau_r
+
+    tau_d = 500.0
+    tau_r = 100.0
+    tau_d_q = 1.0
+    # tau_peak = 20.0
+    # print tau_d_q_function(tau_d, tau_r, tau_peak)
     x0 = initial_condition(v)
     t = np.arange(0, t_final, dt)
     sol = odeint(derivative, x0, t)
     V = sol[:, 0]
-    S1 = sol[:, -1]
+    S = sol[:, -1]
+    nSteps = len(V)
+
+    #spike detection
+    nSpikes = 0
+    tSpikes = []
+    for i in range(1, nSteps):
+        if (V[i - 1] <= spikeThreshold) & (V[i] > spikeThreshold):
+            nSpikes += 1
+            ts = ((i - 1) * dt * (V[i - 1] - spikeThreshold) +
+                        i * dt * (spikeThreshold - V[i])) / (V[i - 1] - V[i])
+            tSpikes.append(ts)
+    
+    period = tSpikes[-1] - tSpikes[-2]
+    print "Period is %10.3f ms" % period
+
 
     # --------------------------------------------------------------#
-    tau_r = 100.0
-    tau_d = 300.0
-    tau_peak = 150.0
-    tau_d_q = tau_d_q_function(tau_d, tau_r, tau_peak)
-    print tau_d_q
-
-    sol = odeint(derivative, x0, t)
-    S2 = sol[:, -1]
-
-    fig, ax = pl.subplots(3, figsize=(7, 5), sharex=True)
+    
+    fig, ax = pl.subplots(2, figsize=(7, 5), sharex=True)
     ax[0].plot(t, V, lw=2, c="k")
-    ax[1].plot(t, S1, lw=2, c="k")
-    ax[2].plot(t, S2, lw=2, c="k")
+    ax[1].plot(t, S, lw=2, c="k")
 
     ax[0].set_xlim(min(t), max(t))
     ax[0].set_ylim(-100, 100)
-    ax[1].set_ylim([0, 1])
-    ax[2].set_ylim([0, 1])
-    ax[2].set_xlabel("time [ms]", fontsize=14)
+    # ax[1].set_ylim([0, 1])
+    ax[1].set_xlabel("time [ms]", fontsize=14)
     ax[0].set_ylabel("v [mV]", fontsize=14)
     ax[1].set_ylabel("s", fontsize=14)
-    ax[2].set_ylabel("s", fontsize=14)
     ax[0].set_yticks([-100, 0, 100])
-    ax[1].set_yticks([0, 0.5, 1])
-    ax[2].set_yticks([0, 0.5, 1])
-
-    ax[1].set_title(r"$\tau_d=300 ms, \tau_r=10 ms, \tau_{d,q}$=10 ms")
-    ax[2].set_title(r"$\tau_d=300 ms, \tau_r=100 ms, \tau_{d,q}$=100 ms")
+    # ax[1].set_yticks([0, 0.5, 1])
 
     pl.tight_layout()
-    pl.savefig("fig_20_5.png", dpi=150)
+    pl.savefig("fig_20_9.png", dpi=150)
     # pl.show()

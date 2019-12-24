@@ -6,7 +6,7 @@ dt05=dt/2;
 s=0;
 t=0;
 s_inc=exp(-t/tau_d_q)*(1-s)/tau_r-s*tau_d;
-while s_inc>0,
+while s_inc > 0,
     t_old=t;
     s_inc_old=s_inc;
     s_tmp=s+dt05*s_inc;

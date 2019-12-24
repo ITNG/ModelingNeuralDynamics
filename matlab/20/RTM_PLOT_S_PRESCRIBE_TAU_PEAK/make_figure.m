@@ -5,6 +5,8 @@ tau_d=300;
 tau_peak=20;
 tau_dq=tau_d_q_function(tau_d,tau_r,tau_peak);
 
+tau_dq
+
 c=1;
 g_k=80; 
 g_na=100;
