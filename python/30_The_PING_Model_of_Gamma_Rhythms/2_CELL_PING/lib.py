@@ -142,5 +142,19 @@ def derivative(x0, t):
                      dv_i, dh_i, dn_i, dq_i, ds_i])
 
 
+def spikeDetection(t, V, spikeThreshold):
+    tSpikes = []
+    v = np.asarray(V)
+    nSteps = len(V)
+
+    for i in range(1, nSteps):
+        if (V[i - 1] <= spikeThreshold) & (V[i] > spikeThreshold):
+            
+            ts = ((i - 1) * dt * (V[i - 1] - spikeThreshold) +
+                        i * dt * (spikeThreshold - V[i])) / (V[i - 1] - V[i])
+            tSpikes.append(ts)
+    return tSpikes
+
 tau_dq_e = tau_d_q_function(tau_d_e, tau_r_e, tau_peak_e)
 tau_dq_i = tau_d_q_function(tau_d_i, tau_r_i, tau_peak_i)
+

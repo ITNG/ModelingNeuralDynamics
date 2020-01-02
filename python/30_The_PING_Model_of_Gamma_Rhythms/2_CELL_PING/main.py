@@ -46,6 +46,12 @@ if __name__ == "__main__":
     v_e = sol[:, 0]
     v_i = sol[:, 5]
 
+    eSpikes = lib.spikeDetection(t, v_e, -20.0)
+    period = eSpikes[-1] - eSpikes[-2]
+    print "Period of E neuron %10.3f ms" % period
+
+
+
     pl.figure(figsize=(7, 3))
     pl.plot(t, v_e, lw=2, c="r", label=r"$v_e$")
     pl.plot(t, v_i, lw=2, c="b", label=r"$v_i$")
@@ -54,7 +60,7 @@ if __name__ == "__main__":
     pl.xlabel("time [ms]", fontsize=16)
     pl.ylabel("v [mV]", fontsize=16)
     pl.legend(fontsize=14, loc="upper right")
-    pl.xticks(range(0, 250, 50))
+    pl.xticks(range(0, int(t_final) + 1, 50))
     pl.tight_layout()
     pl.tick_params(labelsize=14)
 
