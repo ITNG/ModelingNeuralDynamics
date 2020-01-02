@@ -22,23 +22,21 @@ dt = 0.01
 # ------------------------------------------------------------------#
 
 
-
 if __name__ == "__main__":
 
+    # initial conditions
     v_e = -75.0
-    m_e = lib.m_inf_e(v_e)
     h_e = 0.1
     n_e = 0.1
     q_e = 0
     s_e = 0
-    
     v_i = -75.0
     h_i = 0.1
     n_i = 0.1
     q_i = 0
     s_i = 0
-    initialConditions = [v_e, m_e, h_e, n_e, q_e, s_e,
-                        v_i, h_i, n_i, q_i, s_i]
+    initialConditions = [v_e, h_e, n_e, q_e, s_e,
+                         v_i, h_i, n_i, q_i, s_i]
 
     t = np.arange(0, t_final, dt)
     sol = odeint(lib.derivative,
@@ -46,19 +44,23 @@ if __name__ == "__main__":
                  t)
 
     v_e = sol[:, 0]
-    v_i = sol[:, 6]
+    v_i = sol[:, 5]
 
     pl.figure(figsize=(7, 3))
     pl.plot(t, v_e, lw=2, c="r", label=r"$v_e$")
     pl.plot(t, v_i, lw=2, c="b", label=r"$v_i$")
     pl.xlim(min(t), max(t))
     # pl.ylim(-100, 50)
-    pl.xlabel("time [ms]")
-    pl.ylabel("v [mV]")
-    # pl.yticks(range(-100, 100, 50))
+    pl.xlabel("time [ms]", fontsize=16)
+    pl.ylabel("v [mV]", fontsize=16)
+    pl.legend(fontsize=14, loc="upper right")
+    pl.xticks(range(0, 250, 50))
     pl.tight_layout()
+    pl.tick_params(labelsize=14)
+
     pl.savefig("fig_30_3.png")
-    
+    pl.show()
+
 # RTM parameters
 # c = 1
 # g_k = 80
