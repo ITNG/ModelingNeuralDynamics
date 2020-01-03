@@ -1,6 +1,7 @@
 from scipy.integrate import odeint
-import numpy as np
 from numpy import exp, matmul
+from copy import copy
+import numpy as np
 import pylab as pl
 from main import *
 
@@ -158,6 +159,120 @@ def derivativePopulation(x0, t=0):
 # -------------------------------------------------------------------#
 
 
+def derivative(x0, t=0):
+
+    n0 = len(x0) / 3
+    v_e, h_e, n_e = x0[:n0], x0[n0: (2 * n0)], x0[(2 * n0): (3 * n0)]
+
+    I_L_e = 0.1 * (v_e + 67.0)
+    I_K_e = 80 * n_e ** 4 * (v_e + 100.0)
+    I_Na_e = 100 * h_e * m_e_inf(v_e) ** 3 * (v_e - 50.0)
+
+    dv_e = i_ext_e - I_L_e - I_K_e - I_Na_e
+    dh_e = (h_e_inf(v_e) - h_e) / tau_h_e(v_e)
+    dn_e = (n_e_inf(v_e) - n_e) / tau_n_e(v_e)
+
+    return np.hstack((dv_e, dh_e, dn_e))
+# -------------------------------------------------------------------#
+
+
+def splayState(i_ext_e, phiVec, f):
+    """
+    input: i_ext=column vector of external drives 
+           phi_vec = column vector of phases at which 
+                     neurons are to be initialized
+           The length, num, of i_ext is the total number 
+           of neurons.
+    output: a num-by-3 array called rtm_init. The columns
+            contain values of v, h, and n. If i_ext(i) is below
+            the firing threshold, then the i-th row of the
+            matrix rtm_init contains the stable equilibrium point.
+            If i_ext(i) is above the firing threshold, then the
+            i-th row of rtm_init is a point (v,h,n) on the limit
+            cycle, at phase phi_vec(i).
+    """
+
+    t = 0.0
+    dt = 0.01
+    t_final = 2000.0                # if fewer than max_spikes spikes occur
+    # by this time, the program gives
+    # up and sets (v,h,n) equal
+    # to the values at time t_final.
+    maxNumSpikes = 3
+    N = len(i_ext_e)
+    numSpikes = np.zeros(N, dtype=int)
+    done = np.zeros(N)              # done[i]=1 indicates that we are
+    # done with neuron i.
+    iteration = 0
+    numSteps = int(t_final / dt)
+
+    v = -70.0 * np.ones(N)
+    m = m_e_inf(v)
+    n = n_e_inf(v)
+    h = h_e_inf(v)
+    x0 = np.hstack((v, h, n))
+
+    tSpikes = np.zeros((N, maxNumSpikes))
+    initialConition = np.zeros((N, 3))
+
+    # ofile = open("v.txt", "w")
+    i = 1
+    while (np.sum(done) < N) and (t < t_final):
+
+        v_old = v
+        h_old = h
+        n_old = n
+        t_old = t
+
+        x = rungeKuttaIntegrator(x0, dt, f)
+        i += 1
+
+        v = x[:N]
+        h = x[N: (2 * N)]
+        n = x[(2 * N):]
+        t = i * dt
+
+        x0 = copy(x)
+
+        # ofile.write("%18.4f %18.4f \n" % (i*dt, v))
+        indices = np.where((v_old >= spikeThreshold) &
+                           (v < spikeThreshold))[0]
+
+        numInstantSpikes = len(indices)
+        for k in indices:
+            numSpikes[k] += 1
+            ts = (t_old * (v_old[k] - spikeThreshold) +
+                  t * (spikeThreshold - v[k])) / (v_old[k] - v[k])
+
+            if numSpikes[k] < 4:
+                tSpikes[k, numSpikes[k] - 1] = ts
+
+        thr = tSpikes[:, -1] + phiVec * (tSpikes[:, -1] - tSpikes[:, -2])
+        indices = np.where((numSpikes == maxNumSpikes) &
+                           (t > thr) &
+                           (t_old <= thr))
+
+        for i0 in range(len(indices)):
+            k = indices[i0]
+            initialConition[k, 0] = (
+                v_old[k] * (t - thr[k]) + v[k] * (thr[k] - t_old)) / dt
+            initialConition[k, 1] = (
+                h_old[k] * (t - thr[k]) + h[k] * (thr[k] - t_old)) / dt
+            initialConition[k, 2] = (
+                n_old[k] * (t - thr[k]) + n[k] * (thr[k] - t_old)) / dt
+        done[indices] = 1
+
+    indices = np.where(done == 0)[0]
+    initialConition[indices, 0] = v[indices]
+    initialConition[indices, 1] = h[indices]
+    initialConition[indices, 2] = n[indices]
+
+    # print ("Period is %10.3f [ms]" % T)
+
+    return initialConition
+# -------------------------------------------------------------------#
+
+
 def spikeDetection(t, V, spikeThreshold):
     tSpikes = []
     v = np.asarray(V)
@@ -202,88 +317,6 @@ def spikeToFile(t_spikes, fileName):
 # -------------------------------------------------------------------#
 
 
-def splayState(i_ext, phiVec, x0, N, f):
-    """
-    input: i_ext=external drive (a single number)
-        phi_vec = vector of phases at which
-                    neurons are to be initialized
-        The length, num, of i_ext is the total number
-        of neurons.
-    output: a N-by-3 array called rtm_init. The columns
-            contain values of v, h, and n. If i_ext is below
-            the firing threshold, then the points (v,h,n)
-            (the rows of the matrix rtm_init) are all equal
-            to each other, and equal to the stable equilibrium
-            point.
-            If i_ext is above the firing threshold, then the
-            (v,h,n) lie on the limit cycle, with the phases
-            given by phi_vec.
-            The function also computes the period, T.
-    """
-
-    t = 0.0
-    dt = 0.01
-    t_final = 5000.0
-    numSpikes = 0
-    iteration = 0
-    tSpikes = []
-    numSteps = int(t_final / dt)
-
-    v, m = np.zeros(numSteps), np.zeros(numSteps)
-    n, h = np.zeros(numSteps), np.zeros(numSteps)
-
-    # ofile = open("v.txt", "w")
-    v[0], m[0], n[0], h[0] = x0
-    i = 1
-    while (numSpikes < 5) and (t < t_final):
-        vpre, mpre, npre, hpre = v, m, n, h
-        v[i], m[i], n[i], h[i] = rungeKuttaIntegrator(x0, dt, f)
-
-        # ofile.write("%18.4f %18.4f \n" % (i*dt, v))
-
-        x0 = np.array([v[i], m[i], n[i], h[i]])
-
-        if (v[i-1] < spikeThreshold) & (v[i] >= spikeThreshold):
-            numSpikes += 1
-            tmp = ((i - 1) * dt * (v[i-1] - spikeThreshold) +
-                   i * dt * (spikeThreshold - v[i])) / (v[i-1] - v[i])
-            tSpikes.append(tmp)
-
-        i += 1
-        t = (i + 1) * dt
-
-    # ofile.close()
-    # r = np.loadtxt("v.txt")
-    # pl.plot(r[:, 0], r[:, 1], lw=1, color="k")
-    # pl.show()
-
-    initialConition = np.zeros((N, 3))
-
-    if numSpikes < 5:
-        initialConition[:, 0] = v[i-1]
-        initialConition[:, 1] = h[i-1]
-        initialConition[:, 2] = n[i-1]
-        T = np.inf
-
-    elif (numSpikes == 5):
-        T = tSpikes[-1] - tSpikes[-2]
-        for i in range(N):
-            phi0 = phiVec[i]
-            t0 = phi0 * T + tSpikes[-2]
-            k = int(floor(t0 / dt))
-            initialConition[i, 0] = (
-                v[k + 1] * (t0 - (k - 1) * dt) + v[k] * (k * dt - t0)) / dt
-            initialConition[i, 1] = (
-                n[k + 1] * (t0 - (k - 1) * dt) + n[k] * (k * dt - t0)) / dt
-            initialConition[i, 2] = (
-                h[k + 1] * (t0 - (k - 1) * dt) + h[k] * (k * dt - t0)) / dt
-
-    print ("Period is %10.3f [ms]" % T)
-
-    return initialConition
-# -------------------------------------------------------------------#
-
-
 def rungeKuttaIntegrator(x, dt, f):
 
     k1 = dt * f(x)
@@ -295,3 +328,15 @@ def rungeKuttaIntegrator(x, dt, f):
 
     return x
 # -------------------------------------------------------------------#
+
+
+def read_from_file(fileName):
+
+    with open(fileName, "r") as text:
+        data = []
+        for line in text:
+            line = line.split()
+            line = [float(i) for i in line]
+            data.append(line)
+
+    return data

@@ -60,21 +60,19 @@ conductance affecting an inhibitory cell is g_hat_ei.
 
 if __name__ == "__main__":
 
-    # numSteps = round(t_final / dt)
-    # initialize dynamic variables
-    # iv = rtm_init(i_ext_e, rand(num_e, 1))
-    # v_e = iv(:, 1)
-    # h_e = iv(:, 2)
-    # n_e = iv(:, 3)
-
     start = time()
 
-    os.setenv('OMP_NUM_THREADS', '1')
+    # os.setenv('OMP_NUM_THREADS', '1')
+    # os.environ["OMP_NUM_THREADS"] = "1"
 
-    v_e = uniform(-100.0, 50.0, num_e)
+    initialVec = lib.splayState(i_ext_e,
+                                rand(num_e),
+                                lib.derivative)
+
+    v_e = initialVec[:, 0]
     m_e = lib.m_e_inf(v_e)
-    h_e = lib.h_e_inf(v_e)
-    n_e = lib.n_e_inf(v_e)
+    h_e = initialVec[:, 1]
+    n_e = initialVec[:, 2]
     q_e = np.zeros(num_e)
     s_e = np.zeros(num_e)
 
@@ -85,6 +83,7 @@ if __name__ == "__main__":
     q_i = np.zeros(num_i)
     s_i = np.zeros(num_i)
 
+
     initialConditions = np.hstack((v_e, h_e, n_e, q_e, s_e,
                                    v_i, h_i, n_i, q_i, s_i))
     t = np.arange(0, t_final, dt)
@@ -92,7 +91,7 @@ if __name__ == "__main__":
                  initialConditions,
                  t)
 
-    lib.display_time(time() - start)
+    lfp = np.mean(sol[:, :num_e], axis=1)
 
     t_e_spikes = []
     t_i_spikes = []
@@ -104,17 +103,8 @@ if __name__ == "__main__":
         ts_i = lib.spikeDetection(t, sol[:, i], spikeThreshold)
         t_i_spikes.append(ts_i)
 
-    fig, ax = pl.subplots(1, figsize=(15, 8))
-
-    for i in range(num_e):
-        ax.plot(t_e_spikes[i], [i + 1] * len(t_e_spikes[i]), "r.")
-
-    for i in range(num_e, num_e + num_i):
-        ax.plot(t_i_spikes[i - num_e], [i + 1] *
-                len(t_i_spikes[i - num_e]), "b.")
+    lib.display_time(time() - start)
 
     lib.spikeToFile(t_e_spikes, "t_e_spikes.txt")
     lib.spikeToFile(t_i_spikes, "t_i_spikes.txt")
-
-    pl.savefig("fig.png", dpi=150)
-    pl.show()
+    np.savetxt("lfp.txt", zip(t, lfp), fmt="%18.6f")
