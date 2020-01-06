@@ -3,11 +3,10 @@ An Introduction to Modeling Neuronal Dynamics - Christoph Borgers in python
 
 ![Cover](https://github.com/Ziaeemehr/ModelingNeuralDynamics/blob/master/python/30_The_PING_Model_of_Gamma_Rhythms/PING_4/fig.png "Ping Model of Gamma Rhythm")
 
-![Wilson-Cowan phase plane](https://github.com/Ziaeemehr/ModelingNeuralDynamics/blob/master/python/22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/WILSON_COWAN_PHASE_PLANE/fig_22_3.png "Wilson-Cowan phase plane")
-
 <p align="center">
   <img src="https://github.com/Ziaeemehr/ModelingNeuralDynamics/blob/master/python/22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/WILSON_COWAN_PHASE_PLANE/fig_22_3.png"> 
-  Wilson-Cowan phase plane
+  <\br>
+  **Wilson-Cowan phase plane**
 </p>
 
 ### Introduction 
