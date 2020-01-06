@@ -5,8 +5,9 @@ An Introduction to Modeling Neuronal Dynamics - Christoph Borgers in python
 
 <p align="center">
   <img src="https://github.com/Ziaeemehr/ModelingNeuralDynamics/blob/master/python/22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/WILSON_COWAN_PHASE_PLANE/fig_22_3.png"> 
-  <\br>
-  **Wilson-Cowan phase plane**
+</p>
+<p align="center">
+**Wilson-Cowan phase plane**
 </p>
 
 ### Introduction 
