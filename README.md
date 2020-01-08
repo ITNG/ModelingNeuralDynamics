@@ -25,4 +25,4 @@ An extensive online collection of Matlab programs generating the figures accompa
 ### matlab code gathered from here
 https://link.springer.com/book/10.1007/978-3-319-51171-9
 
-### Python codes provided by me
+### Python codes provided by contributors
