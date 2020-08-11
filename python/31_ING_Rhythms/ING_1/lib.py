@@ -84,6 +84,18 @@ def eulerIntegrator(x, dt, f):
 
     x += f(x) * dt
     return x
+
+def rungeKuttaIntegrator(x, dt, f):
+
+    k1 = dt * f(x)
+    k2 = dt * f(x + 0.5 * k1)
+    k3 = dt * f(x + 0.5 * k2)
+    k4 = dt * f(x + k3)
+
+    x = x + (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0
+
+    return x
+
 # -------------------------------------------------------------------#
 
 
@@ -135,7 +147,7 @@ def splayState(i_ext, phiVec, f):
         n_old = n
         t_old = t
 
-        x = eulerIntegrator(x0, dt, f)
+        x = rungeKuttaIntegrator(x0, dt, f)
         i += 1
 
         v = x[:N]

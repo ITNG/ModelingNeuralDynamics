@@ -1,5 +1,5 @@
-from copy import copy
 from numpy import exp, matmul
+from copy import copy
 import numpy as np
 import pylab as pl
 from main import *
@@ -146,7 +146,8 @@ def derivative(x0, t):
     s_e = x0[4 * num_e : 5 * num_e]
     
     n0 = 5 * num_e 
-    v_i, h_i = x0[n0: n0 + num_i], x0[n0 + num_i : n0 + 2 * num_i]
+    v_i = x0[n0: n0 + num_i]
+    h_i = x0[n0 + num_i : n0 + 2 * num_i]
     n_i = x0[n0 + 2 * num_i : n0 + 3 * num_i]
     q_i = x0[n0 + 3 * num_i : n0 + 4 * num_i]
     s_i = x0[n0 + 4 * num_i : n0 + 5 * num_i]
@@ -318,7 +319,7 @@ def rtmInit(i_ext, phiVec):
 
     t = 0.0
     dt = 0.01
-    t_final = 20.0
+    t_final = 2000.0
     # if fewer than max_spikes spikes occur by this time, the program gives
     # up and sets (v,h,n) equal to the values at time t_final.
     maxNumSpikes = 3
@@ -374,7 +375,6 @@ def rtmInit(i_ext, phiVec):
             initialConition[k, 2] = (
                 n_old[k] * (t - thr[k]) + n[k] * (thr[k] - t_old)) / dt
         done[indices] = 1
-
     indices = np.where(done == 0)[0]
     initialConition[indices, 0] = v[indices]
     initialConition[indices, 1] = h[indices]
@@ -425,7 +425,7 @@ def wbInit(i_ext, phiVec):
     v_l = -65
     t = 0.0
     dt = 0.01
-    t_final = 20.0
+    t_final = 2000.0
     # if fewer than max_spikes spikes occur by this time, the program gives
     # up and sets (v,h,n) equal to the values at time t_final.
 
@@ -508,9 +508,12 @@ def olmInit(i_ext_o, phiVec):
     """
     def derivativeOLM(x0, t=0):
 
-        v_o, h_o = x0[:num_o], x0[num_o: 2 * num_o]
-        n_o, r_o = x0[2 * num_o : 3 * num_o], x0[3 * num_o : 4 * num_o]
-        a_o, b_o = x0[4 * num_o : 5 * num_o], x0[5 * num_o : 6 * num_o]
+        v_o = x0[:num_o]
+        h_o = x0[num_o: 2 * num_o]
+        n_o = x0[2 * num_o : 3 * num_o]
+        r_o = x0[3 * num_o : 4 * num_o]
+        a_o = x0[4 * num_o : 5 * num_o]
+        b_o = x0[5 * num_o : 6 * num_o]
 
         I_K_o = g_k * n_o ** 4 * (v_o - v_k)
         I_Na_o = g_na * h_o * m_o_inf(v_o) ** 3 * (v_o - v_na)
@@ -525,6 +528,7 @@ def olmInit(i_ext_o, phiVec):
         dr_o = (r_o_inf(v_o) - r_o) / tau_r_o(v_o)
         da_o = (a_o_inf(v_o) - a_o) / tau_a_o(v_o)
         db_o = (b_o_inf(v_o) - b_o) / tau_b_o(v_o)
+
 
         return np.hstack((dv_o, dh_o, dn_o, dr_o, da_o, db_o))
 
@@ -542,7 +546,7 @@ def olmInit(i_ext_o, phiVec):
     v_A = -90
 
     max_spikes = 3
-    t_final = 20;
+    t_final = 2000.0;
     dt = 0.01
     t = 0.0
     # if fewer than max_spikes spikes occur
@@ -568,14 +572,27 @@ def olmInit(i_ext_o, phiVec):
     tSpikes = np.zeros((N, maxNumSpikes))
     initialConition = np.zeros((N, 6))
 
+    xx = []
+
     i = 1
     while (np.sum(done) < N) and (t < t_final):
 
-        v_old, h_old, n_old, t_old = v, h, n, t
+        v_old = v
+        h_old = h
+        n_old = n
+        r_old = r
+        a_old = a
+        b_old = b
+        t_old = t
         x = rungeKuttaIntegrator(x0, dt, derivativeOLM)
         i += 1
 
-        v, h, n = x[:N], x[N: (2 * N)], x[(2 * N):]
+        v = x[:N]
+        h = x[N: 2 * N]
+        n = x[2 * N: 3 * N]
+        r = x[3 * N: 4 * N]
+        a = x[4 * N: 5 * N]
+        b = x[5 * N: 6 * N]
         t = i * dt
         x0 = copy(x)
 
@@ -604,6 +621,12 @@ def olmInit(i_ext_o, phiVec):
                 h_old[k] * (t - thr[k]) + h[k] * (thr[k] - t_old)) / dt
             initialConition[k, 2] = (
                 n_old[k] * (t - thr[k]) + n[k] * (thr[k] - t_old)) / dt
+            initialConition[k, 3] = (
+                r_old[k] * (t - thr[k]) + r[k] * (thr[k] - t_old)) / dt
+            initialConition[k, 4] = (
+                a_old[k] * (t - thr[k]) + a[k] * (thr[k] - t_old)) / dt
+            initialConition[k, 5] = (
+                b_old[k] * (t - thr[k]) + b[k] * (thr[k] - t_old)) / dt 
         done[indices] = 1
 
     indices = np.where(done == 0)[0]
@@ -611,8 +634,8 @@ def olmInit(i_ext_o, phiVec):
     initialConition[indices, 1] = h[indices]
     initialConition[indices, 2] = n[indices]
     initialConition[indices, 3] = r[indices]
-    initialConition[indices, 3] = a[indices]
-    initialConition[indices, 3] = b[indices]
+    initialConition[indices, 4] = a[indices]
+    initialConition[indices, 5] = b[indices]
 
     return initialConition
 

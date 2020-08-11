@@ -15,7 +15,7 @@ g_A = 22.0
 
 # Define network parameters:
 
-num_e = 20
+num_e = 10
 num_i = 5
 num_o = 5
 sigma_e = 0.05
@@ -61,7 +61,7 @@ tau_rise_o = 0.5
 tau_peak_o = 0.5
 tau_d_o = 20.0
 
-t_final = 2  # Time(in ms) simulated.
+t_final = 1000.0  # Time(in ms) simulated.
 dt = 0.01  # Time step used in solving the differential equations.
 spikeThreshold = -20.0
 
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     iv = lib.rtmInit(i_ext_e, rand(num_e))
     v_e = iv[:, 0]
-    m_e = lib.m_e_inf(v_e)
+    # m_e = lib.m_e_inf(v_e)
     h_e = iv[:, 1]
     n_e = iv[:, 2]
     q_e = zeros(num_e)
@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
     iv = lib.wbInit(i_ext_i, rand(num_i))
     v_i = iv[:, 0]
-    m_i = lib.m_i_inf(v_i)
+    # m_i = lib.m_i_inf(v_i)
     h_i = iv[:, 1]
     n_i = iv[:, 2]
     q_i = zeros(num_i)

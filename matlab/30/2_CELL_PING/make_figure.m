@@ -42,6 +42,7 @@ for k=1:m_steps,
     h_e_inc=(h_e_inf(v_e(k))-h_e)./tau_h_e(v_e(k));
     q_e_inc=(1+tanh(v_e(k)/10))/2.*(1-q_e)/0.1-q_e./tau_dq_e;
     s_e_inc=q_e.*(1-s_e)./tau_r_e-s_e./tau_d_e;
+
 	v_i_inc=0.1*(-65-v_i(k))+9*n_i.^4.*(-90-v_i(k)) ...
            +35*m_i_inf(v_i(k)).^3.*h_i.*(55-v_i(k)) ...
            +(g_ei*s_e).*(v_rev_e-v_i(k)) ...
@@ -56,6 +57,7 @@ for k=1:m_steps,
     h_e_tmp=h_e+dt05*h_e_inc;
     q_e_tmp=q_e+dt05*q_e_inc;   
     s_e_tmp=s_e+dt05*s_e_inc;    
+    
 	v_i_tmp=v_i(k)+dt05*v_i_inc;
 	n_i_tmp=n_i+dt05*n_i_inc;
     h_i_tmp=h_i+dt05*h_i_inc;
@@ -70,7 +72,8 @@ for k=1:m_steps,
     h_e_inc=(h_e_inf(v_e_tmp)-h_e_tmp)./tau_h_e(v_e_tmp);
     q_e_inc=(1+tanh(v_e_tmp/10))/2.*(1-q_e_tmp)/0.1-q_e_tmp./tau_dq_e;
     s_e_inc=q_e_tmp.*(1-s_e_tmp)./tau_r_e-s_e_tmp./tau_d_e;
-	v_i_inc=0.1*(-65-v_i_tmp)+9*n_i_tmp.^4.*(-90-v_i_tmp) ...
+	
+    v_i_inc=0.1*(-65-v_i_tmp)+9*n_i_tmp.^4.*(-90-v_i_tmp) ...
            +35*m_i_inf(v_i_tmp).^3.*h_i_tmp.*(55-v_i_tmp) ...
            +(g_ei*s_e_tmp).*(v_rev_e-v_i_tmp) ...
            +i_ext_i;
@@ -84,7 +87,8 @@ for k=1:m_steps,
     n_e=n_e+dt*n_e_inc; 
     q_e=q_e+dt*q_e_inc;
     s_e=s_e+dt*s_e_inc;
-	v_i(k+1)=v_i(k)+dt*v_i_inc;
+	
+    v_i(k+1)=v_i(k)+dt*v_i_inc;
     h_i=h_i+dt*h_i_inc; 
     n_i=n_i+dt*n_i_inc; 
     q_i=q_i+dt*q_i_inc;
