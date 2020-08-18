@@ -86,7 +86,7 @@ tau_d = 9
 x0 = initial_condition(-70)
 
 U = 0.5
-C = 1.45
+C = 1.545 # 1.45
 
 if __name__ == "__main__":
 
@@ -103,7 +103,7 @@ if __name__ == "__main__":
             num_spikes += 1
     gamma = C * (1 + np.tanh(v / 10.0))
     integral_of_delta_function_per_period = np.sum(gamma) * dt / num_spikes
-    
+    print("integral : {}".format(integral_of_delta_function_per_period))
 
     fig, ax = pl.subplots(nrows=2, ncols=2, figsize=(6, 5), sharex=True)
     ax[0, 0].plot(t, v, lw=2, c="k")
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     ax[0, 0].set_yticks(range(-100, 100, 50))
     ax[0, 0].set_ylim(-100, 50)
     ax[0, 1].set_xlim(min(t), max(t))
-    ax[0, 1].set_ylim(0, 1)
+    ax[0, 1].set_ylim(0, 1.01)
 
     pl.tight_layout()
     

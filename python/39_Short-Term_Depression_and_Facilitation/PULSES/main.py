@@ -85,6 +85,9 @@ if __name__ == "__main__":
             num_spikes += 1
     gamma = C * (1 + np.tanh(v / 10.0))
     integral_of_delta_function_per_period = np.sum(gamma) * dt / num_spikes
+    print("integral : {}".format(integral_of_delta_function_per_period))
+    print("inverse of integral result : {}".format(1.0/integral_of_delta_function_per_period))
+
     
 
     fig, ax = pl.subplots(2, figsize=(5, 4), sharex=True)
