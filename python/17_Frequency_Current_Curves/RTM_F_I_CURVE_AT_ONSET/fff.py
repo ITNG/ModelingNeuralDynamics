@@ -35,7 +35,7 @@ for ijk in range(len(alpha_vec)):
     alpha = alpha_vec[ijk]
     I_c = I_c_low * alpha + I_c_high * (1 - alpha)
     y = f0 / np.sqrt(I0 - I_c)
-    print y
+    print (y)
     exit(0)
     # measure how constant f/sqrt(I-I_c) is, with
     # the I_c defined above.
@@ -49,7 +49,7 @@ alpha = alpha_vec[ind]
 I_c = I_c_low * alpha + I_c_high * (1 - alpha)
 C = C_vec[ind]
 I = I_c + np.linspace(0, 1.0, 1001) * (i_ext_high - I_c)
-print C * np.sqrt(I - I_c)
+print (C * np.sqrt(I - I_c))
 pl.plot(I, C * np.sqrt(I - I_c), 'r', lw=2)
 
 

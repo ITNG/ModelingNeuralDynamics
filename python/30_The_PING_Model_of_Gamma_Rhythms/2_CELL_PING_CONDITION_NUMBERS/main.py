@@ -197,7 +197,7 @@ v_i = sol[:, 5]
 
 eSpikes = spikeDetection(t, v_e, -20.0)
 base_period = eSpikes[-1] - eSpikes[-2]
-print "Period of E neuron %10.3f ms" % base_period
+print ("Period of E neuron %10.3f ms" % base_period)
 
 # ------------------------------------------------------------------#
 
@@ -211,7 +211,7 @@ v_i = sol[:, 5]
 eSpikes = spikeDetection(t, v_e, -20.0)
 period = eSpikes[-1] - eSpikes[-2]
 percentage_change = (base_period-period)/base_period*100
-print "Percentage change of reduce in I_E %10.3f" % percentage_change
+print ("Percentage change of reduce in I_E %10.3f" % percentage_change)
 
 # ------------------------------------------------------------------#
 
@@ -226,7 +226,7 @@ v_i = sol[:, 5]
 eSpikes = spikeDetection(t, v_e, -20.0)
 period = eSpikes[-1] - eSpikes[-2]
 percentage_change = (base_period-period)/base_period*100
-print "Percentage change of increse in g_IE %10.3f" % percentage_change
+print ("Percentage change of increse in g_IE %10.3f" % percentage_change)
 
 # ------------------------------------------------------------------#
 
@@ -243,5 +243,5 @@ v_i = sol[:, 5]
 eSpikes = spikeDetection(t, v_e, -20.0)
 period = eSpikes[-1] - eSpikes[-2]
 percentage_change = (base_period-period)/base_period*100
-print "Percentage change of increse in tau_I %10.3f" % percentage_change
+print ("Percentage change of increse in tau_I %10.3f" % percentage_change)
 

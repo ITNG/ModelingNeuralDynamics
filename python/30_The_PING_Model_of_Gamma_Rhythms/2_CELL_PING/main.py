@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     eSpikes = lib.spikeDetection(t, v_e, -20.0)
     period = eSpikes[-1] - eSpikes[-2]
-    print "Period of E neuron %10.3f ms" % period
+    print ("Period of E neuron %10.3f ms" % period)
 
 
 

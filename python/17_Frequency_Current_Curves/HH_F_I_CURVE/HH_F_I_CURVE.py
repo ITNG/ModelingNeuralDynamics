@@ -138,7 +138,7 @@ if __name__ == "__main__":
                         ((maxh - minh) < 0.0001 * abs(maxh + minh)) &
                             ((maxn - minn) < 0.0001 * abs(maxn + minn))):
                         frequencies[ii] = 0.0
-                        print "I =%10.3f, f =%10.2f" % (i_ext, frequencies[ii])
+                        print ("I =%10.3f, f =%10.2f" % (i_ext, frequencies[ii]))
                         break
 
                 # spike detection
@@ -147,11 +147,11 @@ if __name__ == "__main__":
                     tmp = ((i - 1) * dt * (v[i - 1] - vThreshold) +
                         i * dt * (vThreshold - v[i])) / (v[i - 1] - v[i])
                     t_spikes.append(tmp)
-                    # print num_spikes
+                    # print (num_spikes)
 
                 if num_spikes == 4:
                     frequencies[ii] = 1000.0 / (t_spikes[-1] - t_spikes[-2])
-                    print "I =%10.3f, f =%10.2f, t =%18.6f" % (i_ext, frequencies[ii], tmp)
+                    print ("I =%10.3f, f =%10.2f, t =%18.6f" % (i_ext, frequencies[ii], tmp))
                     break
         
         # save to file
@@ -160,7 +160,7 @@ if __name__ == "__main__":
         else:
             np.savetxt("forward.txt", zip(i_ext_vec, frequencies), fmt="%20.9f")
 
-    print "Done in %10.3f" % (time() - start)
+    print ("Done in %10.3f" % (time() - start))
 
     
     f_forward = np.loadtxt("forward.txt")

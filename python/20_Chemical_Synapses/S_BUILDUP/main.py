@@ -146,7 +146,7 @@ if __name__ == "__main__":
             tSpikes.append(ts)
     
     period = tSpikes[-1] - tSpikes[-2]
-    print "Period is %10.3f ms" % period
+    print ("Period is %10.3f ms" % period)
 
 
     # --------------------------------------------------------------#

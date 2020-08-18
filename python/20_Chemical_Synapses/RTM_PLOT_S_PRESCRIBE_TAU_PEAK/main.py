@@ -135,7 +135,7 @@ if __name__ == "__main__":
     tau_r = 10.0
     tau_peak = 20.0
     tau_d_q = tau_d_q_function(tau_d, tau_r, tau_peak)
-    print tau_d_q
+    print (tau_d_q)
     
     x0 = initial_condition(v)
     t = np.arange(0, t_final, dt)
@@ -148,7 +148,7 @@ if __name__ == "__main__":
     tau_d = 300.0
     tau_peak = 150.0
     tau_d_q = tau_d_q_function(tau_d, tau_r, tau_peak)
-    print tau_d_q
+    print (tau_d_q)
 
     sol = odeint(derivative, x0, t)
     S2 = sol[:, -1]

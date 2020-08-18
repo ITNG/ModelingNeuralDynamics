@@ -21,7 +21,8 @@ t_final = 50.0
 tau_m = 2.0
 dt = 0.01
 I = 1 / (1 - np.exp(-20.0 / tau_m)) / tau_m
-print I
+print(I)
+
 
 
 
