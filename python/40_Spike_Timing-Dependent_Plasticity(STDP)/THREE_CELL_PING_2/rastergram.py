@@ -1,7 +1,7 @@
 import numpy as np
 import pylab as pl
 from lib import read_from_file
-from main import num_e, num_i
+from main import num_e, num_i, t_final
 
 
 def plot_raster(e_file, i_file, ax):
@@ -21,9 +21,20 @@ def plot_raster(e_file, i_file, ax):
     ax.set_xlabel("time [ms]")
     ax.set_ylabel("neuron #")
 
+    for i in range(num_i):
+            frequency_of_i_cell = len(t_i_spikes[i]) * 1000 / t_final
+            print("frequency of i cell {}: {}".format(i, frequency_of_i_cell))
+    
+    for i in range(num_e):
+            frequency_of_e_cell = len(t_e_spikes[i]) * 1000 / t_final
+            print("frequency of e cell {}: {}".format(i, frequency_of_e_cell))
+
 fig, ax = pl.subplots(2, figsize=(7, 3), sharex=True)
 plot_raster('t_e_spikes1.txt', 't_i_spikes1.txt', ax[0])
 plot_raster('t_e_spikes2.txt', 't_i_spikes2.txt', ax[1])
 pl.margins(x=0.01)
 pl.tight_layout()
 pl.savefig("fig.png")
+
+
+    

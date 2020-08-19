@@ -96,6 +96,6 @@ if __name__ == "__main__":
         t_i_spikes.append(ts_i)
 
     lib.spikeToFile(t_e_spikes, "t_e_spikes2.txt")
-    lib.spikeToFile(t_i_spikes, "t_i_spikes2.txt")
+    lib.spikeToFile(t_i_spikes, "t_i_spikes2.txt")    
 
     lib.display_time(time() - start)
