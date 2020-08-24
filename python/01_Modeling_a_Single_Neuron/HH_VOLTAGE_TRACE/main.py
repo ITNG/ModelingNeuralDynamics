@@ -76,6 +76,8 @@ h = h_inf(v)
 n = n_inf(v)
 x0 = [v, m, n, h]
 
+print(x0)
+
 if __name__ == "__main__":
 
     t = np.arange(0, t_final, dt)
