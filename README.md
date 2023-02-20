@@ -13,6 +13,7 @@ An Introduction to Modeling Neuronal Dynamics - Christoph Borgers in python
 Wilson-Cowan phase plane
 </p>
 
+There is also an standalone Python package of the book [here](https://github.com/Ziaeemehr/mndynamics) to play with codes on Colab and Binder.
 
 
 ### Introduction 
@@ -22,7 +23,7 @@ Topics include models of individual nerve cells and their dynamics, models of ne
 
 An extensive online collection of Matlab programs generating the figures accompanies the book.
 
-### matlab code gathered from here
-https://link.springer.com/book/10.1007/978-3-319-51171-9
+### matlab code gathered from [here](https://link.springer.com/book/10.1007/978-3-319-51171-9)
+
 
 ### Python codes provided by contributors
