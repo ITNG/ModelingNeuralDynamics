@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 60/256 (23%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 61/256 (24%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
