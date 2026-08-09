@@ -7,7 +7,9 @@ e/
 template/
 results/
 .ipynb_checkpoints/
+__pycache__/
 *.pyc
+.DS_Store
 *.npz
 #*.png
 *.pdf

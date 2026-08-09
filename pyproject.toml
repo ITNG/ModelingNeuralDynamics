@@ -1,0 +1,23 @@
+[project]
+name = "modelingneuraldynamics"
+version = "0.1.0"
+description = "Python and Brian2 code companion to 'An Introduction to Modeling Neuronal Dynamics' (Borgers), ported from the book's MATLAB originals"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "networkx",
+    "brian2",
+    "neurodynex3",
+    "jupyter",
+    "ipykernel",
+]
+
+[dependency-groups]
+dev = [
+    "nbstripout",
+]
+
+[tool.uv]
+package = false
