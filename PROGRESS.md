@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 147/256 (57%). brian 21/256 (8%, +80 n/a).**
+**Totals: python 147/256 (57%). brian 25/256 (10%, +80 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, or its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...) rather than "run this neuron/network" -- even where it calls odeint internally, Brian2 adds nothing over the existing Python port for these
@@ -201,12 +201,12 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 |---|---|---|
 | B_JAHR_STEVENS | [x] | [ ] |
 | RTM_PLOT_Q | [x] | [ ] |
-| RTM_PLOT_S | [x] | [ ] |
+| RTM_PLOT_S | [x] | [x] |
 | RTM_PLOT_S_PRESCRIBE_TAU_PEAK | [x] | [ ] |
-| RTM_PLOT_S_TWO_VARIABLES | [x] | [ ] |
+| RTM_PLOT_S_TWO_VARIABLES | [x] | [x] |
 | RTM_WITH_AUTAPSE_F_I_CURVE | [x] | [ ] |
-| S_BUILDUP | [x] | [ ] |
-| S_SLOW_BUILDUP | [x] | [ ] |
+| S_BUILDUP | [x] | [x] |
+| S_SLOW_BUILDUP | [x] | [x] |
 
 ## Chapter 21 - Gap Junctions
 

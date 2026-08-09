@@ -44,23 +44,23 @@ def derivative(x0, t):
     '''
     define Traub Model
     '''
-    v, m, n, h, s = x0
+    v, n, h, s = x0
+
+    m = m_inf(v)
     dv = i_ext - g_na * h * m ** 3 * \
         (v - v_na) - g_k * n ** 4 * (v - v_k) - g_l * (v - v_l)
-    dm = alpha_m(v) * (1.0 - m) - beta_m(v) * m
     dn = alpha_n(v) * (1.0 - n) - beta_n(v) * n
     dh = alpha_h(v) * (1.0 - h) - beta_h(v) * h
     ds = 0.5 * (1.0+np.tanh(0.1 * v)) * (1-s)/tau_r - s/tau_d
 
-    return [dv, dm, dn, dh, ds]
+    return [dv, dn, dh, ds]
 
 
 def initial_condition(v):
-    m = m_inf(v)
     h = h_inf(v)
     n = n_inf(v)
     s = 0.0
-    return [v, m, n, h, s]
+    return [v, n, h, s]
 
 c = 1
 g_k = 80.0
@@ -69,7 +69,7 @@ g_l = 0.1
 v_k = -100.0
 v_na = 50.0
 v_l = -67.0
-i_ext = 1.5
+i_ext = 1.0
 t_final = 100.0
 dt = 0.01
 v = -70.0

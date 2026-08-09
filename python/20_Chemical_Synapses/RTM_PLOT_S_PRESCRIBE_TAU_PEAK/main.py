@@ -45,25 +45,25 @@ def derivative(x0, t):
     '''
     define Traub Model
     '''
-    v, m, n, h, q, s = x0
+    v, n, h, q, s = x0
+
+    m = m_inf(v)
     dv = i_ext - g_na * h * m ** 3 * \
         (v - v_na) - g_k * n ** 4 * (v - v_k) - g_l * (v - v_l)
-    dm = alpha_m(v) * (1.0 - m) - beta_m(v) * m
     dn = alpha_n(v) * (1.0 - n) - beta_n(v) * n
     dh = alpha_h(v) * (1.0 - h) - beta_h(v) * h
     dq = 0.5 * (1.0 + np.tanh(0.1 * v)) * (1 - q) * 10.0 - q / tau_d_q
     ds = q * (1 - s)/tau_r - s/tau_d
 
-    return [dv, dm, dn, dh, dq, ds]
+    return [dv, dn, dh, dq, ds]
 
 
 def initial_condition(v):
-    m = m_inf(v)
     h = h_inf(v)
     n = n_inf(v)
     q = 0.0
     s = 0.0
-    return [v, m, n, h, q, s]
+    return [v, n, h, q, s]
 
 
 def tau_peak_function(tau_d, tau_r, tau_d_q):
