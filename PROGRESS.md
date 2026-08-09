@@ -44,7 +44,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 |---|---|---|
 | LIF_NEURON_WITH_HH | [x] | [ ] |
 | LIF_VOLTAGE_TRACE | [x] | [ ] |
-| LIF_VOLTAGE_TRACE_2 | [ ] | [ ] |
+| LIF_VOLTAGE_TRACE_2 | [x] | [ ] |
 | SUBTHR_FOR_HH | [x] | [ ] |
 | TAU_M_FOR_HH | [x] | [ ] |
 
