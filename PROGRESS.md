@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 70/256 (27%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 73/256 (29%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -75,10 +75,10 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| FN | [ ] | [ ] |
-| HH_CYCLE_SPEED | [ ] | [ ] |
+| FN | [x] | [ ] |
+| HH_CYCLE_SPEED | [x] | [ ] |
 | HH_H_PLUS_N | [x] | [ ] |
-| HH_NULLCLINES_PLUS_SOLUTION | [ ] | [ ] |
+| HH_NULLCLINES_PLUS_SOLUTION | [x] | [ ] |
 | REDUCED_HH | [x] | [ ] |
 
 ## Chapter 11
