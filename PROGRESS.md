@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 141/256 (55%). brian 21/256 (8%, +80 n/a).**
+**Totals: python 147/256 (57%). brian 21/256 (8%, +80 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, or its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...) rather than "run this neuron/network" -- even where it calls odeint internally, Brian2 adds nothing over the existing Python port for these
@@ -199,12 +199,12 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| B_JAHR_STEVENS | [ ] | [ ] |
+| B_JAHR_STEVENS | [x] | [ ] |
 | RTM_PLOT_Q | [x] | [ ] |
 | RTM_PLOT_S | [x] | [ ] |
 | RTM_PLOT_S_PRESCRIBE_TAU_PEAK | [x] | [ ] |
 | RTM_PLOT_S_TWO_VARIABLES | [x] | [ ] |
-| RTM_WITH_AUTAPSE_F_I_CURVE | [ ] | [ ] |
+| RTM_WITH_AUTAPSE_F_I_CURVE | [x] | [ ] |
 | S_BUILDUP | [x] | [ ] |
 | S_SLOW_BUILDUP | [x] | [ ] |
 
@@ -212,17 +212,17 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| LIF_NETWORK_WITH_GJ | [ ] | [ ] |
-| RESET_THRESHOLD | [ ] | [ ] |
+| LIF_NETWORK_WITH_GJ | [x] | [ ] |
+| RESET_THRESHOLD | [x] | [ ] |
 | WB_NETWORK_WITH_GJ | [x] | [ ] |
-| WB_NETWORK_WITH_GJ_SUBTHRESHOLD | [ ] | [ ] |
+| WB_NETWORK_WITH_GJ_SUBTHRESHOLD | [x] | [ ] |
 
 ## Chapter 22 - A Wilson Cowan Model of an Oscillatory E-I Network
 
 | sub-example | python | brian |
 |---|---|---|
 | WILSON_COWAN_E_AND_I | [x] | [ ] |
-| WILSON_COWAN_LOWERING_W_EE | [ ] | [ ] |
+| WILSON_COWAN_LOWERING_W_EE | [x] | [ ] |
 | WILSON_COWAN_PHASE_PLANE | [x] | [ ] |
 | WILSON_COWAN_RASTERGRAM | [x] | [ ] |
 
