@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 103/256 (40%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 116/256 (45%). brian 1/256 (0%).**
 
 - [ ] not done
 
@@ -12,7 +12,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| HH_VOLTAGE_TRACE | [x] | [ ] |
+| HH_VOLTAGE_TRACE | [x] | [x] |
 
 ## Chapter 03 - The Classical HH ODEs
 
@@ -145,19 +145,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_F_I_CURVE | [ ] | [ ] |
+| ERISIR_F_I_CURVE | [x] | [ ] |
 | HH_F_I_CURVE | [x] | [ ] |
-| HH_REDUCED_F_I_CURVE | [ ] | [ ] |
-| INAPIK_F_I_CURVE | [ ] | [ ] |
-| INAPIK_SADDLE_CYCLE_DISTANCE | [ ] | [ ] |
-| LIF_F_I_CURVE | [ ] | [ ] |
+| HH_REDUCED_F_I_CURVE | [x] | [ ] |
+| INAPIK_F_I_CURVE | [x] | [ ] |
+| INAPIK_SADDLE_CYCLE_DISTANCE | [x] | [ ] |
+| LIF_F_I_CURVE | [x] | [ ] |
 | RTM_F_I_CURVE | [x] | [ ] |
 | RTM_F_I_CURVE_AT_ONSET | [x] | [ ] |
-| RTM_WITH_M_CURRENT_F_I | [ ] | [ ] |
-| SETN_F_I | [ ] | [ ] |
-| THETA_F_I_CURVE | [ ] | [ ] |
-| WB_F_I_CURVE | [ ] | [ ] |
-| WB_F_I_CURVE_AT_ONSET | [ ] | [ ] |
+| RTM_WITH_M_CURRENT_F_I | [x] | [ ] |
+| SETN_F_I | [x] | [ ] |
+| THETA_F_I_CURVE | [x] | [ ] |
+| WB_F_I_CURVE | [x] | [ ] |
+| WB_F_I_CURVE_AT_ONSET | [x] | [ ] |
 
 ## Chapter 18
 
