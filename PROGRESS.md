@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 74/256 (29%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 76/256 (30%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -87,12 +87,12 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 |---|---|---|
 | SADDLE_NODE_BIFURCATION | [x] | [ ] |
 
-## Chapter 12
+## Chapter 12 - Two Dimensional Bifurcation Analysis
 
 | sub-example | python | brian |
 |---|---|---|
-| RTM_2D_FP | [ ] | [ ] |
-| RTM_2D_INVARIANT_CYCLE | [ ] | [ ] |
+| RTM_2D_FP | [x] | [ ] |
+| RTM_2D_INVARIANT_CYCLE | [x] | [ ] |
 
 ## Chapter 13
 
