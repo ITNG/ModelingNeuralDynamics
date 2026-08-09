@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 92/256 (36%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 103/256 (40%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -120,26 +120,26 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | HH_REDUCED_FP_EVS | [x] | [ ] |
 | HH_REDUCED_REPELLING_CYCLE | [x] | [ ] |
 
-## Chapter 15
+## Chapter 15 - Canard Explosions
 
 | sub-example | python | brian |
 |---|---|---|
-| CANARD | [ ] | [ ] |
-| CANARD_2 | [ ] | [ ] |
-| FITZHUGH_NAGUMO_MACRO | [ ] | [ ] |
-| FITZHUGH_NAGUMO_MICRO | [ ] | [ ] |
-| HH_REDUCED_BIF_DIAG | [ ] | [ ] |
-| MMOS | [ ] | [ ] |
+| CANARD | [x] | [ ] |
+| CANARD_2 | [x] | [ ] |
+| FITZHUGH_NAGUMO_MACRO | [x] | [ ] |
+| FITZHUGH_NAGUMO_MICRO | [x] | [ ] |
+| HH_REDUCED_BIF_DIAG | [x] | [ ] |
+| MMOS | [x] | [ ] |
 
-## Chapter 16
+## Chapter 16 - Model Neurons of Bifurcation Type 3
 
 | sub-example | python | brian |
 |---|---|---|
-| INAPIK_FIXED_POINTS | [ ] | [ ] |
-| INAPIK_PHASE_PLANE | [ ] | [ ] |
-| SELF_EXCITING_THETA_NEURON | [ ] | [ ] |
-| SELF_EXCITING_THETA_SMOOTH | [ ] | [ ] |
-| SETN_PHASE_PLANE | [ ] | [ ] |
+| INAPIK_FIXED_POINTS | [x] | [ ] |
+| INAPIK_PHASE_PLANE | [x] | [ ] |
+| SELF_EXCITING_THETA_NEURON | [x] | [ ] |
+| SELF_EXCITING_THETA_SMOOTH | [x] | [ ] |
+| SETN_PHASE_PLANE | [x] | [ ] |
 
 ## Chapter 17 - Frequency Current Curves
 
