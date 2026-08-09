@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 59/256 (23%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 60/256 (23%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -44,7 +44,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 |---|---|---|
 | LIF_NEURON_WITH_HH | [x] | [ ] |
 | LIF_VOLTAGE_TRACE | [x] | [ ] |
-| LIF_VOLTAGE_TRACE_2 | [ ] | [ ] |
+| LIF_VOLTAGE_TRACE_2 | [x] | [ ] |
 | SUBTHR_FOR_HH | [x] | [ ] |
 | TAU_M_FOR_HH | [x] | [ ] |
 
