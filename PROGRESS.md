@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 141/256 (55%). brian 19/256 (7%, +4 n/a).**
+**Totals: python 141/256 (55%). brian 21/256 (8%, +7 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot (gating-variable curves, bifurcation diagrams, phase planes, ...) with no ODE simulation to run -- Brian2 (a spiking network simulator) has nothing to add over the Python port
@@ -62,15 +62,15 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| ADAPTATION_MAP | [x] | [ ] |
-| CALCIUM_RISE | [x] | [ ] |
-| LIF_ADAPT | [x] | [ ] |
-| M_CURRENT | [x] | [ ] |
+| ADAPTATION_MAP | [x] | n/a |
+| CALCIUM_RISE | [x] | n/a |
+| LIF_ADAPT | [x] | [x] |
+| M_CURRENT | [x] | n/a |
 | RTM_AHP | [x] | [x] |
 | RTM_AHP_RESTING | [x] | [x] |
 | RTM_M | [x] | [x] |
 | RTM_M_RESTING | [x] | [x] |
-| V_V_TILDE | [x] | [ ] |
+| V_V_TILDE | [x] | [x] |
 
 ## Chapter 10 - The Slow Fast Phase Plane
 
