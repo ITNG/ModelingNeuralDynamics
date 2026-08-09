@@ -226,17 +226,17 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | WILSON_COWAN_PHASE_PLANE | [x] | [ ] |
 | WILSON_COWAN_RASTERGRAM | [x] | [ ] |
 
-## Chapter 23
+## Chapter 23 - Entrainment by Excitatory Input Pulses
 
 | sub-example | python | brian |
 |---|---|---|
-| LIF_ENTRAINMENT | [ ] | [ ] |
-| PLOT_F_ENTRAINMENT | [ ] | [ ] |
-| PLOT_F_ENTRAINMENT_2 | [ ] | [ ] |
+| LIF_ENTRAINMENT | [x] | [ ] |
+| PLOT_F_ENTRAINMENT | [x] | [ ] |
+| PLOT_F_ENTRAINMENT_2 | [x] | [ ] |
 | WB_ENTRAINMENT_INTERVALS | [ ] | [ ] |
-| WB_NEURON_ENTRAINED | [ ] | [ ] |
-| WB_NEURON_IRREGULAR | [ ] | [ ] |
-| WB_NEURON_N_TO_ONE | [ ] | [ ] |
+| WB_NEURON_ENTRAINED | [x] | [ ] |
+| WB_NEURON_IRREGULAR | [x] | [ ] |
+| WB_NEURON_N_TO_ONE | [x] | [ ] |
 
 ## Chapter 24 - Synchronization by Fast Recurrent Excitation
 
