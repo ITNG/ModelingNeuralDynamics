@@ -1,14 +1,14 @@
 # ModelingNeuralDynamics
 An Introduction to Modeling Neuronal Dynamics - Christoph Borgers in python
 <p align="center">
-<img src="https://github.com/Ziaeemehr/ModelingNeuralDynamics/blob/master/python/30_The_PING_Model_of_Gamma_Rhythms/PING_4/fig.png"  width="600">
+<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/python/30_The_PING_Model_of_Gamma_Rhythms/PING_4/fig.png"  width="600">
 </p>
 <p align="center">
  Ping Model of Gamma Rhythm 
 </p>
 
 <p align="center">
-  <img src="https://github.com/Ziaeemehr/ModelingNeuralDynamics/blob/master/python/22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/WILSON_COWAN_PHASE_PLANE/fig_22_3.png" width=300> 
+  <img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/python/22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/WILSON_COWAN_PHASE_PLANE/fig_22_3.png" width=300> 
 </p>
 <p align="center">
 Wilson-Cowan phase plane
@@ -32,7 +32,7 @@ dependencies automatically when running on Colab.
 |---|---|
 | 01 - Modeling a Single Neuron | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter01.ipynb) |
 | 04 - Numerical Solution of HH ODEs | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter04.ipynb) |
-| 05 - The Simple Model of Neurons in Rodent Brains | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter05.ipynb) |
+| 05 - Three Simple Models of Neurons in Rodent Brains | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter05.ipynb) |
 | 07 - Linear Integrate and Fire (LIF) Neurons | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter07.ipynb) |
 | 08 - Quadratic Integrate and Fire (QIF) and Theta Neurons | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter08.ipynb) |
 | 09 - Spike Frequency Adaptation | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter09.ipynb) |

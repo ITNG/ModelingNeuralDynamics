@@ -29,7 +29,7 @@ def install_cell():
         "import subprocess\n"
         "import sys\n"
         "if \"google.colab\" in sys.modules:\n"
-        "    subprocess.run([sys.executable, \"-m\", \"pip\", \"install\", \"-q\", \"modelingneuraldynamics\"])\n"
+        "    subprocess.run([sys.executable, \"-m\", \"pip\", \"install\", \"-q\", \"modelingneuraldynamics\"], check=True)\n"
     )
     return {
         "cell_type": "code",
@@ -53,8 +53,9 @@ def add_colab_cells(path):
     # Keep the notebook's original title cell first; insert the badge and
     # install cells right after it rather than before it.
     nb["cells"] = nb["cells"][:1] + [badge_cell(path), install_cell()] + nb["cells"][1:]
-    for cell in nb["cells"]:
-        cell.pop("id", None)
+    if nb.get("nbformat_minor", 0) < 5:
+        for cell in nb["cells"]:
+            cell.pop("id", None)
     path.write_text(json.dumps(nb, indent=1))
     print(f"{path}: added Colab badge + install cell")
 

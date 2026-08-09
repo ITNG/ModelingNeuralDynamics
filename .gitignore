@@ -1,6 +1,7 @@
 archive/
 back/
 build/
+dist/
 bin/
 e/
 .vscode/
