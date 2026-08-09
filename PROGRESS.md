@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 73/256 (29%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 74/256 (29%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -81,11 +81,11 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | HH_NULLCLINES_PLUS_SOLUTION | [x] | [ ] |
 | REDUCED_HH | [x] | [ ] |
 
-## Chapter 11
+## Chapter 11 - The Saddle Node Bifurcation
 
 | sub-example | python | brian |
 |---|---|---|
-| SADDLE_NODE_BIFURCATION | [ ] | [ ] |
+| SADDLE_NODE_BIFURCATION | [x] | [ ] |
 
 ## Chapter 12
 
