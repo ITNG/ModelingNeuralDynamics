@@ -2,6 +2,8 @@
 
 Used to check a Python/Brian2 port against the book's original MATLAB code.
 """
+import importlib.util
+import os
 import subprocess
 import tempfile
 from pathlib import Path
@@ -10,6 +12,27 @@ import numpy as np
 from scipy.io import loadmat
 
 MATLAB = "/home/ziaee/prog/Matlab/R2020a/bin/matlab"
+
+
+def load_python_port(path):
+    """Import a chapter's main.py with cwd set to its own folder.
+
+    Chapter scripts save figures to relative paths (fig.png) and are meant
+    to be run as `cd folder && python main.py`. Some don't guard their
+    plotting code behind `if __name__ == "__main__"`, so importing them
+    with the wrong cwd would silently (re)write a fig.png wherever pytest
+    happens to run from.
+    """
+    path = Path(path).resolve()
+    spec = importlib.util.spec_from_file_location(path.stem, path)
+    mod = importlib.util.module_from_spec(spec)
+    cwd = os.getcwd()
+    try:
+        os.chdir(path.parent)
+        spec.loader.exec_module(mod)
+    finally:
+        os.chdir(cwd)
+    return mod
 
 
 def run_matlab_script(script_dir, script_name, varnames, timeout=120):

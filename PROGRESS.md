@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 61/256 (24%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 63/256 (25%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -52,10 +52,10 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| QIF_INFINITE_THRESHOLD | [ ] | [ ] |
+| QIF_INFINITE_THRESHOLD | [x] | [ ] |
 | QIF_VOLTAGE_TRACE | [x] | [ ] |
 | THETA_FIRING | [x] | [ ] |
-| THREE_CIRCLES | [ ] | [ ] |
+| THREE_CIRCLES | [x] | [ ] |
 
 ## Chapter 09
 
