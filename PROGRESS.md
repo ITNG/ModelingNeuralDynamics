@@ -4,10 +4,10 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 141/256 (55%). brian 21/256 (8%, +7 n/a).**
+**Totals: python 141/256 (55%). brian 21/256 (8%, +80 n/a).**
 
 - [ ] not done
-- n/a: sub-example is a static plot (gating-variable curves, bifurcation diagrams, phase planes, ...) with no ODE simulation to run -- Brian2 (a spiking network simulator) has nothing to add over the Python port
+- n/a: sub-example is a static plot, or its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...) rather than "run this neuron/network" -- even where it calls odeint internally, Brian2 adds nothing over the existing Python port for these
 
 ## Chapter 01 - Modeling a Single Neuron
 
@@ -76,124 +76,124 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| FN | [x] | [ ] |
-| HH_CYCLE_SPEED | [x] | [ ] |
-| HH_H_PLUS_N | [x] | [ ] |
-| HH_NULLCLINES_PLUS_SOLUTION | [x] | [ ] |
-| REDUCED_HH | [x] | [ ] |
+| FN | [x] | n/a |
+| HH_CYCLE_SPEED | [x] | n/a |
+| HH_H_PLUS_N | [x] | n/a |
+| HH_NULLCLINES_PLUS_SOLUTION | [x] | n/a |
+| REDUCED_HH | [x] | n/a |
 
 ## Chapter 11 - The Saddle Node Bifurcation
 
 | sub-example | python | brian |
 |---|---|---|
-| SADDLE_NODE_BIFURCATION | [x] | [ ] |
+| SADDLE_NODE_BIFURCATION | [x] | n/a |
 
 ## Chapter 12 - Two Dimensional Bifurcation Analysis
 
 | sub-example | python | brian |
 |---|---|---|
-| RTM_2D_FP | [x] | [ ] |
-| RTM_2D_INVARIANT_CYCLE | [x] | [ ] |
+| RTM_2D_FP | [x] | n/a |
+| RTM_2D_INVARIANT_CYCLE | [x] | n/a |
 
 ## Chapter 13 - Hopf Bifurcations
 
 | sub-example | python | brian |
 |---|---|---|
-| HOPF_SUB | [x] | [ ] |
-| HOPF_SUB_2 | [x] | [ ] |
-| HOPF_SUB_BIF_DIAG | [x] | [ ] |
-| HOPF_SUB_BIF_DIAG_2 | [x] | [ ] |
-| HOPF_SUB_PHASE_PLANE | [x] | [ ] |
-| HOPF_SUB_PHASE_PLANE_2 | [x] | [ ] |
-| HOPF_SUP | [x] | [ ] |
-| HOPF_SUP_BIF_DIAG | [x] | [ ] |
-| HOPF_SUP_PHASE_PLANE | [x] | [ ] |
+| HOPF_SUB | [x] | n/a |
+| HOPF_SUB_2 | [x] | n/a |
+| HOPF_SUB_BIF_DIAG | [x] | n/a |
+| HOPF_SUB_BIF_DIAG_2 | [x] | n/a |
+| HOPF_SUB_PHASE_PLANE | [x] | n/a |
+| HOPF_SUB_PHASE_PLANE_2 | [x] | n/a |
+| HOPF_SUP | [x] | n/a |
+| HOPF_SUP_BIF_DIAG | [x] | n/a |
+| HOPF_SUP_PHASE_PLANE | [x] | n/a |
 
 ## Chapter 14 - Model Neurons of Bifurcation Type 2
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_2D_FP | [x] | [ ] |
-| ERISIR_REDUCED | [x] | [ ] |
-| HH_REDUCED_COUNT_FP | [x] | [ ] |
-| HH_REDUCED_CYCLE_DISTANCE | [x] | [ ] |
-| HH_REDUCED_FIXED_POINTS | [x] | [ ] |
-| HH_REDUCED_FP_EVS | [x] | [ ] |
-| HH_REDUCED_REPELLING_CYCLE | [x] | [ ] |
+| ERISIR_2D_FP | [x] | n/a |
+| ERISIR_REDUCED | [x] | n/a |
+| HH_REDUCED_COUNT_FP | [x] | n/a |
+| HH_REDUCED_CYCLE_DISTANCE | [x] | n/a |
+| HH_REDUCED_FIXED_POINTS | [x] | n/a |
+| HH_REDUCED_FP_EVS | [x] | n/a |
+| HH_REDUCED_REPELLING_CYCLE | [x] | n/a |
 
 ## Chapter 15 - Canard Explosions
 
 | sub-example | python | brian |
 |---|---|---|
-| CANARD | [x] | [ ] |
-| CANARD_2 | [x] | [ ] |
-| FITZHUGH_NAGUMO_MACRO | [x] | [ ] |
-| FITZHUGH_NAGUMO_MICRO | [x] | [ ] |
-| HH_REDUCED_BIF_DIAG | [x] | [ ] |
-| MMOS | [x] | [ ] |
+| CANARD | [x] | n/a |
+| CANARD_2 | [x] | n/a |
+| FITZHUGH_NAGUMO_MACRO | [x] | n/a |
+| FITZHUGH_NAGUMO_MICRO | [x] | n/a |
+| HH_REDUCED_BIF_DIAG | [x] | n/a |
+| MMOS | [x] | n/a |
 
 ## Chapter 16 - Model Neurons of Bifurcation Type 3
 
 | sub-example | python | brian |
 |---|---|---|
-| INAPIK_FIXED_POINTS | [x] | [ ] |
-| INAPIK_PHASE_PLANE | [x] | [ ] |
-| SELF_EXCITING_THETA_NEURON | [x] | [ ] |
-| SELF_EXCITING_THETA_SMOOTH | [x] | [ ] |
-| SETN_PHASE_PLANE | [x] | [ ] |
+| INAPIK_FIXED_POINTS | [x] | n/a |
+| INAPIK_PHASE_PLANE | [x] | n/a |
+| SELF_EXCITING_THETA_NEURON | [x] | n/a |
+| SELF_EXCITING_THETA_SMOOTH | [x] | n/a |
+| SETN_PHASE_PLANE | [x] | n/a |
 
 ## Chapter 17 - Frequency Current Curves
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_F_I_CURVE | [x] | [ ] |
-| HH_F_I_CURVE | [x] | [ ] |
-| HH_REDUCED_F_I_CURVE | [x] | [ ] |
-| INAPIK_F_I_CURVE | [x] | [ ] |
-| INAPIK_SADDLE_CYCLE_DISTANCE | [x] | [ ] |
-| LIF_F_I_CURVE | [x] | [ ] |
-| RTM_F_I_CURVE | [x] | [ ] |
-| RTM_F_I_CURVE_AT_ONSET | [x] | [ ] |
-| RTM_WITH_M_CURRENT_F_I | [x] | [ ] |
-| SETN_F_I | [x] | [ ] |
-| THETA_F_I_CURVE | [x] | [ ] |
-| WB_F_I_CURVE | [x] | [ ] |
-| WB_F_I_CURVE_AT_ONSET | [x] | [ ] |
+| ERISIR_F_I_CURVE | [x] | n/a |
+| HH_F_I_CURVE | [x] | n/a |
+| HH_REDUCED_F_I_CURVE | [x] | n/a |
+| INAPIK_F_I_CURVE | [x] | n/a |
+| INAPIK_SADDLE_CYCLE_DISTANCE | [x] | n/a |
+| LIF_F_I_CURVE | [x] | n/a |
+| RTM_F_I_CURVE | [x] | n/a |
+| RTM_F_I_CURVE_AT_ONSET | [x] | n/a |
+| RTM_WITH_M_CURRENT_F_I | [x] | n/a |
+| SETN_F_I | [x] | n/a |
+| THETA_F_I_CURVE | [x] | n/a |
+| WB_F_I_CURVE | [x] | n/a |
+| WB_F_I_CURVE_AT_ONSET | [x] | n/a |
 
 ## Chapter 18 - Bistability Resulting from Rebound Firing
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_BISTABLE | [x] | [ ] |
-| ERISIR_BISTABLE_GATES | [x] | [ ] |
-| ERISIR_BISTABLE_LIMITED_H | [x] | [ ] |
-| HH_BISTABLE | [x] | [ ] |
-| HH_BISTABLE_GATES | [x] | [ ] |
-| HH_BISTABLE_LIMITED_N | [x] | [ ] |
-| H_CURRENT | [x] | [ ] |
-| PLOT_MODIFIED_TAU_R | [x] | [ ] |
-| RTM_F_I_CURVE_WITH_I_H | [x] | [ ] |
-| RTM_VOLTAGE_TRACE_WITH_I_H | [x] | [ ] |
-| RTM_WITH_I_H_BISTABLE | [x] | [ ] |
-| RTM_WITH_I_H_BISTABLE_GATES | [x] | [ ] |
-| RTM_WITH_I_H_LIMITED_R | [x] | [ ] |
-| RTM_WITH_I_M_BISTABLE | [x] | [ ] |
-| RTM_WITH_I_M_BISTABLE_GATES | [x] | [ ] |
-| RTM_WITH_I_M_LIMITED_W | [x] | [ ] |
+| ERISIR_BISTABLE | [x] | n/a |
+| ERISIR_BISTABLE_GATES | [x] | n/a |
+| ERISIR_BISTABLE_LIMITED_H | [x] | n/a |
+| HH_BISTABLE | [x] | n/a |
+| HH_BISTABLE_GATES | [x] | n/a |
+| HH_BISTABLE_LIMITED_N | [x] | n/a |
+| H_CURRENT | [x] | n/a |
+| PLOT_MODIFIED_TAU_R | [x] | n/a |
+| RTM_F_I_CURVE_WITH_I_H | [x] | n/a |
+| RTM_VOLTAGE_TRACE_WITH_I_H | [x] | n/a |
+| RTM_WITH_I_H_BISTABLE | [x] | n/a |
+| RTM_WITH_I_H_BISTABLE_GATES | [x] | n/a |
+| RTM_WITH_I_H_LIMITED_R | [x] | n/a |
+| RTM_WITH_I_M_BISTABLE | [x] | n/a |
+| RTM_WITH_I_M_BISTABLE_GATES | [x] | n/a |
+| RTM_WITH_I_M_LIMITED_W | [x] | n/a |
 
 ## Chapter 19 - Bursting
 
 | sub-example | python | brian |
 |---|---|---|
-| ELLIPSES | [x] | [ ] |
-| ERISIR_PLUS_SLOW_I_K | [x] | [ ] |
-| ERISIR_SHOW_SLOW_I_K | [x] | [ ] |
-| INAPIK_PLUS_SLOW_I_K | [x] | [ ] |
-| INAPIK_PLUS_SLOW_I_K_3D | [x] | [ ] |
-| INAPIK_PLUS_STRONG_SLOW_I_K | [x] | [ ] |
-| INAPIK_PLUS_WEAK_SLOW_I_K | [x] | [ ] |
-| INAPIK_SHOW_SLOW_I_K | [x] | [ ] |
-| SQUARE_WAVES | [x] | [ ] |
+| ELLIPSES | [x] | n/a |
+| ERISIR_PLUS_SLOW_I_K | [x] | n/a |
+| ERISIR_SHOW_SLOW_I_K | [x] | n/a |
+| INAPIK_PLUS_SLOW_I_K | [x] | n/a |
+| INAPIK_PLUS_SLOW_I_K_3D | [x] | n/a |
+| INAPIK_PLUS_STRONG_SLOW_I_K | [x] | n/a |
+| INAPIK_PLUS_WEAK_SLOW_I_K | [x] | n/a |
+| INAPIK_SHOW_SLOW_I_K | [x] | n/a |
+| SQUARE_WAVES | [x] | n/a |
 
 ## Chapter 20 - Chemical Synapses
 
