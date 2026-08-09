@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 85/256 (33%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 92/256 (36%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -108,17 +108,17 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | HOPF_SUP_BIF_DIAG | [x] | [ ] |
 | HOPF_SUP_PHASE_PLANE | [x] | [ ] |
 
-## Chapter 14
+## Chapter 14 - Model Neurons of Bifurcation Type 2
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_2D_FP | [ ] | [ ] |
-| ERISIR_REDUCED | [ ] | [ ] |
-| HH_REDUCED_COUNT_FP | [ ] | [ ] |
-| HH_REDUCED_CYCLE_DISTANCE | [ ] | [ ] |
-| HH_REDUCED_FIXED_POINTS | [ ] | [ ] |
-| HH_REDUCED_FP_EVS | [ ] | [ ] |
-| HH_REDUCED_REPELLING_CYCLE | [ ] | [ ] |
+| ERISIR_2D_FP | [x] | [ ] |
+| ERISIR_REDUCED | [x] | [ ] |
+| HH_REDUCED_COUNT_FP | [x] | [ ] |
+| HH_REDUCED_CYCLE_DISTANCE | [x] | [ ] |
+| HH_REDUCED_FIXED_POINTS | [x] | [ ] |
+| HH_REDUCED_FP_EVS | [x] | [ ] |
+| HH_REDUCED_REPELLING_CYCLE | [x] | [ ] |
 
 ## Chapter 15
 
