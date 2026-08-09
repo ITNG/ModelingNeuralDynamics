@@ -17,7 +17,12 @@ dependencies = [
 [dependency-groups]
 dev = [
     "nbstripout",
+    "pytest",
 ]
 
-[tool.uv]
-package = false
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["mnd*"]

@@ -42,11 +42,24 @@ beginners to read** — this governs every decision below.
   that chapter already uses (single notebook or per-example folder).
 - Write it to look human-written: match the naming/structure of
   neighboring chapters, not obviously AI-generated boilerplate.
-- Shared code: `python/core.py` and `brian/core.py` (mirroring the
-  existing `brian/input_factory.py` pattern) hold only code duplicated
-  across 3+ chapters (e.g. integrators, HH/LIF gating equations). Populated
-  incrementally as duplication is actually observed — not pre-designed.
-- No pip package, no src-layout, no shared code added speculatively.
+- Shared code: a real installable package, `mnd/`, flat two-directory
+  layout — `mnd/core.py` for plain-numpy helpers shared by `python/`
+  chapters (integrators, gating equations), `mnd/brian/` for Brian2-only
+  helpers. Chapters `import mnd` after an editable install
+  (`uv sync` / `pip install -e .`). Populated incrementally, only with
+  code actually duplicated across 3+ chapters — not pre-designed.
+  (Superseded the earlier "plain files, no package" call once it became
+  clear helper modules needed real organization — see decision log.)
+- `pyproject.toml` now builds `mnd` via setuptools
+  (`tool.setuptools.packages.find.include = ["mnd*"]`); everything else
+  (`python/`, `brian/`, `matlab/`) stays outside the package.
+- `brian/input_factory.py` turned out to be a byte-identical vendored
+  copy of the already-installed `neurodynex3.tools.input_factory` — not
+  moved into `mnd/brian/`, just deleted, and the 5 notebooks that had a
+  dead leftover cell importing the local copy (chapters 01, 04, 05, 09,
+  20) had that cell removed. Their real import
+  (`import neurodynex3.tools.input_factory as input_factory`) already
+  worked and was untouched.
 
 ## Verification ("definition of done" per sub-example)
 
