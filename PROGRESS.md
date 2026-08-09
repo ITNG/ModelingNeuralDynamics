@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 76/256 (30%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 85/256 (33%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -94,19 +94,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | RTM_2D_FP | [x] | [ ] |
 | RTM_2D_INVARIANT_CYCLE | [x] | [ ] |
 
-## Chapter 13
+## Chapter 13 - Hopf Bifurcations
 
 | sub-example | python | brian |
 |---|---|---|
-| HOPF_SUB | [ ] | [ ] |
-| HOPF_SUB_2 | [ ] | [ ] |
-| HOPF_SUB_BIF_DIAG | [ ] | [ ] |
-| HOPF_SUB_BIF_DIAG_2 | [ ] | [ ] |
-| HOPF_SUB_PHASE_PLANE | [ ] | [ ] |
-| HOPF_SUB_PHASE_PLANE_2 | [ ] | [ ] |
-| HOPF_SUP | [ ] | [ ] |
-| HOPF_SUP_BIF_DIAG | [ ] | [ ] |
-| HOPF_SUP_PHASE_PLANE | [ ] | [ ] |
+| HOPF_SUB | [x] | [ ] |
+| HOPF_SUB_2 | [x] | [ ] |
+| HOPF_SUB_BIF_DIAG | [x] | [ ] |
+| HOPF_SUB_BIF_DIAG_2 | [x] | [ ] |
+| HOPF_SUB_PHASE_PLANE | [x] | [ ] |
+| HOPF_SUB_PHASE_PLANE_2 | [x] | [ ] |
+| HOPF_SUP | [x] | [ ] |
+| HOPF_SUP_BIF_DIAG | [x] | [ ] |
+| HOPF_SUP_PHASE_PLANE | [x] | [ ] |
 
 ## Chapter 14
 
