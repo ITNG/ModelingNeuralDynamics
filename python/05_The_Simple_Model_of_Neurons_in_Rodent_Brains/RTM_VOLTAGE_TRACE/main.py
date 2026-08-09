@@ -54,22 +54,26 @@ def n_inf(v):
 def derivative(x0, t):
     '''
     define Traub Model
+
+    m is not integrated as its own gating variable -- the book's RTM
+    model holds it at instantaneous equilibrium m_inf(v), same as
+    make_figure.m computing m(k+1)=m_inf(v(k+1)) every step rather than
+    updating it with an ODE like h and n.
     '''
-    v, m, n, h, = x0
+    v, n, h, = x0
+    m = m_inf(v)
     dv = i_ext - g_na * h * m ** 3 * \
         (v - v_na) - g_k * n ** 4 * (v - v_k) - g_l * (v - v_l)
-    dm = alpha_m(v) * (1.0 - m) - beta_m(v) * m
     dn = alpha_n(v) * (1.0 - n) - beta_n(v) * n
     dh = alpha_h(v) * (1.0 - h) - beta_h(v) * h
 
-    return [dv, dm, dn, dh]
+    return [dv, dn, dh]
 
 
 v = -70.0
-m = m_inf(v)
 h = h_inf(v)
 n = n_inf(v)
-x0 = [v, m, n, h]
+x0 = [v, n, h]
 
 if __name__ == "__main__":
 

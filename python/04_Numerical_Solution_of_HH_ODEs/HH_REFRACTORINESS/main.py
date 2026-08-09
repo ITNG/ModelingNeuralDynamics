@@ -61,7 +61,7 @@ def derivative(x0, t, i_ext, PULSE_ONSET):
     v, m, n, h, = x0
 
     if (t > PULSE_ONSET) & (t < PULSE_ONSET + 1):
-        i_ext = 40.0
+        i_ext = i_ext + 20.0
 
     dv = (i_ext - g_na * h * m ** 3 * \
         (v - v_na) - g_k * n ** 4 * (v - v_k) - g_l * (v - v_l)) / c
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     fig, ax = pl.subplots(3, figsize=(7, 6), sharex=True)
 
     i_ext = 10.0
-    PULSE_ONSETS = [500.0, 5.0, 10.0]
+    PULSE_ONSETS = [500.0, 5.0, 9.0]
     
     for i in range(3):
         t = np.arange(0, t_final, dt)

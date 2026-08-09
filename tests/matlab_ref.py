@@ -72,3 +72,51 @@ def trace_rmse(t_ref, v_ref, t_test, v_test):
     """
     v_test_interp = np.interp(t_ref, t_test, v_test)
     return float(np.sqrt(np.mean((v_test_interp - v_ref) ** 2)))
+
+
+def spike_times(t, v, threshold=0.0):
+    """Upward threshold crossings of v(t), as an array of times.
+
+    For repetitively-spiking traces, comparing spike times (rather than
+    trace_rmse's whole-trace RMSE) is the right check: MATLAB's fixed-step
+    Euler/Heun and Brian2/scipy's adaptive solvers drift apart by a
+    fraction of a step on each cycle, so by the last of a dozen spikes the
+    traces are offset by ~1ms -- fine on the limit cycle itself, but that
+    offset lands squarely on a spike upstroke (huge dv/dt) and blows up a
+    point-by-point or whole-trace RMSE even though every spike is present
+    and correctly timed to begin with.
+    """
+    t = np.asarray(t)
+    v = np.asarray(v)
+    idx = np.where((v[:-1] < threshold) & (v[1:] >= threshold))[0]
+    return t[idx]
+
+
+def load_notebook_as_module(path):
+    """Execute a Brian2 chapter notebook's code cells and return the results.
+
+    Mirrors load_python_port for notebook-based chapters (brian/ keeps some
+    chapters as a single notebook rather than per-example folders). Runs
+    with a non-interactive matplotlib backend and cwd set to the notebook's
+    own folder, then returns a namespace with every top-level name the
+    notebook defined (functions, StateMonitors, parameters, ...).
+    """
+    import nbformat
+    import matplotlib
+    from types import SimpleNamespace
+
+    matplotlib.use("Agg")
+
+    path = Path(path).resolve()
+    nb = nbformat.read(path, as_version=4)
+    source = "\n".join(
+        "".join(cell["source"]) for cell in nb.cells if cell["cell_type"] == "code"
+    )
+    namespace = {"__name__": path.stem}
+    cwd = os.getcwd()
+    try:
+        os.chdir(path.parent)
+        exec(compile(source, str(path), "exec"), namespace)
+    finally:
+        os.chdir(cwd)
+    return SimpleNamespace(**namespace)

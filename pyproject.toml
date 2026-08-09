@@ -50,4 +50,3 @@ ignore = ["F401", "F841", "F403", "F405"]
 # rather than a blind patch; downgraded to unchecked in PROGRESS.md.
 "python/30_The_PING_Model_of_Gamma_Rhythms/PING_5/main.py" = ["F821"]
 "python/25_Phase_Response_Curves_(PRCs)/PHASE_SHIFT/lib.py" = ["F821"]
-"brian/chapter04.ipynb" = ["F821"]
