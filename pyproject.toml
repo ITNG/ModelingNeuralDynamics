@@ -18,6 +18,7 @@ dependencies = [
 dev = [
     "nbstripout",
     "pytest",
+    "ruff",
 ]
 
 [build-system]
@@ -26,3 +27,27 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["mnd*"]
+
+[tool.ruff]
+line-length = 100
+exclude = ["matlab"]
+
+[tool.ruff.lint]
+# Real-bug rules only (undefined names, syntax errors, redefinitions).
+# Not unused-import/unused-variable (F401/F841) or import sorting (I001):
+# too noisy for this repo's many small, independent teaching scripts,
+# and not what "looks wrong" here -- see feedback-human-written-style.
+# Not F403/F405 either: several chapters deliberately do
+# `from lib import *` (e.g. chapter30/40 PING variants), which is the
+# established convention there, not a mistake.
+select = ["E9", "F"]
+ignore = ["F401", "F841", "F403", "F405"]
+
+[tool.ruff.lint.per-file-ignores]
+# Pre-existing bugs found by adding ruff, real (missing j_vec allocation,
+# a range() that runs when matlab's equivalent for-loop wouldn't) -- not
+# lint noise. Left as-is pending proper re-verification against MATLAB
+# rather than a blind patch; downgraded to unchecked in PROGRESS.md.
+"python/30_The_PING_Model_of_Gamma_Rhythms/PING_5/main.py" = ["F821"]
+"python/25_Phase_Response_Curves_(PRCs)/PHASE_SHIFT/lib.py" = ["F821"]
+"brian/chapter04.ipynb" = ["F821"]

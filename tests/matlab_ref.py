@@ -4,11 +4,13 @@ Used to check a Python/Brian2 port against the book's original MATLAB code.
 """
 import importlib.util
 import os
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 import numpy as np
+import pytest
 from scipy.io import loadmat
 
 MATLAB = "/home/ziaee/prog/Matlab/R2020a/bin/matlab"
@@ -37,7 +39,13 @@ def load_python_port(path):
 
 def run_matlab_script(script_dir, script_name, varnames, timeout=120):
     """Run script_name (a MATLAB script, not function) inside script_dir and
-    return the requested workspace variables as numpy arrays."""
+    return the requested workspace variables as numpy arrays.
+
+    Skips the test (rather than failing) when MATLAB isn't on this machine
+    -- it's a local-only license, not available in CI.
+    """
+    if not (os.path.exists(MATLAB) or shutil.which("matlab")):
+        pytest.skip("MATLAB not available on this machine")
     script_dir = Path(script_dir).resolve()
     with tempfile.TemporaryDirectory() as tmp:
         outfile = Path(tmp) / "out.mat"

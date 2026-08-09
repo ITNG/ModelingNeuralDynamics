@@ -4,7 +4,6 @@ from numpy.random import randn, rand
 from time import time
 import numpy as np
 import pylab as pl
-import pylab as pl
 import lib
 
 

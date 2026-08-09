@@ -1,8 +1,6 @@
 import numpy as np
 import pylab as pl
 
-import numpy as np
-import pylab as pl
 from numpy import exp
 
 

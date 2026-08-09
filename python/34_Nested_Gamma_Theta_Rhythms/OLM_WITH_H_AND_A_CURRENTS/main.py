@@ -2,7 +2,6 @@ from scipy.integrate import odeint
 import numpy as np
 import pylab as pl
 from numpy import exp
-import pylab as pl
 from lib import *
 
 
