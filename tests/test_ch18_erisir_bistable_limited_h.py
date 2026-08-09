@@ -1,0 +1,16 @@
+from pathlib import Path
+
+import numpy as np
+
+from matlab_ref import load_python_port, run_matlab_script
+
+ROOT = Path(__file__).resolve().parents[1]
+PYTHON_DIR = "18_Bistability_Resulting_from_Rebound_Firing/ERISIR_BISTABLE_LIMITED_H"
+MATLAB_DIR = "18/ERISIR_BISTABLE_LIMITED_H"
+
+
+def test_erisir_bistable_limited_h_matches_matlab():
+    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ref = run_matlab_script(ROOT / "matlab" / MATLAB_DIR, "make_figure.m", ["v"])
+
+    assert np.allclose(py.v, ref["v"], atol=1e-4)

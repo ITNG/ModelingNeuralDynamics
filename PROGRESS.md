@@ -4,9 +4,10 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 116/256 (45%). brian 1/256 (0%).**
+**Totals: python 141/256 (55%). brian 19/256 (7%, +4 n/a).**
 
 - [ ] not done
+- n/a: sub-example is a static plot (gating-variable curves, bifurcation diagrams, phase planes, ...) with no ODE simulation to run -- Brian2 (a spiking network simulator) has nothing to add over the Python port
 
 ## Chapter 01 - Modeling a Single Neuron
 
@@ -18,44 +19,44 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| HH_GATING_VARIABLES | [x] | [ ] |
+| HH_GATING_VARIABLES | [x] | n/a |
 
 ## Chapter 04 - Numerical Solution of HH ODEs
 
 | sub-example | python | brian |
 |---|---|---|
-| HH_LIMIT_CYCLE | [x] | [ ] |
-| HH_REFRACTORINESS | [x] | [ ] |
-| HH_SOLUTION | [x] | [ ] |
+| HH_LIMIT_CYCLE | [x] | [x] |
+| HH_REFRACTORINESS | [x] | [x] |
+| HH_SOLUTION | [x] | [x] |
 
 ## Chapter 05 - The Simple Model of Neurons in Rodent Brains
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_VOLTAGE_TRACE | [x] | [ ] |
-| ERISIR_VOLTAGE_TRACE_2 | [x] | [ ] |
-| RTM_VOLTAGE_TRACE | [x] | [ ] |
-| THREE_MODELS_GATING_VARIABLES | [x] | [ ] |
-| WB_VOLTAGE_TRACE | [x] | [ ] |
+| ERISIR_VOLTAGE_TRACE | [x] | [x] |
+| ERISIR_VOLTAGE_TRACE_2 | [x] | [x] |
+| RTM_VOLTAGE_TRACE | [x] | [x] |
+| THREE_MODELS_GATING_VARIABLES | [x] | n/a |
+| WB_VOLTAGE_TRACE | [x] | [x] |
 
 ## Chapter 07 - Linear Integrate and Fire (LIF) Neurons
 
 | sub-example | python | brian |
 |---|---|---|
-| LIF_NEURON_WITH_HH | [x] | [ ] |
-| LIF_VOLTAGE_TRACE | [x] | [ ] |
-| LIF_VOLTAGE_TRACE_2 | [x] | [ ] |
-| SUBTHR_FOR_HH | [x] | [ ] |
-| TAU_M_FOR_HH | [x] | [ ] |
+| LIF_NEURON_WITH_HH | [x] | [x] |
+| LIF_VOLTAGE_TRACE | [x] | [x] |
+| LIF_VOLTAGE_TRACE_2 | [x] | [x] |
+| SUBTHR_FOR_HH | [x] | [x] |
+| TAU_M_FOR_HH | [x] | [x] |
 
 ## Chapter 08 - Quadratic Integrate and Fire (QIF) and Theta Neurons
 
 | sub-example | python | brian |
 |---|---|---|
-| QIF_INFINITE_THRESHOLD | [x] | [ ] |
-| QIF_VOLTAGE_TRACE | [x] | [ ] |
-| THETA_FIRING | [x] | [ ] |
-| THREE_CIRCLES | [x] | [ ] |
+| QIF_INFINITE_THRESHOLD | [x] | n/a |
+| QIF_VOLTAGE_TRACE | [x] | [x] |
+| THETA_FIRING | [x] | [x] |
+| THREE_CIRCLES | [x] | n/a |
 
 ## Chapter 09 - Spike Frequency Adaptation
 
@@ -65,10 +66,10 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | CALCIUM_RISE | [x] | [ ] |
 | LIF_ADAPT | [x] | [ ] |
 | M_CURRENT | [x] | [ ] |
-| RTM_AHP | [x] | [ ] |
-| RTM_AHP_RESTING | [x] | [ ] |
-| RTM_M | [x] | [ ] |
-| RTM_M_RESTING | [x] | [ ] |
+| RTM_AHP | [x] | [x] |
+| RTM_AHP_RESTING | [x] | [x] |
+| RTM_M | [x] | [x] |
+| RTM_M_RESTING | [x] | [x] |
 | V_V_TILDE | [x] | [ ] |
 
 ## Chapter 10 - The Slow Fast Phase Plane
@@ -159,40 +160,40 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | WB_F_I_CURVE | [x] | [ ] |
 | WB_F_I_CURVE_AT_ONSET | [x] | [ ] |
 
-## Chapter 18
+## Chapter 18 - Bistability Resulting from Rebound Firing
 
 | sub-example | python | brian |
 |---|---|---|
-| ERISIR_BISTABLE | [ ] | [ ] |
-| ERISIR_BISTABLE_GATES | [ ] | [ ] |
-| ERISIR_BISTABLE_LIMITED_H | [ ] | [ ] |
-| HH_BISTABLE | [ ] | [ ] |
-| HH_BISTABLE_GATES | [ ] | [ ] |
-| HH_BISTABLE_LIMITED_N | [ ] | [ ] |
-| H_CURRENT | [ ] | [ ] |
-| PLOT_MODIFIED_TAU_R | [ ] | [ ] |
-| RTM_F_I_CURVE_WITH_I_H | [ ] | [ ] |
-| RTM_VOLTAGE_TRACE_WITH_I_H | [ ] | [ ] |
-| RTM_WITH_I_H_BISTABLE | [ ] | [ ] |
-| RTM_WITH_I_H_BISTABLE_GATES | [ ] | [ ] |
-| RTM_WITH_I_H_LIMITED_R | [ ] | [ ] |
-| RTM_WITH_I_M_BISTABLE | [ ] | [ ] |
-| RTM_WITH_I_M_BISTABLE_GATES | [ ] | [ ] |
-| RTM_WITH_I_M_LIMITED_W | [ ] | [ ] |
+| ERISIR_BISTABLE | [x] | [ ] |
+| ERISIR_BISTABLE_GATES | [x] | [ ] |
+| ERISIR_BISTABLE_LIMITED_H | [x] | [ ] |
+| HH_BISTABLE | [x] | [ ] |
+| HH_BISTABLE_GATES | [x] | [ ] |
+| HH_BISTABLE_LIMITED_N | [x] | [ ] |
+| H_CURRENT | [x] | [ ] |
+| PLOT_MODIFIED_TAU_R | [x] | [ ] |
+| RTM_F_I_CURVE_WITH_I_H | [x] | [ ] |
+| RTM_VOLTAGE_TRACE_WITH_I_H | [x] | [ ] |
+| RTM_WITH_I_H_BISTABLE | [x] | [ ] |
+| RTM_WITH_I_H_BISTABLE_GATES | [x] | [ ] |
+| RTM_WITH_I_H_LIMITED_R | [x] | [ ] |
+| RTM_WITH_I_M_BISTABLE | [x] | [ ] |
+| RTM_WITH_I_M_BISTABLE_GATES | [x] | [ ] |
+| RTM_WITH_I_M_LIMITED_W | [x] | [ ] |
 
-## Chapter 19
+## Chapter 19 - Bursting
 
 | sub-example | python | brian |
 |---|---|---|
-| ELLIPSES | [ ] | [ ] |
-| ERISIR_PLUS_SLOW_I_K | [ ] | [ ] |
-| ERISIR_SHOW_SLOW_I_K | [ ] | [ ] |
-| INAPIK_PLUS_SLOW_I_K | [ ] | [ ] |
-| INAPIK_PLUS_SLOW_I_K_3D | [ ] | [ ] |
-| INAPIK_PLUS_STRONG_SLOW_I_K | [ ] | [ ] |
-| INAPIK_PLUS_WEAK_SLOW_I_K | [ ] | [ ] |
-| INAPIK_SHOW_SLOW_I_K | [ ] | [ ] |
-| SQUARE_WAVES | [ ] | [ ] |
+| ELLIPSES | [x] | [ ] |
+| ERISIR_PLUS_SLOW_I_K | [x] | [ ] |
+| ERISIR_SHOW_SLOW_I_K | [x] | [ ] |
+| INAPIK_PLUS_SLOW_I_K | [x] | [ ] |
+| INAPIK_PLUS_SLOW_I_K_3D | [x] | [ ] |
+| INAPIK_PLUS_STRONG_SLOW_I_K | [x] | [ ] |
+| INAPIK_PLUS_WEAK_SLOW_I_K | [x] | [ ] |
+| INAPIK_SHOW_SLOW_I_K | [x] | [ ] |
+| SQUARE_WAVES | [x] | [ ] |
 
 ## Chapter 20 - Chemical Synapses
 
