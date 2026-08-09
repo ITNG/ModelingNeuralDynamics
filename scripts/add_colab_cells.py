@@ -43,11 +43,16 @@ def install_cell():
 def add_colab_cells(path):
     path = Path(path)
     nb = json.loads(path.read_text())
-    first_source = "".join(nb["cells"][0].get("source", []))
-    if "colab.research.google.com" in first_source:
+    already = any(
+        "colab.research.google.com" in "".join(cell.get("source", []))
+        for cell in nb["cells"]
+    )
+    if already:
         print(f"{path}: already has a Colab badge, skipping")
         return
-    nb["cells"] = [badge_cell(path), install_cell()] + nb["cells"]
+    # Keep the notebook's original title cell first; insert the badge and
+    # install cells right after it rather than before it.
+    nb["cells"] = nb["cells"][:1] + [badge_cell(path), install_cell()] + nb["cells"][1:]
     for cell in nb["cells"]:
         cell.pop("id", None)
     path.write_text(json.dumps(nb, indent=1))
