@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 63/256 (25%). brian: not yet audited at sub-example grain, tracked here going forward.**
+**Totals: python 70/256 (27%). brian: not yet audited at sub-example grain, tracked here going forward.**
 
 - [ ] not done
 
@@ -57,19 +57,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | THETA_FIRING | [x] | [ ] |
 | THREE_CIRCLES | [x] | [ ] |
 
-## Chapter 09
+## Chapter 09 - Spike Frequency Adaptation
 
 | sub-example | python | brian |
 |---|---|---|
-| ADAPTATION_MAP | [ ] | [ ] |
-| CALCIUM_RISE | [ ] | [ ] |
-| LIF_ADAPT | [ ] | [ ] |
-| M_CURRENT | [ ] | [ ] |
-| RTM_AHP | [ ] | [ ] |
-| RTM_AHP_RESTING | [ ] | [ ] |
-| RTM_M | [ ] | [ ] |
-| RTM_M_RESTING | [ ] | [ ] |
-| V_V_TILDE | [ ] | [ ] |
+| ADAPTATION_MAP | [x] | [ ] |
+| CALCIUM_RISE | [x] | [ ] |
+| LIF_ADAPT | [x] | [ ] |
+| M_CURRENT | [x] | [ ] |
+| RTM_AHP | [x] | [ ] |
+| RTM_AHP_RESTING | [x] | [ ] |
+| RTM_M | [x] | [ ] |
+| RTM_M_RESTING | [x] | [ ] |
+| V_V_TILDE | [x] | [ ] |
 
 ## Chapter 10 - The Slow Fast Phase Plane
 
@@ -253,7 +253,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | sub-example | python | brian |
 |---|---|---|
 | MISC_PRC | [ ] | [ ] |
-| PHASE_SHIFT | [x] | [ ] |
+| PHASE_SHIFT | [ ] | [ ] |
 | RTM_INTERACTION_FUNCTION | [ ] | [ ] |
 | RTM_PRC | [ ] | [ ] |
 | RTM_PRC_SHORT | [ ] | [ ] |
@@ -319,7 +319,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | PING_2 | [x] | [ ] |
 | PING_3 | [x] | [ ] |
 | PING_4 | [x] | [ ] |
-| PING_5 | [x] | [ ] |
+| PING_5 | [ ] | [ ] |
 | PING_6 | [ ] | [ ] |
 | PING_7 | [ ] | [ ] |
 | PING_8 | [ ] | [ ] |
