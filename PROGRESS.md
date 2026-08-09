@@ -253,19 +253,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| MISC_PRC | [ ] | [ ] |
-| PHASE_SHIFT | [ ] | [ ] |
-| RTM_INTERACTION_FUNCTION | [ ] | [ ] |
-| RTM_PRC | [ ] | [ ] |
-| RTM_PRC_SHORT | [ ] | [ ] |
-| RTM_PRC_SHORT_AND_WEAK | [ ] | [ ] |
-| RTM_PRC_THREE_WEAK_ONES | [ ] | [ ] |
-| RTM_PRC_WEAK | [ ] | [ ] |
-| THETA_F | [ ] | [ ] |
-| THETA_F_TILDE | [ ] | [ ] |
-| THETA_PRC | [ ] | [ ] |
-| THETA_PRC_SHORT_WEAK | [ ] | [ ] |
-| WB_PRC_INHIBITORY_PULSE | [ ] | [ ] |
+| MISC_PRC | [x] | [ ] |
+| PHASE_SHIFT | [x] | [ ] |
+| RTM_INTERACTION_FUNCTION | [x] | [ ] |
+| RTM_PRC | [x] | [ ] |
+| RTM_PRC_SHORT | [x] | [ ] |
+| RTM_PRC_SHORT_AND_WEAK | [x] | [ ] |
+| RTM_PRC_THREE_WEAK_ONES | [x] | [ ] |
+| RTM_PRC_WEAK | [x] | [ ] |
+| THETA_F | [x] | [ ] |
+| THETA_F_TILDE | [x] | [ ] |
+| THETA_PRC | [x] | [ ] |
+| THETA_PRC_SHORT_WEAK | [x] | [ ] |
+| WB_PRC_INHIBITORY_PULSE | [x] | [ ] |
 
 ## Chapter 26
 
