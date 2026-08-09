@@ -242,12 +242,12 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| RTM_E_TO_E_HETEROGENEOUS | [ ] | [ ] |
+| RTM_E_TO_E_HETEROGENEOUS | [x] | [ ] |
 | RTM_E_TO_E_NETWORK_1 | [x] | [ ] |
-| RTM_E_TO_E_NETWORK_2 | [ ] | [ ] |
+| RTM_E_TO_E_NETWORK_2 | [x] | [ ] |
 | RTM_SPLAY | [x] | [ ] |
-| RTM_SYNC | [ ] | [ ] |
-| RTM_TWO_CELL_NETWORK | [ ] | [ ] |
+| RTM_SYNC | [x] | [ ] |
+| RTM_TWO_CELL_NETWORK | [x] | [ ] |
 
 ## Chapter 25 - Phase Response Curves (PRCs)
 
