@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 249/256 (97%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 253/256 (99%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -414,14 +414,14 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | RTM_F_I_CURVE_PULSED_EXCITATION_2 | [x] | [ ] |
 | SQUARE_PULSES | [x] | [ ] |
 
-## Chapter 37
+## Chapter 37 (Thresholding in PING)
 
 | sub-example | python | brian |
 |---|---|---|
-| NO_RESET | [ ] | [ ] |
-| PING_THR_1 | [ ] | [ ] |
-| PING_THR_1_ZOOM | [ ] | [ ] |
-| THRESHOLDING | [ ] | [ ] |
+| NO_RESET | [x] | [ ] |
+| PING_THR_1 | [x] | [ ] |
+| PING_THR_1_ZOOM | [x] | [ ] |
+| THRESHOLDING | [x] | [ ] |
 
 ## Chapter 38
 
