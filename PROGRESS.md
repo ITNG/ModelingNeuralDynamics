@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 184/256 (72%). brian 36/256 (14%, +90 n/a).**
+**Totals: python 184/256 (72%). brian 36/256 (14%, +103 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -253,19 +253,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| MISC_PRC | [x] | [ ] |
-| PHASE_SHIFT | [x] | [ ] |
-| RTM_INTERACTION_FUNCTION | [x] | [ ] |
-| RTM_PRC | [x] | [ ] |
-| RTM_PRC_SHORT | [x] | [ ] |
-| RTM_PRC_SHORT_AND_WEAK | [x] | [ ] |
-| RTM_PRC_THREE_WEAK_ONES | [x] | [ ] |
-| RTM_PRC_WEAK | [x] | [ ] |
-| THETA_F | [x] | [ ] |
-| THETA_F_TILDE | [x] | [ ] |
-| THETA_PRC | [x] | [ ] |
-| THETA_PRC_SHORT_WEAK | [x] | [ ] |
-| WB_PRC_INHIBITORY_PULSE | [x] | [ ] |
+| MISC_PRC | [x] | n/a |
+| PHASE_SHIFT | [x] | n/a |
+| RTM_INTERACTION_FUNCTION | [x] | n/a |
+| RTM_PRC | [x] | n/a |
+| RTM_PRC_SHORT | [x] | n/a |
+| RTM_PRC_SHORT_AND_WEAK | [x] | n/a |
+| RTM_PRC_THREE_WEAK_ONES | [x] | n/a |
+| RTM_PRC_WEAK | [x] | n/a |
+| THETA_F | [x] | n/a |
+| THETA_F_TILDE | [x] | n/a |
+| THETA_PRC | [x] | n/a |
+| THETA_PRC_SHORT_WEAK | [x] | n/a |
+| WB_PRC_INHIBITORY_PULSE | [x] | n/a |
 
 ## Chapter 26 - Phase Locking of Two Oscillators
 
