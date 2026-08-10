@@ -331,9 +331,9 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | sub-example | python | brian |
 |---|---|---|
 | 1_CELL_ING | [x] | [ ] |
-| 1_CELL_ING_CONDITION_NUMBERS | [ ] | [ ] |
-| ABSTRACT_PULSE_COUPLING_INH | [ ] | [ ] |
-| ABSTRACT_PULSE_COUPLING_INH_2 | [ ] | [ ] |
+| 1_CELL_ING_CONDITION_NUMBERS | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_INH | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_INH_2 | [x] | [ ] |
 | ING_1 | [x] | [ ] |
 | ING_10 | [ ] | [ ] |
 | ING_2 | [ ] | [ ] |
