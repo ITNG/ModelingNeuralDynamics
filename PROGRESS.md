@@ -330,22 +330,22 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| 1_CELL_ING | [x] | [ ] |
-| 1_CELL_ING_CONDITION_NUMBERS | [x] | [ ] |
-| ABSTRACT_PULSE_COUPLING_INH | [x] | [ ] |
-| ABSTRACT_PULSE_COUPLING_INH_2 | [x] | [ ] |
-| ING_1 | [x] | [ ] |
-| ING_10 | [x] | [ ] |
-| ING_2 | [x] | [ ] |
-| ING_3 | [x] | [ ] |
-| ING_4 | [x] | [ ] |
-| ING_5 | [x] | [ ] |
-| ING_6 | [x] | [ ] |
-| ING_7 | [x] | [ ] |
-| ING_8 | [x] | [ ] |
-| ING_9 | [x] | [ ] |
-| ING_ENTRAINING_E_CELLS | [x] | [ ] |
-| ING_ENTRAINING_E_CELLS_2 | [x] | [ ] |
+| 1_CELL_ING | [x] | [x] |
+| 1_CELL_ING_CONDITION_NUMBERS | [x] | [x] |
+| ABSTRACT_PULSE_COUPLING_INH | [x] | n/a |
+| ABSTRACT_PULSE_COUPLING_INH_2 | [x] | n/a |
+| ING_1 | [x] | [x] |
+| ING_10 | [x] | [x] |
+| ING_2 | [x] | [x] |
+| ING_3 | [x] | [x] |
+| ING_4 | [x] | [x] |
+| ING_5 | [x] | [x] |
+| ING_6 | [x] | [x] |
+| ING_7 | [x] | [x] |
+| ING_8 | [x] | [x] |
+| ING_9 | [x] | [x] |
+| ING_ENTRAINING_E_CELLS | [x] | [x] |
+| ING_ENTRAINING_E_CELLS_2 | [x] | [x] |
 
 ## Chapter 32 (M-Current PING and Poisson PING)
 
@@ -454,4 +454,3 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | THREE_CELL_PING_3 | [x] | [ ] |
 | THREE_CELL_PING_4 | [x] | [ ] |
 | THREE_CELL_PING_5 | [ ] | [ ] |
-
