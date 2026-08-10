@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 256/256 (100%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 256/256 (100%). brian 52/256 (20%, +116 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -185,15 +185,15 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| ELLIPSES | [x] | n/a |
-| ERISIR_PLUS_SLOW_I_K | [x] | n/a |
+| ELLIPSES | [x] | [x] |
+| ERISIR_PLUS_SLOW_I_K | [x] | [x] |
 | ERISIR_SHOW_SLOW_I_K | [x] | n/a |
-| INAPIK_PLUS_SLOW_I_K | [x] | n/a |
+| INAPIK_PLUS_SLOW_I_K | [x] | [x] |
 | INAPIK_PLUS_SLOW_I_K_3D | [x] | n/a |
-| INAPIK_PLUS_STRONG_SLOW_I_K | [x] | n/a |
-| INAPIK_PLUS_WEAK_SLOW_I_K | [x] | n/a |
+| INAPIK_PLUS_STRONG_SLOW_I_K | [x] | [x] |
+| INAPIK_PLUS_WEAK_SLOW_I_K | [x] | [x] |
 | INAPIK_SHOW_SLOW_I_K | [x] | n/a |
-| SQUARE_WAVES | [x] | n/a |
+| SQUARE_WAVES | [x] | [x] |
 
 ## Chapter 20 - Chemical Synapses
 
