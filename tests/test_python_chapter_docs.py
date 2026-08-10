@@ -24,6 +24,16 @@ CHAPTERS = (
     "17_Frequency_Current_Curves",
     "18_Bistability_Resulting_from_Rebound_Firing",
     "19_Bursting",
+    "20_Chemical_Synapses",
+    "21_Gap_Junctions",
+    "22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network",
+    "23_Entrainment_by_Excitatory_Input_Pulses",
+    "24_Synchronization_by_Fast_Recurrent_Excitation",
+    "25_Phase_Response_Curves_(PRCs)",
+    "26_Phase_Locking_of_Two_Oscillators",
+    "27_Phase_Locking_with_Delays",
+    "28_Weakly_Coupled_Oscillators",
+    "29_Stability_of_the_Synchronous_State",
 )
 REQUIRED_HEADINGS = (
     "## Overview",
