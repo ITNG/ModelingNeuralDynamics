@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 237/256 (93%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 245/256 (96%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -392,18 +392,18 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | PRE_OLM_VOLTAGE_TRACE | [x] | [x] |
 | PRE_OLM_X_INF_TAU_X | [x] | n/a |
 
-## Chapter 35
+## Chapter 35 (Periodic Inhibition)
 
 | sub-example | python | brian |
 |---|---|---|
-| OSCILLATIONS | [ ] | [ ] |
-| PERIODIC_INHIBITION | [ ] | [ ] |
-| PERIODIC_INHIBITION_2 | [ ] | [ ] |
-| PERIODIC_INHIBITION_3 | [ ] | [ ] |
-| PERIODIC_INHIBITION_F_I_CURVE | [ ] | [ ] |
-| PERIODIC_INHIBITION_F_I_CURVE_2 | [ ] | [ ] |
-| RTM_F_I_CURVE_WITH_INHIBITION | [ ] | [ ] |
-| RTM_F_I_CURVE_WITH_INHIBITION_2 | [ ] | [ ] |
+| OSCILLATIONS | [x] | [ ] |
+| PERIODIC_INHIBITION | [x] | [ ] |
+| PERIODIC_INHIBITION_2 | [x] | [ ] |
+| PERIODIC_INHIBITION_3 | [x] | [ ] |
+| PERIODIC_INHIBITION_F_I_CURVE | [x] | [ ] |
+| PERIODIC_INHIBITION_F_I_CURVE_2 | [x] | [ ] |
+| RTM_F_I_CURVE_WITH_INHIBITION | [x] | [ ] |
+| RTM_F_I_CURVE_WITH_INHIBITION_2 | [x] | [ ] |
 
 ## Chapter 36
 
