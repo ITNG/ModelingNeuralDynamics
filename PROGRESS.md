@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 228/256 (89%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 237/256 (93%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -365,19 +365,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | POISSON_PING_3 | [x] | [ ] |
 | POISSON_PING_3_VOLTAGE_TRACE | [x] | [ ] |
 
-## Chapter 33
+## Chapter 33 (M-Current PING and PINB)
 
 | sub-example | python | brian |
 |---|---|---|
-| M_CURRENT_BETA_WITH_GJ | [ ] | [ ] |
-| M_CURRENT_PING_4 | [ ] | [ ] |
-| M_CURRENT_PING_5 | [ ] | [ ] |
-| M_CURRENT_PING_6 | [ ] | [ ] |
-| M_CURRENT_PING_7 | [ ] | [ ] |
-| M_CURRENT_PING_8 | [ ] | [ ] |
-| PINB_1 | [ ] | [ ] |
-| PINB_2 | [ ] | [ ] |
-| PINB_3 | [ ] | [ ] |
+| M_CURRENT_BETA_WITH_GJ | [x] | [ ] |
+| M_CURRENT_PING_4 | [x] | [ ] |
+| M_CURRENT_PING_5 | [x] | [ ] |
+| M_CURRENT_PING_6 | [x] | [ ] |
+| M_CURRENT_PING_7 | [x] | [ ] |
+| M_CURRENT_PING_8 | [x] | [ ] |
+| PINB_1 | [x] | [ ] |
+| PINB_2 | [x] | [ ] |
+| PINB_3 | [x] | [ ] |
 
 ## Chapter 34 - Nested Gamma Theta Rhythms
 
