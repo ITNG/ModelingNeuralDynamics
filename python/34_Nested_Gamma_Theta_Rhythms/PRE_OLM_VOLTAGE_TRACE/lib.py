@@ -55,8 +55,8 @@ def tau_n(v):
 def derivative(x0, t):
     v, h, n = x0
     
-    dv = i_ext - g_na * h * m_inf(v) ** 3 * \
-        (v - v_na) - g_k * n ** 4 * (v - v_k) - g_l * (v - v_l)
+    dv = (i_ext - g_na * h * m_inf(v) ** 3 * \
+        (v - v_na) - g_k * n ** 4 * (v - v_k) - g_l * (v - v_l)) / c
     dn = alpha_n(v) * (1.0 - n) - beta_n(v) * n
     dh = alpha_h(v) * (1.0 - h) - beta_h(v) * h
 
