@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 177/256 (69%). brian 25/256 (10%, +80 n/a).**
+**Totals: python 177/256 (69%). brian 29/256 (11%, +80 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, or its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...) rather than "run this neuron/network" -- even where it calls odeint internally, Brian2 adds nothing over the existing Python port for these
@@ -212,10 +212,10 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| LIF_NETWORK_WITH_GJ | [x] | [ ] |
-| RESET_THRESHOLD | [x] | [ ] |
-| WB_NETWORK_WITH_GJ | [x] | [ ] |
-| WB_NETWORK_WITH_GJ_SUBTHRESHOLD | [x] | [ ] |
+| LIF_NETWORK_WITH_GJ | [x] | [x] |
+| RESET_THRESHOLD | [x] | [x] |
+| WB_NETWORK_WITH_GJ | [x] | [x] |
+| WB_NETWORK_WITH_GJ_SUBTHRESHOLD | [x] | [x] |
 
 ## Chapter 22 - A Wilson Cowan Model of an Oscillatory E-I Network
 

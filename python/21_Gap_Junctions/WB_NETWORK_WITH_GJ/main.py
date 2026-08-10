@@ -87,7 +87,7 @@ v = np.array([-63.0, -63.0])
 # m = m_inf(v)
 h = h_inf(v)
 n = n_inf(v)
-x0 = v.tolist() + n.tolist() + h.tolist()
+x0 = v.tolist() + h.tolist() + n.tolist()
 
 
 if __name__ == "__main__":
