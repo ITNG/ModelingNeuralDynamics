@@ -2,33 +2,55 @@
 
 ## Overview
 
-Gamma coherence is the alignment of population responses across pulses or gamma episodes. These examples compare matched and mismatched pulse timing and perturb a Poisson-PING population to show stronger, shifted, or disrupted alignment.
+Gamma coherence is the alignment of population responses across pulses or gamma
+episodes. These examples compare two-cell timing references with Poisson-PING
+phase sweeps that measure the response of E-cells 1--5, plus a separate raster
+with a periodic green waveform as a timing reference.
 
 ## Core ideas
 
-Coherence is population timing alignment, not simply high firing rate. A pulse at a compatible gamma phase can reinforce a common response, while a mismatched pulse can land during inhibition or at a conflicting phase. Poisson PING makes this distinction clear because individual spikes vary while collective phase preference can remain.
+Coherence is population timing alignment, not simply high firing rate. A pulse
+at a compatible gamma phase can reinforce a common response, while a
+mismatched pulse can land during inhibition or at a conflicting phase. Poisson
+PING makes this distinction clear because individual spikes vary while a
+phase-dependent population response can remain.
 
 ## Essential model
 
-For phases \(\phi_k\) relative to gamma, a population-alignment summary is \(R=|N^{-1}\sum_k e^{i\phi_k}|\). The examples express the same idea through rasters and voltage responses to differently timed pulses.
+For each sampled pulse phase \(\varphi\), the Poisson-PING sweep scripts
+simulate a population, count spikes from E-cells 1--5, and fit a line to the
+phase-versus-count response. The two sweep directories use different pulse
+periods; the green-reference directory instead displays a Poisson-PING raster
+with its periodic waveform.
 
 ## Code examples
 
-- [`GAMMA_COHERENCE_1`](GAMMA_COHERENCE_1/) shows a first gamma-coherence pulse response.
-- [`GAMMA_COHERENCE_2`](GAMMA_COHERENCE_2/) compares a second timing condition.
-- [`POISSON_PING_3_MISMATCHED_PULSES`](POISSON_PING_3_MISMATCHED_PULSES/) perturbs Poisson PING with mismatched pulses.
-- [`POISSON_PING_3_PLUS_GREEN`](POISSON_PING_3_PLUS_GREEN/) adds a marked green timing reference.
-- [`POISSON_PING_3_PLUS_PULSES`](POISSON_PING_3_PLUS_PULSES/) overlays applied pulses on the Poisson-PING output.
+- [`GAMMA_COHERENCE_1`](GAMMA_COHERENCE_1/) plots two-cell inhibitory
+  currents with E/I spike times and periodic timing markers.
+- [`GAMMA_COHERENCE_2`](GAMMA_COHERENCE_2/) compares coupled inhibition with
+  its mean-inhibition approximation.
+- [`POISSON_PING_3_MISMATCHED_PULSES`](POISSON_PING_3_MISMATCHED_PULSES/)
+  sweeps pulse phase for a 29 ms period and plots E-cell-1--5 spike counts
+  with a linear fit.
+- [`POISSON_PING_3_PLUS_GREEN`](POISSON_PING_3_PLUS_GREEN/) displays a
+  Poisson-PING E/I raster with a green periodic timing waveform.
+- [`POISSON_PING_3_PLUS_PULSES`](POISSON_PING_3_PLUS_PULSES/) sweeps pulse
+  phase for a 31 ms period and plots E-cell-1--5 spike counts with a linear
+  fit.
 
 ## What to look for
 
-Compare pulse time with the E--I rhythm, then look for tighter or more dispersed population response. The marked and pulse-overlay cases distinguish true alignment from extra spikes. The __pycache__ directory is deliberately excluded because it is not an example.
+For the sweep plots, compare E-cell-1--5 spike counts across phase and inspect
+the fitted slope rather than reading them as rasters. Use the green waveform
+and raster only in its dedicated directory to relate a population episode to
+the periodic timing reference. The __pycache__ directory is deliberately
+excluded because it is not an example.
 
 ## Suggested order
 
 1. Run `GAMMA_COHERENCE_1` and `GAMMA_COHERENCE_2`.
-2. Run the two `POISSON_PING_3_PLUS_*` examples.
-3. Contrast them with `POISSON_PING_3_MISMATCHED_PULSES`.
+2. Run `POISSON_PING_3_PLUS_GREEN` to inspect its raster and waveform.
+3. Compare the two phase-versus-spike-count sweeps.
 
 ## Prerequisites and related chapters
 
