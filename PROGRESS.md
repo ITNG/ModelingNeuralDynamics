@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 215/256 (84%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 228/256 (89%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -347,23 +347,23 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | ING_ENTRAINING_E_CELLS | [x] | [ ] |
 | ING_ENTRAINING_E_CELLS_2 | [x] | [ ] |
 
-## Chapter 32
+## Chapter 32 (M-Current PING and Poisson PING)
 
 | sub-example | python | brian |
 |---|---|---|
-| M_CURRENT_PING_1 | [ ] | [ ] |
-| M_CURRENT_PING_1_CLOSEUP | [ ] | [ ] |
-| M_CURRENT_PING_1_FROM_REST | [ ] | [ ] |
-| M_CURRENT_PING_2_CLOSEUP | [ ] | [ ] |
-| M_CURRENT_PING_3_CLOSEUP | [ ] | [ ] |
-| PING_CLUSTERS | [ ] | [ ] |
-| PLOT_PHI | [ ] | [ ] |
-| PLOT_PSI | [ ] | [ ] |
-| PLOT_PSI_PHI | [ ] | [ ] |
-| POISSON_PING_1 | [ ] | [ ] |
-| POISSON_PING_2 | [ ] | [ ] |
-| POISSON_PING_3 | [ ] | [ ] |
-| POISSON_PING_3_VOLTAGE_TRACE | [ ] | [ ] |
+| M_CURRENT_PING_1 | [x] | [ ] |
+| M_CURRENT_PING_1_CLOSEUP | [x] | [ ] |
+| M_CURRENT_PING_1_FROM_REST | [x] | [ ] |
+| M_CURRENT_PING_2_CLOSEUP | [x] | [ ] |
+| M_CURRENT_PING_3_CLOSEUP | [x] | [ ] |
+| PING_CLUSTERS | [x] | [ ] |
+| PLOT_PHI | [x] | [ ] |
+| PLOT_PSI | [x] | [ ] |
+| PLOT_PSI_PHI | [x] | [ ] |
+| POISSON_PING_1 | [x] | [ ] |
+| POISSON_PING_2 | [x] | [ ] |
+| POISSON_PING_3 | [x] | [ ] |
+| POISSON_PING_3_VOLTAGE_TRACE | [x] | [ ] |
 
 ## Chapter 33
 
