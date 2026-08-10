@@ -34,6 +34,17 @@ CHAPTERS = (
     "27_Phase_Locking_with_Delays",
     "28_Weakly_Coupled_Oscillators",
     "29_Stability_of_the_Synchronous_State",
+    "30_The_PING_Model_of_Gamma_Rhythms",
+    "31_ING_Rhythms",
+    "32_M_Current_PING_and_Poisson_PING",
+    "33_M_Current_PING_and_PINB",
+    "34_Nested_Gamma_Theta_Rhythms",
+    "35_Periodic_Inhibition",
+    "36_F_I_Curves_Pulsed_Excitation",
+    "37_Thresholding_in_PING",
+    "38_Gamma_Coherence",
+    "39_Short-Term_Depression_and_Facilitation",
+    "40_Spike_Timing-Dependent_Plasticity(STDP)",
 )
 REQUIRED_HEADINGS = (
     "## Overview",
