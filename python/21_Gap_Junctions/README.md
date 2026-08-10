@@ -4,8 +4,8 @@
 
 Gap junctions are electrical synapses: each cell receives a current determined
 by the voltage difference from its neighbours. The examples contrast the
-resulting synchronization of spiking cells with subthreshold coupling and show
-why reset and threshold rules matter in integrate-and-fire models.
+resulting synchronization of spiking cells with subthreshold coupling. They
+also contrast LIF event handling with a continuous WB voltage trace.
 
 ## Core ideas
 
@@ -33,8 +33,8 @@ its conductance-based voltage continuously.
   traces under diffusive gap-junction coupling, with and without the script's
   additional spike-triggered voltage kick to the other cell; vertical marks
   identify spikes.
-- [`RESET_THRESHOLD`](RESET_THRESHOLD/) compares the LIF reset trajectory with
-  the threshold crossing that triggers it.
+- [`RESET_THRESHOLD`](RESET_THRESHOLD/) integrates a single WB
+  conductance-based voltage trace and marks two reference voltage levels.
 - [`WB_NETWORK_WITH_GJ`](WB_NETWORK_WITH_GJ/) integrates two WB neurons with a
   gap junction to display their voltage alignment.
 - [`WB_NETWORK_WITH_GJ_SUBTHRESHOLD`](WB_NETWORK_WITH_GJ_SUBTHRESHOLD/) focuses
@@ -46,12 +46,13 @@ Inspect whether an initial voltage difference shrinks in the subthreshold WB
 trace and whether spike times become aligned in the network plots. In the LIF
 comparison, separate diffusive electrical equalization from the additional
 spike-triggered kick. Relate the discontinuous reset to the voltage gap
-immediately after a threshold crossing; this is not present in a smooth WB
-trajectory.
+immediately after a threshold crossing in `LIF_NETWORK_WITH_GJ`; contrast this
+with the smooth WB trajectories, including `RESET_THRESHOLD`.
 
 ## Suggested order
 
-1. Run `RESET_THRESHOLD` and `LIF_NETWORK_WITH_GJ`.
+1. Run `LIF_NETWORK_WITH_GJ`, then `RESET_THRESHOLD` as a continuous WB
+   voltage reference.
 2. Run `WB_NETWORK_WITH_GJ_SUBTHRESHOLD` to isolate electrical equalization.
 3. Run `WB_NETWORK_WITH_GJ` and compare the spiking case.
 

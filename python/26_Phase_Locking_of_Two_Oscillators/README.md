@@ -17,15 +17,17 @@ oscillators displays the same stable or unstable phase arrangements.
 
 ## Essential model
 
-If \(g\) is a phase-resetting curve and \(f\) is the corresponding map for a
-phase difference \(\phi\), locking satisfies
+If \(g\) is a phase-resetting curve, the scripts first form the single-pulse
+reset map \(f(\phi)=\phi+g(\phi)\). They then account for the other
+oscillator's complementary phase with \(F(\phi)=f(1-\phi)\), and form the
+two-event phase-difference map \(G(\phi)=F(F(\phi))\). Locking satisfies
 
 \[
-f(\phi_*)=\phi_*.
+G(\phi_*)=\phi_*.
 \]
 
 For a one-dimensional map, the fixed point is locally stable when
-\(|f'(\phi_*)|<1\). The scripts plot both the map and identity line so those
+\(|G'(\phi_*)|<1\). The scripts plot the two-event map and identity line so those
 intersections can be read directly.
 
 ## Code examples
@@ -51,9 +53,9 @@ intersections can be read directly.
 
 ## What to look for
 
-For every map plot, find intersections with the diagonal and then compare the
-nearby slope with one. Iterate the two-oscillator cases to confirm which
-intersections attract trajectories. Comparing the symmetric and asymmetric
+For every two-event map plot, find intersections with the diagonal and then
+compare the nearby slope with one. Iterate the two-oscillator cases to confirm
+which intersections attract trajectories. Comparing the symmetric and asymmetric
 abstract cases shows that symmetry of a phase relation is a model property, not
 a general guarantee. Use `RTM_PLOT_G` to connect the map to a neuron model.
 

@@ -28,16 +28,18 @@ an event-time condition rather than being folded into a static voltage term.
   two-oscillator phase map with delayed pulses.
 - [`THREE_DELAYED_PULSE_COUPLED_OSC`](THREE_DELAYED_PULSE_COUPLED_OSC/) extends
   delayed pulse coupling to three oscillators and plots their event times.
-- [`TWO_THETA_NEURONS`](TWO_THETA_NEURONS/) simulates a theta-neuron pair with
-  delayed excitatory events, recording repeated phase relations.
+- [`TWO_THETA_NEURONS`](TWO_THETA_NEURONS/) classifies a grid of delayed,
+  pulse-coupled theta-neuron simulations as synchronized or unsynchronized and
+  plots that region in the \((\epsilon,\delta)\) parameter plane.
 
 ## What to look for
 
 Vary the initial conditions mentally while following the event sequence: a
 locked state repeats the same pulse-arrival phases. In the three-cell plot,
 distinguish a repeating collective order from exact simultaneous spikes. For
-the theta pair, compare the transient event spacing with the late-time spacing
-to see whether the realization settles.
+the theta pair, read the red and blue grid points as synchronized and
+unsynchronized outcomes, respectively, and compare them with the plotted
+boundary in the \((\epsilon,\delta)\) plane.
 
 ## Suggested order
 
@@ -56,4 +58,4 @@ focuses on the stability of a synchronous phase relation.
 
 Run `python main.py` from each immediate example directory. The scripts use
 NumPy and Matplotlib; the theta simulation runs a long fine-step trajectory to
-show its late-time locking behavior.
+classify each sampled coupling-strength and delay pair.
