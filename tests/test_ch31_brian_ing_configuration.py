@@ -118,8 +118,34 @@ def test_connectivity_normalization_and_symmetry():
 def test_fixed_indegree_has_equal_column_counts():
     ns = load_notebook_as_module(ROOT / "brian" / "chapter31.ipynb")
     built = ns.build_ing_inputs(ns.ING_CONFIGS["ING_4"], seed=63806, num_i=40)
+    repeated = ns.build_ing_inputs(ns.ING_CONFIGS["ING_4"], seed=63806, num_i=40)
     counts = np.count_nonzero(built["g_ii_ms"], axis=0)
     assert np.array_equal(counts, np.full(40, round(0.85 * 40)))
+    assert np.array_equal(built["g_ii_ms"], repeated["g_ii_ms"])
+    assert np.flatnonzero(built["g_ii_ms"][:, 0] == 0).tolist() == [
+        0,
+        2,
+        7,
+        15,
+        29,
+        34,
+    ]
+    assert np.flatnonzero(built["g_ii_ms"][:, 1] == 0).tolist() == [
+        2,
+        13,
+        23,
+        24,
+        26,
+        31,
+    ]
+    assert np.flatnonzero(built["g_ii_ms"][:, 2] == 0).tolist() == [
+        15,
+        21,
+        25,
+        28,
+        30,
+        33,
+    ]
     assert not np.array_equal(
         np.count_nonzero(built["g_ii_ms"], axis=1),
         np.full(40, round(0.85 * 40)),
