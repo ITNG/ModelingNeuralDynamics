@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 245/256 (96%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 249/256 (97%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -405,14 +405,14 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | RTM_F_I_CURVE_WITH_INHIBITION | [x] | [ ] |
 | RTM_F_I_CURVE_WITH_INHIBITION_2 | [x] | [ ] |
 
-## Chapter 36
+## Chapter 36 (F-I Curves Under Pulsed Excitation)
 
 | sub-example | python | brian |
 |---|---|---|
-| IDEALIZED_F_I_CURVE | [ ] | [ ] |
-| RTM_F_I_CURVE_PULSED_EXCITATION | [ ] | [ ] |
-| RTM_F_I_CURVE_PULSED_EXCITATION_2 | [ ] | [ ] |
-| SQUARE_PULSES | [ ] | [ ] |
+| IDEALIZED_F_I_CURVE | [x] | [ ] |
+| RTM_F_I_CURVE_PULSED_EXCITATION | [x] | [ ] |
+| RTM_F_I_CURVE_PULSED_EXCITATION_2 | [x] | [ ] |
+| SQUARE_PULSES | [x] | [ ] |
 
 ## Chapter 37
 
