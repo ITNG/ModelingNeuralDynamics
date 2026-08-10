@@ -233,7 +233,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | LIF_ENTRAINMENT | [x] | [ ] |
 | PLOT_F_ENTRAINMENT | [x] | [ ] |
 | PLOT_F_ENTRAINMENT_2 | [x] | [ ] |
-| WB_ENTRAINMENT_INTERVALS | [ ] | [ ] |
+| WB_ENTRAINMENT_INTERVALS | [x] | [ ] |
 | WB_NEURON_ENTRAINED | [x] | [ ] |
 | WB_NEURON_IRREGULAR | [x] | [ ] |
 | WB_NEURON_N_TO_ONE | [x] | [ ] |
