@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 253/256 (99%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 256/256 (100%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -440,18 +440,18 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | PULSES | [x] | [ ] |
 | RTM_WITH_DEPRESSING_AND_FACILITATING_S | [x] | [ ] |
 | RTM_WITH_DEPRESSING_S | [x] | [ ] |
-| WB_WITH_DEPRESSING_S | [ ] | [ ] |
+| WB_WITH_DEPRESSING_S | [x] | [ ] |
 
 ## Chapter 40 - Spike Timing-Dependent Plasticity(STDP)
 
 | sub-example | python | brian |
 |---|---|---|
 | ABBOTT_SONG | [x] | [ ] |
-| PING_WITH_STDP | [ ] | [ ] |
+| PING_WITH_STDP | [x] | [ ] |
 | RTM_VOLTAGE_TRACE_WITH_A | [x] | [ ] |
 | THREE_CELL_PING_1 | [x] | [ ] |
 | THREE_CELL_PING_2 | [x] | [ ] |
 | THREE_CELL_PING_3 | [x] | [ ] |
 | THREE_CELL_PING_4 | [x] | [ ] |
-| THREE_CELL_PING_5 | [ ] | [ ] |
+| THREE_CELL_PING_5 | [x] | [ ] |
 
