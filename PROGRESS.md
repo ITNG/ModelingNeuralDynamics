@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 196/256 (77%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 208/256 (81%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -335,15 +335,15 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | ABSTRACT_PULSE_COUPLING_INH | [x] | [ ] |
 | ABSTRACT_PULSE_COUPLING_INH_2 | [x] | [ ] |
 | ING_1 | [x] | [ ] |
-| ING_10 | [ ] | [ ] |
-| ING_2 | [ ] | [ ] |
-| ING_3 | [ ] | [ ] |
-| ING_4 | [ ] | [ ] |
-| ING_5 | [ ] | [ ] |
-| ING_6 | [ ] | [ ] |
-| ING_7 | [ ] | [ ] |
-| ING_8 | [ ] | [ ] |
-| ING_9 | [ ] | [ ] |
+| ING_10 | [x] | [ ] |
+| ING_2 | [x] | [ ] |
+| ING_3 | [x] | [ ] |
+| ING_4 | [x] | [ ] |
+| ING_5 | [x] | [ ] |
+| ING_6 | [x] | [ ] |
+| ING_7 | [x] | [ ] |
+| ING_8 | [x] | [ ] |
+| ING_9 | [x] | [ ] |
 | ING_ENTRAINING_E_CELLS | [ ] | [ ] |
 | ING_ENTRAINING_E_CELLS_2 | [ ] | [ ] |
 
