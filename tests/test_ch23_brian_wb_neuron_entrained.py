@@ -1,0 +1,20 @@
+from pathlib import Path
+
+import numpy as np
+
+from matlab_ref import load_notebook_as_module, load_python_port
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_wb_neuron_entrained_matches_python():
+    ns = load_notebook_as_module(ROOT / "brian" / "chapter23.ipynb")
+    py = load_python_port(
+        ROOT / "python" / "23_Entrainment_by_Excitatory_Input_Pulses" / "WB_NEURON_ENTRAINED" / "main.py"
+    )
+
+    for g_syn, sm, v_py in [(0.195, ns.sm_strong, py.v_strong), (0.14, ns.sm_weak, py.v_weak)]:
+        sp_py = py.spike_times(v_py)
+        sp_brian = ns.spike_times_from_trace(sm.t / ns.b2.ms, sm.vm[0] / ns.b2.mV)
+        assert len(sp_py) == len(sp_brian), f"g_syn={g_syn}: spike count mismatch"
+        np.testing.assert_allclose(sp_brian, sp_py, atol=1.0)

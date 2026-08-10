@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 180/256 (70%). brian 29/256 (11%, +84 n/a).**
+**Totals: python 180/256 (70%). brian 32/256 (13%, +88 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -230,13 +230,13 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| LIF_ENTRAINMENT | [x] | [ ] |
-| PLOT_F_ENTRAINMENT | [x] | [ ] |
-| PLOT_F_ENTRAINMENT_2 | [x] | [ ] |
-| WB_ENTRAINMENT_INTERVALS | [x] | [ ] |
-| WB_NEURON_ENTRAINED | [x] | [ ] |
-| WB_NEURON_IRREGULAR | [x] | [ ] |
-| WB_NEURON_N_TO_ONE | [x] | [ ] |
+| LIF_ENTRAINMENT | [x] | n/a |
+| PLOT_F_ENTRAINMENT | [x] | n/a |
+| PLOT_F_ENTRAINMENT_2 | [x] | n/a |
+| WB_ENTRAINMENT_INTERVALS | [x] | n/a |
+| WB_NEURON_ENTRAINED | [x] | [x] |
+| WB_NEURON_IRREGULAR | [x] | [x] |
+| WB_NEURON_N_TO_ONE | [x] | [x] |
 
 ## Chapter 24 - Synchronization by Fast Recurrent Excitation
 
