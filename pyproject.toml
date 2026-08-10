@@ -1,6 +1,6 @@
 [project]
 name = "modelingneuraldynamics"
-version = "0.1.0"
+version = "1.0.0"
 description = "Python and Brian2 code companion to 'An Introduction to Modeling Neuronal Dynamics' (Borgers), ported from the book's MATLAB originals"
 readme = "README.md"
 requires-python = ">=3.10"
