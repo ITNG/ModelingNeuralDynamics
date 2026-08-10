@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 180/256 (70%). brian 32/256 (13%, +88 n/a).**
+**Totals: python 184/256 (72%). brian 32/256 (12%, +88 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -289,14 +289,14 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | TWO_DELAYED_PULSE_COUPLED_OSC | [x] | [ ] |
 | TWO_THETA_NEURONS | [x] | [ ] |
 
-## Chapter 28
+## Chapter 28 - Weakly Coupled Oscillators
 
 | sub-example | python | brian |
 |---|---|---|
-| PLOT_D_TWO_FIXED_POINTS | [ ] | [ ] |
-| WEAKLY_COUPLED_1 | [ ] | [ ] |
-| WEAKLY_COUPLED_2 | [ ] | [ ] |
-| WEAKLY_COUPLED_HETEROGENEOUS_1 | [ ] | [ ] |
+| PLOT_D_TWO_FIXED_POINTS | [x] | [ ] |
+| WEAKLY_COUPLED_1 | [x] | [ ] |
+| WEAKLY_COUPLED_2 | [x] | [ ] |
+| WEAKLY_COUPLED_HETEROGENEOUS_1 | [x] | [ ] |
 
 ## Chapter 29
 
