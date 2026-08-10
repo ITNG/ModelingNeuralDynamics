@@ -5,6 +5,7 @@ dist/
 bin/
 e/
 .vscode/
+.worktrees/
 template/
 results/
 .ipynb_checkpoints/
