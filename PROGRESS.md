@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 191/256 (75%). brian 41/256 (16%, +121 n/a).**
+**Totals: python 196/256 (77%). brian 41/256 (16%, +121 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -321,10 +321,10 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | PING_3 | [x] | [ ] |
 | PING_4 | [x] | [ ] |
 | PING_5 | [x] | [ ] |
-| PING_6 | [ ] | [ ] |
-| PING_7 | [ ] | [ ] |
-| PING_8 | [ ] | [ ] |
-| PING_9 | [ ] | [ ] |
+| PING_6 | [x] | [ ] |
+| PING_7 | [x] | [ ] |
+| PING_8 | [x] | [ ] |
+| PING_9 | [x] | [ ] |
 
 ## Chapter 31 - ING Rhythms
 
