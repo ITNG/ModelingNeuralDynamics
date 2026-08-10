@@ -4,10 +4,10 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 177/256 (69%). brian 29/256 (11%, +80 n/a).**
+**Totals: python 180/256 (70%). brian 29/256 (11%, +84 n/a).**
 
 - [ ] not done
-- n/a: sub-example is a static plot, or its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...) rather than "run this neuron/network" -- even where it calls odeint internally, Brian2 adds nothing over the existing Python port for these
+- n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
 
 ## Chapter 01 - Modeling a Single Neuron
 
@@ -221,10 +221,10 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| WILSON_COWAN_E_AND_I | [x] | [ ] |
-| WILSON_COWAN_LOWERING_W_EE | [x] | [ ] |
-| WILSON_COWAN_PHASE_PLANE | [x] | [ ] |
-| WILSON_COWAN_RASTERGRAM | [x] | [ ] |
+| WILSON_COWAN_E_AND_I | [x] | n/a |
+| WILSON_COWAN_LOWERING_W_EE | [x] | n/a |
+| WILSON_COWAN_PHASE_PLANE | [x] | n/a |
+| WILSON_COWAN_RASTERGRAM | [x] | n/a |
 
 ## Chapter 23 - Entrainment by Excitatory Input Pulses
 
@@ -281,13 +281,13 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | TWO_PULSE_COUPLED_OSC | [x] | [ ] |
 | TWO_PULSE_COUPLED_OSC_2 | [x] | [ ] |
 
-## Chapter 27
+## Chapter 27 - Phase Locking with Delays
 
 | sub-example | python | brian |
 |---|---|---|
-| THREE_DELAYED_PULSE_COUPLED_OSC | [ ] | [ ] |
-| TWO_DELAYED_PULSE_COUPLED_OSC | [ ] | [ ] |
-| TWO_THETA_NEURONS | [ ] | [ ] |
+| THREE_DELAYED_PULSE_COUPLED_OSC | [x] | [ ] |
+| TWO_DELAYED_PULSE_COUPLED_OSC | [x] | [ ] |
+| TWO_THETA_NEURONS | [x] | [ ] |
 
 ## Chapter 28
 
