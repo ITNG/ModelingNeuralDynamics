@@ -14,7 +14,6 @@ CHAPTERS = (
     "05_The_Simple_Model_of_Neurons_in_Rodent_Brains",
     "07_Linear_Integrate_and_Fire_(LIF)_Neurons",
     "08_Quadratic_Integrate_and_Fire_(QIF)_and_Theta_Neurons",
-    "09_Spike_Frequency_Adaptation",
 )
 REQUIRED_HEADINGS = (
     "## Overview",
