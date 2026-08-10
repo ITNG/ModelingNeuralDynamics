@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 147/256 (57%). brian 25/256 (10%, +80 n/a).**
+**Totals: python 177/256 (69%). brian 25/256 (10%, +80 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, or its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...) rather than "run this neuron/network" -- even where it calls odeint internally, Brian2 adds nothing over the existing Python port for these
@@ -267,19 +267,19 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | THETA_PRC_SHORT_WEAK | [x] | [ ] |
 | WB_PRC_INHIBITORY_PULSE | [x] | [ ] |
 
-## Chapter 26
+## Chapter 26 - Phase Locking of Two Oscillators
 
 | sub-example | python | brian |
 |---|---|---|
-| ABSTRACT_PULSE_COUPLING_1 | [ ] | [ ] |
-| ABSTRACT_PULSE_COUPLING_2 | [ ] | [ ] |
-| ABSTRACT_PULSE_COUPLING_3 | [ ] | [ ] |
-| ABSTRACT_PULSE_COUPLING_4 | [ ] | [ ] |
-| ABSTRACT_PULSE_COUPLING_5 | [ ] | [ ] |
-| F_TILDE | [ ] | [ ] |
-| RTM_PLOT_G | [ ] | [ ] |
-| TWO_PULSE_COUPLED_OSC | [ ] | [ ] |
-| TWO_PULSE_COUPLED_OSC_2 | [ ] | [ ] |
+| ABSTRACT_PULSE_COUPLING_1 | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_2 | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_3 | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_4 | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_5 | [x] | [ ] |
+| F_TILDE | [x] | [ ] |
+| RTM_PLOT_G | [x] | [ ] |
+| TWO_PULSE_COUPLED_OSC | [x] | [ ] |
+| TWO_PULSE_COUPLED_OSC_2 | [x] | [ ] |
 
 ## Chapter 27
 
