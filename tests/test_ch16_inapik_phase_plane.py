@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "16_Model_Neurons_of_Bifurcation_Type_3/INAPIK_PHASE_PLANE"
 MATLAB_DIR = "16/INAPIK_PHASE_PLANE"
 
 
+@pytest.mark.slow
 def test_inapik_phase_plane_matches_matlab():
     # matlab overwrites v/n/t_final/dt on every panel -- only the last
     # (I=4.4) trajectory survives to the end of the script

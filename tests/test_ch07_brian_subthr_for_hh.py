@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_subthr_for_hh_matches_matlab():
     """Same underlying trace as LIF_NEURON_WITH_HH (see that test for the
     v(t) spike-time check). I_na/I_k inherit v's spike-upstroke RMSE

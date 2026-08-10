@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "18_Bistability_Resulting_from_Rebound_Firing/RTM_WITH_I_H_BISTABLE"
 MATLAB_DIR = "18/RTM_WITH_I_H_BISTABLE"
 
 
+@pytest.mark.slow
 def test_rtm_with_i_h_bistable_matches_matlab():
     # matlab overwrites v/m/h/n/r for both runs -- only the second (firing)
     # trace survives to the end of the script

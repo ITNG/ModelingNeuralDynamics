@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from scipy.integrate import odeint
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
@@ -21,6 +22,7 @@ def _check(python_dir, matlab_dir, v_tol, w_tol):
     assert rmse_w < w_tol, f"w RMSE vs MATLAB too high: {rmse_w:.4f}"
 
 
+@pytest.mark.slow
 def test_rtm_m_matches_matlab():
     # v_tol looser than the resting variant: 8 full-height spikes over
     # 300ms mean even sub-ms timing jitter at the upstrokes contributes
@@ -32,6 +34,7 @@ def test_rtm_m_matches_matlab():
     )
 
 
+@pytest.mark.slow
 def test_rtm_m_resting_matches_matlab():
     _check(
         "09_Spike_Frequency_Adaptation/RTM_M_RESTING",

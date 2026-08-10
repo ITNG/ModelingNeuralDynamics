@@ -3,10 +3,12 @@ from pathlib import Path
 from scipy.integrate import odeint
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_wb_network_with_gj_matches_matlab():
     py = load_python_port(ROOT / "python" / "21_Gap_Junctions" / "WB_NETWORK_WITH_GJ" / "main.py")
     t = py.np.arange(0, py.t_final, py.dt)

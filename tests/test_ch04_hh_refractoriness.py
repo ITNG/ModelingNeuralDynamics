@@ -3,12 +3,14 @@ from pathlib import Path
 from scipy.integrate import odeint
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "04_Numerical_Solution_of_HH_ODEs/HH_REFRACTORINESS"
 MATLAB_DIR = "04/HH_REFRACTORINESS"
 
 
+@pytest.mark.slow
 def test_hh_refractoriness_matches_matlab():
     """make_figure.m runs all three pulse-onset panels (-2, 5, 9) in one
     script, reusing v/t each time -- so its workspace at the end only holds

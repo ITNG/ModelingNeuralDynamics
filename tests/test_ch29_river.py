@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "29_Stability_of_the_Synchronous_State/RIVER"
 MATLAB_DIR = "29/RIVER"
 
 
+@pytest.mark.slow
 def test_river_matches_matlab():
     # matlab's script reuses theta/g_syn for many trajectories, so by the
     # end of the script they hold only the last-computed trajectory

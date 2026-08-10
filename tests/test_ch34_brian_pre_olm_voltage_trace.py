@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_pre_olm_voltage_trace_matches_matlab():
     ns = load_notebook_as_module(ROOT / "brian" / "chapter34.ipynb")
 

@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_reset_threshold_matches_matlab():
     """Reuses chapter 5's WB neuron with i_ext=0.75uA -- this is the same
     trace used to pick the -67/-52mV reset/threshold pair for the LIF

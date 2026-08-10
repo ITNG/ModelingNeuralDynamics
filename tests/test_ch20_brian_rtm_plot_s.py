@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_rtm_plot_s_matches_matlab():
     """make_figure.m runs tau_r=0.2 then tau_r=1, reusing the same s/v
     arrays -- workspace at the end holds the tau_r=1 run.

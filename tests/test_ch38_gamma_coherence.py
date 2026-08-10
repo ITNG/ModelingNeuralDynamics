@@ -57,6 +57,7 @@ def test_gamma_coherence_1_produces_aligned_traces_and_spikes():
     assert len(result["t_i_spikes"]) > 0
 
 
+@pytest.mark.slow
 def test_gamma_coherence_1_matches_matlab_spike_timing():
     result = load_example("GAMMA_COHERENCE_1").simulate()
     matlab = run_matlab_script(
@@ -82,6 +83,7 @@ def test_gamma_coherence_2_replaces_feedback_with_mean_inhibition():
     )
 
 
+@pytest.mark.slow
 def test_gamma_coherence_2_matches_matlab_summary():
     result = load_example("GAMMA_COHERENCE_2").simulate()
     matlab = run_matlab_script(

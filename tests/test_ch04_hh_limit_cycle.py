@@ -3,12 +3,14 @@ from pathlib import Path
 from scipy.integrate import odeint
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "04_Numerical_Solution_of_HH_ODEs/HH_LIMIT_CYCLE"
 MATLAB_DIR = "04/HH_LIMIT_CYCLE"
 
 
+@pytest.mark.slow
 def test_hh_limit_cycle_matches_matlab():
     py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
     t_p = py.np.arange(0, py.t_final, py.dt)

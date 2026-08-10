@@ -3,10 +3,12 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, spike_times
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_lif_neuron_with_hh_matches_matlab():
     """Same HH subthreshold trace underlies Figures 7.1-7.3 (LIF_NEURON_WITH_HH,
     TAU_M_FOR_HH, SUBTHR_FOR_HH); this checks the shared simulation's spike

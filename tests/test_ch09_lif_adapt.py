@@ -1,12 +1,14 @@
 from pathlib import Path
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "09_Spike_Frequency_Adaptation/LIF_ADAPT"
 MATLAB_DIR = "09/LIF_ADAPT"
 
 
+@pytest.mark.slow
 def test_lif_adapt_matches_matlab():
     py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
     ref = run_matlab_script(ROOT / "matlab" / MATLAB_DIR, "make_figure.m", ["t", "v", "w"])

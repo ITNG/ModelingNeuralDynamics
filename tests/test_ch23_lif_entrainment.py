@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "23_Entrainment_by_Excitatory_Input_Pulses/LIF_ENTRAINMENT"
 MATLAB_DIR = "23/LIF_ENTRAINMENT"
 
 
+@pytest.mark.slow
 def test_lif_entrainment_matches_matlab():
     # matlab overwrites v_pre/v_post each loop iteration -- only the final
     # pulse's values survive to the end of the script

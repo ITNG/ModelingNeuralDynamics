@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "18_Bistability_Resulting_from_Rebound_Firing/RTM_F_I_CURVE_WITH_I_H"
 MATLAB_DIR = "18/RTM_F_I_CURVE_WITH_I_H"
 
 
+@pytest.mark.slow
 def test_rtm_f_i_curve_with_i_h_matches_matlab():
     # very slow both sides (~4-24min): several i_ext points sit close to
     # the two bistability thresholds, where settling/spiking takes a very

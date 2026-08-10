@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_erisir_plus_slow_i_k_matches_matlab():
     ns = load_notebook_as_module(ROOT / "brian" / "chapter19.ipynb")
     sm = ns.simulate_erisir_slow_k(g_k_slow=1.5 * ns.b2.msiemens)

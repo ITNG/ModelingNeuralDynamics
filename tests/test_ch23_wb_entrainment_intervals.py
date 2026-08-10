@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "23_Entrainment_by_Excitatory_Input_Pulses/WB_ENTRAINMENT_INTERVALS"
 MATLAB_DIR = "23/WB_ENTRAINMENT_INTERVALS"
 
 
+@pytest.mark.slow
 def test_wb_entrainment_intervals_matches_matlab():
     # very slow both sides (book's own comment: "This takes quite a
     # while to run") -- 201 g_syn values x 1e6-step WB-neuron sims each.

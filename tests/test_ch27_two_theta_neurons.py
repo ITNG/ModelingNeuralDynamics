@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "27_Phase_Locking_with_Delays/TWO_THETA_NEURONS"
 MATLAB_DIR = "27/TWO_THETA_NEURONS"
 
 
+@pytest.mark.slow
 def test_two_theta_neurons_matches_matlab():
     # very slow both sides (~3.5min in python): 81 grid points x
     # 1e6-step simulations of two delay-coupled theta neurons each.

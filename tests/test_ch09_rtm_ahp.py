@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from scipy.integrate import odeint
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
@@ -21,6 +22,7 @@ def _check(python_dir, matlab_dir, v_tol, ca_tol):
     assert rmse_ca < ca_tol, f"ca RMSE vs MATLAB too high: {rmse_ca:.4f}"
 
 
+@pytest.mark.slow
 def test_rtm_ahp_matches_matlab():
     _check(
         "09_Spike_Frequency_Adaptation/RTM_AHP",
@@ -29,6 +31,7 @@ def test_rtm_ahp_matches_matlab():
     )
 
 
+@pytest.mark.slow
 def test_rtm_ahp_resting_matches_matlab():
     _check(
         "09_Spike_Frequency_Adaptation/RTM_AHP_RESTING",

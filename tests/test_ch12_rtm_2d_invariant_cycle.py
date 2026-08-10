@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "12_Two_Dimensional_Bifurcation_Analysis/RTM_2D_INVARIANT_CYCLE"
 MATLAB_DIR = "12/RTM_2D_INVARIANT_CYCLE"
 
 
+@pytest.mark.slow
 def test_rtm_2d_invariant_cycle_matches_matlab():
     py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
 

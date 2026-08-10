@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "29_Stability_of_the_Synchronous_State/RTM_WITH_INHIBITORY_PULSE"
 MATLAB_DIR = "29/RTM_WITH_INHIBITORY_PULSE"
 
 
+@pytest.mark.slow
 def test_rtm_with_inhibitory_pulse_matches_matlab():
     # matlab's script reuses v/t for all three panels, so by the end of
     # the script they hold only the third (strong/fast) panel's traces.

@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_s_buildup_matches_matlab():
     ns = load_notebook_as_module(ROOT / "brian" / "chapter20.ipynb")
     sm = ns.simulate_RTM_neuron_q_s(0.2 * ns.b2.uA, tau_r=10 * ns.b2.ms, tau_d=300 * ns.b2.ms,

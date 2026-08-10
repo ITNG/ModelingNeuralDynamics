@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "08_Quadratic_Integrate_and_Fire_(QIF)_and_Theta_Neurons/QIF_INFINITE_THRESHOLD"
 MATLAB_DIR = "08/QIF_INFINITE_THRESHOLD"
 
 
+@pytest.mark.slow
 def test_qif_infinite_threshold_matches_matlab():
     py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
     ref = run_matlab_script(

@@ -19,7 +19,6 @@ dependencies = [
     "matplotlib",
     "networkx",
     "brian2",
-    "neurodynex3",
     "jupyter",
     "ipykernel",
 ]
@@ -31,6 +30,7 @@ Repository = "https://github.com/ITNG/ModelingNeuralDynamics"
 dev = [
     "nbstripout",
     "pytest",
+    "pytest-xdist",
     "ruff",
 ]
 
@@ -40,6 +40,12 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["mnd*"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: launches MATLAB via subprocess to check against the book's original scripts (skipped automatically if MATLAB isn't installed). Run with `pytest -m slow`; excluded by default via addopts.",
+]
+addopts = "-m 'not slow'"
 
 [tool.ruff]
 line-length = 100

@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "25_Phase_Response_Curves_(PRCs)/RTM_PRC_SHORT_AND_WEAK"
 MATLAB_DIR = "25/RTM_PRC_SHORT_AND_WEAK"
 
 
+@pytest.mark.slow
 def test_rtm_prc_short_and_weak_matches_matlab():
     # matlab's script reuses the variable names g_vec/delta_v for both
     # simulations, so by the end of the script they hold the *second*

@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "26_Phase_Locking_of_Two_Oscillators/RTM_PLOT_G"
 MATLAB_DIR = "26/RTM_PLOT_G"
 
 
+@pytest.mark.slow
 def test_rtm_plot_g_matches_matlab():
     py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
     ref = run_matlab_script(ROOT / "matlab" / MATLAB_DIR, "make_figure.m",

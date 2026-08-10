@@ -3,10 +3,12 @@ from pathlib import Path
 from scipy.integrate import odeint
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_rtm_plot_s_matches_matlab():
     py = load_python_port(ROOT / "python" / "20_Chemical_Synapses" / "RTM_PLOT_S" / "main.py")
     py.tau_r, py.tau_d = 1.0, 2.0

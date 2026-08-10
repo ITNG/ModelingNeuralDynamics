@@ -1,12 +1,14 @@
 from pathlib import Path
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "09_Spike_Frequency_Adaptation/V_V_TILDE"
 MATLAB_DIR = "09/V_V_TILDE"
 
 
+@pytest.mark.slow
 def test_v_v_tilde_matches_matlab():
     py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
 

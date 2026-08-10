@@ -21,7 +21,9 @@ jobs:
         run: uv run ruff check .
 
       - name: Run tests
-        # MATLAB-comparison tests skip themselves here (no MATLAB license
-        # in CI) -- this still catches import errors, syntax errors, and
-        # any test that doesn't depend on MATLAB.
-        run: uv run pytest tests/ -v
+        # -m "" overrides the repo-default "-m 'not slow'" (see
+        # pyproject.toml) so slow/MATLAB-comparison tests are still
+        # collected here. They skip themselves (no MATLAB license in CI)
+        # -- this still catches import errors, syntax errors, and any
+        # test that doesn't depend on MATLAB.
+        run: uv run pytest tests/ -v -m ""

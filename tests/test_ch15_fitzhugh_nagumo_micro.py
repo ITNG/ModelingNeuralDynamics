@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "15_Canard_Explosions/FITZHUGH_NAGUMO_MICRO"
 MATLAB_DIR = "15/FITZHUGH_NAGUMO_MICRO"
 
 
+@pytest.mark.slow
 def test_fitzhugh_nagumo_micro_matches_matlab():
     # ~8 minutes in python (a full 10s trajectory for every i_ext where the
     # fixed point is an unstable spiral, to trace the canard-cycle

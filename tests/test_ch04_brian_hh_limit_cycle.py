@@ -1,10 +1,12 @@
 from pathlib import Path
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_hh_limit_cycle_matches_matlab():
     """Same simulation as HH_SOLUTION, plotted as a v-n phase portrait.
 

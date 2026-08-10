@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "25_Phase_Response_Curves_(PRCs)/PHASE_SHIFT"
 MATLAB_DIR = "25/PHASE_SHIFT"
 
 
+@pytest.mark.slow
 def test_phase_shift_matches_matlab():
     # matlab's script reuses the variable names v/t across all four
     # simulation runs, so by the end of the script they hold only the

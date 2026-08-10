@@ -3,12 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_python_port, run_matlab_script
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_DIR = "20_Chemical_Synapses/RTM_WITH_AUTAPSE_F_I_CURVE"
 MATLAB_DIR = "20/RTM_WITH_AUTAPSE_F_I_CURVE"
 
 
+@pytest.mark.slow
 def test_rtm_with_autapse_f_i_curve_matches_matlab():
     # ~4min each side: forward+backward sweep over 31 i_ext values with
     # an autaptic RTM neuron.

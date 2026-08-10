@@ -3,10 +3,12 @@ from pathlib import Path
 import numpy as np
 
 from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.slow
 def test_square_waves_matches_matlab():
     ns = load_notebook_as_module(ROOT / "brian" / "chapter19.ipynb")
     sm = ns.simulate_inapik_slow_k(g_k_slow=5.0 * ns.b2.msiemens)
