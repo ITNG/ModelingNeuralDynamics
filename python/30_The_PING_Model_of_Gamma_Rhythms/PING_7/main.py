@@ -76,7 +76,7 @@ def h_i_inf(v):
 def tau_h_i(v):
     alpha_h = 0.07 * exp(-(v + 58) / 20)
     beta_h = 1. / (exp(-0.1 * (v + 28)) + 1)
-    return 1. / (alpha_h + beta_h)
+    return 1. / (alpha_h + beta_h) / 5
 
 
 def n_i_inf(v):
@@ -88,7 +88,7 @@ def n_i_inf(v):
 def tau_n_i(v):
     alpha_n = -0.01 * (v + 34) / (exp(-0.1 * (v + 34)) - 1)
     beta_n = 0.125 * exp(-(v + 44) / 80)
-    return 1. / (alpha_n + beta_n)
+    return 1. / (alpha_n + beta_n) / 5
 
 
 # ------------------------------------------------------------------- shared
