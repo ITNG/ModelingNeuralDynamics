@@ -14,6 +14,16 @@ CHAPTERS = (
     "05_The_Simple_Model_of_Neurons_in_Rodent_Brains",
     "07_Linear_Integrate_and_Fire_(LIF)_Neurons",
     "08_Quadratic_Integrate_and_Fire_(QIF)_and_Theta_Neurons",
+    "10_The_Slow_Fast_Phase_Plane",
+    "11_The_Saddle_Node_Bifurcation",
+    "12_Two_Dimensional_Bifurcation_Analysis",
+    "13_Hopf_Bifurcations",
+    "14_Model_Neurons_of_Bifurcation_Type_2",
+    "15_Canard_Explosions",
+    "16_Model_Neurons_of_Bifurcation_Type_3",
+    "17_Frequency_Current_Curves",
+    "18_Bistability_Resulting_from_Rebound_Firing",
+    "19_Bursting",
 )
 REQUIRED_HEADINGS = (
     "## Overview",

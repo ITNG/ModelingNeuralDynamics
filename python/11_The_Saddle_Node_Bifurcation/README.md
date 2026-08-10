@@ -1,0 +1,57 @@
+# The saddle-node bifurcation
+
+## Overview
+
+This chapter's single example makes a saddle-node collision concrete: as a
+parameter changes, a stable fixed point and a saddle coalesce into one
+half-stable point and then disappear.
+
+## Core ideas
+
+A saddle-node bifurcation changes the number of equilibria. Before the
+collision, trajectories can be attracted to a node or separated by a saddle's
+stable manifold. At the collision, the flow is attracting from one side and
+repelling from the other; beyond it, neither equilibrium remains.
+
+## Essential model
+
+The plotted planar normal-form-like system is
+
+\[
+\dot x=-ax+y,\qquad \dot y=\frac{x^2}{1+x^2}-by.
+\]
+
+Here \(x\) and \(y\) are state variables, \(a\) is the varied control
+parameter, and \(b=1\) is fixed. Solving the nullclines produces two fixed
+points for \(a<0.5\), one collision point at \(a=0.5\), and none for
+\(a>0.5\).
+
+## Code examples
+
+- [`SADDLE_NODE_BIFURCATION`](SADDLE_NODE_BIFURCATION/) integrates trajectories
+  for the three parameter regimes and saves their phase portraits as
+  `fig.png`.
+
+## What to look for
+
+Read the three panels from left to right. The black filled marker is the
+stable fixed point and the white marker is the saddle; their merged half-filled
+marker in the middle panel shows the collision. In the final panel, all shown
+trajectories pass through because no fixed point survives.
+
+## Suggested order
+
+1. Run `SADDLE_NODE_BIFURCATION` and identify the fixed-point markers.
+2. Compare nearby trajectories on each side of the saddle's separatrix.
+3. Relate the three panels to creation or destruction of a resting state.
+
+## Prerequisites and related chapters
+
+Chapter 10 supplies nullclines and phase portraits. Chapter 12 applies
+saddle-node ideas to reduced neuron dynamics, while Chapters 17--18 connect
+them to firing thresholds and bistability.
+
+## Running the examples
+
+Run `python main.py` inside `SADDLE_NODE_BIFURCATION`. It uses NumPy and
+Matplotlib and writes `fig.png` in that directory.
