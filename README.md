@@ -49,3 +49,5 @@ An extensive online collection of Matlab programs generating the figures accompa
 
 
 ### Python codes provided by contributors
+See the [practical Python chapter guides](python/README.md) for the concepts,
+equations, example map, and expected results for every implemented chapter.

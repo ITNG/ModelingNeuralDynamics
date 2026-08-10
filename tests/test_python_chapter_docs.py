@@ -102,3 +102,44 @@ def test_chapter_guide_relative_links_resolve(chapter: str) -> None:
         assert (path.parent / target).resolve().exists(), (
             f"Broken link in {path.relative_to(REPO_ROOT)}: {target}"
         )
+
+
+def test_inventory_matches_all_python_chapter_directories() -> None:
+    actual = {
+        path.name
+        for path in PYTHON_ROOT.iterdir()
+        if path.is_dir() and re.match(r"^\d{2}_", path.name)
+    }
+    assert set(CHAPTERS) == actual - {"09_Spike_Frequency_Adaptation"}
+    assert len(CHAPTERS) == 37
+
+
+def test_python_index_links_every_chapter() -> None:
+    index = PYTHON_ROOT / "README.md"
+    assert index.is_file()
+    text = index.read_text(encoding="utf-8")
+    for chapter in CHAPTERS:
+        encoded = chapter.replace("(", "%28").replace(")", "%29")
+        assert f"({encoded}/README.md)" in text
+    assert "Chapters 2 and 6" in text
+    assert "Chapter 9" in text
+    assert "(09_Spike_Frequency_Adaptation/README.md)" not in text
+
+
+def test_root_readme_links_python_guide() -> None:
+    text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    assert "(python/README.md)" in text
+
+
+def test_all_documentation_relative_links_resolve() -> None:
+    paths = [PYTHON_ROOT / "README.md", REPO_ROOT / "README.md"]
+    paths.extend(guide_path(chapter) for chapter in CHAPTERS)
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        for match in LINK_RE.finditer(text):
+            target = unquote(match.group(1) or match.group(2)).split("#", 1)[0]
+            if not target or urlsplit(target).scheme or target.startswith("mailto:"):
+                continue
+            assert (path.parent / target).resolve().exists(), (
+                f"Broken link in {path.relative_to(REPO_ROOT)}: {target}"
+            )
