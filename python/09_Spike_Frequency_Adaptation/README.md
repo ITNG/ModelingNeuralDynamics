@@ -12,8 +12,8 @@ slow variable changes from one spike to the next.
 Adaptation accumulates during activity and reduces subsequent excitability,
 which can lengthen interspike intervals. The M-current uses a slow gate,
 whereas the AHP current uses a calcium-like state. Resting variants set the
-external drive to zero, making it possible to contrast decaying slow variables
-with sustained spiking regimes. A spike-to-spike map condenses continuous
+external drive to zero, showing the models' zero-drive resting trajectories
+alongside sustained spiking regimes. A spike-to-spike map condenses continuous
 evolution into a one-dimensional update.
 
 ## Essential model
