@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 208/256 (81%). brian 46/256 (18%, +122 n/a).**
+**Totals: python 215/256 (84%). brian 46/256 (18%, +122 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -344,8 +344,8 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | ING_7 | [x] | [ ] |
 | ING_8 | [x] | [ ] |
 | ING_9 | [x] | [ ] |
-| ING_ENTRAINING_E_CELLS | [ ] | [ ] |
-| ING_ENTRAINING_E_CELLS_2 | [ ] | [ ] |
+| ING_ENTRAINING_E_CELLS | [x] | [ ] |
+| ING_ENTRAINING_E_CELLS_2 | [x] | [ ] |
 
 ## Chapter 32
 
@@ -427,11 +427,11 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| GAMMA_COHERENCE_1 | [ ] | [ ] |
-| GAMMA_COHERENCE_2 | [ ] | [ ] |
-| POISSON_PING_3_MISMATCHED_PULSES | [ ] | [ ] |
-| POISSON_PING_3_PLUS_GREEN | [ ] | [ ] |
-| POISSON_PING_3_PLUS_PULSES | [ ] | [ ] |
+| GAMMA_COHERENCE_1 | [x] | [ ] |
+| GAMMA_COHERENCE_2 | [x] | [ ] |
+| POISSON_PING_3_MISMATCHED_PULSES | [x] | [ ] |
+| POISSON_PING_3_PLUS_GREEN | [x] | [ ] |
+| POISSON_PING_3_PLUS_PULSES | [x] | [ ] |
 
 ## Chapter 39 - Short-Term Depression and Facilitation
 
