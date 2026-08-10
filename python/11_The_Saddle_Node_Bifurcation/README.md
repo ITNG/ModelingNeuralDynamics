@@ -2,16 +2,17 @@
 
 ## Overview
 
-This chapter's single example makes a saddle-node collision concrete: as a
-parameter changes, a stable fixed point and a saddle coalesce into one
-half-stable point and then disappear.
+This chapter's single example makes a saddle-node collision concrete: in the
+displayed positive-\(x\) region, a stable fixed point and a saddle coalesce
+into one half-stable point and then disappear.
 
 ## Core ideas
 
-A saddle-node bifurcation changes the number of equilibria. Before the
-collision, trajectories can be attracted to a node or separated by a saddle's
-stable manifold. At the collision, the flow is attracting from one side and
-repelling from the other; beyond it, neither equilibrium remains.
+A saddle-node bifurcation changes the number of equilibria in a local region.
+Before the displayed collision, trajectories can be attracted to a node or
+separated by a saddle's stable manifold. At the collision, the flow is
+attracting from one side and repelling from the other; beyond it, the displayed
+positive-\(x\) pair no longer remains.
 
 ## Essential model
 
@@ -22,9 +23,11 @@ The plotted planar normal-form-like system is
 \]
 
 Here \(x\) and \(y\) are state variables, \(a\) is the varied control
-parameter, and \(b=1\) is fixed. Solving the nullclines produces two fixed
-points for \(a<0.5\), one collision point at \(a=0.5\), and none for
-\(a>0.5\).
+parameter, and \(b=1\) is fixed. In the displayed positive-\(x\) region,
+solving the nullclines produces two fixed points for \(a<0.5\), one collision
+point at \(a=0.5\), and none for \(a>0.5\). The full system also has the
+equilibrium \((x,y)=(0,0)\) for every \(a\); the script clips it out by
+starting and displaying trajectories at \(x\ge0.2\).
 
 ## Code examples
 
@@ -37,7 +40,8 @@ points for \(a<0.5\), one collision point at \(a=0.5\), and none for
 Read the three panels from left to right. The black filled marker is the
 stable fixed point and the white marker is the saddle; their merged half-filled
 marker in the middle panel shows the collision. In the final panel, all shown
-trajectories pass through because no fixed point survives.
+trajectories pass through because no positive-\(x\) fixed point survives; the
+equilibrium at the excluded origin is outside the plotted frame.
 
 ## Suggested order
 
