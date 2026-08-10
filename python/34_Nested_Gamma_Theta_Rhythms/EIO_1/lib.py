@@ -163,7 +163,7 @@ def derivative(x0, t):
     s_o = x0[n1 + 7 * num_o : n1 + 8 * num_o]
 
     I_K_e = 80.0 * n_e ** 4 * (v_e + 100.0)
-    I_Na_e = 100.0 * h_e * m_i_inf(v_e) ** 3 * (v_e - 50.0)
+    I_Na_e = 100.0 * h_e * m_e_inf(v_e) ** 3 * (v_e - 50.0)
     I_L_e = 0.1 * (v_e + 67.0)
     
     dv_e = i_ext_e - I_L_e - I_K_e - I_Na_e + \
@@ -296,7 +296,7 @@ def rtmInit(i_ext, phiVec):
 
     def derivativeRTM(x, t=0):
 
-        n0 = len(x0) / 3
+        n0 = len(x0) // 3
         v_e, h_e, n_e = x0[:n0], x0[n0: (2 * n0)], x0[(2 * n0): (3 * n0)]
 
         I_L_e = g_l * (v_e - v_l)
@@ -402,7 +402,7 @@ def wbInit(i_ext, phiVec):
 
     def derivativeWB(x, t=0):
 
-        n0 = len(x0) / 3
+        n0 = len(x0) // 3
         v_i, h_i, n_i = x0[:n0], x0[n0: (2 * n0)], x0[(2 * n0): (3 * n0)]
 
         I_L_i = g_l * (v_i - v_l)
