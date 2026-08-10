@@ -320,7 +320,7 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | PING_2 | [x] | [ ] |
 | PING_3 | [x] | [ ] |
 | PING_4 | [x] | [ ] |
-| PING_5 | [ ] | [ ] |
+| PING_5 | [x] | [ ] |
 | PING_6 | [ ] | [ ] |
 | PING_7 | [ ] | [ ] |
 | PING_8 | [ ] | [ ] |
