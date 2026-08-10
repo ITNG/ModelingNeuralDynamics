@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 184/256 (72%). brian 39/256 (15%, +121 n/a).**
+**Totals: python 191/256 (75%). brian 39/256 (15%, +121 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -298,17 +298,17 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 | WEAKLY_COUPLED_2 | [x] | n/a |
 | WEAKLY_COUPLED_HETEROGENEOUS_1 | [x] | n/a |
 
-## Chapter 29
+## Chapter 29 - Stability of the Synchronous State
 
 | sub-example | python | brian |
 |---|---|---|
-| ILLUSTRATE_P0_AND_P1 | [ ] | [ ] |
-| LIF_CONDITION_NUMBERS | [ ] | [ ] |
-| LIF_P_AND_S | [ ] | [ ] |
-| LIF_WITH_INHIBITORY_PULSE | [ ] | [ ] |
-| RIVER | [ ] | [ ] |
-| RTM_CONDITION_NUMBERS | [ ] | [ ] |
-| RTM_WITH_INHIBITORY_PULSE | [ ] | [ ] |
+| ILLUSTRATE_P0_AND_P1 | [x] | [ ] |
+| LIF_CONDITION_NUMBERS | [x] | [ ] |
+| LIF_P_AND_S | [x] | [ ] |
+| LIF_WITH_INHIBITORY_PULSE | [x] | [ ] |
+| RIVER | [x] | [ ] |
+| RTM_CONDITION_NUMBERS | [x] | [ ] |
+| RTM_WITH_INHIBITORY_PULSE | [x] | [ ] |
 
 ## Chapter 30 - The PING Model of Gamma Rhythms
 
