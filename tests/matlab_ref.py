@@ -2,6 +2,7 @@
 
 Used to check a Python/Brian2 port against the book's original MATLAB code.
 """
+import ast
 import importlib.util
 import os
 import shutil
@@ -117,6 +118,45 @@ def load_notebook_as_module(path):
     try:
         os.chdir(path.parent)
         exec(compile(source, str(path), "exec"), namespace)
+    finally:
+        os.chdir(cwd)
+    return SimpleNamespace(**namespace)
+
+
+def load_notebook_definitions_as_module(path):
+    """Load a notebook's imports and definitions without running examples.
+
+    Chapter notebooks commonly combine reusable functions with top-level
+    plotting and Brian2 simulations. This focused loader makes definitions
+    available to lightweight tests without executing those expensive examples.
+    """
+    import matplotlib
+    import nbformat
+    from types import SimpleNamespace
+
+    matplotlib.use("Agg")
+
+    path = Path(path).resolve()
+    nb = nbformat.read(path, as_version=4)
+    nodes = []
+    for cell in nb.cells:
+        if cell["cell_type"] != "code":
+            continue
+        tree = ast.parse("".join(cell["source"]), filename=str(path))
+        nodes.extend(
+            node
+            for node in tree.body
+            if isinstance(
+                node,
+                (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
+            )
+        )
+    source = ast.Module(body=nodes, type_ignores=[])
+    namespace = {"__name__": path.stem}
+    cwd = os.getcwd()
+    try:
+        os.chdir(path.parent)
+        exec(compile(ast.fix_missing_locations(source), str(path), "exec"), namespace)
     finally:
         os.chdir(cwd)
     return SimpleNamespace(**namespace)
