@@ -4,7 +4,7 @@ Unit of tracking is the MATLAB sub-example (one leaf folder = one figure/script)
 Process order: chapter number ascending, then sub-example name within a chapter.
 
 - [x] done and verified (visual + numeric vs MATLAB)
-**Totals: python 184/256 (72%). brian 36/256 (14%, +103 n/a).**
+**Totals: python 184/256 (72%). brian 36/256 (14%, +119 n/a).**
 
 - [ ] not done
 - n/a: sub-example is a static plot, its point is dynamical-systems analysis (bifurcation diagrams, phase planes with nullclines, F-I curves, bistability regions, ...), or it's a firing-rate/mean-field model (e.g. Wilson-Cowan) rather than individual spiking neurons -- even where it calls odeint internally, Brian2 (a spiking-network simulator) adds nothing over the existing Python port for these
@@ -271,32 +271,32 @@ Process order: chapter number ascending, then sub-example name within a chapter.
 
 | sub-example | python | brian |
 |---|---|---|
-| ABSTRACT_PULSE_COUPLING_1 | [x] | [ ] |
-| ABSTRACT_PULSE_COUPLING_2 | [x] | [ ] |
-| ABSTRACT_PULSE_COUPLING_3 | [x] | [ ] |
-| ABSTRACT_PULSE_COUPLING_4 | [x] | [ ] |
-| ABSTRACT_PULSE_COUPLING_5 | [x] | [ ] |
-| F_TILDE | [x] | [ ] |
-| RTM_PLOT_G | [x] | [ ] |
-| TWO_PULSE_COUPLED_OSC | [x] | [ ] |
-| TWO_PULSE_COUPLED_OSC_2 | [x] | [ ] |
+| ABSTRACT_PULSE_COUPLING_1 | [x] | n/a |
+| ABSTRACT_PULSE_COUPLING_2 | [x] | n/a |
+| ABSTRACT_PULSE_COUPLING_3 | [x] | n/a |
+| ABSTRACT_PULSE_COUPLING_4 | [x] | n/a |
+| ABSTRACT_PULSE_COUPLING_5 | [x] | n/a |
+| F_TILDE | [x] | n/a |
+| RTM_PLOT_G | [x] | n/a |
+| TWO_PULSE_COUPLED_OSC | [x] | n/a |
+| TWO_PULSE_COUPLED_OSC_2 | [x] | n/a |
 
 ## Chapter 27 - Phase Locking with Delays
 
 | sub-example | python | brian |
 |---|---|---|
-| THREE_DELAYED_PULSE_COUPLED_OSC | [x] | [ ] |
-| TWO_DELAYED_PULSE_COUPLED_OSC | [x] | [ ] |
-| TWO_THETA_NEURONS | [x] | [ ] |
+| THREE_DELAYED_PULSE_COUPLED_OSC | [x] | n/a |
+| TWO_DELAYED_PULSE_COUPLED_OSC | [x] | n/a |
+| TWO_THETA_NEURONS | [x] | n/a |
 
 ## Chapter 28 - Weakly Coupled Oscillators
 
 | sub-example | python | brian |
 |---|---|---|
-| PLOT_D_TWO_FIXED_POINTS | [x] | [ ] |
-| WEAKLY_COUPLED_1 | [x] | [ ] |
-| WEAKLY_COUPLED_2 | [x] | [ ] |
-| WEAKLY_COUPLED_HETEROGENEOUS_1 | [x] | [ ] |
+| PLOT_D_TWO_FIXED_POINTS | [x] | n/a |
+| WEAKLY_COUPLED_1 | [x] | n/a |
+| WEAKLY_COUPLED_2 | [x] | n/a |
+| WEAKLY_COUPLED_HETEROGENEOUS_1 | [x] | n/a |
 
 ## Chapter 29
 
