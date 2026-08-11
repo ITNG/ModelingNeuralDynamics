@@ -36,7 +36,7 @@ linked from this index.
 
 - [Chapter 20: Chemical Synapses](chapter20.md)
 - [Chapter 21: Gap Junctions](chapter21.md)
-- [Chapter 22: A Wilson-Cowan Model of an Oscillatory E-I Network](22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/README.md)
+- [Chapter 22: A Wilson-Cowan Model of an Oscillatory E-I Network](chapter22.md)
 
 ## Entrainment, synchronization, and rhythms (Chapters 23-38)
 

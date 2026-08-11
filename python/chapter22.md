@@ -29,27 +29,28 @@ explain the direction of a trajectory and any oscillatory feedback loop.
 
 ## Code examples
 
-- [`WILSON_COWAN_E_AND_I`](WILSON_COWAN_E_AND_I/) plots the excitatory and
-  inhibitory rate traces over several oscillation cycles.
-- [`WILSON_COWAN_LOWERING_W_EE`](WILSON_COWAN_LOWERING_W_EE/) lowers recurrent
-  excitation and shows the altered long-time activity.
-- [`WILSON_COWAN_PHASE_PLANE`](WILSON_COWAN_PHASE_PLANE/) draws the E--I
-  nullclines and the trajectory in the rate phase plane.
-- [`WILSON_COWAN_RASTERGRAM`](WILSON_COWAN_RASTERGRAM/) samples the rates into
-  a population-style raster representation.
+All four examples now live in one notebook, [`chapter22.ipynb`](chapter22.ipynb):
+`simulate_wilson_cowan_e_and_i` plots the excitatory and inhibitory rate
+traces over several oscillation cycles. `simulate_wilson_cowan_lowering_w_ee`
+lowers recurrent excitation and shows the altered long-time activity.
+`plot_wilson_cowan_phase_plane` draws the E--I nullclines and the flow field
+in the rate phase plane. `simulate_wilson_cowan_rastergram` samples the
+rates into a population-style raster representation.
 
 ## What to look for
 
-In `WILSON_COWAN_E_AND_I`, compare the timing of E and I peaks rather than
-only their heights. In the phase plane, follow the trajectory relative to both
-nullclines. Then compare the lowered-$w_{EE}$ trace and the raster: a rate
-oscillation is summarized differently by continuous activity and by events.
+In `simulate_wilson_cowan_e_and_i`, compare the timing of E and I peaks
+rather than only their heights. In the phase plane, follow the trajectory
+relative to both nullclines. Then compare the lowered-$w_{EE}$ trace and
+the raster: a rate oscillation is summarized differently by continuous
+activity and by events.
 
 ## Suggested order
 
-1. Run `WILSON_COWAN_E_AND_I`.
-2. Use `WILSON_COWAN_PHASE_PLANE` to interpret the rate cycle.
-3. Compare `WILSON_COWAN_LOWERING_W_EE` and `WILSON_COWAN_RASTERGRAM`.
+1. Run `simulate_wilson_cowan_e_and_i`.
+2. Use `plot_wilson_cowan_phase_plane` to interpret the rate cycle.
+3. Compare `simulate_wilson_cowan_lowering_w_ee` and
+   `simulate_wilson_cowan_rastergram`.
 
 ## Prerequisites and related chapters
 
@@ -59,5 +60,5 @@ networks, whereas this chapter describes the population-level E--I mechanism.
 
 ## Running the examples
 
-Run `python main.py` in an immediate example directory. They use NumPy, SciPy,
-and Matplotlib and save figure files alongside the scripts.
+Open [`chapter22.ipynb`](chapter22.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.
