@@ -1719,6 +1719,7 @@ dependencies = [
     { name = "brian2", version = "2.9.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "brian2", version = "2.10.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "ipykernel" },
+    { name = "ipywidgets" },
     { name = "jupyter" },
     { name = "matplotlib", version = "3.10.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "matplotlib", version = "3.11.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
@@ -1744,6 +1745,7 @@ dev = [
 requires-dist = [
     { name = "brian2" },
     { name = "ipykernel" },
+    { name = "ipywidgets" },
     { name = "jupyter" },
     { name = "matplotlib" },
     { name = "networkx" },

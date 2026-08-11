@@ -20,6 +20,7 @@ dependencies = [
     "networkx",
     "brian2",
     "jupyter",
+    "ipywidgets",
     "ipykernel",
 ]
 
