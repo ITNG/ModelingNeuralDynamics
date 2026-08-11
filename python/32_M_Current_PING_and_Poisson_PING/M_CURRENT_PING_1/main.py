@@ -330,10 +330,13 @@ def simulate(g_ee, g_ei, g_ie, g_ii, t_final=t_final, track_cell=3):
             np.array(t_i_spikes), np.array(i_i_spikes), v_plot)
 
 
-g_ee, g_ei, g_ie, g_ii = make_random_connectivity(p_ee, p_ei, p_ie, p_ii)
-t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes, v_plot = simulate(g_ee, g_ei, g_ie, g_ii)
+def run_smoke(t_final_run=t_final):
+    connectivity = make_random_connectivity(p_ee, p_ei, p_ie, p_ii)
+    return simulate(*connectivity, t_final=t_final_run)
+
 
 if __name__ == "__main__":
+    t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes, v_plot = run_smoke()
     f_hat_e = round(len(t_e_spikes) / num_e / t_final * 1000)
     f_hat_i = round(len(t_i_spikes) / num_i / t_final * 1000)
     print(f"f_hat_e = {f_hat_e}")

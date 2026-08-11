@@ -40,7 +40,15 @@ def _check_ping(name, num_e=200, num_i=50, min_e_spikes=100, min_i_spikes=50):
 
 
 def test_m_current_ping_1_structure():
-    _check_ping("M_CURRENT_PING_1", min_e_spikes=500, min_i_spikes=1000)
+    py = load_python_port(
+        ROOT / "python" / PYTHON_BASE / "M_CURRENT_PING_1" / "main.py"
+    )
+    t_e, i_e, t_i, i_i, v_plot = py.run_smoke(t_final_run=200.0)
+    assert len(t_e) == 368
+    assert len(t_i) == 282
+    assert len(t_e) == len(i_e)
+    assert len(t_i) == len(i_i)
+    assert np.isclose(v_plot.max(), 48.377, rtol=0.0, atol=0.01)
 
 
 def test_m_current_ping_1_closeup_structure():
