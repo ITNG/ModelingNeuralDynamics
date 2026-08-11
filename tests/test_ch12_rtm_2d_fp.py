@@ -2,10 +2,9 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "12_Two_Dimensional_Bifurcation_Analysis/RTM_2D_FP"
 
 
 def test_rtm_2d_fp_bifurcation_shape():
@@ -15,11 +14,12 @@ def test_rtm_2d_fp_bifurcation_shape():
     # sane instead: same shape as the figure (stable-node branch below a
     # saddle branch, meeting near i_ext~0.13, plus the spurious constant
     # blue branch at v~=-36 that matlab's own version also has).
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter12.ipynb")
+    points, i_ext_vec = ns.simulate_rtm_2d_fp()
 
-    black = np.array(py.points['k'])
-    magenta = np.array(py.points['m'])
-    blue = np.array(py.points['b'])
+    black = np.array(points['k'])
+    magenta = np.array(points['m'])
+    blue = np.array(points['b'])
 
     assert len(black) > 100
     assert len(magenta) > 100

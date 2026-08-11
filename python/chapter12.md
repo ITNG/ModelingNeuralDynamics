@@ -31,10 +31,11 @@ conductances and reversal potentials.
 
 ## Code examples
 
-- [`RTM_2D_FP`](RTM_2D_FP/) scans applied current, finds reduced RTM fixed
-  points, classifies their Jacobian eigenvalues, and saves `fig.png`.
-- [`RTM_2D_INVARIANT_CYCLE`](RTM_2D_INVARIANT_CYCLE/) plots trajectories and
-  crossings around the RTM invariant cycle and its onset geometry in `fig.png`.
+Both examples now live in one notebook, [`chapter12.ipynb`](chapter12.ipynb):
+`simulate_rtm_2d_fp` scans applied current, finds reduced RTM fixed
+points, and classifies their Jacobian eigenvalues; `plot_rtm_2d_invariant_cycle`
+plots trajectories and crossings around the RTM invariant cycle and its
+onset geometry.
 
 ## What to look for
 
@@ -57,6 +58,5 @@ these onset mechanisms into firing-rate curves.
 
 ## Running the examples
 
-Run `python main.py` from either immediate example directory. Each script uses
-NumPy and Matplotlib, and `RTM_2D_INVARIANT_CYCLE` also uses the local arrow
-plotting helper; both save `fig.png`.
+Open [`chapter12.ipynb`](chapter12.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.
