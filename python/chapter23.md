@@ -30,20 +30,18 @@ the compact map scripts plot $F$ directly.
 
 ## Code examples
 
-- [`LIF_ENTRAINMENT`](LIF_ENTRAINMENT/) shows periodic pulses entraining an LIF
-  neuron.
-- [`PLOT_F_ENTRAINMENT`](PLOT_F_ENTRAINMENT/) plots a phase return map and its
-  intersections with the identity line.
-- [`PLOT_F_ENTRAINMENT_2`](PLOT_F_ENTRAINMENT_2/) iterates a second return-map
-  construction from a chosen initial phase.
-- [`WB_ENTRAINMENT_INTERVALS`](WB_ENTRAINMENT_INTERVALS/) measures WB spike
-  intervals under periodic excitation.
-- [`WB_NEURON_ENTRAINED`](WB_NEURON_ENTRAINED/) gives a WB trajectory with a
-  stable locked response and phases relative to the pulse period.
-- [`WB_NEURON_IRREGULAR`](WB_NEURON_IRREGULAR/) demonstrates a WB response
-  whose pulse-relative timing does not settle into the same pattern.
-- [`WB_NEURON_N_TO_ONE`](WB_NEURON_N_TO_ONE/) illustrates an n-to-one WB
-  entrainment pattern.
+All seven examples now live in one notebook, [`chapter23.ipynb`](chapter23.ipynb):
+`simulate_lif_entrainment` shows periodic pulses entraining an LIF neuron.
+`plot_f_entrainment` plots a phase return map and its intersections with the
+identity line. `simulate_f_entrainment_2`/`plot_f_entrainment_2` iterate a
+second return-map construction from a chosen initial phase.
+`simulate_wb_entrainment_intervals` measures WB spike intervals under
+periodic excitation, sweeping the synaptic strength; its inner loop is
+JIT-compiled with numba. `simulate_wb_neuron_entrained` gives WB trajectories
+with a stable locked response and phases relative to the pulse period.
+`simulate_wb_neuron_irregular` demonstrates a WB response whose
+pulse-relative timing does not settle into the same pattern.
+`simulate_wb_neuron_n_to_one` illustrates an n-to-one WB entrainment pattern.
 
 ## What to look for
 
@@ -55,9 +53,10 @@ than assuming every pulse evokes a spike.
 
 ## Suggested order
 
-1. Run `LIF_ENTRAINMENT`, `PLOT_F_ENTRAINMENT`, and `PLOT_F_ENTRAINMENT_2`.
-2. Run `WB_NEURON_ENTRAINED` and `WB_ENTRAINMENT_INTERVALS`.
-3. Contrast `WB_NEURON_IRREGULAR` with `WB_NEURON_N_TO_ONE`.
+1. Run `simulate_lif_entrainment`, `plot_f_entrainment`, and
+   `plot_f_entrainment_2`.
+2. Run `simulate_wb_neuron_entrained` and `simulate_wb_entrainment_intervals`.
+3. Contrast `simulate_wb_neuron_irregular` with `simulate_wb_neuron_n_to_one`.
 
 ## Prerequisites and related chapters
 
@@ -67,6 +66,8 @@ for PRCs, coupled oscillators, and delays.
 
 ## Running the examples
 
-Run `python main.py` from the chosen immediate example directory. The WB
-simulations use NumPy and Matplotlib; long interval runs use a fine time step
-and take longer than the analytical map plots.
+Open [`chapter23.ipynb`](chapter23.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom. The
+`simulate_wb_entrainment_intervals` cell is JIT-compiled with numba, so
+after the first (one-time compile) call it takes well under a minute
+instead of the uncompiled sweep's roughly an hour.

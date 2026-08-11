@@ -40,7 +40,7 @@ linked from this index.
 
 ## Entrainment, synchronization, and rhythms (Chapters 23-38)
 
-- [Chapter 23: Entrainment by Excitatory Input Pulses](23_Entrainment_by_Excitatory_Input_Pulses/README.md)
+- [Chapter 23: Entrainment by Excitatory Input Pulses](chapter23.md)
 - [Chapter 24: Synchronization by Fast Recurrent Excitation](24_Synchronization_by_Fast_Recurrent_Excitation/README.md)
 - [Chapter 25: Phase Response Curves (PRCs)](25_Phase_Response_Curves_%28PRCs%29/README.md)
 - [Chapter 26: Phase Locking of Two Oscillators](26_Phase_Locking_of_Two_Oscillators/README.md)
