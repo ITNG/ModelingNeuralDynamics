@@ -8,6 +8,7 @@ Baseline HEAD: `4595fb0 test: prevent full Python notebook execution`
 
 Follow-up plan commit: `fca954d docs: plan measured non-brian suite optimization`
 Corrected follow-up plan commit: `937681f docs: correct non-brian performance plan`
+Evidence-gate correction commit: `803905b docs: align dense scan evidence gates`
 Follow-up plan: `docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md`
 
 ## Outcome
@@ -539,7 +540,7 @@ These commands did not modify tracked files; they loaded definitions and called 
 
 Path: `docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md`
 
-Commits: `fca954d` (original plan), `937681f` (review-corrected plan)
+Commits: `fca954d` (original plan), `937681f` (review-corrected plan), `803905b` (evidence-gate correction)
 
 The plan contains seven implementation tasks with exact files, functions, tests, measured baselines, numerical assertions, and after-times. Tasks 1-5 use only measured smaller workloads or callable smoke entry points. Task 6 first removes import-time curve execution, then accepts cached Numba only when independent Python/JIT equivalence and fresh-cache cold cost both pass. Task 7 re-verifies Brian deselection and the bounded non-Brian suite.
 
@@ -676,3 +677,117 @@ git status --short
 ### Fix-round concerns
 
 The complete table is a bounded-run substitute for the unavailable monolithic `--durations=50` result; timings come from the exact commands already transcribed above and do not establish a full-suite pass. Context-only cap-active calls remain explicitly unranked and deferred because the bounded run never produced attributable call durations for them.
+
+## Fix Round 2: Dense-Scan Target and Import Consistency
+
+Date: 2026-08-11
+
+Plan fix commit: `803905b docs: align dense scan evidence gates`
+
+### Changes made
+
+1. Removed chapter-35 `PERIODIC_INHIBITION_F_I_CURVE_2` from every Task 6 file list, callable/equivalence instruction, cold/warm command, commit command, and Task 7 optimized-set command. It remains solely in the explicit context-only deferral set because no attributable duration or lower bound was measured.
+2. Added a five-row Task 6 evidence/gate table. Every target now names its completed duration or lower bound and an exact fresh-cache gate.
+3. Added exact `from numba import njit` and `from numba.extending import register_jitable` imports. All decorators use `@register_jitable`; dispatchers use bare `njit`; the plan forbids an undefined bare `numba` module name.
+
+No production or test file was modified.
+
+### Covering validation commands and exact output
+
+Target/defer disjointness, evidence/gate coverage, and Numba-name consistency:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+import re
+p = Path('docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md')
+text = p.read_text()
+task6 = text.split('### Task 6:', 1)[1].split('### Task 7:', 1)[0]
+pre_tasks = text.split('### Task 1:', 1)[0]
+targets = set(re.findall(r'^\| `(test_[^`]+)` \| ([^|]+) \| ([^|]+) \|$', task6, re.M))
+target_names = {name for name, _, _ in targets}
+expected_targets = {
+    'test_periodic_inhibition_f_i_curve_structure',
+    'test_rtm_f_i_curve_with_inhibition_structure',
+    'test_rtm_f_i_curve_with_inhibition_2_structure',
+    'test_rtm_f_i_curve_pulsed_excitation_structure',
+    'test_rtm_f_i_curve_pulsed_excitation_2_structure',
+}
+assert target_names == expected_targets
+for name, evidence, gate in targets:
+    assert re.search(r'(\d+\.\d+s completed|>\d+s (exact cap|contextual lower bound))', evidence.strip()), (name, evidence)
+    assert re.fullmatch(r'<30s and <\d+(?:\.\d+)?s', gate.strip()), (name, gate)
+deferred = {
+    'M_CURRENT_PING_1_CLOSEUP', 'M_CURRENT_PING_2_CLOSEUP', 'POISSON_PING_1',
+    'M_CURRENT_PING_8', 'PERIODIC_INHIBITION_F_I_CURVE_2', 'THRESHOLDING',
+    'FINAL_PHASE_STATISTICS', 'PING_WITH_STDP',
+}
+assert 'chapter-35 periodic-inhibition f-I curve 2' in pre_tasks
+assert 'test_periodic_inhibition_f_i_curve_2_structure' not in task6
+task6_scripts = {
+    'PERIODIC_INHIBITION_F_I_CURVE', 'RTM_F_I_CURVE_WITH_INHIBITION',
+    'RTM_F_I_CURVE_WITH_INHIBITION_2', 'RTM_F_I_CURVE_PULSED_EXCITATION',
+    'RTM_F_I_CURVE_PULSED_EXCITATION_2',
+}
+assert not (task6_scripts & deferred)
+assert task6.count('from numba import njit') == 1
+assert task6.count('from numba.extending import register_jitable') == 1
+assert '@numba.' not in task6
+assert '@register_jitable' in task6
+assert 'njit(cache=True)' in task6
+print('target/defer overlap: none (5 Task 6 targets; 8 explicit context-only deferrals)')
+print('measured gate coverage: 5/5 Task 6 targets')
+print('Numba imports: PASS (njit and register_jitable each imported exactly once; no @numba usage)')
+PY
+```
+
+```text
+target/defer overlap: none (5 Task 6 targets; 8 explicit context-only deferrals)
+measured gate coverage: 5/5 Task 6 targets
+Numba imports: PASS (njit and register_jitable each imported exactly once; no @numba usage)
+```
+
+Placeholder scan:
+
+```bash
+rg -n 'TBD|TODO|implement later|fill in details|Similar to|\.\.\.|# existing|first_kernel|threshold corrections|simulate_from_rest|rest_duration|driven_duration|py\.f_vec|return \[simulate' \
+  docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md
+```
+
+Output: none; exit code 1.
+
+Markdown fence balance:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+for p in [Path('docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md'), Path('.superpowers/sdd/2026-08-11-python-notebook-test-loader-performance/task-3-report.md')]:
+    n = sum(line.startswith('```') for line in p.read_text().splitlines())
+    print(f'{p}: fence lines={n}; balanced={n % 2 == 0}')
+PY
+```
+
+```text
+docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md: fence lines=58; balanced=True
+.superpowers/sdd/2026-08-11-python-notebook-test-loader-performance/task-3-report.md: fence lines=94; balanced=True
+```
+
+Diff checks before the plan commit:
+
+```bash
+git diff --check
+git diff --stat
+git status --short
+```
+
+```text
+ ...026-08-11-non-brian-python-suite-performance.md | 40 ++++++++++++++--------
+ 1 file changed, 25 insertions(+), 15 deletions(-)
+ M docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md
+```
+
+`git diff --check` emitted no output and exited 0.
+
+### Fix-round self-review and concerns
+
+Task 6 contains exactly five targets and no deferred script. Every target has an evidence row, a cold threshold, an independent Python/JIT equivalence path, and identifiers supplied by exact imports. The only standing concern is unchanged: `PERIODIC_INHIBITION_F_I_CURVE_2` cannot receive a performance task until an attributable measurement exists.
