@@ -3,6 +3,7 @@ name: tests
 on:
   push:
     branches: [main, develop_python, develop_brian]
+    tags: ["v*"]
   pull_request:
 
 jobs:
@@ -20,10 +21,18 @@ jobs:
       - name: Lint (ruff)
         run: uv run ruff check .
 
-      - name: Run tests
-        # -m "" overrides the repo-default "-m 'not slow'" (see
-        # pyproject.toml) so slow/MATLAB-comparison tests are still
-        # collected here. They skip themselves (no MATLAB license in CI)
-        # -- this still catches import errors, syntax errors, and any
-        # test that doesn't depend on MATLAB.
+      - name: Run tests (fast)
+        # Default addopts (-m 'not slow', see pyproject.toml) skips
+        # MATLAB-comparison tests at setup time, without running their
+        # simulation bodies -- keeps day-to-day CI fast.
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: uv run pytest tests/ -v
+
+      - name: Run tests (full, release)
+        # -m "" overrides the repo-default "-m 'not slow'" so
+        # slow/MATLAB-comparison tests are collected here. They skip
+        # themselves (no MATLAB license in CI) -- this still catches
+        # import errors, syntax errors, and any test that doesn't depend
+        # on MATLAB. Only run on version tags to keep normal CI fast.
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         run: uv run pytest tests/ -v -m ""
