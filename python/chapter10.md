@@ -30,16 +30,16 @@ $m=m_\infty(v)$ and $h=0.83-n$, leaving $(v,n)$ as the phase plane.
 
 ## Code examples
 
-- [`FN`](FN/) integrates FitzHugh--Nagumo and plots its nullclines, orbit, and
-  voltage trace in `fig.png`.
-- [`HH_H_PLUS_N`](HH_H_PLUS_N/) plots the HH combination $h+n$ against its
-  `0.83` approximation in `fig_10_1.png`.
-- [`REDUCED_HH`](REDUCED_HH/) compares the reduced HH voltage and gates with
-  the imposed $h=0.83-n$ relation in `fig_10_2.png`.
-- [`HH_NULLCLINES_PLUS_SOLUTION`](HH_NULLCLINES_PLUS_SOLUTION/) draws the
-  reduced HH nullclines and a trajectory with direction arrows in `fig.png`.
-- [`HH_CYCLE_SPEED`](HH_CYCLE_SPEED/) colors portions of the HH orbit by their
-  phase-plane speed in `fig.png`.
+All five examples now live in one notebook, [`chapter10.ipynb`](chapter10.ipynb):
+`simulate_fn` integrates FitzHugh-Nagumo and plots its nullclines, orbit,
+and voltage trace; `simulate_hh_h_plus_n` plots the HH combination $h+n$
+against its `0.83` approximation; `simulate_reduced_hh` compares the
+reduced HH voltage and gates with the imposed $h=0.83-n$ relation;
+`simulate_hh_nullclines_plus_solution` draws the reduced HH nullclines and
+a trajectory with direction arrows; `simulate_hh_cycle_speed` colors
+portions of the HH orbit by their phase-plane speed. The nullcline
+construction shared by the last two lives in `hh_v_nullcline`. Each has an
+`ipywidgets` slider to explore its parameters interactively.
 
 ## What to look for
 
@@ -62,6 +62,7 @@ to study bifurcations and canards.
 
 ## Running the examples
 
-From any immediate example directory, run `python main.py`. The scripts use
-NumPy, SciPy where noted, and Matplotlib, and save their named PNG files in
-the working directory.
+Open [`chapter10.ipynb`](chapter10.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook. Run all cells top to bottom; each
+section's static figure reproduces the book's plot, and the `interact(...)`
+cell below it lets you adjust that example's parameters with sliders.
