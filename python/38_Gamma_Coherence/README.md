@@ -17,7 +17,7 @@ phase-dependent population response can remain.
 
 ## Essential model
 
-For each sampled pulse phase \(\varphi\), the Poisson-PING sweep scripts
+For each sampled pulse phase $\varphi$, the Poisson-PING sweep scripts
 simulate a population, count spikes from E-cells 1--5, and fit a line to the
 phase-versus-count response. The two sweep directories use different pulse
 periods; the green-reference directory instead displays a Poisson-PING raster

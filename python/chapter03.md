@@ -16,17 +16,17 @@ brief spike instead of unbounded depolarization.
 
 ## Essential model
 
-For any gate \(x\), the implementation can be written as
+For any gate $x$, the implementation can be written as
 
-\[
+$$
 \frac{dx}{dt}=\frac{x_\infty(V)-x}{\tau_x(V)},\qquad
 x_\infty(V)=\frac{\alpha_x(V)}{\alpha_x(V)+\beta_x(V)},\qquad
 \tau_x(V)=\frac{1}{\alpha_x(V)+\beta_x(V)}.
-\]
+$$
 
-Here \(x\) is one of the dimensionless gates \(m\), \(h\), or \(n\); \(V\)
-is membrane voltage; \(x_\infty\) is its steady-state value; \(\tau_x\) is
-its voltage-dependent time constant; and \(\alpha_x\) and \(\beta_x\) are
+Here $x$ is one of the dimensionless gates $m$, $h$, or $n$; $V$
+is membrane voltage; $x_\infty$ is its steady-state value; $\tau_x$ is
+its voltage-dependent time constant; and $\alpha_x$ and $\beta_x$ are
 the opening and closing rates, respectively.
 
 ## Code examples
@@ -38,13 +38,13 @@ their time constants over a voltage grid, plotted as a six-panel figure.
 ## What to look for
 
 Compare the left-column steady-state curves with the right-column time
-constants. A high \(m_\infty\) does not mean immediate sodium activation:
-the corresponding \(\tau_m\) says how quickly it can approach that level.
+constants. A high $m_\infty$ does not mean immediate sodium activation:
+the corresponding $\tau_m$ says how quickly it can approach that level.
 
 ## Suggested order
 
 1. Inspect the rate functions `alpha_*` and `beta_*`.
-2. Relate each pair of rates to \(x_\infty\) and \(\tau_x\).
+2. Relate each pair of rates to $x_\infty$ and $\tau_x$.
 3. Return to the voltage equation in Chapter 01 and identify each gate's
    conductance exponent.
 

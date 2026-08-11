@@ -3,7 +3,7 @@
 ## Overview
 
 These examples create bursts by adding a slow potassium current to Erisir and
-INaP-I\(_K\) neurons. The slow state moves the fast subsystem between silent
+INaP-I$_K$ neurons. The slow state moves the fast subsystem between silent
 and spiking attractors, yielding alternation between quiescence and rapid
 spikes.
 
@@ -19,15 +19,15 @@ transitions closes the loop.
 
 The added slow outward current is
 
-\[
+$$
 I_{K,\rm slow}=g_{K,\rm slow}n_{\rm slow}(v_K-v),\qquad
 \dot n_{\rm slow}=\frac{n_{\rm slow,\infty}(v)-n_{\rm slow}}
 {\tau_{n,\rm slow}}.
-\]
+$$
 
-Here \(n_{\rm slow}\) is the slow potassium activation, \(g_{K,\rm slow}\)
-is its conductance, \(v_K\) is the potassium reversal potential, and
-\(\tau_{n,\rm slow}\) separates its evolution from the fast voltage and gate
+Here $n_{\rm slow}$ is the slow potassium activation, $g_{K,\rm slow}$
+is its conductance, $v_K$ is the potassium reversal potential, and
+$\tau_{n,\rm slow}$ separates its evolution from the fast voltage and gate
 dynamics.
 
 ## Code examples
@@ -38,21 +38,21 @@ dynamics.
   resulting effective drive and transition levels in `fig.png`.
 - [`ELLIPSES`](ELLIPSES/) marks selected portions of the Erisir bursting trace
   in `fig.png`.
-- [`INAPIK_PLUS_SLOW_I_K`](INAPIK_PLUS_SLOW_I_K/) simulates INaP-I\(_K\)
+- [`INAPIK_PLUS_SLOW_I_K`](INAPIK_PLUS_SLOW_I_K/) simulates INaP-I$_K$
   bursting with the reference slow conductance in `fig.png`.
 - [`INAPIK_PLUS_WEAK_SLOW_I_K`](INAPIK_PLUS_WEAK_SLOW_I_K/) shows the response
   with weaker slow potassium feedback in `fig.png`.
 - [`INAPIK_PLUS_STRONG_SLOW_I_K`](INAPIK_PLUS_STRONG_SLOW_I_K/) shows the
   response with stronger slow potassium feedback in `fig.png`.
-- [`INAPIK_SHOW_SLOW_I_K`](INAPIK_SHOW_SLOW_I_K/) plots INaP-I\(_K\) voltage
+- [`INAPIK_SHOW_SLOW_I_K`](INAPIK_SHOW_SLOW_I_K/) plots INaP-I$_K$ voltage
   and effective drive thresholds in `fig.png`.
 - [`SQUARE_WAVES`](SQUARE_WAVES/) marks square-wave burst epochs in `fig.png`.
 - [`INAPIK_PLUS_SLOW_I_K_3D`](INAPIK_PLUS_SLOW_I_K_3D/) plots the settled
-  INaP-I\(_K\) cycle in \((v,n,n_{\rm slow})\) space in `fig.png`.
+  INaP-I$_K$ cycle in $(v,n,n_{\rm slow})$ space in `fig.png`.
 
 ## What to look for
 
-Compare the weak, reference, and strong INaP-I\(_K\) slow conductances to see
+Compare the weak, reference, and strong INaP-I$_K$ slow conductances to see
 how slow feedback changes the rhythm. The two `SHOW_SLOW_I_K` plots make the
 effective current cross thresholds while the voltage alternates. Use
 `INAPIK_PLUS_SLOW_I_K_3D` to connect the trace to a three-dimensional loop.
@@ -73,4 +73,4 @@ create hysteresis and bistability.
 
 Run `python main.py` from each immediate example directory. The scripts use
 NumPy and Matplotlib and save `fig.png`; the long Erisir and 3D trajectories
-may take longer than the short INaP-I\(_K\) simulations.
+may take longer than the short INaP-I$_K$ simulations.

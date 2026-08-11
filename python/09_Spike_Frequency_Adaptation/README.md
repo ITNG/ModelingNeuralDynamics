@@ -20,20 +20,20 @@ evolution into a one-dimensional update.
 
 For the adaptation LIF example, the equations and spike update are
 
-\[
+$$
 \frac{dV}{dt}=-\frac{V}{\tau_m}+I-wV,\qquad
 \frac{dw}{dt}=-\frac{w}{\tau_a},\qquad
 V\ge1\Rightarrow (V,w)\leftarrow(0,w+\Delta).
-\]
+$$
 
-Here \(V\) is normalized voltage, \(t\) is time, \(\tau_m\) is membrane
-time constant, \(I\) is applied input, \(w\) is the nonnegative adaptation
-state, \(\tau_a\) is its decay time constant, and \(\Delta\) is its increment
+Here $V$ is normalized voltage, $t$ is time, $\tau_m$ is membrane
+time constant, $I$ is applied input, $w$ is the nonnegative adaptation
+state, $\tau_a$ is its decay time constant, and $\Delta$ is its increment
 at a spike. In the RTM M-current model, the added current is
-\(I_M=g_Mw(V-E_K)\), where \(g_M\) is maximal M conductance and \(E_K\) is
+$I_M=g_Mw(V-E_K)$, where $g_M$ is maximal M conductance and $E_K$ is
 the potassium reversal potential. In the AHP model it is
-\(I_{AHP}=g_{AHP}c(V-E_K)\), where \(g_{AHP}\) is maximal AHP conductance and
-\(c\) is the calcium-like state.
+$I_{AHP}=g_{AHP}c(V-E_K)$, where $g_{AHP}$ is maximal AHP conductance and
+$c$ is the calcium-like state.
 
 ## Code examples
 
@@ -52,9 +52,9 @@ its parameters interactively.
 In `RTM_M` and `RTM_AHP`, watch the slow state rise while spiking continues;
 the resting versions show what remains when drive is removed. `LIF_ADAPT`
 makes the discrete spike increment explicit. In `ADAPTATION_MAP`, intersections
-of \(\phi(z)\) with the diagonal identify fixed spike-to-spike adaptation
-levels, where \(z\) is the adaptation value just after a spike and
-\(\phi(z)\) is its value after the next spike.
+of $\phi(z)$ with the diagonal identify fixed spike-to-spike adaptation
+levels, where $z$ is the adaptation value just after a spike and
+$\phi(z)$ is its value after the next spike.
 
 ## Suggested order
 

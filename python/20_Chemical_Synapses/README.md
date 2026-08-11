@@ -9,25 +9,26 @@ and for the temporal accumulation produced by repeated input.
 
 ## Core ideas
 
-The synaptic current is conductance based: \(I_{\rm syn}=g_{\rm syn}s
-(v_{\rm syn}-v)\). A release variable can rise rapidly after a spike and feed
-the gate \(s\), which decays more slowly. The rise and decay constants therefore
+The synaptic current is conductance based:
+$I_{\rm syn}=g_{\rm syn}s(v_{\rm syn}-v)$. A release variable can rise rapidly
+after a spike and feed
+the gate $s$, which decays more slowly. The rise and decay constants therefore
 shape both the peak time and the duration of the conductance. The NMDA factor
 also depends on postsynaptic voltage because magnesium block is relieved by
 depolarization.
 
 ## Essential model
 
-For the two-stage synapse used here, release \(q\) and activation \(s\) evolve
+For the two-stage synapse used here, release $q$ and activation $s$ evolve
 as
 
-\[
+$$
 \dot q=R(v)(1-q)-q/\tau_{d,q},\qquad
 \dot s=q(1-s)/\tau_r-s/\tau_d.
-\]
+$$
 
-`tau_d_q_function` numerically chooses \(\tau_{d,q}\) to obtain a requested
-activation peak time. The resulting \(s\) multiplies the synaptic conductance
+`tau_d_q_function` numerically chooses $\tau_{d,q}$ to obtain a requested
+activation peak time. The resulting $s$ multiplies the synaptic conductance
 in the RTM voltage equation.
 
 ## Code examples
@@ -36,8 +37,8 @@ in the RTM voltage equation.
   magnesium-block factor from Jahr and Stevens.
 - [`RTM_PLOT_S`](RTM_PLOT_S/) compares a fast and a slower synaptic-gate rise
   alongside the RTM voltage trace.
-- [`RTM_PLOT_Q`](RTM_PLOT_Q/) separates transmitter-release \(q\) from the
-  gate \(s\), showing why a two-variable synapse has a delayed profile.
+- [`RTM_PLOT_Q`](RTM_PLOT_Q/) separates transmitter-release $q$ from the
+  gate $s$, showing why a two-variable synapse has a delayed profile.
 - [`RTM_PLOT_S_TWO_VARIABLES`](RTM_PLOT_S_TWO_VARIABLES/) uses the explicit
   release-and-gate system for two timing choices.
 - [`RTM_PLOT_S_PRESCRIBE_TAU_PEAK`](RTM_PLOT_S_PRESCRIBE_TAU_PEAK/) solves for
@@ -52,7 +53,7 @@ in the RTM voltage equation.
 ## What to look for
 
 In the gate plots, locate the delay between a voltage spike and the maximum of
-\(s\). Increasing the rise or release time moves that maximum and broadens the
+$s$. Increasing the rise or release time moves that maximum and broadens the
 conductance. Compare the two buildup plots to see that a slow decay retains
 activation between events. In the autapse sweep, compare the two directions to
 identify any history dependence of the firing state.

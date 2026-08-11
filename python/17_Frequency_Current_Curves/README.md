@@ -3,7 +3,7 @@
 ## Overview
 
 These scripts compute firing rate as a function of applied current across
-LIF, theta, HH, RTM, Erisir, reduced HH, INaP-I\(_K\), and self-exciting theta
+LIF, theta, HH, RTM, Erisir, reduced HH, INaP-I$_K$, and self-exciting theta
 models. Forward and backward scans reveal onset frequency, continuous or
 discontinuous branches, and bistability.
 
@@ -19,12 +19,12 @@ and spiking attractors coexist.
 
 For the LIF example, the interspike interval and firing rate are
 
-\[
+$$
 T=\tau_m\log\!\left(\frac{\tau_m I}{\tau_m I-1}\right),\qquad f=1000/T.
-\]
+$$
 
-Here \(I\) is normalized applied current, \(\tau_m\) is membrane time
-constant, \(T\) is in milliseconds, and \(f\) is in hertz. The conductance
+Here $I$ is normalized applied current, $\tau_m$ is membrane time
+constant, $T$ is in milliseconds, and $f$ is in hertz. The conductance
 models numerically count threshold crossings after transients.
 
 ## Code examples
@@ -47,10 +47,10 @@ models numerically count threshold crossings after transients.
   RTM model's f--I curve in `fig.png`.
 - [`ERISIR_F_I_CURVE`](ERISIR_F_I_CURVE/) computes Erisir forward and backward
   branches in `fig.png`.
-- [`INAPIK_F_I_CURVE`](INAPIK_F_I_CURVE/) computes INaP-I\(_K\) forward and
+- [`INAPIK_F_I_CURVE`](INAPIK_F_I_CURVE/) computes INaP-I$_K$ forward and
   backward branches in `fig.png`.
 - [`INAPIK_SADDLE_CYCLE_DISTANCE`](INAPIK_SADDLE_CYCLE_DISTANCE/) plots the
-  distance between an INaP-I\(_K\) saddle and cycle in `fig.png`.
+  distance between an INaP-I$_K$ saddle and cycle in `fig.png`.
 - [`WB_F_I_CURVE`](WB_F_I_CURVE/) computes the Wang--Buzsaki f--I curve in
   `fig.png`.
 - [`WB_F_I_CURVE_AT_ONSET`](WB_F_I_CURVE_AT_ONSET/) magnifies Wang--Buzsaki
@@ -72,7 +72,7 @@ onset. Use each paired forward/backward scan to find hysteresis. The two
 ## Prerequisites and related chapters
 
 Chapters 12 and 14 distinguish type-1 and type-2 onset. Chapter 16 provides
-the INaP-I\(_K\) and self-exciting theta systems; Chapter 18 explains the
+the INaP-I$_K$ and self-exciting theta systems; Chapter 18 explains the
 bistability visible in some forward/backward curves.
 
 ## Running the examples

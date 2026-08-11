@@ -19,17 +19,17 @@ same firing process becomes a continuous phase flow.
 
 The QIF examples use
 
-\[
+$$
 \frac{dV}{dt}=-\frac{V}{\tau_m}(1-V)+I,
 \qquad V=1-\cos\theta.
-\]
+$$
 
-Here \(V\) is normalized voltage, \(t\) is time, \(\tau_m\) is the membrane
-time constant, \(I\) is constant input, and \(\theta\) is circular phase.
-The QIF trace resets after passing the finite numerical threshold \(V=1\),
+Here $V$ is normalized voltage, $t$ is time, $\tau_m$ is the membrane
+time constant, $I$ is constant input, and $\theta$ is circular phase.
+The QIF trace resets after passing the finite numerical threshold $V=1$,
 while the analytic infinite-threshold construction connects the positive and
 negative infinite branches. In the circle diagram, the transition occurs at
-\(I=1/(4\tau_m)\), where \(I\) and \(\tau_m\) have the meanings above.
+$I=1/(4\tau_m)$, where $I$ and $\tau_m$ have the meanings above.
 
 ## Code examples
 
@@ -37,7 +37,7 @@ All four examples now live in one notebook, [`chapter08.ipynb`](chapter08.ipynb)
 `simulate_qif_voltage_trace` integrates a QIF trace with a midpoint step and
 reset convention; `simulate_qif_infinite_threshold` constructs the analytic
 finite-time blow-up branches and their continuation; `simulate_theta_firing`
-integrates phase \(\theta\) and plots \(1-\cos\theta\); `plot_three_circles`
+integrates phase $\theta$ and plots $1-\cos\theta$; `plot_three_circles`
 draws phase flows below, at, and above the firing transition on three
 circles (a schematic, no simulation). Each simulated example has an
 `ipywidgets` slider to explore its parameters interactively.

@@ -18,14 +18,14 @@ state.
 
 ## Essential model
 
-For phases \(\theta_1,\theta_2\), a weak-coupling reduction has the form
+For phases $\theta_1,\theta_2$, a weak-coupling reduction has the form
 
-\[
+$$
 \dot\theta_i=\omega_i+\varepsilon H(\theta_j-\theta_i).
-\]
+$$
 
-With \(\psi=\theta_2-\theta_1\), the difference equation is
-\(\dot\psi=\omega_2-\omega_1+\varepsilon D(\psi)\). A zero with restoring
+With $\psi=\theta_2-\theta_1$, the difference equation is
+$\dot\psi=\omega_2-\omega_1+\varepsilon D(\psi)$. A zero with restoring
 flow on both sides is a stable phase difference.
 
 ## Code examples

@@ -19,12 +19,12 @@ window where cycle amplitude changes sharply.
 
 The FitzHugh--Nagumo system is
 
-\[
+$$
 \dot v=v-v^3/3-n+I,\qquad \dot n=(av-n)/\tau_n.
-\]
+$$
 
-The slow recovery variable \(n\) has time scale \(\tau_n\), \(v\) is fast,
-and \(I\) is the scanned control parameter. In the adaptation example, an
+The slow recovery variable $n$ has time scale $\tau_n$, $v$ is fast,
+and $I$ is the scanned control parameter. In the adaptation example, an
 additional slowly decaying feedback current shifts the effective drive during
 the oscillation.
 

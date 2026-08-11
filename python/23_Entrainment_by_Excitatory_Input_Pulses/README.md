@@ -9,7 +9,7 @@ responses.
 
 ## Core ideas
 
-Entrainment is phase locking to an external period \(T\). In one-to-one
+Entrainment is phase locking to an external period $T$. In one-to-one
 locking, one spike is associated with each input cycle; n-to-one locking has n
 input cycles per neuronal cycle or, depending on the event convention, a
 repeating multi-cycle relationship. A return map takes the phase after one
@@ -18,15 +18,15 @@ phase, while a nonconvergent orbit predicts irregular timing.
 
 ## Essential model
 
-If \(\alpha_k\) is the phase of the kth relevant spike relative to the pulse
+If $\alpha_k$ is the phase of the kth relevant spike relative to the pulse
 train, the pulse response gives a map
 
-\[
+$$
 \alpha_{k+1}=F(\alpha_k)\pmod 1.
-\]
+$$
 
 The detailed WB simulations implement the pulse through a synaptic gate, while
-the compact map scripts plot \(F\) directly.
+the compact map scripts plot $F$ directly.
 
 ## Code examples
 
@@ -47,7 +47,7 @@ the compact map scripts plot \(F\) directly.
 
 ## What to look for
 
-On a return map, a fixed point lies where \(F(\alpha)=\alpha\); repeated
+On a return map, a fixed point lies where $F(\alpha)=\alpha$; repeated
 iterations should approach it only when it is stable. In the WB plots, compare
 the sequence of pulse-relative spike phases: a locked response repeats, whereas
 the irregular trace drifts. For n-to-one locking, count pulse intervals rather

@@ -10,7 +10,7 @@ Spikes can be locked, suppressed, or shifted according to their phase in the inh
 
 ## Essential model
 
-The forcing is \(I_{\rm inh}(t)=g_{\rm inh}s(t)(E_I-v)\), with a periodic gate \(s(t)\). Sweeping applied current and counting spikes per observation time produces the inhibited f--I relation.
+The forcing is $I_{\rm inh}(t)=g_{\rm inh}s(t)(E_I-v)$, with a periodic gate $s(t)$. Sweeping applied current and counting spikes per observation time produces the inhibited f--I relation.
 
 ## Code examples
 

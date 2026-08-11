@@ -13,29 +13,29 @@ When one state changes much faster than another, trajectories move quickly
 between branches of a slow manifold and linger near slow branches. Nullclines
 locate the directions with zero velocity, while a closed orbit describes
 repeated firing. A reduction with instantaneous sodium activation and
-\(h+n=0.83\) makes this geometry visible in a two-dimensional HH system.
+$h+n=0.83$ makes this geometry visible in a two-dimensional HH system.
 
 ## Essential model
 
 The FitzHugh--Nagumo example uses
 
-\[
+$$
 \dot v=v-v^3/3-n+I,\qquad \dot n=(av-n)/\tau_n.
-\]
+$$
 
-Here \(v\) is the fast voltage-like variable, \(n\) is the slow recovery
-variable, \(I\) is applied current, \(a\) sets the recovery nullcline, and
-\(\tau_n\) makes recovery slow. The reduced HH examples take
-\(m=m_\infty(v)\) and \(h=0.83-n\), leaving \((v,n)\) as the phase plane.
+Here $v$ is the fast voltage-like variable, $n$ is the slow recovery
+variable, $I$ is applied current, $a$ sets the recovery nullcline, and
+$\tau_n$ makes recovery slow. The reduced HH examples take
+$m=m_\infty(v)$ and $h=0.83-n$, leaving $(v,n)$ as the phase plane.
 
 ## Code examples
 
 - [`FN`](FN/) integrates FitzHugh--Nagumo and plots its nullclines, orbit, and
   voltage trace in `fig.png`.
-- [`HH_H_PLUS_N`](HH_H_PLUS_N/) plots the HH combination \(h+n\) against its
+- [`HH_H_PLUS_N`](HH_H_PLUS_N/) plots the HH combination $h+n$ against its
   `0.83` approximation in `fig_10_1.png`.
 - [`REDUCED_HH`](REDUCED_HH/) compares the reduced HH voltage and gates with
-  the imposed \(h=0.83-n\) relation in `fig_10_2.png`.
+  the imposed $h=0.83-n$ relation in `fig_10_2.png`.
 - [`HH_NULLCLINES_PLUS_SOLUTION`](HH_NULLCLINES_PLUS_SOLUTION/) draws the
   reduced HH nullclines and a trajectory with direction arrows in `fig.png`.
 - [`HH_CYCLE_SPEED`](HH_CYCLE_SPEED/) colors portions of the HH orbit by their

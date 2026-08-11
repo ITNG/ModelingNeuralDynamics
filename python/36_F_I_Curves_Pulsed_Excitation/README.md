@@ -10,7 +10,7 @@ A pulsed f--I curve counts response opportunities per pulse period. It can have 
 
 ## Essential model
 
-For pulse period \(T\), the observed rate is \(f=N_{\rm spikes}/T_{\rm observation}\). Unlike steady injected current, drive is nonzero only during a pulse interval; sweeping pulse amplitude produces the pulsed f--I curve.
+For pulse period $T$, the observed rate is $f=N_{\rm spikes}/T_{\rm observation}$. Unlike steady injected current, drive is nonzero only during a pulse interval; sweeping pulse amplitude produces the pulsed f--I curve.
 
 ## Code examples
 

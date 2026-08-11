@@ -17,14 +17,14 @@ can therefore react differently even when both receive an inhibitory pulse.
 
 ## Essential model
 
-Let \(P_0\) and \(P_1\) denote the two pulse-to-spike timings. The LIF scripts
+Let $P_0$ and $P_1$ denote the two pulse-to-spike timings. The LIF scripts
 define their mean timing and normalized separation as
 
-\[
+$$
 P=\frac{P_0+P_1}{2},\qquad S=\frac{P_0-P_1}{P}.
-\]
+$$
 
-Here \(S\), rather than a derivative of \(P\), is the plotted stability
+Here $S$, rather than a derivative of $P$, is the plotted stability
 quantity. The sensitivity calculations report how changes in parameters alter
 the mean timing and its inference.
 
@@ -32,8 +32,8 @@ the mean timing and its inference.
 
 - [`ILLUSTRATE_P0_AND_P1`](ILLUSTRATE_P0_AND_P1/) traces trajectories used to
   illustrate the two timing maps before and after a pulse.
-- [`LIF_P_AND_S`](LIF_P_AND_S/) plots the LIF mean timing \(P\) and normalized
-  separation \(S\) while varying synaptic decay, conductance, and drive.
+- [`LIF_P_AND_S`](LIF_P_AND_S/) plots the LIF mean timing $P$ and normalized
+  separation $S$ while varying synaptic decay, conductance, and drive.
 - [`LIF_CONDITION_NUMBERS`](LIF_CONDITION_NUMBERS/) prints a dictionary of
   baseline LIF mean timings and percent changes under parameter perturbations.
 - [`LIF_WITH_INHIBITORY_PULSE`](LIF_WITH_INHIBITORY_PULSE/) simulates LIF cells
@@ -50,7 +50,7 @@ the mean timing and its inference.
 
 In the pulse simulations, compare the timing gap before and after the common
 inhibition rather than just the voltage deflection. Read the printed LIF and
-RTM sensitivity results alongside the \(P\) and \(S\) plots and the RTM voltage
+RTM sensitivity results alongside the $P$ and $S$ plots and the RTM voltage
 traces: a conclusion that changes strongly with parameters deserves more
 caution. In `RIVER`, follow neighbouring theta trajectories to connect the
 geometric flow with phase contraction.

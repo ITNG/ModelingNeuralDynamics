@@ -9,7 +9,7 @@ and how that rhythm appears in rate traces, a phase plane, and a rastergram.
 
 ## Core ideas
 
-The variables \(E\) and \(I\) are population activities filtered on their own
+The variables $E$ and $I$ are population activities filtered on their own
 time scales. Nonlinear response functions turn recurrent input into rates.
 Excitation raises the E population, inhibition subsequently suppresses it, and
 the cycle can repeat. Lowering recurrent excitation changes whether this loop
@@ -19,10 +19,10 @@ can sustain a rhythm.
 
 A representative system is
 
-\[
+$$
 \tau_E\dot E=-E+f(w_{EE}E-w_{IE}I+P_E),\qquad
 \tau_I\dot I=-I+g(w_{EI}E-w_{II}I+P_I).
-\]
+$$
 
 Nullclines are the points where one derivative is zero; their geometry helps
 explain the direction of a trajectory and any oscillatory feedback loop.
@@ -42,7 +42,7 @@ explain the direction of a trajectory and any oscillatory feedback loop.
 
 In `WILSON_COWAN_E_AND_I`, compare the timing of E and I peaks rather than
 only their heights. In the phase plane, follow the trajectory relative to both
-nullclines. Then compare the lowered-\(w_{EE}\) trace and the raster: a rate
+nullclines. Then compare the lowered-$w_{EE}$ trace and the raster: a rate
 oscillation is summarized differently by continuous activity and by events.
 
 ## Suggested order

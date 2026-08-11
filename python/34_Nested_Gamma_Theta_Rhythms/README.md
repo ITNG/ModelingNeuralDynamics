@@ -10,7 +10,7 @@ Theta modulation selects windows for gamma. h-current promotes slow recovery, wh
 
 ## Essential model
 
-The E--I--OLM network keeps conductance currents \(gs(E_{\rm rev}-v)\) and adds slow OLM gates for h- and A-currents. A theta-periodic E drive or inhibitory conductance creates gamma packets at preferred theta phases.
+The E--I--OLM network keeps conductance currents $gs(E_{\rm rev}-v)$ and adds slow OLM gates for h- and A-currents. A theta-periodic E drive or inhibitory conductance creates gamma packets at preferred theta phases.
 
 ## Code examples
 

@@ -15,15 +15,15 @@ plots distinguish attracting and repelling structures.
 
 ## Essential model
 
-With polar radius \(r\), the normal forms used here are
+With polar radius $r$, the normal forms used here are
 
-\[
+$$
 \dot r=Ir-r^3 \quad\text{(supercritical)},\qquad
 \dot r=Ir+r^3 \quad\text{(subcritical)}.
-\]
+$$
 
-Here \(I\) is the bifurcation parameter and \(r\ge0\) is distance from the
-equilibrium. The extended subcritical examples add a \(-r^5\) term, which
+Here $I$ is the bifurcation parameter and $r\ge0$ is distance from the
+equilibrium. The extended subcritical examples add a $-r^5$ term, which
 supports both an unstable inner and a stable outer cycle.
 
 ## Code examples

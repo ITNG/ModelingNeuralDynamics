@@ -10,7 +10,7 @@ Poisson PING can make irregular individual events align into gamma-population ep
 
 ## Essential model
 
-The E cell includes \(I_M=g_Mw(v-E_K)\) with \(\dot w=(w_\infty(v)-w)/\tau_w(v)\). Poisson cases replace fixed drive with random events, so alignment must be judged from population timing rather than an identical raster on every run.
+The E cell includes $I_M=g_Mw(v-E_K)$ with $\dot w=(w_\infty(v)-w)/\tau_w(v)$. Poisson cases replace fixed drive with random events, so alignment must be judged from population timing rather than an identical raster on every run.
 
 ## Code examples
 

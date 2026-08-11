@@ -18,19 +18,19 @@ on both voltage and recent history.
 
 The voltage balance implemented here is
 
-\[
+$$
 C\frac{dV}{dt}=I_{\mathrm{ext}}-g_{\mathrm{Na}}m^3h(V-E_{\mathrm{Na}})
 -g_{\mathrm{K}}n^4(V-E_{\mathrm{K}})-g_{\mathrm{L}}(V-E_{\mathrm{L}}).
-\]
+$$
 
-Here \(V\) is membrane voltage, \(t\) is time, \(C\) is membrane
-capacitance, \(I_{\mathrm{ext}}\) is applied current, \(g_{\mathrm{Na}}\),
-\(g_{\mathrm{K}}\), and \(g_{\mathrm{L}}\) are maximal sodium, potassium,
-and leak conductances, and \(E_{\mathrm{Na}}\), \(E_{\mathrm{K}}\), and
-\(E_{\mathrm{L}}\) are their reversal potentials. \(m\), \(h\), and \(n\)
+Here $V$ is membrane voltage, $t$ is time, $C$ is membrane
+capacitance, $I_{\mathrm{ext}}$ is applied current, $g_{\mathrm{Na}}$,
+$g_{\mathrm{K}}$, and $g_{\mathrm{L}}$ are maximal sodium, potassium,
+and leak conductances, and $E_{\mathrm{Na}}$, $E_{\mathrm{K}}$, and
+$E_{\mathrm{L}}$ are their reversal potentials. $m$, $h$, and $n$
 are dimensionless sodium-activation, sodium-inactivation, and
-potassium-activation gates. Each gate \(x\in\{m,h,n\}\) follows
-\(dx/dt=\alpha_x(V)(1-x)-\beta_x(V)x\), where \(\alpha_x\) and \(\beta_x\)
+potassium-activation gates. Each gate $x\in\{m,h,n\}$ follows
+$dx/dt=\alpha_x(V)(1-x)-\beta_x(V)x$, where $\alpha_x$ and $\beta_x$
 are voltage-dependent opening and closing rates.
 
 ## Code examples
@@ -43,7 +43,7 @@ adjust `i_ext` interactively.
 ## What to look for
 
 The trace is the compact consequence of current balance: a depolarizing input
-first recruits \(m\), then \(h\) falls and \(n\) rises to end the spike. Try
+first recruits $m$, then $h$ falls and $n$ rises to end the spike. Try
 changing `i_ext` only after confirming how the same initial state is built
 from `m_inf`, `h_inf`, and `n_inf`.
 

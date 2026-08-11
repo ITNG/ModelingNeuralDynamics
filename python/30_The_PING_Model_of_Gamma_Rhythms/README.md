@@ -10,7 +10,7 @@ E-to-I excitation is followed by I-to-E inhibition. Drive strength, E/I heteroge
 
 ## Essential model
 
-The E and I cells receive conductance currents such as \(I_{\rm IE}=g_{\rm IE}s_I(E_I-v_E)\) and \(I_{\rm EI}=g_{\rm EI}s_E(E_E-v_I)\). Random-network weights are normalized by expected in-degree, allowing sparse and dense networks to be compared.
+The E and I cells receive conductance currents such as $I_{\rm IE}=g_{\rm IE}s_I(E_I-v_E)$ and $I_{\rm EI}=g_{\rm EI}s_E(E_E-v_I)$. Random-network weights are normalized by expected in-degree, allowing sparse and dense networks to be compared.
 
 ## Code examples
 

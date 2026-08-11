@@ -10,7 +10,7 @@ of the HH model before comparing the two descriptions.
 ## Core ideas
 
 Below threshold, voltage decays toward a driven equilibrium with membrane time
-constant \(\tau_m\). Crossing the chosen threshold is an event: the script
+constant $\tau_m$. Crossing the chosen threshold is an event: the script
 records a reset instead of resolving spike-generating sodium and potassium
 currents. This makes LIF economical, but it cannot reproduce the HH gates or
 their biophysical refractory dynamics without additional rules.
@@ -19,18 +19,18 @@ their biophysical refractory dynamics without additional rules.
 
 The subthreshold equation and event rule are
 
-\[
+$$
 \frac{dV}{dt}=-\frac{V}{\tau_m}+I,\qquad
 V\ge V_{\mathrm{th}}\Rightarrow V\leftarrow V_{\mathrm{reset}}.
-\]
+$$
 
-Here \(V\) is the model voltage, \(t\) is time, \(\tau_m\) is the membrane
-time constant, \(I\) is constant input in the code's normalized units,
-\(V_{\mathrm{th}}\) is threshold, and \(V_{\mathrm{reset}}\) is the voltage
+Here $V$ is the model voltage, $t$ is time, $\tau_m$ is the membrane
+time constant, $I$ is constant input in the code's normalized units,
+$V_{\mathrm{th}}$ is threshold, and $V_{\mathrm{reset}}$ is the voltage
 assigned after a threshold crossing. For the HH comparison, the instantaneous
-effective time constant is \(\tau=C/(g_{\mathrm{K}}n^4+g_{\mathrm{Na}}m^3h+g_{\mathrm{L}})\),
-where \(C\) is capacitance, \(g_{\mathrm{K}}\), \(g_{\mathrm{Na}}\), and
-\(g_{\mathrm{L}}\) are conductances, and \(m\), \(n\), and \(h\) are HH gates.
+effective time constant is $\tau=C/(g_{\mathrm{K}}n^4+g_{\mathrm{Na}}m^3h+g_{\mathrm{L}})$,
+where $C$ is capacitance, $g_{\mathrm{K}}$, $g_{\mathrm{Na}}$, and
+$g_{\mathrm{L}}$ are conductances, and $m$, $n$, and $h$ are HH gates.
 
 ## Code examples
 

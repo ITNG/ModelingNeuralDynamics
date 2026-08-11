@@ -18,13 +18,13 @@ actual gates to their voltage-dependent steady-state values.
 
 The added h-current has the form
 
-\[
+$$
 I_h=g_hr(v_h-v),\qquad \dot r=\frac{r_\infty(v)-r}{\tau_r(v)},
-\]
+$$
 
-where \(r\) is a slow activation gate, \(g_h\) is maximal conductance, and
-\(v_h\) is its reversal potential. The M-current analog is
-\(I_M=g_Mw(v_K-v)\) with a slow potassium gate \(w\).
+where $r$ is a slow activation gate, $g_h$ is maximal conductance, and
+$v_h$ is its reversal potential. The M-current analog is
+$I_M=g_Mw(v_K-v)$ with a slow potassium gate $w$.
 
 ## Code examples
 

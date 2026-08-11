@@ -17,17 +17,17 @@ oscillators displays the same stable or unstable phase arrangements.
 
 ## Essential model
 
-If \(g\) is a phase-resetting curve, the scripts first form the single-pulse
-reset map \(f(\phi)=\phi+g(\phi)\). They then account for the other
-oscillator's complementary phase with \(F(\phi)=f(1-\phi)\), and form the
-two-event phase-difference map \(G(\phi)=F(F(\phi))\). Locking satisfies
+If $g$ is a phase-resetting curve, the scripts first form the single-pulse
+reset map $f(\phi)=\phi+g(\phi)$. They then account for the other
+oscillator's complementary phase with $F(\phi)=f(1-\phi)$, and form the
+two-event phase-difference map $G(\phi)=F(F(\phi))$. Locking satisfies
 
-\[
+$$
 G(\phi_*)=\phi_*.
-\]
+$$
 
 For a one-dimensional map, the fixed point is locally stable when
-\(|G'(\phi_*)|<1\). The scripts plot the two-event map and identity line so those
+$|G'(\phi_*)|<1$. The scripts plot the two-event map and identity line so those
 intersections can be read directly.
 
 ## Code examples

@@ -18,14 +18,14 @@ basins.
 
 The reduced HH equations are
 
-\[
+$$
 C\dot v=I_{\rm Na}(v,n)+I_{\rm K}(v,n)+I_L(v)+I,\qquad
 \dot n=\alpha_n(v)(1-n)-\beta_n(v)n,
-\]
+$$
 
-with \(m=m_\infty(v)\) and \(h=0.83-n\). The Erisir reduction has the same
-form but uses its rodent-neuron conductances and \(h=0.36-n\). Here \(v\) is
-voltage, \(n\) is a recovery gate, and \(I\) is applied current.
+with $m=m_\infty(v)$ and $h=0.83-n$. The Erisir reduction has the same
+form but uses its rodent-neuron conductances and $h=0.36-n$. Here $v$ is
+voltage, $n$ is a recovery gate, and $I$ is applied current.
 
 ## Code examples
 

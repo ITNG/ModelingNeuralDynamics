@@ -18,9 +18,9 @@ the coupling mechanism is.
 
 Each RTM cell receives summed recurrent excitation through synaptic gates:
 
-\[
+$$
 I_{{\rm syn},i}=g_{\rm syn}\sum_{j\ne i}s_j(v_{\rm syn}-v_i).
-\]
+$$
 
 The scripts build phase-spread initial conditions from the single-cell limit
 cycle and then integrate the full conductance-based network.

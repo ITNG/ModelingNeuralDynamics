@@ -18,14 +18,14 @@ approaches zero.
 ## Essential model
 
 The reduced RTM dynamics use instantaneous activation and the approximation
-\(m=m_\infty(v)\), \(h=1-n\):
+$m=m_\infty(v)$, $h=1-n$:
 
-\[
+$$
 C\dot v=I_{\rm Na}(v,n)+I_{\rm K}(v,n)+I_L(v)+I,\qquad
 \dot n=\alpha_n(v)(1-n)-\beta_n(v)n.
-\]
+$$
 
-Here \(v\) is membrane voltage, \(n\) is potassium activation, \(I\) is
+Here $v$ is membrane voltage, $n$ is potassium activation, $I$ is
 applied current, and the sodium, potassium, and leak terms use RTM
 conductances and reversal potentials.
 

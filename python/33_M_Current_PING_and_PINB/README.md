@@ -10,7 +10,7 @@ Slow M-current recovery can make E cells skip gamma opportunities, yielding beta
 
 ## Essential model
 
-The PING E--I loop is supplemented by M-current-controlled E-cell availability. Population period and skipped cycles are useful timing measures. Gap-junction currents are proportional to \(v_j-v_i\), providing electrical coupling without chemical-synapse delay.
+The PING E--I loop is supplemented by M-current-controlled E-cell availability. Population period and skipped cycles are useful timing measures. Gap-junction currents are proportional to $v_j-v_i$, providing electrical coupling without chemical-synapse delay.
 
 ## Code examples
 

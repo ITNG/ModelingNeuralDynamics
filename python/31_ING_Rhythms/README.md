@@ -10,7 +10,7 @@ ING synchrony is organized by inhibitory recovery rather than recurrent excitati
 
 ## Essential model
 
-Recurrent inhibition has the form \(I_{{\rm II},i}=g_{\rm II}\sum_j s_j(E_I-v_i)\), optionally supplemented by gap-junction voltage-difference currents. A pulse map \(\phi\mapsto F(\phi)\) reduces inhibitory timing to fixed points and their slopes.
+Recurrent inhibition has the form $I_{{\rm II},i}=g_{\rm II}\sum_j s_j(E_I-v_i)$, optionally supplemented by gap-junction voltage-difference currents. A pulse map $\phi\mapsto F(\phi)$ reduces inhibitory timing to fixed points and their slopes.
 
 ## Code examples
 

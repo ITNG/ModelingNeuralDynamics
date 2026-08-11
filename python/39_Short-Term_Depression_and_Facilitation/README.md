@@ -13,17 +13,17 @@ Depression depletes available resources after release and recovers between event
 
 ## Essential model
 
-With resources \(x\) and utilization \(u\), release is proportional to
-\(ux\); depression lowers \(x\) after events and facilitation raises \(u\).
+With resources $x$ and utilization $u$, release is proportional to
+$ux$; depression lowers $x$ after events and facilitation raises $u$.
 The resulting synaptic gate enters the conductance current
-\(gs(E_{\rm rev}-v)\). The introductory smooth proxy is
-\(\gamma=1+\tanh(v/10)\), which approximates a spike-shaped pulse for a
+$gs(E_{\rm rev}-v)$. The introductory smooth proxy is
+$\gamma=1+\tanh(v/10)$, which approximates a spike-shaped pulse for a
 voltage trace.
 
 ## Code examples
 
 - [`PULSES`](PULSES/) plots an RTM voltage trace and its smooth
-  \(\gamma=1+\tanh(v/10)\) spike/pulse approximation, including its
+  $\gamma=1+\tanh(v/10)$ spike/pulse approximation, including its
   per-spike area calculation.
 - [`RTM_WITH_DEPRESSING_AND_FACILITATING_S`](RTM_WITH_DEPRESSING_AND_FACILITATING_S/) compares both mechanisms in RTM.
 - [`RTM_WITH_DEPRESSING_S`](RTM_WITH_DEPRESSING_S/) shows depression alone in RTM.
@@ -31,7 +31,7 @@ voltage trace.
 
 ## What to look for
 
-In `PULSES`, compare the voltage crossing with the smooth \(\gamma\) pulse;
+In `PULSES`, compare the voltage crossing with the smooth $\gamma$ pulse;
 it is not a resource/utilization simulation. In the remaining examples, track
 synaptic strength over events: depression should weaken later events until
 recovery, while facilitation can enhance them transiently. Compare RTM and WB

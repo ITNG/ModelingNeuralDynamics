@@ -10,7 +10,7 @@ Weight-update sign and size depend on spike order and time difference. An adapta
 
 ## Essential model
 
-For \(\Delta t=t_{\rm post}-t_{\rm pre}\), a representative rule is \(\Delta w=A_+e^{-\Delta t/\tau_+}\) for post-after-pre and \(\Delta w=-A_-e^{\Delta t/\tau_-}\) for the opposite order. The PING implementation bounds recurrent E-to-E weights while spiking continues.
+For $\Delta t=t_{\rm post}-t_{\rm pre}$, a representative rule is $\Delta w=A_+e^{-\Delta t/\tau_+}$ for post-after-pre and $\Delta w=-A_-e^{\Delta t/\tau_-}$ for the opposite order. The PING implementation bounds recurrent E-to-E weights while spiking continues.
 
 ## Code examples
 

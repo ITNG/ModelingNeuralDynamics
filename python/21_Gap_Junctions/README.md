@@ -9,7 +9,7 @@ also contrast LIF event handling with a continuous WB voltage trace.
 
 ## Core ideas
 
-For a pair, a gap-junction current is proportional to \(v_j-v_i\), so it
+For a pair, a gap-junction current is proportional to $v_j-v_i$, so it
 reduces voltage differences rather than imposing a fixed chemical reversal
 potential. This promotes synchrony when cells spike, but subthreshold behavior
 can still be distinctive. In LIF models, a spike reset makes the threshold and
@@ -17,11 +17,11 @@ reset separation part of the coupling mechanism.
 
 ## Essential model
 
-With electrical conductance \(g_{\rm gap}\), cell \(i\) receives
+With electrical conductance $g_{\rm gap}$, cell $i$ receives
 
-\[
+$$
 I_{{\rm gap},i}=g_{\rm gap}\sum_{j\ne i}(v_j-v_i).
-\]
+$$
 
 The continuous current is supplemented by the model-specific event rule: an
 LIF voltage is reset after crossing threshold, whereas the WB network evolves

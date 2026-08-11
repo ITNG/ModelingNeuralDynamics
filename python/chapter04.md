@@ -18,13 +18,13 @@ effect at different phases.
 
 The solver advances the state vector
 
-\[
+$$
 \mathbf{x}=(V,m,n,h),\qquad \frac{d\mathbf{x}}{dt}=\mathbf{F}(\mathbf{x};I_{\mathrm{ext}}).
-\]
+$$
 
-Here \(V\) is membrane voltage; \(m\), \(n\), and \(h\) are the
-dimensionless HH gates; \(t\) is time; \(I_{\mathrm{ext}}\) is applied
-current; and \(\mathbf{F}\) is the HH voltage-and-gate right-hand side
+Here $V$ is membrane voltage; $m$, $n$, and $h$ are the
+dimensionless HH gates; $t$ is time; $I_{\mathrm{ext}}$ is applied
+current; and $\mathbf{F}$ is the HH voltage-and-gate right-hand side
 defined in each `derivative` function. A limit cycle is a closed trajectory
 in this state space that repeats after one period.
 
@@ -33,7 +33,7 @@ in this state space that repeats after one period.
 All three examples now live in one notebook, [`chapter04.ipynb`](chapter04.ipynb):
 `simulate_hh_solution` integrates voltage and all three gates at a
 constant input; `simulate_hh_limit_cycle` starts away from equilibrium and
-plots \(n\) against \(V\); `simulate_hh_refractoriness` adds a short current
+plots $n$ against $V$; `simulate_hh_refractoriness` adds a short current
 pulse at several onset times. Each has an `ipywidgets` slider to explore
 `i_ext` interactively.
 

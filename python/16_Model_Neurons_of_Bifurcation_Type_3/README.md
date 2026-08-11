@@ -16,20 +16,20 @@ mechanism.
 
 ## Essential model
 
-The persistent-sodium/potassium (INaP-I\(_K\)) reduction uses
+The persistent-sodium/potassium (INaP-I$_K$) reduction uses
 
-\[
+$$
 C\dot v=g_{\rm Na}m_\infty(v)(v_{\rm Na}-v)+g_Kn(v_K-v)
 +g_L(v_L-v)+I,\qquad \dot n=(n_\infty(v)-n)/\tau_n.
-\]
+$$
 
-Here \(v\) is voltage, \(n\) is potassium activation, \(m_\infty\) is
-instantaneous persistent sodium activation, and \(I\) is applied current.
+Here $v$ is voltage, $n$ is potassium activation, $m_\infty$ is
+instantaneous persistent sodium activation, and $I$ is applied current.
 
 ## Code examples
 
 - [`INAPIK_FIXED_POINTS`](INAPIK_FIXED_POINTS/) scans current and classifies
-  INaP-I\(_K\) equilibria in `fig.png`.
+  INaP-I$_K$ equilibria in `fig.png`.
 - [`INAPIK_PHASE_PLANE`](INAPIK_PHASE_PLANE/) plots phase-plane trajectories,
   fixed points, and cycles at several currents in `fig.png`.
 - [`SELF_EXCITING_THETA_NEURON`](SELF_EXCITING_THETA_NEURON/) simulates a
@@ -56,7 +56,7 @@ threshold structure underlying those traces.
 
 Chapter 08 introduces theta neurons. Chapters 10--14 supply phase-plane and
 bifurcation language, and Chapter 17 compares the firing-rate response of the
-INaP-I\(_K\) and theta models.
+INaP-I$_K$ and theta models.
 
 ## Running the examples
 

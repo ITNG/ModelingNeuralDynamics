@@ -18,12 +18,12 @@ cycle yields an interaction function for weakly coupled oscillators.
 
 ## Essential model
 
-For unperturbed period \(T\), let a pulse applied at phase \(\phi\) change the
-next-cycle timing by \(\Delta t\). A phase response can be represented as
+For unperturbed period $T$, let a pulse applied at phase $\phi$ change the
+next-cycle timing by $\Delta t$. A phase response can be represented as
 
-\[
+$$
 Z(\phi)=-\Delta t/T.
-\]
+$$
 
 For weak coupling, the interaction function combines a phase response and a
 synaptic waveform; it describes how one oscillator's phase affects another's
