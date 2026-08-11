@@ -33,14 +33,14 @@ negative infinite branches. In the circle diagram, the transition occurs at
 
 ## Code examples
 
-- [`QIF_VOLTAGE_TRACE`](QIF_VOLTAGE_TRACE/) integrates a QIF trace with a
-  midpoint step and reset convention, saving `fig.png`.
-- [`QIF_INFINITE_THRESHOLD`](QIF_INFINITE_THRESHOLD/) constructs the analytic
-  finite-time blow-up branches and their continuation, saving `fig.png`.
-- [`THETA_FIRING`](THETA_FIRING/) integrates phase \(\theta\), plots
-  \(1-\cos\theta\), and saves `fig.png`.
-- [`THREE_CIRCLES`](THREE_CIRCLES/) draws phase flows below, at, and above the
-  firing transition on three circles, saving `fig.png`.
+All four examples now live in one notebook, [`chapter08.ipynb`](chapter08.ipynb):
+`simulate_qif_voltage_trace` integrates a QIF trace with a midpoint step and
+reset convention; `simulate_qif_infinite_threshold` constructs the analytic
+finite-time blow-up branches and their continuation; `simulate_theta_firing`
+integrates phase \(\theta\) and plots \(1-\cos\theta\); `plot_three_circles`
+draws phase flows below, at, and above the firing transition on three
+circles (a schematic, no simulation). Each simulated example has an
+`ipywidgets` slider to explore its parameters interactively.
 
 ## What to look for
 
@@ -63,6 +63,7 @@ Later network examples use theta-neuron phase descriptions.
 
 ## Running the examples
 
-Run `python main.py` from each example directory. They require NumPy and
-Matplotlib; `THREE_CIRCLES` also imports `draw_arrow` from `mnd.core`. Each
-entry point writes `fig.png` in its own directory.
+Open [`chapter08.ipynb`](chapter08.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook. Run all cells top to bottom; each
+section's static figure reproduces the book's plot, and the `interact(...)`
+cell below it lets you adjust that example's parameters with sliders.

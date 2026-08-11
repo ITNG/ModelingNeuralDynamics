@@ -17,7 +17,7 @@ linked from this index.
 - [Chapter 4: Numerical Solution of HH ODEs](chapter04.md)
 - [Chapter 5: The Simple Model of Neurons in Rodent Brains](chapter05.md)
 - [Chapter 7: Linear Integrate-and-Fire (LIF) Neurons](chapter07.md)
-- [Chapter 8: Quadratic Integrate-and-Fire (QIF) and Theta Neurons](08_Quadratic_Integrate_and_Fire_%28QIF%29_and_Theta_Neurons/README.md)
+- [Chapter 8: Quadratic Integrate-and-Fire (QIF) and Theta Neurons](chapter08.md)
 
 ## Single-neuron dynamics (Chapters 10-19)
 
