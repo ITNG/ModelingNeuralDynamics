@@ -37,24 +37,15 @@ the potassium reversal potential. In the AHP model it is
 
 ## Code examples
 
-- [`M_CURRENT`](M_CURRENT/) plots the M-gate steady state and time constant,
-  saving `fig.png`.
-- [`CALCIUM_RISE`](CALCIUM_RISE/) plots the voltage-dependent calcium target
-  used by the AHP examples, saving `fig.png`.
-- [`RTM_M`](RTM_M/) adds an M-current to a driven RTM neuron and saves voltage
-  and gate traces as `fig.png`.
-- [`RTM_M_RESTING`](RTM_M_RESTING/) uses zero external input for the M-current
-  model and saves the resting trajectory as `fig.png`.
-- [`RTM_AHP`](RTM_AHP/) adds calcium-dependent AHP feedback to a driven RTM
-  neuron and saves voltage and calcium traces as `fig.png`.
-- [`RTM_AHP_RESTING`](RTM_AHP_RESTING/) runs the AHP model at zero input and
-  saves its resting trajectory as `fig.png`.
-- [`LIF_ADAPT`](LIF_ADAPT/) integrates the reset-based adaptation model and
-  saves voltage and adaptation state as `fig.png`.
-- [`ADAPTATION_MAP`](ADAPTATION_MAP/) computes the spike-to-spike map
-  \(\phi(z)\), its diagonal, and a marked fixed point, saving `fig.png`.
-- [`V_V_TILDE`](V_V_TILDE/) compares two subthreshold voltages with different
-  initial adaptation amplitudes and saves `fig.png`.
+All nine examples now live in one notebook,
+[`chapter09.ipynb`](../chapter09.ipynb): `M_CURRENT` and `CALCIUM_RISE`
+plot the underlying steady-state laws; `RTM_M`/`RTM_M_RESTING` and
+`RTM_AHP`/`RTM_AHP_RESTING` add each slow current to a driven vs.
+zero-drive RTM neuron; `LIF_ADAPT` integrates the reset-based adaptation
+model; `ADAPTATION_MAP` computes the spike-to-spike map φ(z); and
+`V_V_TILDE` compares two subthreshold voltages with different initial
+adaptation amplitudes. Each section has an `ipywidgets` slider to explore
+its parameters interactively.
 
 ## What to look for
 
@@ -80,6 +71,7 @@ ways to represent spike events and phase.
 
 ## Running the examples
 
-Run `python main.py` from each immediate example directory. The RTM examples
-require SciPy, NumPy, and Matplotlib/Pylab; the remaining examples use NumPy
-and Matplotlib. Every entry point writes `fig.png` in its working directory.
+Open [`chapter09.ipynb`](../chapter09.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook. Run all cells top to bottom; each
+section's static figure reproduces the book's plot, and the `interact(...)`
+cell below it lets you adjust that example's parameters with sliders.
