@@ -343,15 +343,25 @@ Run:
 
 Expected: the suite passes and prints the 50 slowest setup/call/teardown durations. Do not add Numba based on source appearance alone.
 
-- [ ] **Step 3: Re-run the ten slowest call phases individually**
+- [ ] **Step 3: Reproduce the first confirmed simulation hotspots**
 
-For each node ID printed as a `call` duration in Step 2, run:
+Run:
 
 ```bash
-/home/ziaee/envs/mnd/bin/python -m pytest -q '<exact-node-id>' --durations=1
+/home/ziaee/envs/mnd/bin/python -m pytest -q \
+  tests/test_ch14_hh_reduced_cycle_distance.py::test_hh_reduced_cycle_distance_fixed_points_are_sane \
+  --durations=1
+
+/home/ziaee/envs/mnd/bin/python -m pytest -q \
+  tests/test_ch17_legacy_f_i_curves.py \
+  --durations=3
 ```
 
-Expected: retain only hotspots that reproduce within 15% across three runs. Classify each retained hotspot as notebook loading, simulation loop, SciPy solver, or oversized test workload.
+Expected baseline on the current machine: approximately 26.02 seconds for the
+chapter-14 call and 5.35, 1.34, and 0.84 seconds for the three chapter-17
+calls. Repeat each command three times and retain a hotspot only when its call
+duration remains within 15% of its median. Classify each retained hotspot as
+notebook loading, simulation loop, SciPy solver, or oversized test workload.
 
 - [ ] **Step 4: Create the measured follow-up plan**
 
