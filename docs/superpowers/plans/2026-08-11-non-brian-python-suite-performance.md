@@ -262,7 +262,8 @@ git commit -m "test: use representative heterogeneous network"
 **Interfaces:**
 - Produces in PING 6: `run_connectivity_panels(t_final_run: float = t_final) -> list[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]`
 - Produces in ING: `run_drive_panels(t_final_run: float = t_final) -> list[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]`
-- Normal `python main.py` execution still calls each entry point with the original 2000ms/500ms defaults before plotting.
+- Produces in each script: `main() -> None`, which calls its runner with no arguments, preserves the existing plotting block, and saves `fig.png`.
+- Each `if __name__ == "__main__"` guard contains exactly `main()`. Normal `python main.py` execution therefore uses the original 2000ms/500ms defaults, while `load_python_port` imports with `__name__ == "main"` and does not enter the guard.
 
 - [ ] **Step 1: Add the PING-6 callable and move reference execution under the main guard**
 
@@ -281,23 +282,38 @@ def run_connectivity_panels(t_final_run=t_final):
     return panels
 
 
-if __name__ == "__main__":
-    panels_raw = run_connectivity_panels()
-    panels = [(ti, ii, te, ie) for te, ie, ti, ii in panels_raw]
+def main():
+    (
+        (t_e_spikes_1, i_e_spikes_1, t_i_spikes_1, i_i_spikes_1),
+        (t_e_spikes_2, i_e_spikes_2, t_i_spikes_2, i_i_spikes_2),
+        (t_e_spikes_3, i_e_spikes_3, t_i_spikes_3, i_i_spikes_3),
+    ) = run_connectivity_panels()
+
     fig, axes = plt.subplots(3, 1, figsize=(8, 9))
+    panels = [
+        (t_i_spikes_1, i_i_spikes_1, t_e_spikes_1, i_e_spikes_1),
+        (t_i_spikes_2, i_i_spikes_2, t_e_spikes_2, i_e_spikes_2),
+        (t_i_spikes_3, i_i_spikes_3, t_e_spikes_3, i_e_spikes_3),
+    ]
     for ax, (ti, ii, te, ie) in zip(axes, panels):
         if len(ti) > 0:
             ax.plot(ti, ii, '.b', markersize=2)
         if len(te) > 0:
             ax.plot(te, ie + num_i, '.r', markersize=2)
         ax.plot([0, t_final], [num_i + 0.5, num_i + 0.5], '--k', linewidth=1)
+        ax.set_yticks([num_i, num_e + num_i])
         ax.axis([t_final - 200, t_final, 0, num_e + num_i + 1])
     axes[-1].set_xlabel('$t$ [ms]')
     plt.tight_layout()
     plt.savefig("fig.png")
+    # plt.show()
+
+
+if __name__ == "__main__":
+    main()
 ```
 
-Remove the three unconditional panel simulation assignments so importing definitions is cheap and the figure path retains the 2000ms default.
+Remove the three unconditional panel simulation assignments. Move the existing `fig, axes` block into `main()` intact: its three-panel order, blue/red spike plots, population separator, y-ticks, 200ms display window, x-label, layout, and `fig.png` save must all remain. The no-argument runner call retains the 2000ms default.
 
 The build/simulate pairs must remain sequential exactly as shown. The module-level RNG is consumed by both connectivity construction and simulation, so constructing every matrix before any simulation would change the seeded reference streams and invalidate the measured spike counts.
 
@@ -305,6 +321,9 @@ The build/simulate pairs must remain sequential exactly as shown. The module-lev
 
 ```python
 py = load_python_port(ROOT / "python" / PYTHON_BASE / "PING_6" / "main.py")
+for suffix in ("_1", "_2", "_3"):
+    assert not hasattr(py, f"t_e_spikes{suffix}")
+    assert not hasattr(py, f"t_i_spikes{suffix}")
 panels = py.run_connectivity_panels(t_final_run=200.0)
 assert len(panels) == 3
 for t_e, i_e, t_i, i_i in panels:
@@ -314,7 +333,78 @@ for t_e, i_e, t_i, i_i in panels:
     assert len(t_i) == len(i_i)
 ```
 
-- [ ] **Step 3: Add the ING callable and move reference execution under the main guard**
+- [ ] **Step 3: Add an exact lightweight PING default-main regression test**
+
+Add `import ast` and `import numpy as np` to `tests/test_ch30_ping_6_to_9.py`, then add this helper and test. The fake runner accepts no arguments, so `py.main()` fails if the guarded default path starts passing a shortened duration. Real Matplotlib axes are used; only the expensive simulation runner and filesystem save are replaced.
+
+```python
+def assert_exact_main_guard(path):
+    tree = ast.parse(path.read_text(), filename=str(path))
+    guards = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.If)
+        and any(
+            isinstance(candidate, ast.Name) and candidate.id == "__name__"
+            for candidate in ast.walk(node.test)
+        )
+    ]
+    expected = ast.parse('if __name__ == "__main__":\n    main()\n').body[0]
+    assert len(guards) == 1
+    assert ast.dump(guards[0], include_attributes=False) == ast.dump(
+        expected, include_attributes=False
+    )
+
+
+def test_ping_6_default_main_preserves_reference_plot(monkeypatch):
+    path = ROOT / "python" / PYTHON_BASE / "PING_6" / "main.py"
+    py = load_python_port(path)
+    calls = []
+    panel = (
+        np.array([10.0]),
+        np.array([1]),
+        np.array([20.0]),
+        np.array([2]),
+    )
+
+    def fake_run_connectivity_panels():
+        calls.append(())
+        return [panel, panel, panel]
+
+    monkeypatch.setitem(
+        py.main.__globals__, "run_connectivity_panels", fake_run_connectivity_panels
+    )
+    saved = []
+    monkeypatch.setattr(py.plt, "savefig", saved.append)
+
+    py.main()
+    fig = py.plt.gcf()
+    try:
+        assert calls == [()]
+        assert saved == ["fig.png"]
+        assert len(fig.axes) == 3
+        for ax in fig.axes:
+            np.testing.assert_array_equal(
+                ax.get_yticks(), [py.num_i, py.num_e + py.num_i]
+            )
+            assert any(
+                np.array_equal(
+                    line.get_ydata(), [py.num_i + 0.5, py.num_i + 0.5]
+                )
+                for line in ax.lines
+            )
+            np.testing.assert_allclose(
+                ax.axis(),
+                [py.t_final - 200, py.t_final, 0, py.num_e + py.num_i + 1],
+            )
+        assert fig.axes[-1].get_xlabel() == '$t$ [ms]'
+    finally:
+        py.plt.close(fig)
+
+    assert_exact_main_guard(path)
+```
+
+- [ ] **Step 4: Add the ING callable and move reference execution under `main()`**
 
 ```python
 def run_drive_panels(t_final_run=t_final):
@@ -327,29 +417,37 @@ def run_drive_panels(t_final_run=t_final):
     ]
 
 
-if __name__ == "__main__":
+def main():
     results = run_drive_panels()
     fig, axes = plt.subplots(3, 1, figsize=(8, 9))
-    for ax, drive, (te, ie, ti, ii) in zip(axes, i_ext_e_vec, results):
-        if len(ti) > 0:
-            ax.plot(ti, ii, '.b', markersize=2)
-        if len(te) > 0:
-            ax.plot(te, ie + num_i, '.r', markersize=2)
+    for ax, i_ext_e_val, (t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes) in zip(axes, i_ext_e_vec, results):
+        if len(t_i_spikes) > 0:
+            ax.plot(t_i_spikes, i_i_spikes, '.b', markersize=2)
+        if len(t_e_spikes) > 0:
+            ax.plot(t_e_spikes, i_e_spikes + num_i, '.r', markersize=2)
+        ax.plot([0, t_final], [num_i + 0.5, num_i + 0.5], '--k', linewidth=1)
+        ax.set_yticks([num_i, num_e + num_i])
         ax.axis([0, t_final, 0, num_e + num_i + 1])
-        ax.set_title(rf'$\overline{{I}}_E={drive:g}$')
+        ax.set_title(rf'$\overline{{I}}_E={i_ext_e_val:g}$')
     axes[-1].set_xlabel('$t$ [ms]')
     plt.tight_layout()
     plt.savefig("fig.png")
+    # plt.show()
+
+
+if __name__ == "__main__":
+    main()
 ```
 
-Remove the unconditional `results` comprehension so import does not run the 500ms simulations.
+Remove the unconditional `results` comprehension. Move the existing plotting block into `main()` intact: its drive order, blue/red spike plots, population separator, y-ticks, axes, titles, x-label, layout, and `fig.png` save must all remain. The no-argument runner call retains the 500ms default.
 
-- [ ] **Step 4: Update the ING test to call the 100ms workload**
+- [ ] **Step 5: Update the ING test to call the 100ms workload**
 
 ```python
 py = load_python_port(
     ROOT / "python" / PYTHON_BASE / "ING_ENTRAINING_E_CELLS_2" / "main.py"
 )
+assert not hasattr(py, "results")
 results = py.run_drive_panels(t_final_run=100.0)
 assert len(results) == 3
 for t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes in results:
@@ -359,20 +457,101 @@ for t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes in results:
     assert len(t_i_spikes) == len(i_i_spikes)
 ```
 
-- [ ] **Step 5: Verify both bounded tests and default script smoke behavior**
+- [ ] **Step 6: Add an exact lightweight ING default-main regression test**
+
+Add `import ast` to `tests/test_ch31_ing_entraining_e_cells.py`, then add this helper and test:
+
+```python
+def assert_exact_main_guard(path):
+    tree = ast.parse(path.read_text(), filename=str(path))
+    guards = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.If)
+        and any(
+            isinstance(candidate, ast.Name) and candidate.id == "__name__"
+            for candidate in ast.walk(node.test)
+        )
+    ]
+    expected = ast.parse('if __name__ == "__main__":\n    main()\n').body[0]
+    assert len(guards) == 1
+    assert ast.dump(guards[0], include_attributes=False) == ast.dump(
+        expected, include_attributes=False
+    )
+
+
+def test_ing_entraining_e_cells_2_default_main_preserves_reference_plot(
+    monkeypatch,
+):
+    path = (
+        ROOT
+        / "python"
+        / PYTHON_BASE
+        / "ING_ENTRAINING_E_CELLS_2"
+        / "main.py"
+    )
+    py = load_python_port(path)
+    calls = []
+    panel = (
+        np.array([10.0]),
+        np.array([1]),
+        np.array([20.0]),
+        np.array([2]),
+    )
+
+    def fake_run_drive_panels():
+        calls.append(())
+        return [panel, panel, panel]
+
+    monkeypatch.setitem(py.main.__globals__, "run_drive_panels", fake_run_drive_panels)
+    saved = []
+    monkeypatch.setattr(py.plt, "savefig", saved.append)
+
+    py.main()
+    fig = py.plt.gcf()
+    try:
+        assert calls == [()]
+        assert saved == ["fig.png"]
+        assert len(fig.axes) == 3
+        for ax in fig.axes:
+            np.testing.assert_array_equal(
+                ax.get_yticks(), [py.num_i, py.num_e + py.num_i]
+            )
+            assert any(
+                np.array_equal(
+                    line.get_ydata(), [py.num_i + 0.5, py.num_i + 0.5]
+                )
+                for line in ax.lines
+            )
+            np.testing.assert_allclose(
+                ax.axis(), [0, py.t_final, 0, py.num_e + py.num_i + 1]
+            )
+        assert [ax.get_title() for ax in fig.axes] == [
+            rf'$\overline{{I}}_E={drive:g}$' for drive in py.i_ext_e_vec
+        ]
+        assert fig.axes[-1].get_xlabel() == '$t$ [ms]'
+    finally:
+        py.plt.close(fig)
+
+    assert_exact_main_guard(path)
+```
+
+- [ ] **Step 7: Verify bounded workloads and lightweight default main paths**
 
 Run:
 
 ```bash
 /home/ziaee/envs/mnd/bin/python -m pytest -q \
   tests/test_ch30_ping_6_to_9.py::test_ping_6_structure \
+  tests/test_ch30_ping_6_to_9.py::test_ping_6_default_main_preserves_reference_plot \
   tests/test_ch31_ing_entraining_e_cells.py::test_ing_entraining_e_cells_2_structure \
-  --durations=2
+  tests/test_ch31_ing_entraining_e_cells.py::test_ing_entraining_e_cells_2_default_main_preserves_reference_plot \
+  --durations=4
 ```
 
-Expected: `2 passed`; PING 6 below 45s; ING below 35s; the original assertions remain satisfied.
+Expected: `4 passed`; PING 6 bounded call below 45s; ING bounded call below 35s; both mocked default-main tests complete without simulation, prove a no-argument runner call, preserve separator/y-tick/axis/title or window behavior, save `fig.png`, and prove the source guard is exactly `if __name__ == "__main__": main()`.
 
-- [ ] **Step 6: Commit the legacy entry-point refactor**
+- [ ] **Step 8: Commit the legacy entry-point refactor**
 
 ```bash
 git add \
