@@ -46,8 +46,9 @@ include = ["mnd*"]
 [tool.pytest.ini_options]
 markers = [
     "slow: launches MATLAB via subprocess to check against the book's original scripts (skipped automatically if MATLAB isn't installed). Run with `pytest -m slow`; excluded by default via addopts.",
+    "brian2: exercises Brian2 notebooks or compares Brian2 results; excluded by default while Brian2 development is paused. Run with `pytest -m brian2`.",
 ]
-addopts = "-m 'not slow'"
+addopts = "-m 'not slow and not brian2'"
 
 [tool.ruff]
 line-length = 100
