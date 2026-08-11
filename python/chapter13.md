@@ -28,23 +28,17 @@ supports both an unstable inner and a stable outer cycle.
 
 ## Code examples
 
-- [`HOPF_SUP`](HOPF_SUP/) plots the supercritical radial vector field in
-  `fig.png`.
-- [`HOPF_SUP_BIF_DIAG`](HOPF_SUP_BIF_DIAG/) draws its equilibrium and stable
-  cycle branches in `fig.png`.
-- [`HOPF_SUP_PHASE_PLANE`](HOPF_SUP_PHASE_PLANE/) integrates supercritical
-  spirals and cycles in `fig.png`.
-- [`HOPF_SUB`](HOPF_SUB/) plots the subcritical radial vector field in
-  `fig.png`.
-- [`HOPF_SUB_BIF_DIAG`](HOPF_SUB_BIF_DIAG/) draws the subcritical unstable
-  cycle branch in `fig.png`.
-- [`HOPF_SUB_PHASE_PLANE`](HOPF_SUB_PHASE_PLANE/) shows the corresponding
-  repelling cycle and phase-plane trajectories in `fig.png`.
-- [`HOPF_SUB_2`](HOPF_SUB_2/) adds the quintic saturation term in `fig.png`.
-- [`HOPF_SUB_BIF_DIAG_2`](HOPF_SUB_BIF_DIAG_2/) plots its inner repelling and
-  outer attracting cycles in `fig.png`.
-- [`HOPF_SUB_PHASE_PLANE_2`](HOPF_SUB_PHASE_PLANE_2/) traces the two-cycle
-  phase-plane organization in `fig.png`.
+All nine examples now live in one notebook, [`chapter13.ipynb`](chapter13.ipynb):
+`plot_hopf_sup` plots the supercritical radial vector field;
+`plot_hopf_sup_bif_diag` draws its equilibrium and stable cycle branches;
+`plot_hopf_sup_phase_plane` integrates supercritical spirals and cycles;
+`plot_hopf_sub` plots the subcritical radial vector field;
+`plot_hopf_sub_bif_diag` draws the subcritical unstable cycle branch;
+`plot_hopf_sub_phase_plane` shows the corresponding repelling cycle and
+phase-plane trajectories; `plot_hopf_sub_2` adds the quintic saturation
+term; `plot_hopf_sub_bif_diag_2` plots its inner repelling and outer
+attracting cycles; `plot_hopf_sub_phase_plane_2` traces the two-cycle
+phase-plane organization.
 
 ## What to look for
 
@@ -66,5 +60,5 @@ conductance-based neuron reductions.
 
 ## Running the examples
 
-Run `python main.py` from any immediate example directory. The scripts use
-NumPy and Matplotlib and save `fig.png` locally.
+Open [`chapter13.ipynb`](chapter13.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.

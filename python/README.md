@@ -24,7 +24,7 @@ linked from this index.
 - [Chapter 10: The Slow-Fast Phase Plane](chapter10.md)
 - [Chapter 11: The Saddle-Node Bifurcation](chapter11.md)
 - [Chapter 12: Two-Dimensional Bifurcation Analysis](chapter12.md)
-- [Chapter 13: Hopf Bifurcations](13_Hopf_Bifurcations/README.md)
+- [Chapter 13: Hopf Bifurcations](chapter13.md)
 - [Chapter 14: Model Neurons of Bifurcation Type 2](14_Model_Neurons_of_Bifurcation_Type_2/README.md)
 - [Chapter 15: Canard Explosions](15_Canard_Explosions/README.md)
 - [Chapter 16: Model Neurons of Bifurcation Type 3](16_Model_Neurons_of_Bifurcation_Type_3/README.md)
