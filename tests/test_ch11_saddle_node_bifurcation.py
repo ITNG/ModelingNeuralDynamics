@@ -2,17 +2,16 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port, run_matlab_script
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "11_The_Saddle_Node_Bifurcation/SADDLE_NODE_BIFURCATION"
 MATLAB_DIR = "11/SADDLE_NODE_BIFURCATION"
 
 
 @pytest.mark.slow
 def test_fixed_points_match_matlab():
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter11.ipynb")
 
     # Closed-form fixed points for panel 1 (a=0.45) -- matlab's x_plus /
     # x_minus (its own subplot(131) doesn't rename these between panels,
@@ -20,10 +19,7 @@ def test_fixed_points_match_matlab():
     # whole script runs... no: the last subplot to compute them is panel 3,
     # but panel 3 has no fixed points and never assigns x_plus/x_minus, so
     # the values left over are panel 2's (a=0.5).
-    a, b = 0.5, 1.0
-    disc = 1 / (4 * a ** 2 * b ** 2) - 1
-    x_plus = 1 / (2 * a * b) + np.sqrt(disc)
-    x_minus = 1 / (2 * a * b) - np.sqrt(disc)
+    x_plus, x_minus = ns.saddle_node_fixed_points(a=0.5, b=1.0)
 
     ref = run_matlab_script(
         ROOT / "matlab" / MATLAB_DIR, "make_figure.m", ["x_plus", "x_minus"]

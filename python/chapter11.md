@@ -31,9 +31,10 @@ starting and displaying trajectories at $x\ge0.2$.
 
 ## Code examples
 
-- [`SADDLE_NODE_BIFURCATION`](SADDLE_NODE_BIFURCATION/) integrates trajectories
-  for the three parameter regimes and saves their phase portraits as
-  `fig.png`.
+The example now lives in [`chapter11.ipynb`](chapter11.ipynb):
+`plot_saddle_node_bifurcation` integrates trajectories for the three
+parameter regimes and draws their phase portraits, using
+`saddle_node_fixed_points` for the closed-form fixed points.
 
 ## What to look for
 
@@ -57,5 +58,5 @@ them to firing thresholds and bistability.
 
 ## Running the examples
 
-Run `python main.py` inside `SADDLE_NODE_BIFURCATION`. It uses NumPy and
-Matplotlib and writes `fig.png` in that directory.
+Open [`chapter11.ipynb`](chapter11.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.
