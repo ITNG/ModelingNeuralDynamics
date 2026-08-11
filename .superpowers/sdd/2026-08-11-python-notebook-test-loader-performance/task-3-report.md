@@ -7,6 +7,7 @@ Worktree: `/home/ziaee/git/02_ITNG_REPOs/ModelingNeuralDynamics/.worktrees/perf-
 Baseline HEAD: `4595fb0 test: prevent full Python notebook execution`
 
 Follow-up plan commit: `fca954d docs: plan measured non-brian suite optimization`
+Corrected follow-up plan commit: `937681f docs: correct non-brian performance plan`
 Follow-up plan: `docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md`
 
 ## Outcome
@@ -416,38 +417,103 @@ timeout --signal=INT 115s /home/ziaee/envs/mnd/bin/python -m pytest -q tests/tes
 timeout --signal=INT 115s /home/ziaee/envs/mnd/bin/python -m pytest -q tests/test_ch39_ch40_remaining.py --durations=10
 ```
 
-## Ranked Confirmed Hotspots
+## Complete Ranked Call-Duration Profile
 
-Completed timings are ranked first. Stable three-run medians are marked `median`; single bounded-run measurements are marked `one run`. Exact cap results are lower bounds.
+The monolithic command produced no duration table, so this replacement ranks every completed call-duration line obtained by bounded batches and exact-node runs. Reproduced calls appear once at their three-run median. Ties retain chapter/file collection order. Lower bounds cannot be numerically interleaved with completed values and are listed separately after the table.
 
-| Rank | Call | Timing | Evidence | Classification |
-|---:|---|---:|---|---|
-| 1 | ch30 `test_ping_6_structure` | >115s | exact cap | oversized test workload |
-| 2 | ch31 `test_ing_entraining_e_cells_2_structure` | >115s | exact cap | oversized test workload |
-| 3 | ch35 `test_rtm_f_i_curve_with_inhibition_structure` | >115s | exact cap | simulation loop |
-| 4 | ch35 `test_rtm_f_i_curve_with_inhibition_2_structure` | >115s | exact cap | simulation loop |
-| 5 | ch36 `test_rtm_f_i_curve_pulsed_excitation_2_structure` | >115s | exact cap | simulation loop |
-| 6 | ch36 `test_rtm_f_i_curve_pulsed_excitation_structure` | >113s | narrowed batch lower bound | simulation loop |
-| 7 | ch24 `test_rtm_e_to_e_heterogeneous_is_sane` | 107.86s | one run | oversized test workload |
-| 8 | ch30 `test_ping_5_structure` | 94.17s | one run | simulation loop |
-| 9 | ch32 `test_m_current_ping_1_from_rest_structure` | 78.30s | one run | oversized test workload |
-| 10 | ch32 `test_m_current_ping_1_structure` | 74.18s | one run | oversized test workload |
-| 11 | ch32 `test_m_current_ping_3_closeup_structure` | 72.46s | one run | oversized test workload |
-| 12 | ch35 `test_periodic_inhibition_f_i_curve_structure` | 64.08s | one run | simulation loop |
-| 13 | ch31 `test_ing_entraining_e_cells_structure` | 42.33s | one run | simulation loop |
-| 14 | ch32 `test_poisson_ping_2_structure` | 38.28s | one run | simulation loop |
-| 15 | ch38 `test_poisson_ping_population_statistics_match_matlab` | 36.71s | one run | oversized test workload |
-| 16 | ch32 `test_poisson_ping_3_structure` | 35.34s | one run | simulation loop |
-| 17 | ch32 `test_poisson_ping_3_voltage_trace_structure` | 34.75s | one run | simulation loop |
-| 18 | ch32 `test_ping_clusters_structure` | 32.20s | one run | simulation loop |
-| 19 | ch37 `test_ping_thr_1_zoom_structure` | 31.77s | one run | simulation loop |
-| 20 | ch39/40 `test_three_cell_ping_5_structure` | 29.41s | one run | simulation loop |
-| 21 | ch14 cycle-distance test | 27.06s | three-run median | oversized test workload |
-| 22 | ch17 HH legacy f-I | 5.35s | three-run median | oversized test workload |
-| 23 | ch17 RTM onset legacy f-I | 1.11s | three-run median | oversized test workload |
-| 24 | ch17 RTM legacy f-I | 0.79s | three-run median | oversized test workload |
+| Rank | Call | Timing | Evidence |
+|---:|---|---:|---|
+| 1 | ch24 heterogeneous network | 107.86s | exact node, one run |
+| 2 | ch30 PING 5 | 94.17s | bounded batch, one run |
+| 3 | ch32 M-current PING 1 from rest | 78.30s | bounded batch, one run |
+| 4 | ch32 M-current PING 1 | 74.18s | bounded batch, one run |
+| 5 | ch32 M-current PING 3 close-up | 72.46s | bounded batch, one run |
+| 6 | ch35 periodic-inhibition f-I curve | 64.08s | bounded batch, one run |
+| 7 | ch31 entraining E cells 1 | 42.33s | bounded batch, one run |
+| 8 | ch32 Poisson PING 2 | 38.28s | bounded batch, one run |
+| 9 | ch38 population statistics | 36.71s | bounded batch, one run |
+| 10 | ch32 Poisson PING 3 | 35.34s | bounded batch, one run |
+| 11 | ch32 Poisson PING 3 voltage | 34.75s | bounded batch, one run |
+| 12 | ch32 PING clusters | 32.20s | bounded batch, one run |
+| 13 | ch37 PING threshold zoom | 31.77s | bounded batch, one run |
+| 14 | ch39 three-cell PING 5 | 29.41s | bounded batch, one run |
+| 15 | ch33 PINB 1 | 28.24s | bounded batch, one run |
+| 16 | ch14 HH reduced cycle distance | 27.06s | three-run median |
+| 17 | ch33 PINB 3 | 26.68s | bounded batch, one run |
+| 18 | ch33 M-current PING 7 | 25.92s | bounded batch, one run |
+| 19 | ch33 M-current PING 6 | 25.84s | bounded batch, one run |
+| 20 | ch33 M-current beta with gap junction | 25.81s | bounded batch, one run |
+| 21 | ch33 PINB 2 | 24.55s | bounded batch, one run |
+| 22 | ch30 PING 7 | 17.73s | exact node, one run |
+| 23 | ch30 PING 8 | 16.37s | exact node, one run |
+| 24 | ch30 PING 9 | 14.99s | exact node, one run |
+| 25 | ch31 ING 10 | 14.88s | bounded batch, one run |
+| 26 | ch31 ING 9 | 14.20s | bounded batch, one run |
+| 27 | ch31 ING 6 | 13.88s | bounded batch, one run |
+| 28 | ch31 ING 5 | 13.87s | bounded batch, one run |
+| 29 | ch31 ING 2 | 13.74s | bounded batch, one run |
+| 30 | ch31 ING 8 | 13.64s | bounded batch, one run |
+| 31 | ch31 ING 4 | 13.58s | bounded batch, one run |
+| 32 | ch31 ING 7 | 13.39s | bounded batch, one run |
+| 33 | ch31 ING 3 | 13.14s | bounded batch, one run |
+| 34 | ch37 PING threshold | 12.99s | bounded batch, one run |
+| 35 | ch33 M-current PING 5 | 11.62s | bounded batch, one run |
+| 36 | ch33 M-current PING 4 | 11.29s | bounded batch, one run |
+| 37 | ch24 E-to-E network 1 | 9.98s | exact node, one run |
+| 38 | ch24 splay-state network | 8.71s | exact node, one run |
+| 39 | ch38 reproducible and active | 7.41s | bounded batch, one run |
+| 40 | ch38 phase response, mismatched pulses | 6.78s | bounded batch, one run |
+| 41 | ch18 h-current | 6.58s | bounded batch, one run |
+| 42 | ch38 phase response, plus pulses | 6.58s | bounded batch, one run |
+| 43 | ch18 modified tau-r | 6.55s | bounded batch, one run |
+| 44 | ch23 f-entrainment plot | 6.38s | bounded batch, one run |
+| 45 | ch09 notebook smoke | 6.24s | bounded batch, one run |
+| 46 | ch17 HH legacy f-I | 5.35s | three-run median |
+| 47 | ch01 HH voltage trace | 4.50s | bounded batch, one run |
+| 48 | ch38 gamma coherence 2 | 4.38s | bounded batch, one run |
+| 49 | ch20 RTM q plot | 4.34s | bounded batch, one run |
+| 50 | ch31 one-cell ING condition numbers | 3.66s | bounded batch, one run |
+| 51 | ch38 gamma coherence 1 | 2.93s | bounded batch, one run |
+| 52 | ch12 RTM 2D fixed point | 2.71s | bounded batch, one run |
+| 53 | ch39 WB depressing-s | 2.40s | bounded batch, one run |
+| 54 | ch32 phi plot | 2.35s | bounded batch, one run |
+| 55 | ch27 delayed pulse-coupled oscillators | 2.00s | bounded batch, one run |
+| 56 | ch35 oscillations | 1.89s | bounded batch, one run |
+| 57 | ch14 Erisir 2D fixed point | 1.88s | bounded batch, one run |
+| 58 | ch37 no-reset | 1.88s | bounded batch, one run |
+| 59 | ch36 idealized f-I | 1.87s | bounded batch, one run |
+| 60 | ch17 RTM onset legacy f-I | 1.11s | three-run median |
+| 61 | ch17 RTM legacy f-I | 0.79s | three-run median |
+| 62 | ch22 phase plane | 0.72s | bounded batch, one run |
+| 63 | ch32 psi-phi plot | 0.43s | bounded batch, one run |
+| 64 | ch22 rastergram | 0.42s | bounded batch, one run |
+| 65 | ch35 periodic inhibition 2 | 0.39s | bounded batch, one run |
+| 66 | ch20 s buildup | 0.38s | bounded batch, one run |
+| 67 | ch20 slow s buildup | 0.37s | bounded batch, one run |
+| 68 | ch08 theta firing | 0.34s | bounded batch, one run |
+| 69 | ch32 psi plot | 0.23s | bounded batch, one run |
+| 70 | ch20 prescribed-tau plot | 0.13s | bounded batch, one run |
+| 71 | loader repeated-load isolation | 0.13s | bounded batch, one run |
+| 72 | ch20 two-stage s simulation | 0.12s | bounded batch, one run |
+| 73 | ch35 periodic inhibition | 0.09s | bounded batch, one run |
+| 74 | ch35 periodic inhibition 3 | 0.07s | bounded batch, one run |
+| 75 | ch10 HH h+n | 0.07s | bounded batch, one run |
+| 76 | ch05 Erisir voltage trace | 0.06s | bounded batch, one run |
+| 77 | ch07 HH subthreshold | 0.05s | bounded batch, one run |
+| 78 | ch10 reduced HH | 0.04s | bounded batch, one run |
+| 79 | ch05 WB 1996 voltage trace | 0.03s | bounded batch, one run |
+| 80 | ch08 QIF voltage trace | 0.03s | bounded batch, one run |
+| 81 | ch05 WB voltage trace | 0.03s | bounded batch, one run |
+| 82 | ch13 notebook smoke | 0.03s | bounded batch, one run |
+| 83 | ch07 LIF voltage trace | 0.02s | bounded batch, one run |
+| 84 | documentation relative links | 0.02s | bounded batch, one run |
+| 85 | ch03 HH gating variables | 0.01s | bounded batch, one run |
+| 86 | ch07 LIF voltage trace 2 | 0.01s | bounded batch, one run |
+| 87 | ch22 Wilson-Cowan E+I | 0.01s | bounded batch, one run |
+| 88 | ch38 shared-input case | 0.01s | bounded batch, one run |
+| 89 | whole-notebook-loader regression guard | 0.01s | bounded batch, one run |
 
-Additional cap-active calls with only contextual lower bounds were recorded but not ranked as completed timings: chapter-32 M-current PING 1 close-up, M-current PING 2 close-up, and Poisson PING 1; chapter-33 M-current PING 8; chapter-35 periodic-inhibition f-I curve 2; chapter-37 thresholding; the final chapter-38 phase-statistics case; and chapter-40 PING with STDP.
+Cap/lower-bound ordering, all above the 107.86s completed maximum: PING 6 >115s; ING entraining E cells 2 >115s; both chapter-35 RTM inhibition calls >115s; chapter-36 pulsed excitation variant 2 >115s; chapter-36 pulsed excitation variant 1 >113s contextual lower bound. Additional context-only cap-active calls without attributable numerical lower bounds were chapter-32 M-current PING 1 close-up, M-current PING 2 close-up, and Poisson PING 1; chapter-33 M-current PING 8; chapter-35 periodic-inhibition f-I curve 2; chapter-37 thresholding; the final chapter-38 phase-statistics case; and chapter-40 PING with STDP.
 
 ## Classification Evidence
 
@@ -473,15 +539,15 @@ These commands did not modify tracked files; they loaded definitions and called 
 
 Path: `docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md`
 
-Commit: `fca954d`
+Commits: `fca954d` (original plan), `937681f` (review-corrected plan)
 
-The plan contains seven implementation tasks with exact files, functions, tests, measured baselines, numerical assertions, and after-times. Tasks 1-5 use smaller workloads or callable smoke entry points. Task 6 uses cached Numba only for dense chapter-35/36 scans whose grid resolution is part of the numerical contract. Task 7 re-verifies Brian deselection and the bounded non-Brian suite.
+The plan contains seven implementation tasks with exact files, functions, tests, measured baselines, numerical assertions, and after-times. Tasks 1-5 use only measured smaller workloads or callable smoke entry points. Task 6 first removes import-time curve execution, then accepts cached Numba only when independent Python/JIT equivalence and fresh-cache cold cost both pass. Task 7 re-verifies Brian deselection and the bounded non-Brian suite.
 
 ## Self-Review
 
 - **Spec coverage:** Brian deselection, exact required profiling commands, three-run stability, bounded remaining-suite coverage, hotspot classification, a measured follow-up plan, and artifact-only commits are all covered.
 - **No-placeholder review:** searched the plan for `TBD`, `TODO`, `implement later`, `fill in details`, generic error-handling language, “Similar to,” and ellipsis placeholders; no unresolved implementation placeholder remains.
-- **Interface consistency:** test calls match planned signatures (`t_final_run`, `run_connectivity_panels`, `run_drive_panels`, `run_smoke`, `simulate_from_rest`, and `i_ext_values`). Return tuple orders are stated at each producer and consumed in the matching test snippet.
+- **Interface consistency:** test calls match planned signatures (`t_final_run`, `run_connectivity_panels`, `run_drive_panels`, `run_smoke`, `i_values`, and `i_ext_values`). Return tuple orders are stated at each producer and consumed in the matching test snippet.
 - **Scope review:** no Brian file appears in the plan's modification list. No production/test optimization was implemented in Task 3.
 - **Evidence review:** after-times are tied to measured cold-process baselines or measured smaller-workload trials, not source appearance.
 
@@ -490,4 +556,123 @@ The plan contains seven implementation tasks with exact files, functions, tests,
 1. The monolithic suite cannot currently provide a trustworthy total duration or final all-tests result within a practical profiling window; bounded file/node execution is required until the dominant loops are reduced.
 2. `test_inventory_matches_all_python_chapter_directories` is a reproducible pre-existing failure caused by the converted chapter-18 notebook coexisting with its legacy directory. It is outside this performance task.
 3. Several cap-active nodes have lower bounds rather than completed timings. They are recorded but excluded from three-run stability claims.
-4. The chapter-35/36 Numba step must pass the plan's three-point `rtol=0, atol=1e-10` comparisons before the full-grid speedup is accepted.
+4. The chapter-35/36 Numba step must pass the plan's independent Python/JIT three-point `rtol=0, atol=1e-10` comparisons and fresh-cache cold-cost gate before the full-grid speedup is accepted; otherwise Numba is removed for that script.
+
+## Fix Round 1: Review Findings
+
+Date: 2026-08-11
+
+Plan fix commit: `937681f docs: correct non-brian performance plan`
+
+### Changes made
+
+1. Replaced the incomplete hotspot table with a complete descending profile of all 89 completed call-duration lines. Stable chapter-14/17 reproductions occur once at their medians. The six attributable cap/lower-bound calls are separate because they cannot be numerically interleaved with completed values. The plan maps all 54 retained calls (46 completed calls at or above 5s, two required sub-5s chapter-17 reproductions, and six cap/lower-bound calls) to an exact task or an evidence-based deferral.
+2. Revised Task 6 so loading any targeted chapter-35/36 script creates no curve arrays and runs no scan. Tests call `compute_f_i_curve` or `compute_f_i_curves`; the unchanged full-grid call and plotting occur only below the main guard.
+3. Replaced rebound-global Numba aliases with separately named Python functions and JIT dispatchers. Equivalence goes through public `use_numba=False` and `use_numba=True` paths. Cold validation uses a fresh `mktemp` cache directory and warm validation reuses it. The plan removes Numba independently from any script whose cold end-to-end time is not a net gain.
+4. Changed PING 6 to build and simulate panel 1, then build and simulate panel 2, then build and simulate panel 3, preserving module RNG consumption.
+5. Narrowed Task 5 to the only measured variant, M-current PING 1. Its sole interface is `run_smoke(t_final_run=t_final)` returning `(t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes, v_plot)`; no from-rest interface remains.
+6. Explicitly deferred all four unmeasured M-current variants rather than extrapolating the PING-1 trial.
+7. Removed the optional threshold-correction step. Final verification forbids numerical-threshold changes outside the exact assertions specified in Tasks 1-6.
+
+No production or test optimization was implemented.
+
+### Covering validation commands and exact output
+
+Ranking consistency and retained-hotspot coverage:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+import re
+plan = Path('docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md').read_text()
+report = Path('.superpowers/sdd/2026-08-11-python-notebook-test-loader-performance/task-3-report.md').read_text()
+section = report.split('## Complete Ranked Call-Duration Profile', 1)[1].split('## Classification Evidence', 1)[0]
+rows = []
+for line in section.splitlines():
+    match = re.match(r'\| (\d+) \| (.*?) \| ([0-9.]+)s \|', line)
+    if match:
+        rows.append((int(match.group(1)), match.group(2), float(match.group(3))))
+assert [rank for rank, _, _ in rows] == list(range(1, len(rows) + 1))
+assert all(a[2] >= b[2] for a, b in zip(rows, rows[1:]))
+retained = [(name, timing) for _, name, timing in rows if timing >= 5.0]
+assert len(retained) == 46
+for required in ['28.24s', '26.68s', '25.92s', '27.06s median', '5.35s median', '1.11s median', '0.79s median']:
+    assert required in plan, required
+plan_dispositions = re.findall(r'^\| (\d+) \| .*? \| .*? \| (Task \d|Defer:)', plan, flags=re.M)
+assert [int(rank) for rank, _ in plan_dispositions] == list(range(1, 55))
+assert all(disposition.startswith(('Task ', 'Defer:')) for _, disposition in plan_dispositions)
+print(f'ranking: {len(rows)} completed calls, ranks contiguous and non-increasing')
+print(f'coverage: {len(retained)} calls >=5s plus 2 required sub-5s chapter-17 calls; 6 cap/lower-bound calls')
+print(f'dispositions: {len(plan_dispositions)}/54 retained calls mapped to a task or explicit deferral')
+PY
+```
+
+```text
+ranking: 89 completed calls, ranks contiguous and non-increasing
+coverage: 46 calls >=5s plus 2 required sub-5s chapter-17 calls; 6 cap/lower-bound calls
+dispositions: 54/54 retained calls mapped to a task or explicit deferral
+```
+
+Placeholder scan:
+
+```bash
+rg -n 'TBD|TODO|implement later|fill in details|Similar to|\.\.\.|# existing|first_kernel|threshold corrections|simulate_from_rest|rest_duration|driven_duration|py\.f_vec|return \[simulate' \
+  docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md
+```
+
+Output: none; exit code 1, meaning none of the forbidden placeholder, removed interface, import-global, or old RNG-order patterns remained.
+
+Markdown fence balance:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+for name in [Path('docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md'), Path('.superpowers/sdd/2026-08-11-python-notebook-test-loader-performance/task-3-report.md')]:
+    count = sum(line.startswith('```') for line in name.read_text().splitlines())
+    print(f'{name}: fences={count}; balanced={count % 2 == 0}')
+PY
+```
+
+```text
+docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md: fences=56; balanced=True
+.superpowers/sdd/2026-08-11-python-notebook-test-loader-performance/task-3-report.md: fences=80; balanced=True
+```
+
+Interface/name consistency:
+
+```bash
+rg -n 'run_smoke|simulate_from_rest|rest_duration|driven_duration|compute_f_i_curve|compute_f_i_curves|f_vec_tonic|f_vec_periodic|f_vec_constant|f_vec_pulsed' \
+  docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md
+```
+
+Exact conclusions from the matching lines: `run_smoke` has one signature and one five-array return order; none of `simulate_from_rest`, `rest_duration`, or `driven_duration` occurs; Task 6 consistently uses `compute_f_i_curve(i_values, use_numba)` for LIF and `compute_f_i_curves(i_ext_values, use_numba)` for RTM; legacy result names appear only in absence checks, returned-value assignments, and the documented main path.
+
+Diff checks before the plan commit:
+
+```bash
+git diff --check
+git diff --stat
+git status --short
+```
+
+```text
+ .../task-3-report.md                               | 129 ++++++---
+ ...026-08-11-non-brian-python-suite-performance.md | 315 +++++++++++----------
+ 2 files changed, 261 insertions(+), 183 deletions(-)
+ M .superpowers/sdd/2026-08-11-python-notebook-test-loader-performance/task-3-report.md
+ M docs/superpowers/plans/2026-08-11-non-brian-python-suite-performance.md
+```
+
+`git diff --check` emitted no output and exited 0.
+
+### Fix-round self-review
+
+- Ranking ranks all completed call timings numerically and keeps imprecise lower bounds separate.
+- Every retained call has a task or explicit deferral; in particular the former omitted 94.17s, 38.28s, 28.24s, 26.68s, and 25.92s calls are covered.
+- No Task 6 target performs a scan during `load_python_port`; Python/JIT equivalence does not depend on rebound globals.
+- PING-6 panel construction/simulation stays sequential, and Task 5 contains no unmeasured variant or contradictory interface.
+- Task 7 contains no optional numerical-contract changes.
+
+### Fix-round concerns
+
+The complete table is a bounded-run substitute for the unavailable monolithic `--durations=50` result; timings come from the exact commands already transcribed above and do not establish a full-suite pass. Context-only cap-active calls remain explicitly unranked and deferred because the bounded run never produced attributable call durations for them.
