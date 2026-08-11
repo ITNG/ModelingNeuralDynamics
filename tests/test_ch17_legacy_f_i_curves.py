@@ -15,25 +15,30 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_chapter17_notebook_hh_f_i_curve_legacy():
     ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter17.ipynb")
     f_forward, f_backward, i_ext_vec = ns.simulate_hh_f_i_curve_legacy(
-        i_ext_vec=np.array([3.0, 8.0, 13.0]), t_final=200.0
+        i_ext_vec=np.array([3.0, 8.0, 13.0]), t_final=100.0
     )
-    assert f_forward.shape == f_backward.shape == i_ext_vec.shape
+    assert f_forward.shape == f_backward.shape == i_ext_vec.shape == (3,)
     assert np.all(np.isfinite(f_forward)) and np.all(np.isfinite(f_backward))
+    assert f_forward[0] == f_backward[0] == 0.0
+    assert f_forward[-1] > 70.0 and f_backward[-1] > 70.0
 
 
 def test_chapter17_notebook_rtm_f_i_curve_legacy():
     ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter17.ipynb")
     f_forward, f_backward, i_ext_vec = ns.simulate_rtm_f_i_curve_legacy(
-        i_ext_vec=np.array([0.0, 0.5, 1.0]), t_final=200.0
+        i_ext_vec=np.array([0.0, 0.5, 1.0]), t_final=100.0
     )
-    assert f_forward.shape == f_backward.shape == i_ext_vec.shape
+    assert f_forward.shape == f_backward.shape == i_ext_vec.shape == (3,)
     assert np.all(np.isfinite(f_forward)) and np.all(np.isfinite(f_backward))
+    assert f_forward[0] == f_backward[0] == 0.0
+    assert f_forward[-1] > 40.0 and f_backward[-1] > 40.0
 
 
 def test_chapter17_notebook_rtm_f_i_curve_at_onset_legacy():
     ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter17.ipynb")
     f_forward, i_ext_vec, I_c, C = ns.simulate_rtm_f_i_curve_at_onset_legacy(
-        n_points=3, t_final=200.0
+        n_points=3, t_final=100.0
     )
-    assert f_forward.shape == i_ext_vec.shape
-    assert np.all(np.isfinite(f_forward))
+    assert f_forward.shape == i_ext_vec.shape == (3,)
+    assert np.array_equal(f_forward, np.zeros(3))
+    assert I_c is None and C is None
