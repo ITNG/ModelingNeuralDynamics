@@ -36,18 +36,13 @@ potassium-gate exponent selected by the model. Dynamic gates obey
 
 ## Code examples
 
-- [`RTM_VOLTAGE_TRACE`](RTM_VOLTAGE_TRACE/) runs the RTM model and saves
-  `fig_5_2.png`.
-- [`WB_VOLTAGE_TRACE`](WB_VOLTAGE_TRACE/) runs the WB trace in `main.py`,
-  saving `fig_5_3.png`; the alternate `main_wb_1996.py` entry point saves
-  `fig_5_3_1996.png`.
-- [`ERISIR_VOLTAGE_TRACE`](ERISIR_VOLTAGE_TRACE/) uses the Erisir model with
-  an \(n^2\) potassium term and saves `fig_5_4.png`.
-- [`ERISIR_VOLTAGE_TRACE_2`](ERISIR_VOLTAGE_TRACE_2/) changes that potassium
-  term to \(n^4\) and saves `fig_5_4_2.png`.
-- [`THREE_MODELS_GATING_VARIABLES`](THREE_MODELS_GATING_VARIABLES/) contains
-  `RTM_GATING_VARIABLES/main.py`, which plots RTM gate steady states and time
-  constants as `fig_5_1.png`.
+All five examples now live in one notebook, [`chapter05.ipynb`](chapter05.ipynb):
+`simulate_rtm_voltage_trace` runs the RTM model; `simulate_rtm_gating_variables`
+plots RTM gate steady states and time constants; `simulate_wb_voltage_trace`
+and `simulate_wb_voltage_trace_1996` run the two WB parameterizations;
+`simulate_erisir_voltage_trace(n_power=...)` covers both Erisir variants
+(\(n^2\) and \(n^4\)). Each has an `ipywidgets` slider to explore its
+parameters interactively.
 
 ## What to look for
 
@@ -69,9 +64,7 @@ kinetics. Chapter 09 extends the RTM model with slow adaptation currents.
 
 ## Running the examples
 
-Run each `main.py` from its example directory with `python main.py`. The
-alternate WB implementation can be run with `python main_wb_1996.py` from
-`WB_VOLTAGE_TRACE`. The nested gating example is run from
-`THREE_MODELS_GATING_VARIABLES/RTM_GATING_VARIABLES` with `python main.py`.
-All examples require SciPy, NumPy, and Matplotlib/Pylab and save PNGs in their
-current working directory.
+Open [`chapter05.ipynb`](chapter05.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook. Run all cells top to bottom; each
+section's static figure reproduces the book's plot, and the `interact(...)`
+cell below it lets you adjust that example's parameters with sliders.
