@@ -2,18 +2,18 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port, run_matlab_script
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "16_Model_Neurons_of_Bifurcation_Type_3/SELF_EXCITING_THETA_SMOOTH"
 MATLAB_DIR = "16/SELF_EXCITING_THETA_SMOOTH"
 
 
 @pytest.mark.slow
 def test_self_exciting_theta_smooth_matches_matlab():
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter16.ipynb")
+    t, theta, w, w_max = ns.simulate_self_exciting_theta_smooth()
     ref = run_matlab_script(ROOT / "matlab" / MATLAB_DIR, "make_figure.m", ["theta", "w"])
 
-    assert np.allclose(py.theta, ref["theta"], atol=1e-6)
-    assert np.allclose(py.w, ref["w"], atol=1e-6)
+    assert np.allclose(theta, ref["theta"], atol=1e-6)
+    assert np.allclose(w, ref["w"], atol=1e-6)

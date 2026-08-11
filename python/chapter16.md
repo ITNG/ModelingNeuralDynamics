@@ -28,16 +28,15 @@ instantaneous persistent sodium activation, and $I$ is applied current.
 
 ## Code examples
 
-- [`INAPIK_FIXED_POINTS`](INAPIK_FIXED_POINTS/) scans current and classifies
-  INaP-I$_K$ equilibria in `fig.png`.
-- [`INAPIK_PHASE_PLANE`](INAPIK_PHASE_PLANE/) plots phase-plane trajectories,
-  fixed points, and cycles at several currents in `fig.png`.
-- [`SELF_EXCITING_THETA_NEURON`](SELF_EXCITING_THETA_NEURON/) simulates a
-  theta neuron with discrete slow-state increments and saves `fig.png`.
-- [`SELF_EXCITING_THETA_SMOOTH`](SELF_EXCITING_THETA_SMOOTH/) uses smooth slow
-  feedback in the theta model and saves `fig.png`.
-- [`SETN_PHASE_PLANE`](SETN_PHASE_PLANE/) draws theta--slow-state phase planes
-  and threshold markers in `fig.png`.
+All five examples now live in one notebook, [`chapter16.ipynb`](chapter16.ipynb):
+`simulate_inapik_fixed_points` scans current and classifies INaP-I$_K$
+equilibria; `simulate_inapik_phase_plane` plots phase-plane trajectories,
+fixed points, and cycles at several currents; `simulate_self_exciting_theta_neuron`
+simulates a theta neuron with discrete slow-state increments;
+`simulate_self_exciting_theta_smooth` uses smooth slow feedback in the
+theta model; `simulate_setn_phase_plane` draws theta-slow-state phase
+planes and threshold markers. The two theta-neuron voltage-trace examples
+have `ipywidgets` sliders.
 
 ## What to look for
 
@@ -60,5 +59,7 @@ INaP-I$_K$ and theta models.
 
 ## Running the examples
 
-Run `python main.py` from each immediate example directory. Every script uses
-NumPy and Matplotlib and saves `fig.png` locally.
+Open [`chapter16.ipynb`](chapter16.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom. The
+`SETN_PHASE_PLANE` cell is noticeably slower than the others (a couple of
+minutes).
