@@ -29,32 +29,20 @@ models numerically count threshold crossings after transients.
 
 ## Code examples
 
-- [`LIF_F_I_CURVE`](LIF_F_I_CURVE/) plots the analytic LIF f--I curve in
-  `fig.png`.
-- [`THETA_F_I_CURVE`](THETA_F_I_CURVE/) plots the theta-neuron f--I relation in
-  `fig.png`.
-- [`SETN_F_I`](SETN_F_I/) computes the self-exciting theta f--I curve in
-  `fig.png`.
-- [`HH_F_I_CURVE`](HH_F_I_CURVE/) runs forward and backward HH scans with
-  `HH_F_I_CURVE.py`, saves data files, and writes `fig_17_1.png`.
-- [`HH_REDUCED_F_I_CURVE`](HH_REDUCED_F_I_CURVE/) computes forward and backward
-  reduced-HH rates in `fig.png`.
-- [`RTM_F_I_CURVE`](RTM_F_I_CURVE/) performs the RTM scan with
-  `RTM_F_I_CURVE.py` and saves `fig_17_1.png`.
-- [`RTM_F_I_CURVE_AT_ONSET`](RTM_F_I_CURVE_AT_ONSET/) resolves RTM onset with
-  `RTM_F_I_CURVE_AT_ONSET.py` and saves `fig_17_5.png`.
-- [`RTM_WITH_M_CURRENT_F_I`](RTM_WITH_M_CURRENT_F_I/) measures the adapting
-  RTM model's f--I curve in `fig.png`.
-- [`ERISIR_F_I_CURVE`](ERISIR_F_I_CURVE/) computes Erisir forward and backward
-  branches in `fig.png`.
-- [`INAPIK_F_I_CURVE`](INAPIK_F_I_CURVE/) computes INaP-I$_K$ forward and
-  backward branches in `fig.png`.
-- [`INAPIK_SADDLE_CYCLE_DISTANCE`](INAPIK_SADDLE_CYCLE_DISTANCE/) plots the
-  distance between an INaP-I$_K$ saddle and cycle in `fig.png`.
-- [`WB_F_I_CURVE`](WB_F_I_CURVE/) computes the Wang--Buzsaki f--I curve in
-  `fig.png`.
-- [`WB_F_I_CURVE_AT_ONSET`](WB_F_I_CURVE_AT_ONSET/) magnifies Wang--Buzsaki
-  onset behavior in `fig.png`.
+All ten primary examples (plus three legacy full-model variants) now live
+in one notebook, [`chapter17.ipynb`](chapter17.ipynb): `simulate_lif_f_i_curve`
+and `simulate_theta_f_i_curve` plot the analytic LIF and theta-neuron f-I
+curves; `simulate_setn_f_i` computes the self-exciting theta f-I curve;
+`simulate_hh_reduced_f_i_curve`, `simulate_erisir_f_i_curve`, and
+`simulate_wb_f_i_curve` compute forward/backward reduced-HH, Erisir, and
+Wang-Buzsaki rates; `simulate_wb_f_i_curve_at_onset` magnifies WB onset
+behavior; `simulate_rtm_with_m_current_f_i` measures the adapting RTM
+model's f-I curve; `simulate_inapik_f_i_curve` computes INaP-I$_K$
+forward/backward branches; `simulate_inapik_saddle_cycle_distance` plots
+the distance between an INaP-I$_K$ saddle and cycle. A "Legacy Full-Model
+F-I Curves" section preserves the original (untested) full HH and RTM RK4
+scans as `simulate_hh_f_i_curve_legacy`, `simulate_rtm_f_i_curve_legacy`,
+and `simulate_rtm_f_i_curve_at_onset_legacy`.
 
 ## What to look for
 
@@ -77,7 +65,8 @@ bistability visible in some forward/backward curves.
 
 ## Running the examples
 
-Run `python main.py` in directories that contain `main.py`. For the legacy HH
-and RTM directories, run `python HH_F_I_CURVE.py`, `python RTM_F_I_CURVE.py`,
-or `python RTM_F_I_CURVE_AT_ONSET.py` as appropriate; their `fff.py` scripts
-replot saved scan data. These long scans use NumPy, SciPy, and Matplotlib.
+Open [`chapter17.ipynb`](chapter17.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom. Most
+scans are a forward+backward sweep over dozens of currents and take tens
+of seconds to a few minutes each; the notebook notes the slower ones
+inline.

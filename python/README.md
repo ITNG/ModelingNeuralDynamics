@@ -28,7 +28,7 @@ linked from this index.
 - [Chapter 14: Model Neurons of Bifurcation Type 2](chapter14.md)
 - [Chapter 15: Canard Explosions](chapter15.md)
 - [Chapter 16: Model Neurons of Bifurcation Type 3](chapter16.md)
-- [Chapter 17: Frequency-Current Curves](17_Frequency_Current_Curves/README.md)
+- [Chapter 17: Frequency-Current Curves](chapter17.md)
 - [Chapter 18: Bistability Resulting from Rebound Firing](18_Bistability_Resulting_from_Rebound_Firing/README.md)
 - [Chapter 19: Bursting](19_Bursting/README.md)
 
