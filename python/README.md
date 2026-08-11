@@ -12,10 +12,10 @@ linked from this index.
 
 ## Foundations and single-neuron models (Chapters 1-9)
 
-- [Chapter 1: Modeling a Single Neuron](01_Modeling_a_Single_Neuron/README.md)
-- [Chapter 3: The Classical HH ODEs](03_The_Classical_HH_ODEs/README.md)
-- [Chapter 4: Numerical Solution of HH ODEs](04_Numerical_Solution_of_HH_ODEs/README.md)
-- [Chapter 5: The Simple Model of Neurons in Rodent Brains](05_The_Simple_Model_of_Neurons_in_Rodent_Brains/README.md)
+- [Chapter 1: Modeling a Single Neuron](chapter01.md)
+- [Chapter 3: The Classical HH ODEs](chapter03.md)
+- [Chapter 4: Numerical Solution of HH ODEs](chapter04.md)
+- [Chapter 5: The Simple Model of Neurons in Rodent Brains](chapter05.md)
 - [Chapter 7: Linear Integrate-and-Fire (LIF) Neurons](07_Linear_Integrate_and_Fire_%28LIF%29_Neurons/README.md)
 - [Chapter 8: Quadratic Integrate-and-Fire (QIF) and Theta Neurons](08_Quadratic_Integrate_and_Fire_%28QIF%29_and_Theta_Neurons/README.md)
 

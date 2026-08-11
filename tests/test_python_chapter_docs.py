@@ -59,11 +59,32 @@ REQUIRED_HEADINGS = (
 LINK_RE = re.compile(r"\[[^\]]+\]\((?:<([^>]+)>|([^)]+))\)")
 
 
+def chapter_number(chapter: str) -> str:
+    return chapter.split("_", 1)[0]
+
+
+def notebook_path(chapter: str) -> Path:
+    return PYTHON_ROOT / f"chapter{chapter_number(chapter)}.ipynb"
+
+
+def is_converted(chapter: str) -> bool:
+    """True once a chapter's main.py scripts have been replaced by a
+    chapterNN.ipynb notebook -- its guide then moves from
+    python/<chapter>/README.md to a flat python/chapterNN.md next to the
+    notebook, and the python/<chapter>/ directory is deleted entirely.
+    """
+    return notebook_path(chapter).is_file()
+
+
 def guide_path(chapter: str) -> Path:
+    if is_converted(chapter):
+        return PYTHON_ROOT / f"chapter{chapter_number(chapter)}.md"
     return PYTHON_ROOT / chapter / "README.md"
 
 
 def example_directories(chapter: str) -> list[Path]:
+    if is_converted(chapter):
+        return []
     return sorted(
         path
         for path in (PYTHON_ROOT / chapter).iterdir()
@@ -110,7 +131,14 @@ def test_inventory_matches_all_python_chapter_directories() -> None:
         for path in PYTHON_ROOT.iterdir()
         if path.is_dir() and re.match(r"^\d{2}_", path.name)
     }
-    assert set(CHAPTERS) == actual - {"09_Spike_Frequency_Adaptation"}
+    non_converted = {chapter for chapter in CHAPTERS if not is_converted(chapter)}
+    assert non_converted == actual - {"09_Spike_Frequency_Adaptation"}
+    for chapter in CHAPTERS:
+        if is_converted(chapter):
+            assert not (PYTHON_ROOT / chapter).exists(), (
+                f"{chapter}/ should be deleted once converted to {notebook_path(chapter).name}"
+            )
+            assert guide_path(chapter).is_file()
     assert len(CHAPTERS) == 37
 
 
@@ -119,8 +147,11 @@ def test_python_index_links_every_chapter() -> None:
     assert index.is_file()
     text = index.read_text(encoding="utf-8")
     for chapter in CHAPTERS:
-        encoded = chapter.replace("(", "%28").replace(")", "%29")
-        assert f"({encoded}/README.md)" in text
+        if is_converted(chapter):
+            assert f"({guide_path(chapter).name})" in text
+        else:
+            encoded = chapter.replace("(", "%28").replace(")", "%29")
+            assert f"({encoded}/README.md)" in text
     assert "Chapters 2 and 6" in text
     assert "Chapter 9" in text
     assert "(09_Spike_Frequency_Adaptation/README.md)" not in text
