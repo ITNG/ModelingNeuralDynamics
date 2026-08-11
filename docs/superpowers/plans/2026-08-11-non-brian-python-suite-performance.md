@@ -452,11 +452,18 @@ git commit -m "test: bound measured m-current ping workload"
 
 ### Task 6: Make Dense Chapter-35/36 Scans Explicit and Validate Cold JIT Gain
 
-**Measured baselines and targets:** Chapter-35 periodic-inhibition f-I took 64.08s; both RTM inhibition variants exceeded 115s. Chapter-36 pulsed excitation consumed more than 113s for variant 1 and exceeded 115s for variant 2. The companion chapter-35 periodic-inhibition f-I variant was cap-active. These tests require their full 100/101/201-point grids. Each exact cold-process test must be **< 30s** and strictly faster than its own measured baseline or lower bound; warm reuse must not regress.
+**Measured baselines and targets:** Chapter-35 periodic-inhibition f-I took 64.08s; both RTM inhibition variants exceeded 115s. Chapter-36 pulsed excitation consumed more than 113s for variant 1 and exceeded 115s for variant 2. These five tests require their full 100/101/201-point grids. The companion chapter-35 periodic-inhibition f-I variant 2 remains deferred because profiling produced no attributable duration or lower bound.
+
+| Task 6 target | Measured evidence | Required fresh-cache call time |
+|---|---:|---:|
+| `test_periodic_inhibition_f_i_curve_structure` | 64.08s completed | <30s and <64.08s |
+| `test_rtm_f_i_curve_with_inhibition_structure` | >115s exact cap | <30s and <115s |
+| `test_rtm_f_i_curve_with_inhibition_2_structure` | >115s exact cap | <30s and <115s |
+| `test_rtm_f_i_curve_pulsed_excitation_structure` | >113s contextual lower bound | <30s and <113s |
+| `test_rtm_f_i_curve_pulsed_excitation_2_structure` | >115s exact cap | <30s and <115s |
 
 **Files:**
 - Modify: `python/35_Periodic_Inhibition/PERIODIC_INHIBITION_F_I_CURVE/main.py`
-- Modify: `python/35_Periodic_Inhibition/PERIODIC_INHIBITION_F_I_CURVE_2/main.py`
 - Modify: `python/35_Periodic_Inhibition/RTM_F_I_CURVE_WITH_INHIBITION/main.py`
 - Modify: `python/35_Periodic_Inhibition/RTM_F_I_CURVE_WITH_INHIBITION_2/main.py`
 - Modify: `python/36_F_I_Curves_Pulsed_Excitation/RTM_F_I_CURVE_PULSED_EXCITATION/main.py`
@@ -465,16 +472,16 @@ git commit -m "test: bound measured m-current ping workload"
 - Modify: `tests/test_ch36_f_i_curves_pulsed_excitation.py:17-38`
 
 **Interfaces:**
-- LIF scripts produce `compute_f_i_curve(i_values: np.ndarray = I_vec, use_numba: bool = True) -> np.ndarray`.
+- The LIF script produces `compute_f_i_curve(i_values: np.ndarray = I_vec, use_numba: bool = True) -> np.ndarray`.
 - RTM inhibition scripts produce `compute_f_i_curves(i_ext_values: np.ndarray = i_ext_vec, use_numba: bool = True) -> tuple[np.ndarray, np.ndarray]` in `(f_vec_tonic, f_vec_periodic)` order.
 - Pulsed-excitation scripts produce `compute_f_i_curves(i_ext_values: np.ndarray = i_ext_vec, use_numba: bool = True) -> tuple[np.ndarray, np.ndarray]` in `(f_vec_constant, f_vec_pulsed)` order.
 - `load_python_port` executes a module body, so no scan, connectivity construction, or curve array may be created at import time. Full-grid calls and plotting exist only inside `if __name__ == "__main__"`.
 
 - [ ] **Step 1: First make every full scan an explicit callable**
 
-For the two LIF scripts, move the current top-level nested loop unchanged into `_compute_f_i_curve_python(i_values)`. For the four RTM scripts, rename the existing numerical functions with `_python` suffixes, parameterize their current grids, and have `compute_f_i_curves` call them. Preserve current iteration order and state carry-over.
+For `PERIODIC_INHIBITION_F_I_CURVE`, move the current top-level nested loop unchanged into `_compute_f_i_curve_python(i_values)`. For the four RTM scripts, rename the existing numerical functions with `_python` suffixes, parameterize their current grids, and have `compute_f_i_curves` call them. Preserve current iteration order and state carry-over.
 
-In each LIF script, put `f_vec = compute_f_i_curve()` and every existing plot statement beneath its `if __name__ == "__main__"` guard. In each RTM script, put `f_vec_tonic, f_vec_periodic = compute_f_i_curves()` or `f_vec_constant, f_vec_pulsed = compute_f_i_curves()`, as appropriate, plus every existing plot statement beneath that guard.
+In `PERIODIC_INHIBITION_F_I_CURVE`, put `f_vec = compute_f_i_curve()` and every existing plot statement beneath its `if __name__ == "__main__"` guard. In each RTM script, put `f_vec_tonic, f_vec_periodic = compute_f_i_curves()` or `f_vec_constant, f_vec_pulsed = compute_f_i_curves()`, as appropriate, plus every existing plot statement beneath that guard.
 
 Update each test to load definitions, verify that legacy result globals are absent, then call the new interface explicitly:
 
@@ -493,7 +500,14 @@ Use corresponding `f_vec_constant`/`f_vec_pulsed` absence checks for chapter 36.
 
 - [ ] **Step 2: Create independent Python and compiled execution paths**
 
-Do not rebind any Python function name to a Numba dispatcher. Add `@numba.extending.register_jitable` directly above the existing scalar helper definitions (`g`; or `shape`, `m_inf`, `alpha_h`, `beta_h`, `alpha_n`, `beta_n`, `g_periodic`, and `step` as present in that script). This leaves each helper callable by CPython and makes it legal inside compiled outer loops.
+Add these exact imports to each of the five target scripts:
+
+```python
+from numba import njit
+from numba.extending import register_jitable
+```
+
+Do not rebind any Python function name to a Numba dispatcher. Add `@register_jitable` directly above the existing scalar helper definitions (`g`; or `shape`, `m_inf`, `alpha_h`, `beta_h`, `alpha_n`, `beta_n`, `g_periodic`, and `step` as present in that script). This leaves each helper callable by CPython and makes it legal inside compiled outer loops. Do not use a bare `numba` module name anywhere; `njit` and `register_jitable` are the two imported identifiers.
 
 Create dispatchers under new names only: `_compute_f_i_curve_jit = njit(cache=True)(_compute_f_i_curve_python)`, `_f_i_curve_tonic_jit = njit(cache=True)(_f_i_curve_tonic_python)`, `_f_i_curve_periodic_jit = njit(cache=True)(_f_i_curve_periodic_python)`, `_f_i_curve_constant_jit = njit(cache=True)(_f_i_curve_constant_python)`, and `_f_i_curve_pulsed_jit = njit(cache=True)(_f_i_curve_pulsed_python)`, using only the pairs present in each file.
 
@@ -501,7 +515,7 @@ In the LIF public wrapper, choose `_compute_f_i_curve_jit` when `use_numba` is t
 
 - [ ] **Step 3: Prove Python/JIT equivalence through the public callable**
 
-For each of the six scripts, compare a three-current probe through the two independent paths:
+For each of the five target scripts, compare a three-current probe through the two independent paths:
 
 ```python
 probe = np.array([grid[0], grid[len(grid) // 2], grid[-1]])
@@ -511,7 +525,7 @@ for expected_curve, actual_curve in zip(expected, actual):
     np.testing.assert_allclose(actual_curve, expected_curve, rtol=0.0, atol=1e-10)
 ```
 
-For LIF scripts, compare `compute_f_i_curve(i_values=probe, use_numba=False)` directly with `compute_f_i_curve(i_values=probe, use_numba=True)`. Keep all existing full-grid assertions: LIF plateau set including `0,40,80,120,160`; RTM 101-point silent-to-active endpoints; pulsed 201-point endpoints and more than ten rounded 40Hz samples.
+For `PERIODIC_INHIBITION_F_I_CURVE`, compare `compute_f_i_curve(i_values=probe, use_numba=False)` directly with `compute_f_i_curve(i_values=probe, use_numba=True)`. Keep all existing full-grid assertions: LIF plateau set including `0,40,80,120,160`; RTM 101-point silent-to-active endpoints; pulsed 201-point endpoints and more than ten rounded 40Hz samples.
 
 - [ ] **Step 4: Measure a truly cold cache, then warm reuse**
 
@@ -521,24 +535,22 @@ Create one fresh cache directory and reuse that exact directory for the second c
 cache_dir=$(mktemp -d /tmp/mnd-numba-task6.XXXXXX)
 NUMBA_CACHE_DIR="$cache_dir" /home/ziaee/envs/mnd/bin/python -m pytest -q \
   tests/test_ch35_periodic_inhibition.py::test_periodic_inhibition_f_i_curve_structure \
-  tests/test_ch35_periodic_inhibition.py::test_periodic_inhibition_f_i_curve_2_structure \
   tests/test_ch35_periodic_inhibition.py::test_rtm_f_i_curve_with_inhibition_structure \
   tests/test_ch35_periodic_inhibition.py::test_rtm_f_i_curve_with_inhibition_2_structure \
   tests/test_ch36_f_i_curves_pulsed_excitation.py::test_rtm_f_i_curve_pulsed_excitation_structure \
   tests/test_ch36_f_i_curves_pulsed_excitation.py::test_rtm_f_i_curve_pulsed_excitation_2_structure \
-  --durations=6
+  --durations=5
 
 NUMBA_CACHE_DIR="$cache_dir" /home/ziaee/envs/mnd/bin/python -m pytest -q \
   tests/test_ch35_periodic_inhibition.py::test_periodic_inhibition_f_i_curve_structure \
-  tests/test_ch35_periodic_inhibition.py::test_periodic_inhibition_f_i_curve_2_structure \
   tests/test_ch35_periodic_inhibition.py::test_rtm_f_i_curve_with_inhibition_structure \
   tests/test_ch35_periodic_inhibition.py::test_rtm_f_i_curve_with_inhibition_2_structure \
   tests/test_ch36_f_i_curves_pulsed_excitation.py::test_rtm_f_i_curve_pulsed_excitation_structure \
   tests/test_ch36_f_i_curves_pulsed_excitation.py::test_rtm_f_i_curve_pulsed_excitation_2_structure \
-  --durations=6
+  --durations=5
 ```
 
-Expected on both runs: `6 passed`; each call below 30s; cold periodic variant 1 is below 64.08s and each lower-bound case is below its >113s/>115s baseline. Record the generated `cache_dir` path with the timings.
+Expected on both runs: `5 passed`; each call satisfies its exact row in the target/evidence/gate table above. Record the generated `cache_dir` path with the timings.
 
 - [ ] **Step 5: Enforce the cold-cost decision gate**
 
@@ -549,7 +561,6 @@ Evaluate each script independently. If its fresh-cache call is not both below 30
 ```bash
 git add \
   python/35_Periodic_Inhibition/PERIODIC_INHIBITION_F_I_CURVE/main.py \
-  python/35_Periodic_Inhibition/PERIODIC_INHIBITION_F_I_CURVE_2/main.py \
   python/35_Periodic_Inhibition/RTM_F_I_CURVE_WITH_INHIBITION/main.py \
   python/35_Periodic_Inhibition/RTM_F_I_CURVE_WITH_INHIBITION_2/main.py \
   python/36_F_I_Curves_Pulsed_Excitation/RTM_F_I_CURVE_PULSED_EXCITATION/main.py \
@@ -590,7 +601,6 @@ Expected: zero selected, 95 deselected, pytest exit code 5 because no tests were
   tests/test_ch31_ing_entraining_e_cells.py::test_ing_entraining_e_cells_2_structure \
   tests/test_ch32_m_current_ping_poisson_ping.py::test_m_current_ping_1_structure \
   tests/test_ch35_periodic_inhibition.py::test_periodic_inhibition_f_i_curve_structure \
-  tests/test_ch35_periodic_inhibition.py::test_periodic_inhibition_f_i_curve_2_structure \
   tests/test_ch35_periodic_inhibition.py::test_rtm_f_i_curve_with_inhibition_structure \
   tests/test_ch35_periodic_inhibition.py::test_rtm_f_i_curve_with_inhibition_2_structure \
   tests/test_ch36_f_i_curves_pulsed_excitation.py::test_rtm_f_i_curve_pulsed_excitation_structure \
