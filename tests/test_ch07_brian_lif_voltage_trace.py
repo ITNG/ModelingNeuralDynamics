@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_notebook_as_module
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -16,7 +16,7 @@ def test_lif_voltage_trace_matches_analytic_period():
     fixed period t* = -tau_m*ln(1 - 1/(I*tau_m)), repeating identically
     every cycle since each reset returns to the same v=0 starting point.
     """
-    ns = load_notebook_as_module(ROOT / "brian" / "chapter07.ipynb")
+    ns = load_notebook_definitions_as_module(ROOT / "brian" / "chapter07.ipynb")
 
     tau_m, I = 10.0, 0.11
     t_star = -tau_m * np.log(1 - 1 / (I * tau_m))

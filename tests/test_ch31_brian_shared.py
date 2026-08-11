@@ -3,14 +3,14 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from matlab_ref import load_notebook_as_module, load_python_port
+from matlab_ref import load_notebook_definitions_as_module, load_python_port
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK = ROOT / "brian" / "chapter31.ipynb"
 
 
 def test_ch31_notebook_exposes_shared_helpers():
-    ns = load_notebook_as_module(NOTEBOOK)
+    ns = load_notebook_definitions_as_module(NOTEBOOK)
     py = load_python_port(
         ROOT / "python" / "31_ING_Rhythms" / "1_CELL_ING_CONDITION_NUMBERS" / "main.py"
     )
@@ -21,7 +21,7 @@ def test_ch31_notebook_exposes_shared_helpers():
 
 
 def test_probability_validation_is_explicit():
-    ns = load_notebook_as_module(NOTEBOOK)
+    ns = load_notebook_definitions_as_module(NOTEBOOK)
     assert ns.validate_probability("p_ii", 0.5) == 0.5
     with pytest.raises(ValueError, match="p_ii"):
         ns.validate_probability("p_ii", -0.01)

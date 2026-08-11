@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script, trace_rmse
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.mark.slow
 def test_inapik_plus_weak_slow_i_k_matches_matlab():
-    ns = load_notebook_as_module(ROOT / "brian" / "chapter19.ipynb")
+    ns = load_notebook_definitions_as_module(ROOT / "brian" / "chapter19.ipynb")
     sm = ns.simulate_inapik_slow_k(g_k_slow=4.0 * ns.b2.msiemens)
     t = sm.t / ns.b2.ms
     v = sm.v[0] / ns.b2.mV

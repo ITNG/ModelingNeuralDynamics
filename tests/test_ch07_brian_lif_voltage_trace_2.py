@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_notebook_as_module
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,7 +12,7 @@ def test_lif_voltage_trace_2_matches_analytic_period():
     so the exact period is 20 (time units), verified against the closed
     form rather than MATLAB's non-cumulative plotting arrays.
     """
-    ns = load_notebook_as_module(ROOT / "brian" / "chapter07.ipynb")
+    ns = load_notebook_definitions_as_module(ROOT / "brian" / "chapter07.ipynb")
 
     tau_m = 2.0
     I = 1 / (1 - np.exp(-20.0 / tau_m)) / tau_m

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from matlab_ref import load_notebook_as_module, run_matlab_script, trace_rmse
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script, trace_rmse
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.mark.slow
 def test_rtm_m_resting_matches_matlab():
-    ns = load_notebook_as_module(ROOT / "brian" / "chapter09.ipynb")
+    ns = load_notebook_definitions_as_module(ROOT / "brian" / "chapter09.ipynb")
     from mnd.brian.core import get_step_current
 
     current = get_step_current(0, 600, ns.b2.ms, 0.0 * ns.b2.uA)

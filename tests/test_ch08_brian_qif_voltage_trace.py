@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_notebook_as_module
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,7 +15,7 @@ def test_qif_voltage_trace_matches_analytic_period():
     T=2*tau_m/w*atan(1/(2w)) is the time for v to go from 0 to 1, which
     repeats every cycle since each reset returns to v=0.
     """
-    ns = load_notebook_as_module(ROOT / "brian" / "chapter08.ipynb")
+    ns = load_notebook_definitions_as_module(ROOT / "brian" / "chapter08.ipynb")
 
     tau_m, I = 2.0, 0.15
     w = np.sqrt(tau_m * I - 0.25)
