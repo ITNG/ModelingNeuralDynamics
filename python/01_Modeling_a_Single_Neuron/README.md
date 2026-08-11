@@ -35,9 +35,10 @@ are voltage-dependent opening and closing rates.
 
 ## Code examples
 
-- [`HH_VOLTAGE_TRACE`](HH_VOLTAGE_TRACE/) integrates the four HH state
-  variables from their voltage-dependent initial values and writes the voltage
-  trace to `fig_1_3.png`.
+The example now lives in [`chapter01.ipynb`](../chapter01.ipynb):
+`simulate_hh_voltage_trace` integrates the four HH state variables from
+their voltage-dependent initial values, and an `ipywidgets` slider lets you
+adjust `i_ext` interactively.
 
 ## What to look for
 
@@ -61,12 +62,7 @@ curves; Chapter 04 focuses on numerical trajectories.
 
 ## Running the examples
 
-From an example directory, run `python main.py`. For example:
-
-```bash
-cd HH_VOLTAGE_TRACE
-python main.py
-```
-
-The script uses SciPy's `odeint` and Matplotlib/Pylab and saves its figure in
-the current example directory.
+Open [`chapter01.ipynb`](../chapter01.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook. Run all cells top to bottom; the static
+figure reproduces the book's plot, and the `interact(...)` cell below it
+lets you adjust `i_ext` with a slider.
