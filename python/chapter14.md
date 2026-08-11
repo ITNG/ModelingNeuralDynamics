@@ -29,20 +29,19 @@ voltage, $n$ is a recovery gate, and $I$ is applied current.
 
 ## Code examples
 
-- [`ERISIR_REDUCED`](ERISIR_REDUCED/) compares three- and two-dimensional
-  Erisir voltage traces in `fig.png`.
-- [`ERISIR_2D_FP`](ERISIR_2D_FP/) classifies Erisir reduced fixed points across
-  current in `fig.png`.
-- [`HH_REDUCED_COUNT_FP`](HH_REDUCED_COUNT_FP/) prints the minimum and maximum
-  number of reduced HH fixed points over its current scan.
-- [`HH_REDUCED_FIXED_POINTS`](HH_REDUCED_FIXED_POINTS/) plots stable and
-  unstable reduced HH fixed-point branches in `fig.png`.
-- [`HH_REDUCED_FP_EVS`](HH_REDUCED_FP_EVS/) plots the real and imaginary parts
-  of fixed-point eigenvalues in `fig.png`.
-- [`HH_REDUCED_REPELLING_CYCLE`](HH_REDUCED_REPELLING_CYCLE/) traces attracting
-  and backward-integrated repelling cycles in `fig.png`.
-- [`HH_REDUCED_CYCLE_DISTANCE`](HH_REDUCED_CYCLE_DISTANCE/) zooms the distance
-  between attracting and repelling cycles for several currents in `fig.png`.
+All seven examples now live in one notebook, [`chapter14.ipynb`](chapter14.ipynb):
+`simulate_erisir_reduced` compares three- and two-dimensional Erisir voltage
+traces; `simulate_erisir_2d_fp` classifies Erisir reduced fixed points
+across current; `simulate_hh_reduced_count_fp` reports the minimum and
+maximum number of reduced HH fixed points over its current scan;
+`simulate_hh_reduced_fixed_points` plots stable and unstable reduced HH
+fixed-point branches; `simulate_hh_reduced_fp_evs` plots the real and
+imaginary parts of fixed-point eigenvalues; `simulate_hh_reduced_repelling_cycle`
+traces attracting and backward-integrated repelling cycles;
+`simulate_hh_reduced_cycle_distance` zooms the distance between attracting
+and repelling cycles for several currents. The reduced-HH gating and
+fixed-point/Jacobian helpers shared by the last five live in one cell
+(`hh_reduced_*`).
 
 ## What to look for
 
@@ -65,6 +64,5 @@ other excitability types.
 
 ## Running the examples
 
-Run `python main.py` inside each immediate example directory. The scripts use
-NumPy and Matplotlib; `ERISIR_REDUCED` additionally uses SciPy. Figures are
-saved as `fig.png`, except `HH_REDUCED_COUNT_FP`, which prints its result.
+Open [`chapter14.ipynb`](chapter14.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.

@@ -1,21 +1,16 @@
 from pathlib import Path
 
-from scipy.integrate import odeint
-
-from matlab_ref import load_python_port, run_matlab_script, trace_rmse
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script, trace_rmse
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "14_Model_Neurons_of_Bifurcation_Type_2/ERISIR_REDUCED"
 MATLAB_DIR = "14/ERISIR_REDUCED"
 
 
 @pytest.mark.slow
 def test_erisir_reduced_matches_matlab():
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
-    t = py.np.arange(0, py.t_final, py.dt)
-    v_3d = odeint(py.derivative_3d, py.x0_3d, t)[:, 0]
-    v_2d = odeint(py.derivative_2d, py.x0_2d, t)[:, 0]
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter14.ipynb")
+    t, v_3d, v_2d = ns.simulate_erisir_reduced()
 
     # matlab's script overwrites v/t -- the 2D (reduced) model's trace is
     # what's left in the workspace at the end
