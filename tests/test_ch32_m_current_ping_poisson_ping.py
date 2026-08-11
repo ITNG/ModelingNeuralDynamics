@@ -43,7 +43,14 @@ def test_m_current_ping_1_structure():
     py = load_python_port(
         ROOT / "python" / PYTHON_BASE / "M_CURRENT_PING_1" / "main.py"
     )
+    # the simulation is an explicit call, not an import side effect
+    assert not hasattr(py, "t_e_spikes")
+    assert not hasattr(py, "v_plot")
     t_e, i_e, t_i, i_i, v_plot = py.run_smoke(t_final_run=200.0)
+    # exact values below hold only for this, the first call to run_smoke()
+    # after load_python_port: run_smoke draws from the shared module-level
+    # rng, so a second call in this test would silently give different
+    # numbers. Do not call run_smoke() again in this test.
     assert len(t_e) == 368
     assert len(t_i) == 282
     assert len(t_e) == len(i_e)

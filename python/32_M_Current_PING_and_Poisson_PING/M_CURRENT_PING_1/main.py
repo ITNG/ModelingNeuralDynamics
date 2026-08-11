@@ -330,6 +330,9 @@ def simulate(g_ee, g_ei, g_ie, g_ii, t_final=t_final, track_cell=3):
             np.array(t_i_spikes), np.array(i_i_spikes), v_plot)
 
 
+# draws from the shared module-level `rng`, so its output is only
+# reproducible on the FIRST call after import; a second call in the same
+# process advances the rng stream and gives different spike counts.
 def run_smoke(t_final_run=t_final):
     connectivity = make_random_connectivity(p_ee, p_ei, p_ie, p_ii)
     return simulate(*connectivity, t_final=t_final_run)
