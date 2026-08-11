@@ -332,17 +332,26 @@ def simulate(g_ee, g_ei, g_ie, g_ii, t_final=t_final):
             np.array(t_i_spikes), np.array(i_i_spikes))
 
 
-g_ee_1, g_ei_1, g_ie_1, g_ii_1 = make_random_connectivity(p_ee, p_ei, p_ie, p_ii)
-t_e_spikes_1, i_e_spikes_1, t_i_spikes_1, i_i_spikes_1 = simulate(g_ee_1, g_ei_1, g_ie_1, g_ii_1)
+def run_connectivity_panels(t_final_run=t_final):
+    panels = []
+    g1 = make_random_connectivity(p_ee, p_ei, p_ie, p_ii)
+    panels.append(simulate(*g1, t_final=t_final_run))
 
-p_ee_2, p_ei_2, p_ie_2, p_ii_2 = 1 / num_e, 1 / num_e, 1 / num_i, 1 / num_i
-g_ee_2, g_ei_2, g_ie_2, g_ii_2 = make_random_connectivity(p_ee_2, p_ei_2, p_ie_2, p_ii_2)
-t_e_spikes_2, i_e_spikes_2, t_i_spikes_2, i_i_spikes_2 = simulate(g_ee_2, g_ei_2, g_ie_2, g_ii_2)
+    sparse = (1 / num_e, 1 / num_e, 1 / num_i, 1 / num_i)
+    g2 = make_random_connectivity(*sparse)
+    panels.append(simulate(*g2, t_final=t_final_run))
 
-g_ee_3, g_ei_3, g_ie_3, g_ii_3 = make_fixed_degree_connectivity(p_ei_2, p_ie_2, p_ii_2, ni=1)
-t_e_spikes_3, i_e_spikes_3, t_i_spikes_3, i_i_spikes_3 = simulate(g_ee_3, g_ei_3, g_ie_3, g_ii_3)
+    g3 = make_fixed_degree_connectivity(sparse[1], sparse[2], sparse[3], ni=1)
+    panels.append(simulate(*g3, t_final=t_final_run))
+    return panels
 
-if __name__ == "__main__":
+
+def main():
+    (
+        (t_e_spikes_1, i_e_spikes_1, t_i_spikes_1, i_i_spikes_1),
+        (t_e_spikes_2, i_e_spikes_2, t_i_spikes_2, i_i_spikes_2),
+        (t_e_spikes_3, i_e_spikes_3, t_i_spikes_3, i_i_spikes_3),
+    ) = run_connectivity_panels()
 
     fig, axes = plt.subplots(3, 1, figsize=(8, 9))
     panels = [
@@ -358,9 +367,11 @@ if __name__ == "__main__":
         ax.plot([0, t_final], [num_i + 0.5, num_i + 0.5], '--k', linewidth=1)
         ax.set_yticks([num_i, num_e + num_i])
         ax.axis([t_final - 200, t_final, 0, num_e + num_i + 1])
-
     axes[-1].set_xlabel('$t$ [ms]')
-
     plt.tight_layout()
     plt.savefig("fig.png")
     # plt.show()
+
+
+if __name__ == "__main__":
+    main()

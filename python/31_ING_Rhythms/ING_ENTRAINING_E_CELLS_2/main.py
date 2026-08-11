@@ -384,11 +384,20 @@ def simulate(i_ext_e_local, t_final=t_final):
 
 
 i_ext_e_vec = [1.9, 2.0, 2.1]
-results = [simulate(i_ext_e_val * np.ones(num_e) * (1 + sigma_e * rng.standard_normal(num_e)))
-           for i_ext_e_val in i_ext_e_vec]
 
-if __name__ == "__main__":
 
+def run_drive_panels(t_final_run=t_final):
+    return [
+        simulate(
+            drive * np.ones(num_e) * (1 + sigma_e * rng.standard_normal(num_e)),
+            t_final=t_final_run,
+        )
+        for drive in i_ext_e_vec
+    ]
+
+
+def main():
+    results = run_drive_panels()
     fig, axes = plt.subplots(3, 1, figsize=(8, 9))
     for ax, i_ext_e_val, (t_e_spikes, i_e_spikes, t_i_spikes, i_i_spikes) in zip(axes, i_ext_e_vec, results):
         if len(t_i_spikes) > 0:
@@ -400,7 +409,10 @@ if __name__ == "__main__":
         ax.axis([0, t_final, 0, num_e + num_i + 1])
         ax.set_title(rf'$\overline{{I}}_E={i_ext_e_val:g}$')
     axes[-1].set_xlabel('$t$ [ms]')
-
     plt.tight_layout()
     plt.savefig("fig.png")
     # plt.show()
+
+
+if __name__ == "__main__":
+    main()
