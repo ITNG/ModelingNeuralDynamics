@@ -30,18 +30,18 @@ the oscillation.
 
 ## Code examples
 
-- [`CANARD`](CANARD/) finds currents for selected FitzHugh--Nagumo amplitudes
-  and plots phase-plane and time-trace views in `fig.png`.
-- [`CANARD_2`](CANARD_2/) fixes a current inside the narrow transition and
-  plots its phase-plane orbit in `fig.png`.
-- [`FITZHUGH_NAGUMO_MACRO`](FITZHUGH_NAGUMO_MACRO/) scans a broad current range
-  for equilibrium and cycle envelopes in `fig.png`.
-- [`FITZHUGH_NAGUMO_MICRO`](FITZHUGH_NAGUMO_MICRO/) resolves the narrow
-  near-critical scan and cycle amplitudes in `fig.png`.
-- [`HH_REDUCED_BIF_DIAG`](HH_REDUCED_BIF_DIAG/) plots reduced HH fixed-point
-  and stable/unstable cycle envelopes in `fig.png`.
-- [`MMOS`](MMOS/) adds slow adaptation to FitzHugh--Nagumo and plots its mixed
-  mode voltage trace in `fig.png`.
+All six examples now live in one notebook, [`chapter15.ipynb`](chapter15.ipynb):
+`simulate_canard` finds currents for selected FitzHugh-Nagumo amplitudes
+and plots phase-plane and time-trace views; `simulate_canard_2` fixes a
+current inside the narrow transition and plots its phase-plane orbit;
+`simulate_fitzhugh_nagumo_macro` scans a broad current range for
+equilibrium and cycle envelopes; `simulate_fitzhugh_nagumo_micro` resolves
+the narrow near-critical scan and cycle amplitudes; `simulate_hh_reduced_bif_diag`
+plots reduced HH fixed-point and stable/unstable cycle envelopes;
+`simulate_mmos` adds slow adaptation to FitzHugh-Nagumo and plots its
+mixed-mode voltage trace (with an `ipywidgets` slider). Several of these
+cells are computationally expensive (minutes, not seconds) -- the notebook
+notes this inline.
 
 ## What to look for
 
@@ -65,6 +65,6 @@ Chapter 19 uses a still slower current to make bursts.
 
 ## Running the examples
 
-Run `python main.py` from any immediate example directory. They use NumPy and
-Matplotlib and save `fig.png` in place; the longer canard scans may take more
-time than the single-trajectory examples.
+Open [`chapter15.ipynb`](chapter15.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom. The
+canard-scan cells are noticeably slower than the single-trajectory ones.
