@@ -2,19 +2,19 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port, run_matlab_script
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "18_Bistability_Resulting_from_Rebound_Firing/HH_BISTABLE_GATES"
 MATLAB_DIR = "18/HH_BISTABLE_GATES"
 
 
 @pytest.mark.slow
 def test_hh_bistable_gates_matches_matlab():
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter18.ipynb")
+    v, m, h, n, m_star, h_star, n_star, t_final = ns.simulate_hh_bistable_gates()
     ref = run_matlab_script(ROOT / "matlab" / MATLAB_DIR, "make_figure.m", ["m", "h", "n"])
 
-    assert np.allclose(py.m, ref["m"], atol=1e-4)
-    assert np.allclose(py.h, ref["h"], atol=1e-4)
-    assert np.allclose(py.n, ref["n"], atol=1e-4)
+    assert np.allclose(m, ref["m"], atol=1e-4)
+    assert np.allclose(h, ref["h"], atol=1e-4)
+    assert np.allclose(n, ref["n"], atol=1e-4)
