@@ -21,8 +21,9 @@ def _in_window(v, n):
 
 def test_hh_reduced_cycle_distance_fixed_points_are_sane():
     ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter14.ipynb")
-    panels = ns.simulate_hh_reduced_cycle_distance()
+    panels = ns.simulate_hh_reduced_cycle_distance(t_final=200.0)
 
+    assert [panel[0] for panel in panels] == [5.5, 5.4, 5.3]
     for i_ext, v_c, n_c, v_attr, n_attr, v_rep, n_rep in panels:
         assert -68 < v_c < -65
         assert 0.35 < n_c < 0.38
