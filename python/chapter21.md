@@ -29,16 +29,17 @@ its conductance-based voltage continuously.
 
 ## Code examples
 
-- [`LIF_NETWORK_WITH_GJ`](LIF_NETWORK_WITH_GJ/) compares two LIF voltage
-  traces under diffusive gap-junction coupling, with and without the script's
-  additional spike-triggered voltage kick to the other cell; vertical marks
-  identify spikes.
-- [`RESET_THRESHOLD`](RESET_THRESHOLD/) integrates a single WB
-  conductance-based voltage trace and marks two reference voltage levels.
-- [`WB_NETWORK_WITH_GJ`](WB_NETWORK_WITH_GJ/) integrates two WB neurons with a
-  gap junction to display their voltage alignment.
-- [`WB_NETWORK_WITH_GJ_SUBTHRESHOLD`](WB_NETWORK_WITH_GJ_SUBTHRESHOLD/) focuses
-  on voltage-difference coupling before the WB cells spike.
+All four examples now live in one notebook, [`chapter21.ipynb`](chapter21.ipynb):
+`simulate_lif_network_with_gj` compares two LIF voltage traces under
+diffusive gap-junction coupling, with and without an additional
+spike-triggered voltage kick to the other cell (`epsilon`); vertical marks
+identify spikes. `simulate_reset_threshold` integrates a single WB
+conductance-based voltage trace and marks two reference voltage levels.
+`simulate_wb_network_with_gj` integrates two WB neurons with a gap junction
+to display their voltage alignment. `simulate_wb_network_with_gj_subthreshold`
+focuses on voltage-difference coupling before the WB cells spike, taking a
+`gap_gate(v1)` callable so the same stepper can run the always-on and
+subthreshold-only cases.
 
 ## What to look for
 
@@ -46,15 +47,17 @@ Inspect whether an initial voltage difference shrinks in the subthreshold WB
 trace and whether spike times become aligned in the network plots. In the LIF
 comparison, separate diffusive electrical equalization from the additional
 spike-triggered kick. Relate the discontinuous reset to the voltage gap
-immediately after a threshold crossing in `LIF_NETWORK_WITH_GJ`; contrast this
-with the smooth WB trajectories, including `RESET_THRESHOLD`.
+immediately after a threshold crossing in `simulate_lif_network_with_gj`;
+contrast this with the smooth WB trajectories, including
+`simulate_reset_threshold`.
 
 ## Suggested order
 
-1. Run `LIF_NETWORK_WITH_GJ`, then `RESET_THRESHOLD` as a continuous WB
-   voltage reference.
-2. Run `WB_NETWORK_WITH_GJ_SUBTHRESHOLD` to isolate electrical equalization.
-3. Run `WB_NETWORK_WITH_GJ` and compare the spiking case.
+1. Run `simulate_lif_network_with_gj`, then `simulate_reset_threshold` as a
+   continuous WB voltage reference.
+2. Run `simulate_wb_network_with_gj_subthreshold` to isolate electrical
+   equalization.
+3. Run `simulate_wb_network_with_gj` and compare the spiking case.
 
 ## Prerequisites and related chapters
 
@@ -65,5 +68,5 @@ stability.
 
 ## Running the examples
 
-Run `python main.py` from each immediate example directory. NumPy, SciPy, and
-Matplotlib are required, and each script writes its figure in that directory.
+Open [`chapter21.ipynb`](chapter21.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.
