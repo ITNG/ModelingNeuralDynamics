@@ -24,3 +24,40 @@ def draw_arrow(ax, xlim, ylim, x, y, v, epsilon=0.1, width=2, color='k'):
         u_rot = rot @ u
         v_rot = np.array([u_rot[0] * (b - a), u_rot[1] * (d - c)])
         ax.plot([x, x - v_rot[0]], [y, y - v_rot[1]], color=color, linewidth=width)
+
+
+def alpha_h(v):
+    """Traub-Miles HH-type gating rate."""
+    return 0.128 * np.exp(-(v + 50.0) / 18.0)
+
+
+def alpha_m(v):
+    return 0.32 * (v + 54) / (1.0 - np.exp(-(v + 54.0) / 4.0))
+
+
+def alpha_n(v):
+    return 0.032 * (v + 52) / (1.0 - np.exp(-(v + 52.0) / 5.0))
+
+
+def beta_h(v):
+    return 4.0 / (1.0 + np.exp(-(v + 27.0) / 5.0))
+
+
+def beta_m(v):
+    return 0.28 * (v + 27.0) / (np.exp((v + 27.0) / 5.0) - 1.0)
+
+
+def beta_n(v):
+    return 0.5 * np.exp(-(v + 57.0) / 40.0)
+
+
+def h_inf(v):
+    return alpha_h(v) / (alpha_h(v) + beta_h(v))
+
+
+def m_inf(v):
+    return alpha_m(v) / (alpha_m(v) + beta_m(v))
+
+
+def n_inf(v):
+    return alpha_n(v) / (alpha_n(v) + beta_n(v))
