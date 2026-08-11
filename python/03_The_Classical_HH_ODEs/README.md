@@ -31,9 +31,9 @@ the opening and closing rates, respectively.
 
 ## Code examples
 
-- [`HH_GATING_VARIABLES`](HH_GATING_VARIABLES/) evaluates `m_inf`, `h_inf`,
-  `n_inf`, and their time constants over a voltage grid, saving the six-panel
-  figure as `fig_3_1.png`.
+The example now lives in [`chapter03.ipynb`](../chapter03.ipynb):
+`simulate_hh_gating_variables` evaluates `m_inf`, `h_inf`, `n_inf`, and
+their time constants over a voltage grid, plotted as a six-panel figure.
 
 ## What to look for
 
@@ -56,11 +56,5 @@ and first-order relaxation is helpful.
 
 ## Running the examples
 
-Run the entry point from the example directory:
-
-```bash
-cd HH_GATING_VARIABLES
-python main.py
-```
-
-It requires NumPy and Matplotlib/Pylab and writes `fig_3_1.png` locally.
+Open [`chapter03.ipynb`](../chapter03.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook, and run all cells top to bottom.
