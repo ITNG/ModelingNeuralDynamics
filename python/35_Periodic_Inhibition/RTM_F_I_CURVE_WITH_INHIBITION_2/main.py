@@ -1,6 +1,8 @@
 import numpy as np
 from numpy import exp
 import matplotlib.pyplot as plt
+from numba import njit
+from numba.extending import register_jitable
 
 c = 1.
 g_k, g_na, g_l = 80., 100., 0.1
@@ -20,32 +22,39 @@ dt = 0.01
 dt05 = dt / 2
 
 
+@register_jitable
 def m_inf(v):
     alpha_m = 0.32 * (v + 54) / (1 - exp(-(v + 54) / 4))
     beta_m = 0.28 * (v + 27) / (exp((v + 27) / 5) - 1)
     return alpha_m / (alpha_m + beta_m)
 
 
+@register_jitable
 def alpha_h(v):
     return 0.128 * exp(-(v + 50) / 18)
 
 
+@register_jitable
 def beta_h(v):
     return 4. / (1 + exp(-(v + 27) / 5))
 
 
+@register_jitable
 def alpha_n(v):
     return 0.032 * (v + 52) / (1 - exp(-(v + 52) / 5))
 
 
+@register_jitable
 def beta_n(v):
     return 0.5 * exp(-(v + 57) / 40)
 
 
+@register_jitable
 def g_periodic(t, amplitude=g_bar):
     return amplitude * (np.exp(alpha * np.cos(np.pi * t / Period) ** 2) - 1) / denom
 
 
+@register_jitable
 def step(v, m, h, n, i_ext, g_inhib_old, g_inhib_mid):
     v_inc = (g_na * m ** 3 * h * (v_na - v) + g_k * n ** 4 * (v_k - v) + g_l * (v_l - v)
               + g_inhib_old * (v_rev - v) + i_ext) / c
@@ -69,16 +78,16 @@ def step(v, m, h, n, i_ext, g_inhib_old, g_inhib_mid):
     return v_new, m_new, h_new, n_new
 
 
-def f_i_curve_tonic():
-    '''For each drive in i_ext_vec (continuing from the final state of
+def _f_i_curve_tonic_python(i_ext_values):
+    '''For each drive in i_ext_values (continuing from the final state of
     the previous drive), integrate until either a fixed point is
     detected (frequency 0) or the 4th spike occurs (frequency from the
     3rd-to-4th interspike interval).'''
     N_check = round(1000 / dt)
     v, m, h, n = -70., m_inf(-70.), 0.7, 0.6
-    f_vec = np.zeros(len(i_ext_vec))
+    f_vec = np.zeros(len(i_ext_values))
 
-    for ijk, i_ext in enumerate(i_ext_vec):
+    for ijk, i_ext in enumerate(i_ext_values):
         v_hist = [v]
         m_hist = [m]
         h_hist = [h]
@@ -121,16 +130,16 @@ def f_i_curve_tonic():
     return f_vec
 
 
-def f_i_curve_periodic(g_amplitude=g_bar):
+def _f_i_curve_periodic_python(i_ext_values, g_amplitude):
     t_final = 2000.
     m_steps = round(t_final / dt)
     t = np.arange(m_steps + 1) * dt
     g_store = g_periodic(t, g_amplitude)
 
     v, m, h, n = -70., m_inf(-70.), 0.7, 0.6
-    f_vec = np.zeros(len(i_ext_vec))
+    f_vec = np.zeros(len(i_ext_values))
 
-    for ijk, i_ext in enumerate(i_ext_vec):
+    for ijk, i_ext in enumerate(i_ext_values):
         num_spikes = 0
         v_old = v
         for k in range(1, m_steps + 1):
@@ -143,10 +152,28 @@ def f_i_curve_periodic(g_amplitude=g_bar):
     return f_vec
 
 
-f_vec_tonic = f_i_curve_tonic()
-f_vec_periodic = f_i_curve_periodic(g_amplitude=2 * g_bar)
+# njit without cache=True: these scripts are exec'd from a file path (not
+# imported as real modules), so numba's on-disk cache can't re-import them
+# to rebuild the compiled environment. Compilation is redone per process.
+_f_i_curve_tonic_jit = njit(_f_i_curve_tonic_python)
+_f_i_curve_periodic_jit = njit(_f_i_curve_periodic_python)
+
+
+def compute_f_i_curves(i_ext_values=i_ext_vec, use_numba=True):
+    '''F-I curves under tonic and under periodic inhibition, one entry
+    per drive in i_ext_values.'''
+    if use_numba:
+        tonic_kernel = _f_i_curve_tonic_jit
+        periodic_kernel = _f_i_curve_periodic_jit
+    else:
+        tonic_kernel = _f_i_curve_tonic_python
+        periodic_kernel = _f_i_curve_periodic_python
+    return tonic_kernel(i_ext_values), periodic_kernel(i_ext_values, 2 * g_bar)
+
 
 if __name__ == "__main__":
+    f_vec_tonic, f_vec_periodic = compute_f_i_curves()
+
     fig, ax = plt.subplots(figsize=(7, 5))
     ax.plot(i_ext_vec, f_vec_tonic, '-r', linewidth=2, label='tonic inhibition')
     ax.plot(i_ext_vec, f_vec_periodic, '-b', linewidth=2, label='periodic inhibition')

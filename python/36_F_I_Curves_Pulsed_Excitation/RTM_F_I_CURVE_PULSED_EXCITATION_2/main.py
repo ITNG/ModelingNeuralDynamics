@@ -1,6 +1,8 @@
 import numpy as np
 from numpy import exp
 import matplotlib.pyplot as plt
+from numba import njit
+from numba.extending import register_jitable
 
 alpha = 1.  # sharpness of the input pulses
 Period = 25.  # period of the input pulses
@@ -8,6 +10,7 @@ N = 2000
 ave = np.mean(np.exp(alpha * np.cos(np.pi * np.arange(N) / N) ** 2) - 1)
 
 
+@register_jitable
 def shape(t):
     '''the input pulses always have the same shape, with temporal
     average 1; amplitude is applied by the caller.'''
@@ -25,32 +28,36 @@ dt = 0.01
 dt05 = dt / 2
 t_final = 1000.
 m_steps = round(t_final / dt)
-t = np.arange(m_steps + 1) * dt
-shape_store = shape(t)
 
 
+@register_jitable
 def m_inf(v):
     alpha_m = 0.32 * (v + 54) / (1 - exp(-(v + 54) / 4))
     beta_m = 0.28 * (v + 27) / (exp((v + 27) / 5) - 1)
     return alpha_m / (alpha_m + beta_m)
 
 
+@register_jitable
 def alpha_h(v):
     return 0.128 * exp(-(v + 50) / 18)
 
 
+@register_jitable
 def beta_h(v):
     return 4. / (1 + exp(-(v + 27) / 5))
 
 
+@register_jitable
 def alpha_n(v):
     return 0.032 * (v + 52) / (1 - exp(-(v + 52) / 5))
 
 
+@register_jitable
 def beta_n(v):
     return 0.5 * exp(-(v + 57) / 40)
 
 
+@register_jitable
 def step(v, m, h, n, i_ext_old, i_ext_mid):
     v_inc = (g_na * m ** 3 * h * (v_na - v) + g_k * n ** 4 * (v_k - v) + g_l * (v_l - v) + i_ext_old) / c
     h_inc = alpha_h(v) * (1 - h) - beta_h(v) * h
@@ -73,14 +80,14 @@ def step(v, m, h, n, i_ext_old, i_ext_mid):
     return v_new, m_new, h_new, n_new
 
 
-def f_i_curve_constant():
+def _f_i_curve_constant_python(i_ext_values):
     '''Frequency from the interval between the 1st and 2nd spikes under
     a constant drive, continuing from the previous drive's final state;
     if two spikes don't occur within t_final, frequency is taken as 0.'''
     v, m, h, n = -70., m_inf(-70.), 0.7, 0.6
-    f_vec = np.zeros(len(i_ext_vec))
+    f_vec = np.zeros(len(i_ext_values))
 
-    for ijk, i_ext in enumerate(i_ext_vec):
+    for ijk, i_ext in enumerate(i_ext_values):
         t_spikes = []
         v_old = v
         f = 0.
@@ -97,14 +104,17 @@ def f_i_curve_constant():
     return f_vec
 
 
-def f_i_curve_pulsed():
+def _f_i_curve_pulsed_python(i_ext_values):
     '''Firing rate (spike count over the fixed t_final window) under a
     periodic pulsed drive of the given time-average amplitude,
     continuing from the previous drive's final state.'''
-    v, m, h, n = -70., m_inf(-70.), 0.7, 0.6
-    f_vec = np.zeros(len(i_ext_vec))
+    t = np.arange(m_steps + 1) * dt
+    shape_store = shape(t)
 
-    for ijk, i_ext in enumerate(i_ext_vec):
+    v, m, h, n = -70., m_inf(-70.), 0.7, 0.6
+    f_vec = np.zeros(len(i_ext_values))
+
+    for ijk, i_ext in enumerate(i_ext_values):
         i_ext_p = i_ext * shape_store
         num_spikes = 0
         v_old = v
@@ -118,10 +128,28 @@ def f_i_curve_pulsed():
     return f_vec
 
 
-f_vec_constant = f_i_curve_constant()
-f_vec_pulsed = f_i_curve_pulsed()
+# njit without cache=True: these scripts are exec'd from a file path (not
+# imported as real modules), so numba's on-disk cache can't re-import them
+# to rebuild the compiled environment. Compilation is redone per process.
+_f_i_curve_constant_jit = njit(_f_i_curve_constant_python)
+_f_i_curve_pulsed_jit = njit(_f_i_curve_pulsed_python)
+
+
+def compute_f_i_curves(i_ext_values=i_ext_vec, use_numba=True):
+    '''F-I curves under a constant and under a pulsed drive, one entry
+    per drive in i_ext_values.'''
+    if use_numba:
+        constant_kernel = _f_i_curve_constant_jit
+        pulsed_kernel = _f_i_curve_pulsed_jit
+    else:
+        constant_kernel = _f_i_curve_constant_python
+        pulsed_kernel = _f_i_curve_pulsed_python
+    return constant_kernel(i_ext_values), pulsed_kernel(i_ext_values)
+
 
 if __name__ == "__main__":
+    f_vec_constant, f_vec_pulsed = compute_f_i_curves()
+
     fig, ax = plt.subplots(figsize=(7, 5))
     ax.plot(i_ext_vec, f_vec_constant, '.r', markersize=8, label='constant drive')
     ax.plot(i_ext_vec, f_vec_pulsed, '.b', markersize=8, label='pulsed drive')

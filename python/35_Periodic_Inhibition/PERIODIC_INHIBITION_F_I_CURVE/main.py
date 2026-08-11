@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from numba import njit
+from numba.extending import register_jitable
 
 alpha = 5.
 Period = 25.
@@ -15,25 +17,45 @@ dt05 = dt / 2
 m_steps = round(t_final / dt)
 
 
+@register_jitable
 def g(t):
     return g_bar * (np.exp(alpha * np.cos(np.pi * t / Period) ** 2) - 1) / m
 
 
-f_vec = np.zeros(len(I_vec))
-for ij, I in enumerate(I_vec):
-    v = 0.
-    num_spikes = 0
-    for k in range(1, m_steps + 1):
-        v_inc = -v / tau + I - g((k - 1) * dt) * v
-        v_tmp = v + dt05 * v_inc
-        v_inc = -v_tmp / tau + I - g((k - 0.5) * dt) * v_tmp
-        v = v + dt * v_inc
-        if v > 1:
-            v = 0.
-            num_spikes += 1
-    f_vec[ij] = num_spikes / t_final * 1000
+def _compute_f_i_curve_python(i_values):
+    f_vec = np.zeros(len(i_values))
+    for ij, I in enumerate(i_values):
+        v = 0.
+        num_spikes = 0
+        for k in range(1, m_steps + 1):
+            v_inc = -v / tau + I - g((k - 1) * dt) * v
+            v_tmp = v + dt05 * v_inc
+            v_inc = -v_tmp / tau + I - g((k - 0.5) * dt) * v_tmp
+            v = v + dt * v_inc
+            if v > 1:
+                v = 0.
+                num_spikes += 1
+        f_vec[ij] = num_spikes / t_final * 1000
+
+    return f_vec
+
+
+# njit without cache=True: these scripts are exec'd from a file path (not
+# imported as real modules), so numba's on-disk cache can't re-import them
+# to rebuild the compiled environment. Compilation is redone per process.
+_compute_f_i_curve_jit = njit(_compute_f_i_curve_python)
+
+
+def compute_f_i_curve(i_values=I_vec, use_numba=True):
+    '''F-I curve of the LIF neuron under periodic inhibition, one entry
+    per drive in i_values.'''
+    kernel = _compute_f_i_curve_jit if use_numba else _compute_f_i_curve_python
+    return kernel(i_values)
+
 
 if __name__ == "__main__":
+    f_vec = compute_f_i_curve()
+
     fig, ax = plt.subplots(figsize=(7, 5))
 
     L = len(I_vec)

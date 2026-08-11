@@ -49,10 +49,22 @@ def test_periodic_inhibition_2_structure():
 
 def test_periodic_inhibition_f_i_curve_structure():
     py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_F_I_CURVE" / "main.py")
+    # the dense scan is an explicit call, not an import side effect
+    assert not hasattr(py, "f_vec")
+    f_vec = py.compute_f_i_curve()
     # visually confirmed step values (40, 80, 120, 160 Hz plateaus)
-    assert set(np.round(np.unique(py.f_vec))) >= {0.0, 40.0, 80.0, 120.0, 160.0}
-    assert py.f_vec[0] == 0.0
-    assert py.f_vec[-1] == 160.0
+    assert set(np.round(np.unique(f_vec))) >= {0.0, 40.0, 80.0, 120.0, 160.0}
+    assert f_vec[0] == 0.0
+    assert f_vec[-1] == 160.0
+
+
+def test_periodic_inhibition_f_i_curve_numba_matches_python():
+    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_F_I_CURVE" / "main.py")
+    grid = py.I_vec
+    probe = np.array([grid[0], grid[len(grid) // 2], grid[-1]])
+    expected = py.compute_f_i_curve(i_values=probe, use_numba=False)
+    actual = py.compute_f_i_curve(i_values=probe, use_numba=True)
+    np.testing.assert_allclose(actual, expected, rtol=0.0, atol=1e-10)
 
 
 def test_periodic_inhibition_f_i_curve_2_structure():
@@ -60,17 +72,45 @@ def test_periodic_inhibition_f_i_curve_2_structure():
     assert set(np.round(np.unique(py.f_vec))) >= {0.0, 40.0, 80.0, 120.0, 160.0}
 
 
+def _load_rtm_inhibition(name):
+    py = load_python_port(ROOT / "python" / PYTHON_BASE / name / "main.py")
+    # the dense scans are explicit calls, not import side effects
+    assert not hasattr(py, "f_vec_tonic")
+    assert not hasattr(py, "f_vec_periodic")
+    return py
+
+
+def _check_rtm_inhibition_numba(name):
+    py = _load_rtm_inhibition(name)
+    grid = py.i_ext_vec
+    probe = np.array([grid[0], grid[len(grid) // 2], grid[-1]])
+    expected = py.compute_f_i_curves(i_ext_values=probe, use_numba=False)
+    actual = py.compute_f_i_curves(i_ext_values=probe, use_numba=True)
+    for expected_curve, actual_curve in zip(expected, actual):
+        np.testing.assert_allclose(actual_curve, expected_curve, rtol=0.0, atol=1e-10)
+
+
 def test_rtm_f_i_curve_with_inhibition_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "RTM_F_I_CURVE_WITH_INHIBITION" / "main.py")
-    assert len(py.f_vec_tonic) == len(py.i_ext_vec)
-    assert len(py.f_vec_periodic) == len(py.i_ext_vec)
+    py = _load_rtm_inhibition("RTM_F_I_CURVE_WITH_INHIBITION")
+    f_vec_tonic, f_vec_periodic = py.compute_f_i_curves()
+    assert len(f_vec_tonic) == len(py.i_ext_vec)
+    assert len(f_vec_periodic) == len(py.i_ext_vec)
     # both curves are silent at low drive and fire at high drive
-    assert py.f_vec_tonic[0] == 0.0
-    assert py.f_vec_tonic[-1] > 0.0
-    assert py.f_vec_periodic[-1] > 0.0
+    assert f_vec_tonic[0] == 0.0
+    assert f_vec_tonic[-1] > 0.0
+    assert f_vec_periodic[-1] > 0.0
+
+
+def test_rtm_f_i_curve_with_inhibition_numba_matches_python():
+    _check_rtm_inhibition_numba("RTM_F_I_CURVE_WITH_INHIBITION")
 
 
 def test_rtm_f_i_curve_with_inhibition_2_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "RTM_F_I_CURVE_WITH_INHIBITION_2" / "main.py")
-    assert len(py.f_vec_periodic) == len(py.i_ext_vec)
-    assert py.f_vec_periodic[-1] > 0.0
+    py = _load_rtm_inhibition("RTM_F_I_CURVE_WITH_INHIBITION_2")
+    _, f_vec_periodic = py.compute_f_i_curves()
+    assert len(f_vec_periodic) == len(py.i_ext_vec)
+    assert f_vec_periodic[-1] > 0.0
+
+
+def test_rtm_f_i_curve_with_inhibition_2_numba_matches_python():
+    _check_rtm_inhibition_numba("RTM_F_I_CURVE_WITH_INHIBITION_2")
