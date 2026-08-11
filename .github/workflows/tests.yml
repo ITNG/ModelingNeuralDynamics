@@ -24,9 +24,11 @@ jobs:
       - name: Run tests (fast)
         # Default addopts (-m 'not slow', see pyproject.toml) skips
         # MATLAB-comparison tests at setup time, without running their
-        # simulation bodies -- keeps day-to-day CI fast.
+        # simulation bodies -- keeps day-to-day CI fast. -n auto
+        # (pytest-xdist, already a dev dependency) spreads tests across
+        # runner cores.
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
-        run: uv run pytest tests/ -v
+        run: uv run pytest tests/ -v -n auto
 
       - name: Run tests (full, release)
         # -m "" overrides the repo-default "-m 'not slow'" so
@@ -35,4 +37,4 @@ jobs:
         # import errors, syntax errors, and any test that doesn't depend
         # on MATLAB. Only run on version tags to keep normal CI fast.
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        run: uv run pytest tests/ -v -m ""
+        run: uv run pytest tests/ -v -m "" -n auto
