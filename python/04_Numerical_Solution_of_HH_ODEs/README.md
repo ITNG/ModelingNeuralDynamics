@@ -30,12 +30,12 @@ in this state space that repeats after one period.
 
 ## Code examples
 
-- [`HH_SOLUTION`](HH_SOLUTION/) integrates voltage and all three gates at a
-  constant input and saves the two-panel result as `fig_4_1.png`.
-- [`HH_LIMIT_CYCLE`](HH_LIMIT_CYCLE/) starts away from equilibrium, plots
-  \(n\) against \(V\), and saves the projected cycle as `fig_4_2.png`.
-- [`HH_REFRACTORINESS`](HH_REFRACTORINESS/) adds a short current pulse at
-  several onset times and saves the comparison as `fig_4_1.png`.
+All three examples now live in one notebook, [`chapter04.ipynb`](../chapter04.ipynb):
+`simulate_hh_solution` integrates voltage and all three gates at a
+constant input; `simulate_hh_limit_cycle` starts away from equilibrium and
+plots \(n\) against \(V\); `simulate_hh_refractoriness` adds a short current
+pulse at several onset times. Each has an `ipywidgets` slider to explore
+`i_ext` interactively.
 
 ## What to look for
 
@@ -58,12 +58,7 @@ with no explicit ionic gates.
 
 ## Running the examples
 
-Each directory has a `main.py` entry point. For example:
-
-```bash
-cd HH_SOLUTION
-python main.py
-```
-
-The examples require SciPy, NumPy, and Matplotlib/Pylab and save figures in
-their own working directories.
+Open [`chapter04.ipynb`](../chapter04.ipynb) in Jupyter, or via the Colab
+badge at the top of the notebook. Run all cells top to bottom; each
+section's static figure reproduces the book's plot, and the `interact(...)`
+cell below it lets you adjust `i_ext` with a slider.
