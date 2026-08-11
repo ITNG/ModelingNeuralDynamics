@@ -30,7 +30,7 @@ linked from this index.
 - [Chapter 16: Model Neurons of Bifurcation Type 3](chapter16.md)
 - [Chapter 17: Frequency-Current Curves](chapter17.md)
 - [Chapter 18: Bistability Resulting from Rebound Firing](chapter18.md)
-- [Chapter 19: Bursting](19_Bursting/README.md)
+- [Chapter 19: Bursting](chapter19.md)
 
 ## Communication (Chapters 20-22)
 

@@ -2,18 +2,18 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port, run_matlab_script
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "19_Bursting/ERISIR_SHOW_SLOW_I_K"
 MATLAB_DIR = "19/ERISIR_SHOW_SLOW_I_K"
 
 
 @pytest.mark.slow
 def test_erisir_show_slow_i_k_matches_matlab():
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter19.ipynb")
+    t, v, n_slow = ns.simulate_erisir_plus_slow_i_k()
     ref = run_matlab_script(ROOT / "matlab" / MATLAB_DIR, "make_figure.m", ["v", "n_slow"])
 
-    assert np.allclose(py.v, ref["v"], atol=1e-4)
-    assert np.allclose(py.n_slow, ref["n_slow"], atol=1e-4)
+    assert np.allclose(v, ref["v"], atol=1e-4)
+    assert np.allclose(n_slow, ref["n_slow"], atol=1e-4)

@@ -16,6 +16,10 @@ from scipy.io import loadmat
 
 MATLAB = "/home/ziaee/prog/Matlab/R2020a/bin/matlab"
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+MATLAB_ROOT = REPO_ROOT / "matlab"
+CACHE_ROOT = REPO_ROOT / "tests" / "matlab_cache"
+
 
 def load_python_port(path):
     """Import a chapter's main.py with cwd set to its own folder.
@@ -38,16 +42,44 @@ def load_python_port(path):
     return mod
 
 
+def _cache_path(script_dir):
+    """tests/matlab_cache/<script_dir relative to matlab/>.npz
+
+    One cache file per script_dir (each is only ever run with one fixed
+    set of varnames in practice), so a whole chapter's reference values
+    can be committed to the repo and reused without MATLAB installed --
+    notably in CI, where MATLAB isn't available at all.
+    """
+    rel = Path(script_dir).resolve().relative_to(MATLAB_ROOT)
+    return (CACHE_ROOT / rel).with_suffix(".npz")
+
+
 def run_matlab_script(script_dir, script_name, varnames, timeout=120):
     """Run script_name (a MATLAB script, not function) inside script_dir and
     return the requested workspace variables as numpy arrays.
 
-    Skips the test (rather than failing) when MATLAB isn't on this machine
-    -- it's a local-only license, not available in CI.
+    Results are cached to tests/matlab_cache/ on first run (keyed by
+    script_dir) and committed to the repo; later calls -- including in CI,
+    where MATLAB isn't installed -- reuse the cache instead of re-running
+    MATLAB. Set MATLAB_REF_REFRESH=1 to force a fresh MATLAB run and
+    overwrite the cache (e.g. after changing a matlab/ script). Skips the
+    test (rather than failing) when there's neither a cache hit nor MATLAB
+    on this machine.
     """
-    if not (os.path.exists(MATLAB) or shutil.which("matlab")):
-        pytest.skip("MATLAB not available on this machine")
     script_dir = Path(script_dir).resolve()
+    cache_file = _cache_path(script_dir)
+    refresh = bool(os.environ.get("MATLAB_REF_REFRESH"))
+
+    if cache_file.is_file() and not refresh:
+        cached = np.load(cache_file)
+        if all(v in cached for v in varnames):
+            return {v: cached[v] for v in varnames}
+
+    if not (os.path.exists(MATLAB) or shutil.which("matlab")):
+        if cache_file.is_file():
+            pytest.skip(f"MATLAB not available and {cache_file} is missing a requested variable")
+        pytest.skip("MATLAB not available on this machine and no cached reference exists")
+
     with tempfile.TemporaryDirectory() as tmp:
         outfile = Path(tmp) / "out.mat"
         var_list = ", ".join(f"'{v}'" for v in varnames)
@@ -60,7 +92,11 @@ def run_matlab_script(script_dir, script_name, varnames, timeout=120):
             check=True, timeout=timeout, capture_output=True, text=True,
         )
         data = loadmat(outfile)
-    return {v: np.asarray(data[v]).squeeze() for v in varnames}
+    data = {v: np.asarray(data[v]).squeeze() for v in varnames}
+
+    cache_file.parent.mkdir(parents=True, exist_ok=True)
+    np.savez(cache_file, **data)
+    return data
 
 
 def trace_rmse(t_ref, v_ref, t_test, v_test):

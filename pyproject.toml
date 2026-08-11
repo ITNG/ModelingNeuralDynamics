@@ -22,6 +22,7 @@ dependencies = [
     "jupyter",
     "ipywidgets",
     "ipykernel",
+    "numba",
 ]
 
 [project.urls]
