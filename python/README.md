@@ -34,7 +34,7 @@ linked from this index.
 
 ## Communication (Chapters 20-22)
 
-- [Chapter 20: Chemical Synapses](20_Chemical_Synapses/README.md)
+- [Chapter 20: Chemical Synapses](chapter20.md)
 - [Chapter 21: Gap Junctions](21_Gap_Junctions/README.md)
 - [Chapter 22: A Wilson-Cowan Model of an Oscillatory E-I Network](22_A_Wilson_Cowan_Model_of_an_Oscillatory_E-I_Network/README.md)
 
