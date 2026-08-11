@@ -8,7 +8,9 @@ import os
 import shutil
 import subprocess
 import tempfile
+from functools import lru_cache
 from pathlib import Path
+from types import CodeType, SimpleNamespace
 
 import numpy as np
 import pytest
@@ -159,23 +161,16 @@ def load_notebook_as_module(path):
     return SimpleNamespace(**namespace)
 
 
-def load_notebook_definitions_as_module(path):
-    """Load a notebook's imports and definitions without running examples.
-
-    Chapter notebooks commonly combine reusable functions with top-level
-    plotting and Brian2 simulations. This focused loader makes definitions
-    available to lightweight tests without executing those expensive examples.
-    """
-    import matplotlib
+@lru_cache(maxsize=64)
+def _compile_notebook_definitions(
+    path: Path, mtime_ns: int, size: int
+) -> CodeType:
+    del mtime_ns, size  # Values participate in the cache key.
     import nbformat
-    from types import SimpleNamespace
 
-    matplotlib.use("Agg")
-
-    path = Path(path).resolve()
-    nb = nbformat.read(path, as_version=4)
+    notebook = nbformat.read(path, as_version=4)
     nodes = []
-    for cell in nb.cells:
+    for cell in notebook.cells:
         if cell["cell_type"] != "code":
             continue
         tree = ast.parse("".join(cell["source"]), filename=str(path))
@@ -186,13 +181,33 @@ def load_notebook_definitions_as_module(path):
                 node,
                 (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
             )
+            and not (
+                isinstance(node, ast.ImportFrom)
+                and node.module == "ipywidgets"
+            )
+            and not (
+                isinstance(node, ast.Import)
+                and any(alias.name == "ipywidgets" for alias in node.names)
+            )
         )
-    source = ast.Module(body=nodes, type_ignores=[])
+    module = ast.Module(body=nodes, type_ignores=[])
+    return compile(ast.fix_missing_locations(module), str(path), "exec")
+
+
+def load_notebook_definitions_as_module(path):
+    """Load imports and definitions without running notebook examples."""
+    import matplotlib
+
+    matplotlib.use("Agg")
+
+    path = Path(path).resolve()
+    stat = path.stat()
+    code = _compile_notebook_definitions(path, stat.st_mtime_ns, stat.st_size)
     namespace = {"__name__": path.stem}
     cwd = os.getcwd()
     try:
         os.chdir(path.parent)
-        exec(compile(ast.fix_missing_locations(source), str(path), "exec"), namespace)
+        exec(code, namespace)
     finally:
         os.chdir(cwd)
     return SimpleNamespace(**namespace)
