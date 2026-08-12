@@ -1,5 +1,8 @@
+import math
+
 import numpy as np
 import matplotlib.pyplot as plt
+from numba import njit
 
 alpha = 1.
 Period = 25.
@@ -19,19 +22,31 @@ def g(t):
     return g_bar * (np.exp(alpha * np.cos(np.pi * t / Period) ** 2) - 1) / m
 
 
-f_vec = np.zeros(len(I_vec))
-for ij, I in enumerate(I_vec):
-    v = 0.
-    num_spikes = 0
-    for k in range(1, m_steps + 1):
-        v_inc = -v / tau + I - g((k - 1) * dt) * v
-        v_tmp = v + dt05 * v_inc
-        v_inc = -v_tmp / tau + I - g((k - 0.5) * dt) * v_tmp
-        v = v + dt * v_inc
-        if v > 1:
-            v = 0.
-            num_spikes += 1
-    f_vec[ij] = num_spikes / t_final * 1000
+@njit
+def _g_s(t, g_bar, alpha, period, m):
+    return g_bar * (math.exp(alpha * math.cos(math.pi * t / period) ** 2) - 1) / m
+
+
+@njit
+def _f_i_sweep(i_vec, m_steps, dt, dt05, tau, g_bar, alpha, period, m, t_final):
+    f_vec = np.zeros(len(i_vec))
+    for ij in range(len(i_vec)):
+        I = i_vec[ij]
+        v = 0.
+        num_spikes = 0
+        for k in range(1, m_steps + 1):
+            v_inc = -v / tau + I - _g_s((k - 1) * dt, g_bar, alpha, period, m) * v
+            v_tmp = v + dt05 * v_inc
+            v_inc = -v_tmp / tau + I - _g_s((k - 0.5) * dt, g_bar, alpha, period, m) * v_tmp
+            v = v + dt * v_inc
+            if v > 1:
+                v = 0.
+                num_spikes += 1
+        f_vec[ij] = num_spikes / t_final * 1000
+    return f_vec
+
+
+f_vec = _f_i_sweep(I_vec, m_steps, dt, dt05, tau, g_bar, alpha, Period, m, t_final)
 
 if __name__ == "__main__":
     fig, ax = plt.subplots(figsize=(7, 5))
