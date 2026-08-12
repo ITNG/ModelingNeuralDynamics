@@ -42,7 +42,7 @@ linked from this index.
 
 - [Chapter 23: Entrainment by Excitatory Input Pulses](chapter23.md)
 - [Chapter 24: Synchronization by Fast Recurrent Excitation](chapter24.md)
-- [Chapter 25: Phase Response Curves (PRCs)](25_Phase_Response_Curves_%28PRCs%29/README.md)
+- [Chapter 25: Phase Response Curves (PRCs)](chapter25.md)
 - [Chapter 26: Phase Locking of Two Oscillators](26_Phase_Locking_of_Two_Oscillators/README.md)
 - [Chapter 27: Phase Locking with Delays](27_Phase_Locking_with_Delays/README.md)
 - [Chapter 28: Weakly Coupled Oscillators](28_Weakly_Coupled_Oscillators/README.md)
