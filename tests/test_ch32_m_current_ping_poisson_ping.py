@@ -2,55 +2,49 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_BASE = "32_M_Current_PING_and_Poisson_PING"
+
+
+def _ns():
+    return load_notebook_definitions_as_module(ROOT / "python" / "chapter32.ipynb")
 
 
 def test_plot_phi_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PLOT_PHI" / "main.py")
-    assert np.all(py.phi_vec > 0) and np.all(py.phi_vec < 1)
+    ns = _ns()
+    x, phi_vec = ns.simulate_plot_phi()
+    assert np.all(phi_vec > 0) and np.all(phi_vec < 1)
     # phi(x) lies above the diagonal for small x and crosses it once
-    assert py.phi_vec[0] > py.x[0]
+    assert phi_vec[0] > x[0]
 
 
 def test_plot_psi_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PLOT_PSI" / "main.py")
-    assert np.all(py.psi_vec > 0) and np.all(py.psi_vec < 1)
+    ns = _ns()
+    x, psi_vec = ns.simulate_plot_psi()
+    assert np.all(psi_vec > 0) and np.all(psi_vec < 1)
     # psi is decreasing (an inhibitory PRC-like map)
-    assert py.psi_vec[0] > py.psi_vec[-1]
+    assert psi_vec[0] > psi_vec[-1]
 
 
 def test_plot_psi_phi_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PLOT_PSI_PHI" / "main.py")
-    assert np.all(py.psi_vec >= 0) and np.all(py.psi_vec <= 1)
-    assert np.all(py.phi_vec >= 0) and np.all(py.phi_vec <= 1)
-
-
-def _check_ping(name, num_e=200, num_i=50, min_e_spikes=100, min_i_spikes=50):
-    # matlab's rng('default'); rng(63806) can't be bit-reproduced by
-    # numpy, so we check structural properties (substantial E and I
-    # firing) rather than exact spike times.
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / name / "main.py")
-    assert len(py.t_e_spikes) > min_e_spikes
-    assert len(py.t_i_spikes) > min_i_spikes
-    assert py.num_e == num_e
-    assert py.num_i == num_i
+    ns = _ns()
+    x, psi_vec, phi_vec = ns.simulate_plot_psi_phi()
+    assert np.all(psi_vec >= 0) and np.all(psi_vec <= 1)
+    assert np.all(phi_vec >= 0) and np.all(phi_vec <= 1)
 
 
 def test_m_current_ping_1_structure():
-    py = load_python_port(
-        ROOT / "python" / PYTHON_BASE / "M_CURRENT_PING_1" / "main.py"
-    )
-    # the simulation is an explicit call, not an import side effect
-    assert not hasattr(py, "t_e_spikes")
-    assert not hasattr(py, "v_plot")
-    t_e, i_e, t_i, i_i, v_plot = py.run_smoke(t_final_run=200.0)
-    # exact values below hold only for this, the first call to run_smoke()
-    # after load_python_port: run_smoke draws from the shared module-level
-    # rng, so a second call in this test would silently give different
-    # numbers. Do not call run_smoke() again in this test.
+    ns = _ns()
+    # the simulation is an explicit call, not an import side effect:
+    # load_notebook_definitions_as_module only pulls imports/defs out of
+    # the notebook's code cells, never top-level calls.
+    assert not hasattr(ns, "t_e_spikes")
+    assert not hasattr(ns, "v_plot")
+    t_e, i_e, t_i, i_i, v_plot = ns.simulate_m_current_ping_1(t_final_run=200.0)
+    # exact values below hold because simulate_m_current_ping_1 seeds its
+    # own fresh rng internally, so every call (not just the first) is
+    # independently reproducible.
     assert len(t_e) == 368
     assert len(t_i) == 282
     assert len(t_e) == len(i_e)
@@ -58,61 +52,82 @@ def test_m_current_ping_1_structure():
     assert np.isclose(v_plot.max(), 48.377, rtol=0.0, atol=0.01)
 
 
+def _check_ping(t_e, i_e, t_i, i_i, num_e=200, num_i=50, min_e_spikes=100, min_i_spikes=50):
+    # matlab's rng('default'); rng(63806) can't be bit-reproduced by
+    # numpy, so we check structural properties (substantial E and I
+    # firing) rather than exact spike times.
+    assert len(t_e) > min_e_spikes
+    assert len(t_i) > min_i_spikes
+
+
 def test_m_current_ping_1_closeup_structure():
-    _check_ping("M_CURRENT_PING_1_CLOSEUP", min_e_spikes=500, min_i_spikes=1000)
-
-
-def test_m_current_ping_1_from_rest_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "M_CURRENT_PING_1_FROM_REST" / "main.py")
-    assert len(py.t_e_spikes) > 500
-    assert len(py.t_i_spikes) > 1000
-    # network is silent for the first ~200 ms (zero drive, from rest)
-    assert py.t_e_spikes.min() > 1.0
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_plot = ns.simulate_m_current_ping_closeup()
+    _check_ping(t_e, i_e, t_i, i_i, min_e_spikes=500, min_i_spikes=1000)
 
 
 def test_m_current_ping_2_closeup_structure():
-    _check_ping("M_CURRENT_PING_2_CLOSEUP", min_e_spikes=500, min_i_spikes=1000)
+    # the legacy _1/_2/_3_CLOSEUP scripts were parameter-identical, so the
+    # notebook exposes a single simulate_m_current_ping_closeup() for all
+    # three; call it again to represent the "second" closeup.
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_plot = ns.simulate_m_current_ping_closeup()
+    _check_ping(t_e, i_e, t_i, i_i, min_e_spikes=500, min_i_spikes=1000)
 
 
 def test_m_current_ping_3_closeup_structure():
-    _check_ping("M_CURRENT_PING_3_CLOSEUP", min_e_spikes=500, min_i_spikes=1000)
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_plot = ns.simulate_m_current_ping_closeup()
+    _check_ping(t_e, i_e, t_i, i_i, min_e_spikes=500, min_i_spikes=1000)
+
+
+def test_m_current_ping_1_from_rest_structure():
+    ns = _ns()
+    t_e, i_e, t_i, i_i = ns.simulate_m_current_ping_1_from_rest()
+    assert len(t_e) > 500
+    assert len(t_i) > 1000
+    # network is silent for the first ~200 ms (zero drive, from rest)
+    assert t_e.min() > 1.0
 
 
 def test_ping_clusters_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PING_CLUSTERS" / "main.py")
-    assert len(py.t_e_spikes) > 500
-    assert len(py.t_i_spikes) > 500
-    assert py.num_e == 200
-    assert py.num_i == 50
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_plot = ns.simulate_ping_clusters()
+    assert len(t_e) > 500
+    assert len(t_i) > 500
 
 
 def test_poisson_ping_1_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "POISSON_PING_1" / "main.py")
-    assert len(py.t_e_spikes) > 500
-    assert len(py.t_i_spikes) > 100
-    assert py.num_i == py.num_e // 4
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_one, num_e, num_i, m_steps = ns.simulate_poisson_ping_1()
+    assert len(t_e) > 500
+    assert len(t_i) > 100
+    assert num_i == num_e // 4
 
 
 def test_poisson_ping_2_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "POISSON_PING_2" / "main.py")
-    assert len(py.t_e_spikes) > 300
-    assert len(py.t_i_spikes) > 300
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_one, num_e, num_i, m_steps = ns.simulate_poisson_ping_2()
+    assert len(t_e) > 300
+    assert len(t_i) > 300
 
 
 def test_poisson_ping_3_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "POISSON_PING_3" / "main.py")
-    assert len(py.t_e_spikes) > 50
-    assert len(py.t_i_spikes) > 300
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_one, num_e, num_i, m_steps = ns.simulate_poisson_ping_3()
+    assert len(t_e) > 50
+    assert len(t_i) > 300
     # strong, all-to-all I-I/E-I coupling with low heterogeneity produces
     # tightly synchronized I-cell volleys
-    counts_i = np.bincount(py.i_i_spikes.astype(int), minlength=py.num_i)
-    assert np.count_nonzero(counts_i) > 0.9 * py.num_i
+    counts_i = np.bincount(i_i.astype(int), minlength=num_i)
+    assert np.count_nonzero(counts_i) > 0.9 * num_i
 
 
 def test_poisson_ping_3_voltage_trace_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "POISSON_PING_3_VOLTAGE_TRACE" / "main.py")
-    assert len(py.t_e_spikes) > 50
-    assert len(py.t_i_spikes) > 300
-    assert len(py.v_one) == py.m_steps + 1
+    ns = _ns()
+    t_e, i_e, t_i, i_i, v_one, num_e, num_i, m_steps = ns.simulate_poisson_ping_3(track_cell=2)
+    assert len(t_e) > 50
+    assert len(t_i) > 300
+    assert len(v_one) == m_steps + 1
     # the tracked cell spikes at least once (voltage crosses well above rest)
-    assert py.v_one.max() > 0
+    assert v_one.max() > 0

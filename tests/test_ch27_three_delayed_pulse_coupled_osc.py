@@ -2,10 +2,9 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = "27_Phase_Locking_with_Delays/THREE_DELAYED_PULSE_COUPLED_OSC"
 
 
 def test_three_delayed_pulse_coupled_osc_structure():
@@ -13,13 +12,14 @@ def test_three_delayed_pulse_coupled_osc_structure():
     # numpy, so we check structural/statistical properties (each
     # oscillator spikes roughly once per period, near-synchrony emerges
     # for the larger delay) rather than exact spike times.
-    py = load_python_port(ROOT / "python" / PYTHON_DIR / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter27.ipynb")
+    t_spikes_1, i_spikes_1, t_spikes_2, i_spikes_2 = ns.simulate_three_delayed_pulse_coupled_osc()
 
-    assert set(py.i_spikes_1) == {0, 1, 2}
-    assert set(py.i_spikes_2) == {0, 1, 2}
+    assert set(i_spikes_1) == {0, 1, 2}
+    assert set(i_spikes_2) == {0, 1, 2}
 
-    counts_1 = np.bincount(py.i_spikes_1)
-    counts_2 = np.bincount(py.i_spikes_2)
+    counts_1 = np.bincount(i_spikes_1)
+    counts_2 = np.bincount(i_spikes_2)
     assert np.max(counts_1) - np.min(counts_1) <= 2
     assert np.max(counts_2) - np.min(counts_2) <= 2
 
@@ -42,6 +42,6 @@ def test_three_delayed_pulse_coupled_osc_structure():
                 spreads.append(chunk_t.max() - chunk_t.min())
         return np.median(spreads)
 
-    spread_1 = cluster_spread(py.t_spikes_1, py.i_spikes_1)
-    spread_2 = cluster_spread(py.t_spikes_2, py.i_spikes_2)
+    spread_1 = cluster_spread(t_spikes_1, i_spikes_1)
+    spread_2 = cluster_spread(t_spikes_2, i_spikes_2)
     assert spread_2 < spread_1
