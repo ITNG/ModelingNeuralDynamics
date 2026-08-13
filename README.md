@@ -7,9 +7,9 @@ An Introduction to Modeling Neuronal Dynamics - Christoph Borgers in python
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)](LICENSE)
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/python/30_The_PING_Model_of_Gamma_Rhythms/PING_4/fig.png" width="32%">
-<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/python/38_Gamma_Coherence/GAMMA_COHERENCE_1/fig.png" width="32%">
-<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/python/40_Spike_Timing-Dependent_Plasticity%28STDP%29/PING_WITH_STDP/fig1.png" width="32%">
+<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/docs/img/chapter30_ping4.png" width="32%">
+<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/docs/img/chapter38_gamma_coherence_1.png" width="32%">
+<img src="https://raw.githubusercontent.com/ITNG/ModelingNeuralDynamics/main/docs/img/chapter40_ping_with_stdp.png" width="32%">
 </p>
 <p align="center">
 PING gamma rhythm &nbsp;&middot;&nbsp; gamma coherence &nbsp;&middot;&nbsp; PING network with STDP
@@ -25,14 +25,11 @@ pip install modelingneuraldynamics
 
 ### What's supported
 
-Chapters are being ported from the book's original MATLAB programs to
-Python one at a time. A converted chapter is a single, tested
-`chapterNN.ipynb` notebook that installs its own dependencies and opens
-directly in Colab; chapters not yet converted still live as one
-`main.py` script per example under `python/<NN_chapter_name>/`.
+Chapters are ported from the book's original MATLAB programs to Python.
+Every tracked chapter is now a single, tested `chapterNN.ipynb` notebook
+that installs its own dependencies and opens directly in Colab.
 
-- **22 / 37** tracked chapters converted to notebooks (✅)
-- **15** chapters still as legacy per-example scripts (🚧)
+- **37 / 37** tracked chapters converted to notebooks (✅)
 - Chapters 2 and 6 have no Python example in the book. Chapter 9 has a
   pilot notebook (below) but isn't part of the official guide index yet.
 
@@ -64,21 +61,21 @@ directly in Colab; chapters not yet converted still live as one
 | 23 | Entrainment by Excitatory Input Pulses | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter23.ipynb) [guide](python/chapter23.md) |
 | 24 | Synchronization by Fast Recurrent Excitation | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter24.ipynb) [guide](python/chapter24.md) |
 | 25 | Phase Response Curves (PRCs) | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter25.ipynb) [guide](python/chapter25.md) |
-| 26 | Phase Locking of Two Oscillators | 🚧 Legacy scripts | [guide](python/26_Phase_Locking_of_Two_Oscillators/README.md) |
-| 27 | Phase Locking with Delays | 🚧 Legacy scripts | [guide](python/27_Phase_Locking_with_Delays/README.md) |
-| 28 | Weakly Coupled Oscillators | 🚧 Legacy scripts | [guide](python/28_Weakly_Coupled_Oscillators/README.md) |
-| 29 | Stability of the Synchronous State | 🚧 Legacy scripts | [guide](python/29_Stability_of_the_Synchronous_State/README.md) |
-| 30 | The PING Model of Gamma Rhythms | 🚧 Legacy scripts | [guide](python/30_The_PING_Model_of_Gamma_Rhythms/README.md) |
-| 31 | ING Rhythms | 🚧 Legacy scripts | [guide](python/31_ING_Rhythms/README.md) |
-| 32 | M-Current PING and Poisson PING | 🚧 Legacy scripts | [guide](python/32_M_Current_PING_and_Poisson_PING/README.md) |
-| 33 | M-Current PING and PINB | 🚧 Legacy scripts | [guide](python/33_M_Current_PING_and_PINB/README.md) |
-| 34 | Nested Gamma-Theta Rhythms | 🚧 Legacy scripts | [guide](python/34_Nested_Gamma_Theta_Rhythms/README.md) |
-| 35 | Periodic Inhibition | 🚧 Legacy scripts | [guide](python/35_Periodic_Inhibition/README.md) |
-| 36 | F-I Curves: Pulsed Excitation | 🚧 Legacy scripts | [guide](python/36_F_I_Curves_Pulsed_Excitation/README.md) |
-| 37 | Thresholding in PING | 🚧 Legacy scripts | [guide](python/37_Thresholding_in_PING/README.md) |
-| 38 | Gamma Coherence | 🚧 Legacy scripts | [guide](python/38_Gamma_Coherence/README.md) |
-| 39 | Short-Term Depression and Facilitation | 🚧 Legacy scripts | [guide](python/39_Short-Term_Depression_and_Facilitation/README.md) |
-| 40 | Spike-Timing-Dependent Plasticity (STDP) | 🚧 Legacy scripts | [guide](python/40_Spike_Timing-Dependent_Plasticity%28STDP%29/README.md) |
+| 26 | Phase Locking of Two Oscillators | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter26.ipynb) [guide](python/chapter26.md) |
+| 27 | Phase Locking with Delays | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter27.ipynb) [guide](python/chapter27.md) |
+| 28 | Weakly Coupled Oscillators | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter28.ipynb) [guide](python/chapter28.md) |
+| 29 | Stability of the Synchronous State | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter29.ipynb) [guide](python/chapter29.md) |
+| 30 | The PING Model of Gamma Rhythms | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter30.ipynb) [guide](python/chapter30.md) |
+| 31 | ING Rhythms | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter31.ipynb) [guide](python/chapter31.md) |
+| 32 | M-Current PING and Poisson PING | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter32.ipynb) [guide](python/chapter32.md) |
+| 33 | M-Current PING and PINB | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter33.ipynb) [guide](python/chapter33.md) |
+| 34 | Nested Gamma-Theta Rhythms | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter34.ipynb) [guide](python/chapter34.md) |
+| 35 | Periodic Inhibition | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter35.ipynb) [guide](python/chapter35.md) |
+| 36 | F-I Curves: Pulsed Excitation | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter36.ipynb) [guide](python/chapter36.md) |
+| 37 | Thresholding in PING | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter37.ipynb) [guide](python/chapter37.md) |
+| 38 | Gamma Coherence | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter38.ipynb) [guide](python/chapter38.md) |
+| 39 | Short-Term Depression and Facilitation | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter39.ipynb) [guide](python/chapter39.md) |
+| 40 | Spike-Timing-Dependent Plasticity (STDP) | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter40.ipynb) [guide](python/chapter40.md) |
 
 </details>
 

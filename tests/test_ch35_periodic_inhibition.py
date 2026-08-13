@@ -2,16 +2,15 @@ from pathlib import Path
 
 import numpy as np
 
-from matlab_ref import load_python_port
+from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_BASE = "35_Periodic_Inhibition"
 
 
 def test_oscillations_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "OSCILLATIONS" / "main.py")
-    phi0 = py.phi_of(1e-5)
-    phi10 = py.phi_of(10)
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
+    phi0 = ns.phi_of(1e-5)
+    phi10 = ns.phi_of(10)
     # larger alpha sharpens the pulses: same mean (normalized to 1 in
     # the sense that mean over one period is fixed), but higher peak
     assert phi10.max() > phi0.max()
@@ -20,20 +19,20 @@ def test_oscillations_structure():
 def test_periodic_inhibition_structure():
     # deterministic script (no RNG) -- exact match confirmed visually
     # against matlab's figure.pdf, so check the exact spike frequencies.
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION" / "main.py")
-    _, _, freq_015 = py.run(0.15, use_periodic=True)
-    _, _, freq_02 = py.run(0.2, use_periodic=True)
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
+    _, _, freq_015 = ns.run_periodic_inhibition(0.15, True, alpha=5.0)
+    _, _, freq_02 = ns.run_periodic_inhibition(0.2, True, alpha=5.0)
     assert freq_015 == 40.0
     assert freq_02 == 80.0
     # tonic (mean) inhibition never lets I=0.15 or 0.2 reach threshold
-    _, _, freq_bar_015 = py.run(0.15, use_periodic=False)
+    _, _, freq_bar_015 = ns.run_periodic_inhibition(0.15, False, alpha=5.0)
     assert freq_bar_015 == 0.0
 
 
 def test_periodic_inhibition_3_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_3" / "main.py")
-    _, _, freq_015 = py.run(0.15, use_periodic=True)
-    _, _, freq_02 = py.run(0.2, use_periodic=True)
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
+    _, _, freq_015 = ns.run_periodic_inhibition(0.15, True, alpha=1.0)
+    _, _, freq_02 = ns.run_periodic_inhibition(0.2, True, alpha=1.0)
     assert freq_015 == 40.0
     assert freq_02 == 80.0
 
@@ -41,76 +40,52 @@ def test_periodic_inhibition_3_structure():
 def test_periodic_inhibition_2_structure():
     # matlab's rng('default'); rng(63806) can't be bit-reproduced by
     # numpy, so we check structural properties instead of exact spikes.
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_2" / "main.py")
-    _, _, freq = py.run(use_periodic=True)
-    _, _, freq_bar = py.run(use_periodic=False)
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
+    _, _, freq = ns.run_periodic_inhibition_noisy(True)
+    _, _, freq_bar = ns.run_periodic_inhibition_noisy(False)
     assert freq > freq_bar
 
 
 def test_periodic_inhibition_f_i_curve_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_F_I_CURVE" / "main.py")
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
     # the dense scan is an explicit call, not an import side effect
-    assert not hasattr(py, "f_vec")
-    f_vec = py.compute_f_i_curve()
+    assert not hasattr(ns, "f_vec")
+    I_vec, f_vec = ns.compute_periodic_inhibition_f_i_curve()
     # visually confirmed step values (40, 80, 120, 160 Hz plateaus)
     assert set(np.round(np.unique(f_vec))) >= {0.0, 40.0, 80.0, 120.0, 160.0}
     assert f_vec[0] == 0.0
     assert f_vec[-1] == 160.0
-
-
-def test_periodic_inhibition_f_i_curve_numba_matches_python():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_F_I_CURVE" / "main.py")
-    grid = py.I_vec
-    probe = np.array([grid[0], grid[len(grid) // 2], grid[-1]])
-    expected = py.compute_f_i_curve(i_values=probe, use_numba=False)
-    actual = py.compute_f_i_curve(i_values=probe, use_numba=True)
-    np.testing.assert_allclose(actual, expected, rtol=0.0, atol=1e-10)
+    # sweep starts at 0.11 (I_vec = arange(1,101)/100*0.2+0.1)
+    assert np.isclose(I_vec[0], 0.102)
 
 
 def test_periodic_inhibition_f_i_curve_2_structure():
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / "PERIODIC_INHIBITION_F_I_CURVE_2" / "main.py")
-    assert set(np.round(np.unique(py.f_vec))) >= {0.0, 40.0, 80.0, 120.0, 160.0}
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
+    _, f_vec = ns.compute_periodic_inhibition_f_i_curve_2()
+    assert set(np.round(np.unique(f_vec))) >= {0.0, 40.0, 80.0, 120.0, 160.0}
 
 
-def _load_rtm_inhibition(name):
-    py = load_python_port(ROOT / "python" / PYTHON_BASE / name / "main.py")
+def _load_rtm_notebook():
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter35.ipynb")
     # the dense scans are explicit calls, not import side effects
-    assert not hasattr(py, "f_vec_tonic")
-    assert not hasattr(py, "f_vec_periodic")
-    return py
-
-
-def _check_rtm_inhibition_numba(name):
-    py = _load_rtm_inhibition(name)
-    grid = py.i_ext_vec
-    probe = np.array([grid[0], grid[len(grid) // 2], grid[-1]])
-    expected = py.compute_f_i_curves(i_ext_values=probe, use_numba=False)
-    actual = py.compute_f_i_curves(i_ext_values=probe, use_numba=True)
-    for expected_curve, actual_curve in zip(expected, actual):
-        np.testing.assert_allclose(actual_curve, expected_curve, rtol=0.0, atol=1e-10)
+    assert not hasattr(ns, "f_vec_tonic")
+    assert not hasattr(ns, "f_vec_periodic")
+    return ns
 
 
 def test_rtm_f_i_curve_with_inhibition_structure():
-    py = _load_rtm_inhibition("RTM_F_I_CURVE_WITH_INHIBITION")
-    f_vec_tonic, f_vec_periodic = py.compute_f_i_curves()
-    assert len(f_vec_tonic) == len(py.i_ext_vec)
-    assert len(f_vec_periodic) == len(py.i_ext_vec)
+    ns = _load_rtm_notebook()
+    i_ext_vec, f_vec_tonic, f_vec_periodic = ns.compute_rtm_f_i_curves()
+    assert len(f_vec_tonic) == len(i_ext_vec)
+    assert len(f_vec_periodic) == len(i_ext_vec)
     # both curves are silent at low drive and fire at high drive
     assert f_vec_tonic[0] == 0.0
     assert f_vec_tonic[-1] > 0.0
     assert f_vec_periodic[-1] > 0.0
 
 
-def test_rtm_f_i_curve_with_inhibition_numba_matches_python():
-    _check_rtm_inhibition_numba("RTM_F_I_CURVE_WITH_INHIBITION")
-
-
 def test_rtm_f_i_curve_with_inhibition_2_structure():
-    py = _load_rtm_inhibition("RTM_F_I_CURVE_WITH_INHIBITION_2")
-    _, f_vec_periodic = py.compute_f_i_curves()
-    assert len(f_vec_periodic) == len(py.i_ext_vec)
+    ns = _load_rtm_notebook()
+    i_ext_vec, _, f_vec_periodic = ns.compute_rtm_f_i_curves_2()
+    assert len(f_vec_periodic) == len(i_ext_vec)
     assert f_vec_periodic[-1] > 0.0
-
-
-def test_rtm_f_i_curve_with_inhibition_2_numba_matches_python():
-    _check_rtm_inhibition_numba("RTM_F_I_CURVE_WITH_INHIBITION_2")

@@ -1,54 +1,47 @@
-import importlib.util
+import inspect
 from pathlib import Path
 
 import numpy as np
 import pytest
 
-from matlab_ref import run_matlab_script
+from matlab_ref import load_notebook_definitions_as_module, run_matlab_script
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CHAPTER = ROOT / "python" / "38_Gamma_Coherence"
 
 
-def load_module(path, name):
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
-def load_example(name):
-    return load_module(CHAPTER / name / "main.py", f"ch38_{name.lower()}")
+def _ns():
+    return load_notebook_definitions_as_module(ROOT / "python" / "chapter38.ipynb")
 
 
 def test_shared_model_matches_matlab_gate_values():
-    model = load_module(CHAPTER / "model.py", "ch38_model")
+    ns = _ns()
     v = np.array([-75.0, -60.0, -20.0])
 
     np.testing.assert_allclose(
-        model.m_e_inf(v), [0.00263048, 0.05624786, 0.94432979], rtol=1e-5
+        ns.m_e_inf(v), [0.00263048, 0.05624786, 0.94432979], rtol=1e-5
     )
     np.testing.assert_allclose(
-        model.m_i_inf(v), [0.00804324, 0.05293249, 0.81665924], rtol=1e-5
+        ns.m_i_inf(v), [0.00804324, 0.05293249, 0.81665924], rtol=1e-5
     )
-    assert model.tau_d_q(3.0, 0.3, 0.3) > 0
+    assert ns.tau_d_q(3.0, 0.3, 0.3) > 0
 
 
 def test_inhibitory_time_constants_include_matlab_phi_factor():
-    model = load_module(CHAPTER / "model.py", "ch38_model_time_constants")
+    ns = _ns()
     v = -60.0
     alpha_h = 0.07 * np.exp(-(v + 58) / 20)
     beta_h = 1 / (np.exp(-0.1 * (v + 28)) + 1)
     alpha_n = -0.01 * (v + 34) / (np.exp(-0.1 * (v + 34)) - 1)
     beta_n = 0.125 * np.exp(-(v + 44) / 80)
 
-    assert model.tau_h_i(v) == pytest.approx(1 / (alpha_h + beta_h) / 5)
-    assert model.tau_n_i(v) == pytest.approx(1 / (alpha_n + beta_n) / 5)
+    assert ns.tau_h_i(v) == pytest.approx(1 / (alpha_h + beta_h) / 5)
+    assert ns.tau_n_i(v) == pytest.approx(1 / (alpha_n + beta_n) / 5)
 
 
 def test_gamma_coherence_1_produces_aligned_traces_and_spikes():
-    result = load_example("GAMMA_COHERENCE_1").simulate(t_final=50.0)
+    ns = _ns()
+    result = ns.simulate_gamma_coherence_1(t_final=50.0)
 
     assert result["t"].shape == result["v_e"].shape
     assert result["t"].shape == result["v_i"].shape
@@ -59,7 +52,8 @@ def test_gamma_coherence_1_produces_aligned_traces_and_spikes():
 
 @pytest.mark.slow
 def test_gamma_coherence_1_matches_matlab_spike_timing():
-    result = load_example("GAMMA_COHERENCE_1").simulate()
+    ns = _ns()
+    result = ns.simulate_gamma_coherence_1()
     matlab = run_matlab_script(
         ROOT / "matlab" / "38" / "GAMMA_COHERENCE_1",
         "make_figure.m",
@@ -73,7 +67,8 @@ def test_gamma_coherence_1_matches_matlab_spike_timing():
 
 
 def test_gamma_coherence_2_replaces_feedback_with_mean_inhibition():
-    result = load_example("GAMMA_COHERENCE_2").simulate(t_final=100.0)
+    ns = _ns()
+    result = ns.simulate_gamma_coherence_2(t_final=100.0)
 
     assert 0.0 < result["mean_s_i"] < 1.0
     assert result["coupled"]["t"].shape == result["mean_inhibition"]["t"].shape
@@ -85,7 +80,8 @@ def test_gamma_coherence_2_replaces_feedback_with_mean_inhibition():
 
 @pytest.mark.slow
 def test_gamma_coherence_2_matches_matlab_summary():
-    result = load_example("GAMMA_COHERENCE_2").simulate()
+    ns = _ns()
+    result = ns.simulate_gamma_coherence_2()
     matlab = run_matlab_script(
         ROOT / "matlab" / "38" / "GAMMA_COHERENCE_2",
         "make_figure.m",
@@ -98,9 +94,9 @@ def test_gamma_coherence_2_matches_matlab_summary():
 
 
 def test_poisson_ping_is_reproducible_and_active():
-    module = load_example("POISSON_PING_3_PLUS_GREEN")
-    first = module.simulate(seed=63806, t_final=50.0)
-    second = module.simulate(seed=63806, t_final=50.0)
+    ns = _ns()
+    first = ns.simulate_poisson_ping_plus_green(seed=63806, t_final=50.0)
+    second = ns.simulate_poisson_ping_plus_green(seed=63806, t_final=50.0)
 
     bins = np.arange(0, 51, 10)
     first_counts = np.histogram(first["t_e_spikes"], bins)[0]
@@ -114,7 +110,8 @@ def test_poisson_ping_is_reproducible_and_active():
 
 
 def test_poisson_ping_population_statistics_match_matlab():
-    result = load_example("POISSON_PING_3_PLUS_GREEN").simulate()
+    ns = _ns()
+    result = ns.simulate_poisson_ping_plus_green()
     bins = np.arange(0, 501, 10)
     counts = np.histogram(result["t_e_spikes"], bins)[0]
 
@@ -127,36 +124,38 @@ def test_poisson_ping_population_statistics_match_matlab():
 
 
 @pytest.mark.parametrize(
-    ("name", "period"),
+    ("func_name", "period"),
     [
-        ("POISSON_PING_3_PLUS_PULSES", 31.0),
-        ("POISSON_PING_3_MISMATCHED_PULSES", 29.0),
+        ("simulate_poisson_ping_plus_pulses", 31.0),
+        ("simulate_poisson_ping_mismatched_pulses", 29.0),
     ],
 )
-def test_poisson_ping_phase_response(name, period):
-    module = load_example(name)
+def test_poisson_ping_phase_response(func_name, period):
+    ns = _ns()
+    func = getattr(ns, func_name)
     phases = np.array([0.1, 0.5, 0.9])
-    result = module.simulate_phases(seed=63806, phases=phases, t_final=30.0)
+    result = func(seed=63806, phases=phases, t_final=30.0)
 
-    assert module.P == period
+    assert inspect.signature(func).parameters["period"].default == period
     assert result["spike_counts"].shape == phases.shape
     assert np.all(result["spike_counts"] >= 0)
 
 
 @pytest.mark.parametrize(
-    ("name", "matlab_counts"),
+    ("func_name", "matlab_counts"),
     [
-        ("POISSON_PING_3_PLUS_PULSES", np.array([25, 15, 19, 21, 20, 30, 31, 37, 29])),
-        ("POISSON_PING_3_MISMATCHED_PULSES", np.array([29, 22, 23, 29, 26, 28, 23, 31, 26])),
+        ("simulate_poisson_ping_plus_pulses", np.array([25, 15, 19, 21, 20, 30, 31, 37, 29])),
+        ("simulate_poisson_ping_mismatched_pulses", np.array([29, 22, 23, 29, 26, 28, 23, 31, 26])),
     ],
 )
-def test_poisson_ping_phase_statistics_match_matlab(name, matlab_counts):
-    result = load_example(name).simulate_phases()
+def test_poisson_ping_phase_statistics_match_matlab(func_name, matlab_counts):
+    ns = _ns()
+    result = getattr(ns, func_name)()
     counts = result["spike_counts"]
 
     assert abs(counts.mean() - matlab_counts.mean()) < 6
     assert abs(counts.std() - matlab_counts.std()) < 4
     assert abs(np.ptp(counts) - np.ptp(matlab_counts)) < 13
 
-    if name.endswith("PLUS_PULSES"):
+    if func_name.endswith("plus_pulses"):
         assert result["fit_slope"] > 0
