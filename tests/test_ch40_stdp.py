@@ -1,8 +1,20 @@
 from pathlib import Path
 
+import numpy as np
+
 from matlab_ref import load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_three_cell_ping_uses_compiled_rhs():
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter40.ipynb")
+
+    result = ns.simulate_three_cell_ping(ns.reciprocal_g_ee(0.05), t_final=5.0)
+
+    assert result.sol.shape == (250, 15)
+    assert np.isfinite(result.sol).all()
+    assert ns.derivative_three_cell_ping.nopython_signatures
 
 
 def test_three_cell_ping_5_structure():
