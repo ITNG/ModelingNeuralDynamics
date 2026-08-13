@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify tag matches pyproject.toml version
+      - name: Verify tag matches mnd/__version__.py
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
-          PYPROJECT_VERSION=$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          if [ "$TAG_VERSION" != "$PYPROJECT_VERSION" ]; then
-            echo "Tag version ($TAG_VERSION) does not match pyproject.toml version ($PYPROJECT_VERSION)"
+          PACKAGE_VERSION=$(python3 -c "import runpy; print(runpy.run_path('mnd/__version__.py')['__version__'])")
+          if [ "$TAG_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match mnd/__version__.py version ($PACKAGE_VERSION)"
             exit 1
           fi
 
