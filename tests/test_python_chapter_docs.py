@@ -14,6 +14,7 @@ CHAPTERS = (
     "05_The_Simple_Model_of_Neurons_in_Rodent_Brains",
     "07_Linear_Integrate_and_Fire_(LIF)_Neurons",
     "08_Quadratic_Integrate_and_Fire_(QIF)_and_Theta_Neurons",
+    "09_Spike_Frequency_Adaptation",
     "10_The_Slow_Fast_Phase_Plane",
     "11_The_Saddle_Node_Bifurcation",
     "12_Two_Dimensional_Bifurcation_Analysis",
@@ -125,13 +126,6 @@ def test_chapter_guide_relative_links_resolve(chapter: str) -> None:
         )
 
 
-# Converted, but its old dir isn't deleted yet: kept pending
-# test_ch18_rtm_f_i_curve_with_i_h's slow MATLAB comparison (~4-24min,
-# @pytest.mark.slow, not yet run/cached). Delete the directory and drop
-# this entry once that test has been run and passes.
-PENDING_DIRECTORY_CLEANUP = {"18_Bistability_Resulting_from_Rebound_Firing"}
-
-
 def test_inventory_matches_all_python_chapter_directories() -> None:
     actual = {
         path.name
@@ -139,14 +133,14 @@ def test_inventory_matches_all_python_chapter_directories() -> None:
         if path.is_dir() and re.match(r"^\d{2}_", path.name)
     }
     non_converted = {chapter for chapter in CHAPTERS if not is_converted(chapter)}
-    assert non_converted == actual - {"09_Spike_Frequency_Adaptation"} - PENDING_DIRECTORY_CLEANUP
+    assert non_converted == actual
     for chapter in CHAPTERS:
-        if is_converted(chapter) and chapter not in PENDING_DIRECTORY_CLEANUP:
+        if is_converted(chapter):
             assert not (PYTHON_ROOT / chapter).exists(), (
                 f"{chapter}/ should be deleted once converted to {notebook_path(chapter).name}"
             )
             assert guide_path(chapter).is_file()
-    assert len(CHAPTERS) == 37
+    assert len(CHAPTERS) == 38
 
 
 def test_python_index_links_every_chapter() -> None:

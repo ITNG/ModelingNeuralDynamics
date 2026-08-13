@@ -7,8 +7,7 @@ results behind each implemented chapter.
 
 Repository numbering follows the historical code organization, so it is not
 always an exact mirror of the book's table of contents. Chapters 2 and 6 have
-no Python example directories. The Chapter 9 guide is deferred and is not
-linked from this index.
+no Python example directories.
 
 ## Foundations and single-neuron models (Chapters 1-9)
 
@@ -18,6 +17,7 @@ linked from this index.
 - [Chapter 5: The Simple Model of Neurons in Rodent Brains](chapter05.md)
 - [Chapter 7: Linear Integrate-and-Fire (LIF) Neurons](chapter07.md)
 - [Chapter 8: Quadratic Integrate-and-Fire (QIF) and Theta Neurons](chapter08.md)
+- [Chapter 9: Spike-Frequency Adaptation](chapter09.md)
 
 ## Single-neuron dynamics (Chapters 10-19)
 

@@ -168,6 +168,18 @@ def _compile_notebook_definitions(
     del mtime_ns, size  # Values participate in the cache key.
     import nbformat
 
+    def is_njit_wrapper_assign(node: ast.AST) -> bool:
+        """`name = njit(other_name)` -- a definition, not a computation, so
+        it's kept alongside the plain `def`/`class`/import statements."""
+        return (
+            isinstance(node, ast.Assign)
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
+            and isinstance(node.value, ast.Call)
+            and isinstance(node.value.func, ast.Name)
+            and node.value.func.id == "njit"
+        )
+
     notebook = nbformat.read(path, as_version=4)
     nodes = []
     for cell in notebook.cells:
@@ -177,9 +189,12 @@ def _compile_notebook_definitions(
         nodes.extend(
             node
             for node in tree.body
-            if isinstance(
-                node,
-                (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
+            if (
+                isinstance(
+                    node,
+                    (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
+                )
+                or is_njit_wrapper_assign(node)
             )
             and not (
                 isinstance(node, ast.ImportFrom)

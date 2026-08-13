@@ -38,7 +38,7 @@ $c$ is the calcium-like state.
 ## Code examples
 
 All nine examples now live in one notebook,
-[`chapter09.ipynb`](../chapter09.ipynb): `M_CURRENT` and `CALCIUM_RISE`
+[`chapter09.ipynb`](chapter09.ipynb): `M_CURRENT` and `CALCIUM_RISE`
 plot the underlying steady-state laws; `RTM_M`/`RTM_M_RESTING` and
 `RTM_AHP`/`RTM_AHP_RESTING` add each slow current to a driven vs.
 zero-drive RTM neuron; `LIF_ADAPT` integrates the reset-based adaptation
@@ -71,7 +71,7 @@ ways to represent spike events and phase.
 
 ## Running the examples
 
-Open [`chapter09.ipynb`](../chapter09.ipynb) in Jupyter, or via the Colab
+Open [`chapter09.ipynb`](chapter09.ipynb) in Jupyter, or via the Colab
 badge at the top of the notebook. Run all cells top to bottom; each
 section's static figure reproduces the book's plot, and the `interact(...)`
 cell below it lets you adjust that example's parameters with sliders.

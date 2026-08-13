@@ -29,9 +29,8 @@ Chapters are ported from the book's original MATLAB programs to Python.
 Every tracked chapter is now a single, tested `chapterNN.ipynb` notebook
 that installs its own dependencies and opens directly in Colab.
 
-- **37 / 37** tracked chapters converted to notebooks (✅)
-- Chapters 2 and 6 have no Python example in the book. Chapter 9 has a
-  pilot notebook (below) but isn't part of the official guide index yet.
+- **38 / 38** tracked chapters converted to notebooks (✅)
+- Chapters 2 and 6 have no Python example in the book.
 
 <details>
 <summary>Full chapter-by-chapter status (click to expand)</summary>
@@ -44,7 +43,7 @@ that installs its own dependencies and opens directly in Colab.
 | 5 | The Simple Model of Neurons in Rodent Brains | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter05.ipynb) [guide](python/chapter05.md) |
 | 7 | Linear Integrate-and-Fire (LIF) Neurons | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter07.ipynb) [guide](python/chapter07.md) |
 | 8 | Quadratic Integrate-and-Fire (QIF) and Theta Neurons | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter08.ipynb) [guide](python/chapter08.md) |
-| 9 | Spike Frequency Adaptation | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter09.ipynb) guide pending |
+| 9 | Spike Frequency Adaptation | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter09.ipynb) [guide](python/chapter09.md) |
 | 10 | The Slow-Fast Phase Plane | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter10.ipynb) [guide](python/chapter10.md) |
 | 11 | The Saddle-Node Bifurcation | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter11.ipynb) [guide](python/chapter11.md) |
 | 12 | Two-Dimensional Bifurcation Analysis | ✅ Notebook | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/python/chapter12.ipynb) [guide](python/chapter12.md) |

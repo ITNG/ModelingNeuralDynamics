@@ -1,6 +1,6 @@
 [project]
 name = "modelingneuraldynamics"
-version = "1.0.0"
+dynamic = ["version"]
 description = "Python and Brian2 code companion to 'An Introduction to Modeling Neuronal Dynamics' (Borgers), ported from the book's MATLAB originals"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -42,6 +42,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["mnd*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "mnd.__version__.__version__" }
 
 [tool.pytest.ini_options]
 markers = [
