@@ -4,10 +4,9 @@ import nbformat
 import numpy as np
 import pytest
 
-from matlab_ref import load_notebook_as_module, load_python_port
+from matlab_ref import load_notebook_as_module, load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_BASE = ROOT / "python" / "31_ING_Rhythms"
 
 
 def _active_fraction(indices, count):
@@ -484,12 +483,13 @@ def test_entrainment_plot_cells_are_guarded_and_run_expected_variants():
 
 def test_brian_ing_entraining_e_cells_matches_python_structure():
     ns = load_notebook_as_module(ROOT / "brian" / "chapter31.ipynb")
-    py = load_python_port(PYTHON_BASE / "ING_ENTRAINING_E_CELLS" / "main.py")
+    py = load_notebook_definitions_as_module(ROOT / "python" / "chapter31.ipynb")
+    t_e_spikes, _, t_i_spikes, _, _, _ = py.simulate_ing_entraining_e_cells()
     result = ns.simulate_ing_entrainment("ING_ENTRAINING_E_CELLS")
     assert _active_fraction(result["i_e"], result["num_e"]) > 0.9
     assert _active_fraction(result["i_i"], result["num_i"]) > 0.9
-    assert np.isclose(len(result["t_e_ms"]), len(py.t_e_spikes), rtol=0.25)
-    assert np.isclose(len(result["t_i_ms"]), len(py.t_i_spikes), rtol=0.25)
+    assert np.isclose(len(result["t_e_ms"]), len(t_e_spikes), rtol=0.25)
+    assert np.isclose(len(result["t_i_ms"]), len(t_i_spikes), rtol=0.25)
 
 
 def test_brian_ing_entraining_e_cells_drive_sweep_has_three_results():

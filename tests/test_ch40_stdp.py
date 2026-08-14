@@ -76,7 +76,10 @@ def test_rtm_init_population_accepts_python_sequences():
 
     assert result.shape == (2, 3)
     assert np.isfinite(result).all()
-    np.testing.assert_array_equal(result, reference)
+    # njit-compiled and interpreted-Python execution of the same 200,000
+    # -step loop can differ by a ULP or two (LLVM vs CPython float codegen),
+    # so compare with a tight tolerance rather than bit-for-bit equality.
+    np.testing.assert_allclose(result, reference, rtol=0.0, atol=1e-10)
 
 
 def test_ping_stdp_caps_and_restores_numba_threads_on_error():

@@ -4,10 +4,9 @@ import nbformat
 import numpy as np
 import pytest
 
-from matlab_ref import load_notebook_as_module, load_python_port
+from matlab_ref import load_notebook_as_module, load_notebook_definitions_as_module
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_BASE = ROOT / "python" / "31_ING_Rhythms"
 
 
 class BuildCaptured(Exception):
@@ -23,11 +22,12 @@ def test_brian_ing_network_matches_python_population_activity(name):
     assert np.count_nonzero(counts) > 0.9 * result["num_i"]
 
     if name != "ING_1":
-        py = load_python_port(PYTHON_BASE / name / "main.py")
+        py = load_notebook_definitions_as_module(ROOT / "python" / "chapter31.ipynb")
+        t_i_spikes, _ = getattr(py, f"simulate_{name.lower()}")()
         brian_rate = len(result["t_i_ms"]) / (
             result["num_i"] * result["duration_ms"] / 1000.0
         )
-        python_rate = len(py.t_i_spikes) / (py.num_i * py.t_final / 1000.0)
+        python_rate = len(t_i_spikes) / (100 * 500.0 / 1000.0)
         assert np.isclose(brian_rate, python_rate, rtol=0.20)
 
 

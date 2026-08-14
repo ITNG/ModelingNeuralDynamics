@@ -11,9 +11,7 @@ NOTEBOOK = ROOT / "brian" / "chapter31.ipynb"
 
 def test_ch31_notebook_exposes_shared_helpers():
     ns = load_notebook_definitions_as_module(NOTEBOOK)
-    py = load_python_port(
-        ROOT / "python" / "31_ING_Rhythms" / "1_CELL_ING_CONDITION_NUMBERS" / "main.py"
-    )
+    py = load_notebook_definitions_as_module(ROOT / "python" / "chapter31.ipynb")
     expected = py.tau_d_q_function(9.0, 0.5, 0.5)
     actual = ns.solve_tau_dq(9.0, 0.5, 0.5)
     assert np.isclose(actual, expected, rtol=1e-10)
