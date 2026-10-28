@@ -14,7 +14,9 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "numpy",
+    # Brian2 2.9 (Python <3.12) imports ndarray.ptp, removed in NumPy 2.4.
+    "numpy<2.4; python_version < '3.12'",
+    "numpy; python_version >= '3.12'",
     "scipy",
     "matplotlib",
     "networkx",

@@ -23,6 +23,27 @@ The shared helper package used by some chapters is on PyPI:
 pip install modelingneuraldynamics
 ```
 
+For a local checkout, create a uv environment and install this package with
+the notebook and development dependencies:
+
+```bash
+uv sync --all-groups
+uv run jupyter lab
+```
+
+Run Brian2 regression tests explicitly with
+`uv run pytest -m 'brian2 and not slow'`; the default test selection excludes them.
+
+After cloning, install the notebook Git filter:
+
+```bash
+uv run python scripts/strip_notebook.py --install
+```
+
+The filter keeps notebook and cell metadata empty, clears outputs and execution
+counts, and normalizes cell IDs when staging. Local notebooks retain their
+metadata and outputs. Git configuration is local, so run setup in each clone.
+
 ### What's supported
 
 Chapters are ported from the book's original MATLAB programs to Python.

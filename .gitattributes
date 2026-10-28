@@ -1,4 +1,2 @@
 matlab/* linguist-vendored
-*.ipynb filter=nbstripout
-*.zpln filter=nbstripout
-*.ipynb diff=ipynb
+*.ipynb text eol=lf filter=nbstripout diff=ipynb
