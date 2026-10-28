@@ -9,6 +9,20 @@ ROOT = Path(__file__).resolve().parents[1]
 MATLAB_DIR = "17/LIF_F_I_CURVE"
 
 
+@pytest.mark.parametrize("tau", [5., 10., 20.])
+def test_lif_threshold_rates_are_finite_and_analytical(tau):
+    ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter17.ipynb")
+    with np.errstate(divide="raise", invalid="raise"):
+        current, frequency = ns.simulate_lif_f_i_curve(tau_m=tau)
+    active = tau*current > 1
+    assert np.isfinite(frequency).all()
+    np.testing.assert_array_equal(frequency[~active], 0.)
+    np.testing.assert_array_equal(
+        frequency[active],
+        1000/(tau*np.log(tau*current[active]/(tau*current[active]-1))),
+    )
+
+
 @pytest.mark.slow
 def test_lif_f_i_curve_matches_matlab():
     ns = load_notebook_definitions_as_module(ROOT / "python" / "chapter17.ipynb")

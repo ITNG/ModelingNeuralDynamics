@@ -99,21 +99,20 @@ that installs its own dependencies and opens directly in Colab.
 
 </details>
 
-### Running `brian/` chapters on Colab
+### Running the Brian2 chapters
 
-`brian/` holds a separate, Brian2-based implementation, one notebook per
-chapter. Every notebook there can also be opened directly in Google
-Colab — click a chapter's badge below.
+`brian/` contains **42 notebooks covering 37 chapters**, including representative
+examples for 23 newly supported chapters. Shared neuron, phase, network, forcing,
+and plasticity modules live in `mnd/brian/`.
 
-| Chapter | Colab |
-|---|---|
-| 01 - Modeling a Single Neuron | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter01.ipynb) |
-| 04 - Numerical Solution of HH ODEs | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter04.ipynb) |
-| 05 - Three Simple Models of Neurons in Rodent Brains | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter05.ipynb) |
-| 07 - Linear Integrate and Fire (LIF) Neurons | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter07.ipynb) |
-| 08 - Quadratic Integrate and Fire (QIF) and Theta Neurons | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter08.ipynb) |
-| 09 - Spike Frequency Adaptation | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter09.ipynb) |
-| 20 - Chemical Synapses | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ITNG/ModelingNeuralDynamics/blob/main/brian/chapter20.ipynb) |
+See the [Brian coverage and setup guide](brian/README.md) for every notebook,
+its implemented examples, and the distinction between representative coverage
+and complete Python figure parity. Chapter 03 is retained in Python because its
+examples are entirely static gating-curve calculations; chapters 02 and 06 have
+no Python examples.
+
+New Brian notebooks require this source checkout and its uv environment; the new
+helpers are not assumed to be present in an older PyPI release.
 
 ### Introduction 
 This book is intended as a text for a one-semester course on Mathematical and Computational Neuroscience for upper-level undergraduate and beginning graduate students of mathematics, the natural sciences, engineering, or computer science. An undergraduate introduction to differential equations is more than enough mathematical background. Only a slim, high school-level background in physics is assumed, and none in biology.
