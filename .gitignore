@@ -6,6 +6,8 @@ bin/
 e/
 .vscode/
 .worktrees/
+.superpowers/
+docs/superpowers/
 template/
 results/
 .ipynb_checkpoints/
