@@ -2,11 +2,13 @@
 
 Python and Brian2 examples for *An Introduction to Modeling Neuronal Dynamics* by Christoph Börgers.
 
-<p align="center">
-  <img src="docs/img/chapter30_ping4.png" alt="PING gamma rhythm — chapter 30" width="32%" height="200">
-  <img src="docs/img/chapter38_gamma_coherence_1.png" alt="Gamma coherence — chapter 38" width="32%" height="200">
-  <img src="docs/img/chapter40_ping_with_stdp.png" alt="PING network with STDP — chapter 40" width="32%" height="200">
-</p>
+<table>
+  <tr>
+    <td width="33%" valign="top"><img src="docs/img/chapter30_ping4.png" alt="PING gamma rhythm — chapter 30" width="300"></td>
+    <td width="33%" valign="top"><img src="docs/img/chapter38_gamma_coherence_1.png" alt="Gamma coherence — chapter 38" width="300"></td>
+    <td width="33%" valign="top"><img src="docs/img/chapter40_ping_with_stdp.png" alt="PING network with STDP — chapter 40" width="300"></td>
+  </tr>
+</table>
 
 ## Installation
 
